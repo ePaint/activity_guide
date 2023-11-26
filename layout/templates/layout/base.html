@@ -79,11 +79,18 @@
         </nav>
     </header>
     <main role="main">
-        <div class="main-content"
-             hx-target=".main-content"
-             hx-trigger="load"
-             hx-get="{{ request.get_full_path }}">
-        </div>
+        {% if request.path != '/' and request.method == 'GET'%}
+            <div class="main-content"
+                 hx-target=".main-content"
+                 hx-trigger="load"
+                 hx-get="{{ request.get_full_path }}"></div>
+        {% else %}
+            <div class="main-content"
+                 hx-target=".main-content"
+                 hx-trigger="load"
+                 hx-push-url="true"
+                 hx-get="{% url 'layout-home' %}"></div>
+        {% endif %}
     </main>
 
     <!-- Optional JavaScript -->
