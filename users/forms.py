@@ -11,7 +11,6 @@ user_type_choices = (
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
     user_type = forms.ChoiceField(choices=user_type_choices,
                                   required=True,
                                   label=_('Select Account Type'),
@@ -30,20 +29,7 @@ class UserRegisterForm(UserCreationForm):
     def clean(self):
         cleaned_data = super().clean()
         user_type = cleaned_data.get('user_type')
-        email = cleaned_data.get('email')
-
-        if user_type == 'member':
-            if User.objects.filter(email=email, is_member=True).exists():
-                raise ValidationError(_('A member with that email already exists.'))
-        elif user_type == 'provider':
-            if User.objects.filter(email=email, is_provider=True).exists():
-                raise ValidationError(_('A provider with that email already exists.'))
-
-        if user_type == 'member':
-            cleaned_data['is_member'] = True
-        elif user_type == 'provider':
-            cleaned_data['is_provider'] = True
-
+        cleaned_data[f'is_{user_type}'] = True
         return cleaned_data
 
 
@@ -58,7 +44,7 @@ class UserLoginForm(AuthenticationForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = ['first_name', 'last_name']
 
 
 class UserProfileForm(forms.ModelForm):
