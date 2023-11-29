@@ -1,0 +1,26 @@
+{% extends 'users/base.html' %}
+{% block user_form %}
+{% load crispy_forms_tags %}
+<form method="post" class="pb-3">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom pb-3 orange">Join Today</legend>
+        {{ form | crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info orange-hover"
+                type="submit"
+                hx-target=".main-content"
+                hx-push-url="true"
+                hx-post="{% url 'users-register' %}">Sign Up</button>
+    </div>
+</form>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        Already Have An Account? <a class="ml-2"
+                                    href="{% url 'users-login' %}"
+                                    hx-target=".main-content"
+                                    hx-get="{% url 'users-login' %}">Sign In</a>
+    </small>
+</div>
+{% endblock %}

@@ -19,3 +19,7 @@ def contact(request):
 
 def categories(request):
     return render(request, 'layout/categories.html')
+
+
+def navbar(request):
+    return render(request, 'layout/navbar.html')

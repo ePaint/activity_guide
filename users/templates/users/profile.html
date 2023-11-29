@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+{% block user_form %}
+{% load crispy_forms_tags %}
+<form method="post" class="pb-3" hx-encoding='multipart/form-data' hx-post="{% url 'users-profile' %}">
+    {% csrf_token %}
+    <img class="bi me-2"
+         width="200"
+         height="200"
+         role="img"
+         src="{{ user.profile.profile_image_url }}"/>
+    <fieldset class="form-group">
+        <legend class="border-bottom pb-3 orange">Profile Picture</legend>
+        {{ image_form | crispy }}
+        {{ user_form | crispy }}
+        {{ profile_form | crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info orange-hover"
+                type="submit">Save</button>
+    </div>
+</form>
+{% endblock %}

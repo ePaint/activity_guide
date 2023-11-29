@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+{% block user_form %}
+<h3 class="orange">You have been logged out!</h3>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        <a class="ml-2"
+           href="{% url 'users-login' %}"
+           hx-target=".main-content"
+           hx-trigger="click"
+           hx-push-url="true"
+           hx-get="{% url 'users-login' %}">Log In Again</a>
+    </small>
+</div>
+{% endblock %}
