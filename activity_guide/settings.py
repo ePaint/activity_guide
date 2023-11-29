@@ -24,8 +24,8 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://activity-guide.fly.dev/',
-    'https://activityguide.ca/',
+    'https://activity-guide.fly.dev',
+    'https://activityguide.ca',
 ]
 
 
