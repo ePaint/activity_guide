@@ -1,6 +1,16 @@
 from django.shortcuts import render
 
 
+def not_found(request, exception):
+    print(f'404 error')
+    return render(request, 'layout/404.html')
+
+
+def server_error(request):
+    print(f'500 error')
+    return render(request, 'layout/500.html')
+
+
 def base(request):
     return render(request, 'layout/base.html')
 
