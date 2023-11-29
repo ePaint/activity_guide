@@ -17,7 +17,16 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'activity-guide.fly.dev',
+    'activityguide.ca',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://activity-guide.fly.dev/',
+    'https://activityguide.ca/',
+]
 
 
 # Application definition
