@@ -15,7 +15,6 @@ class HTMXMiddleware(MiddlewareMixin):
 
 class IsReadyMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
-        print(request.META['HTTP_HOST'])
         if not IS_READY and request.META['HTTP_HOST'] == 'activityguide.ca':
             return not_ready(request)
         return response
