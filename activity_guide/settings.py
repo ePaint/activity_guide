@@ -17,6 +17,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
 
+IS_READY = os.getenv('IS_READY') == 'True'
+
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'activity-guide.fly.dev',
@@ -55,8 +57,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'layout.middleware.HTMXMiddleware',
     'django_htmx.middleware.HtmxMiddleware',
+    'layout.middleware.HTMXMiddleware',
+    'layout.middleware.IsReadyMiddleware',
 ]
 
 ROOT_URLCONF = 'activity_guide.urls'

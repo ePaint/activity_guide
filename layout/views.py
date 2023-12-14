@@ -11,6 +11,11 @@ def server_error(request):
     return render(request, 'layout/500.html')
 
 
+def not_ready(request):
+    print(f'Not ready')
+    return render(request, 'layout/not_ready.html')
+
+
 def base(request):
     return render(request, 'layout/base.html')
 
