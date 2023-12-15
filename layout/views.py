@@ -38,3 +38,7 @@ def categories(request):
 
 def navbar(request):
     return render(request, 'layout/navbar.html')
+
+
+def search_results(request):
+    return render(request, 'layout/search_results.html')

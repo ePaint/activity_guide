@@ -1,6 +1,57 @@
 {% extends request.base_template %}
 {% block content %}
-<div class="container">
+<div class="container-fluid search-results">
+
+    <div class="row h-100">
+        <div class="col-sm-9 border bg-warning">
+            <div class="long-ad row border d-flex align-items-center justify-content-center">
+                LONG AD
+            </div>
+            <div class="search-box row border d-flex align-items-center justify-content-end">
+                <span class="border w-50 text-center"> SEARCH BOX </span>
+            </div>
+
+            <div class="result-box row border">
+                <div class="col-sm-2 border h-100">
+                    <div class="text-center h-100 border"> image </div>
+                </div>
+                <div class="col-sm-2 border h-100">
+                    <div class="text-center h-100 border"> image </div>
+                </div>
+                <div class="col-sm-2 border h-100">
+                    <div class="text-center h-100 border"> image </div>
+                </div>
+                <div class="col-sm-3 border h-100">
+                    <div class="text-center h-100 border"> image </div>
+                </div>
+
+                <div class="col-sm-3 border h-100 d-flex flex-column justify-content-center align-items-center">
+                    <div class="w-100 border">
+                        A
+                    </div>
+
+                    <div class="w-100 border d-flex flex-row">
+                        <div class="w-50 border">
+                            B
+                        </div>
+
+                        <div class="w-50 border">
+                            C
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 bg-info border d-flex flex-column flex-nowrap g-0">
+            <div class="big-ad border d-flex align-items-center text-center justify-content-center">
+                BIG AD 1
+            </div>
+            <div class="big-ad border d-flex align-items-center text-center justify-content-center">
+                BIG AD 2
+            </div>
+        </div>
+    </div>
 
 </div>
 {% endblock %}

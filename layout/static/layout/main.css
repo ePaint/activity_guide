@@ -118,3 +118,23 @@ body {
     line-height: 1.5;
     color: #00AEEF;
 }
+
+
+.search-results {
+}
+
+.long-ad {
+    height: 100px;
+}
+
+.search-box {
+    height: 40px;
+}
+
+.result-box{
+}
+
+.big-ad{
+    height: 200px;
+    width: 100%;
+}
