@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'livereload',
     'django.contrib.staticfiles',
     'storages',
 ]
@@ -60,15 +61,23 @@ MIDDLEWARE = [
     'django_htmx.middleware.HtmxMiddleware',
     'layout.middleware.HTMXMiddleware',
     'layout.middleware.IsReadyMiddleware',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'activity_guide.urls'
+
+default_loaders = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
+
+cached_loaders = [('django.template.loaders.cached.Loader', default_loaders)]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'layout' / 'templates' / 'layout'],
-        'APP_DIRS': True,
+        # 'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -76,6 +85,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'loaders': default_loaders if DEBUG else cached_loaders,
         },
     },
 ]
@@ -155,8 +165,10 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-if not DEBUG:
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+if DEBUG:
+    ...
+else:
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'

@@ -1,11 +1,12 @@
 var logo_element = document.getElementById('site-logo');
 var max_size = 7;
+var min_size = 2;
 var size_unit = 'rem';
 
 function resizeLogo(page_y_offset) {
     var progress = Math.min(page_y_offset, 50) / 50;
 
-    var shrink_factor = progress * 5;
+    var shrink_factor = progress * (max_size - min_size);
     var new_size = max_size - shrink_factor;
     logo_element.style.width = new_size + size_unit;
     logo_element.style.height = new_size + size_unit;
