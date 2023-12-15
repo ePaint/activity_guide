@@ -19,7 +19,11 @@
     <title>Activity Guide</title>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <header class="site-header">
+    <img id="site-logo" class="site-logo"
+         role="button"
+         src="{% static 'layout/main_icon.png' %}"/>
+    <div class="site-logo-space"></div>
+    <header id="site-header" class="site-header">
         <div id="navbar"
              hx-target="#navbar"
              hx-trigger="load, reloadNavBar from:body"
@@ -37,8 +41,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        const scrollToTop = () => window.scrollTo({top: 0, behavior: 'smooth'});
-    </script>
+    <script src="{% static 'layout/logo_resize.js' %}"></script>
 </body>
 </html>
