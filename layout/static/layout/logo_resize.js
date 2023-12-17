@@ -1,5 +1,5 @@
 var logo_element = document.getElementById('site-logo');
-var max_size = 7;
+var max_size = 7.5;
 var min_size = 2;
 var size_unit = 'rem';
 

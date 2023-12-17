@@ -1,0 +1,43 @@
+{% load static %}
+<footer class="site-footer container-fluid text-center pb-2 pt-2">
+    <div class="d-flex flex-row flex-wrap">
+        <div class="footer-logo">        
+            <img class=""
+                 role="button"
+                 src="{% static 'layout/main_icon.png' %}"
+                 hx-get="{% url 'layout-home' %}"
+                 hx-target=".main-content"
+                 hx-push-url="true"
+                 hx-trigger="click"
+                 onclick="scrollToTop()"/>
+        </div>
+        <div class="footer-main d-flex flex-column">
+            <div class="footer-section">
+                <div class="footer-item-group">
+                    <div class="footer-item">
+                        <img src="{% static 'layout/google_logo.svg' %}">
+                        <a href="https://www.google.com">Google</a>
+
+                    </div>
+                    <div class="footer-item">
+                        <img src="{% static 'layout/facebook_logo.svg' %}">
+                        <a href="https://www.facebook.com">Facebook</a>
+                    </div>
+                </div>
+                <div class="footer-item-group">
+                    <div class="footer-item">
+                        Send us an email
+                    </div>
+                    <div class="footer-item">
+                        Drop us a line
+                    </div>
+                </div>
+            </div>
+            <div class="h-50 text-muted small w-75 align-self-center">
+                <em>
+                    Longer message about how we are not responsible for random stuff. 2023 Activity Guide. All rights reserved.
+                </em>
+            </div>
+        </div>
+    </div>
+</footer>

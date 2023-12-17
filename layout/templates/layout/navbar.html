@@ -1,26 +1,51 @@
 {% load static %}
+<footer class="site-footer">
+    <div class="footer-content">
 <div class="navbar-main container-fluid">
     <div class="d-flex flex-row flex-nowrap">
         <div class="col-2 flex-shrink-0 site-logo-mobile-slot">
             <img class="site-logo-mobile"
                  role="button"
-                 src="{% static 'layout/main_icon.png' %}"/>
+                 src="{% static 'layout/main_icon.png' %}"
+                 hx-target=".main-content"
+                 hx-trigger="click"
+                 hx-push-url="true"
+                 hx-get="{% url 'layout-home' %}"
+                 onclick="scrollToTop()"/>
         </div>
         <div class="col-10 flex-grow-1">
             <div class="row text-center align-items-center">
                 <div class="col-sm-5 g-2 d-flex flex-row justify-content-around">
                     <div class="header-item">
-                        <div class="rounded orange-hover" role="button">
+                        <div class="rounded orange-hover"
+                             role="button"
+                             hx-target=".main-content"
+                             hx-trigger="click"
+                             hx-push-url="true"
+                             hx-get="{% url 'layout-home' %}"
+                             onclick="scrollToTop()">
                             Home
                         </div>
                     </div>
                     <div class="header-item">
-                        <div class="rounded orange-hover" role="button">
+                        <div class="rounded orange-hover"
+                             role="button"
+                             hx-target=".main-content"
+                             hx-trigger="click"
+                             hx-push-url="true"
+                             hx-get="{% url 'layout-categories' %}"
+                             onclick="scrollToTop()">
                             Categories
                         </div>
                     </div>
                     <div class="header-item">
-                        <div class="rounded orange-hover" role="button">
+                        <div class="rounded orange-hover"
+                             role="button"
+                             hx-target=".main-content"
+                             hx-trigger="click"
+                             hx-push-url="true"
+                             hx-get="{% url 'layout-about' %}"
+                             onclick="scrollToTop()">
                             About Us
                         </div>
                     </div>
@@ -28,17 +53,35 @@
                 <div class="col-sm-2 header-logo"><div></div></div>
                 <div class="col-sm-5 g-2 d-flex flex-row justify-content-around">
                     <div class="header-item">
-                        <div class="rounded orange-hover" role="button">
+                        <div class="rounded orange-hover"
+                             role="button"
+                             hx-target=".main-content"
+                             hx-trigger="click"
+                             hx-push-url="true"
+                             hx-get="{% url 'layout-contact' %}"
+                             onclick="scrollToTop()">
                             Contact
                         </div>
                     </div>
                     <div class="header-item">
-                        <div class="rounded orange-hover" role="button">
+                        <div class="rounded orange-hover"
+                             role="button"
+                             hx-target=".main-content"
+                             hx-trigger="click"
+                             hx-push-url="true"
+                             hx-get="{% url 'users-login' %}"
+                             onclick="scrollToTop()">
                             Login
                         </div>
                     </div>
                     <div class="header-item">
-                        <div class="rounded orange-hover" role="button">
+                        <div class="rounded orange-hover"
+                             role="button"
+                             hx-target=".main-content"
+                             hx-trigger="click"
+                             hx-push-url="true"
+                             hx-get="{% url 'users-register' %}"
+                             onclick="scrollToTop()">
                             Sign Up
                         </div>
                     </div>
@@ -141,4 +184,3 @@
 <!--        </div>-->
 <!--    </div>-->
 </div>
-
