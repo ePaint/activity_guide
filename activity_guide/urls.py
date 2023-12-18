@@ -6,6 +6,7 @@ from activity_guide import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
+    path('categories/', include('categories.urls')),
     path('', include('layout.urls')),
 ]
 

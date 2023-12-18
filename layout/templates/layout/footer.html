@@ -1,14 +1,15 @@
 {% load static %}
-<footer class="site-footer container-fluid text-center pb-2 pt-2">
+<footer class="site-footer container-fluid text-center pb-2 pt-2 user-select-none">
     <div class="d-flex flex-row flex-wrap">
         <div class="footer-logo">        
             <img class=""
                  role="button"
                  src="{% static 'layout/main_icon.png' %}"
-                 hx-get="{% url 'layout-home' %}"
                  hx-target=".main-content"
+                 hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+                 hx-on::after-request="scrollToTop()"
                  hx-push-url="true"
-                 hx-trigger="click"
+                 hx-get="{% url 'layout-home' %}"
                  onclick="scrollToTop()"/>
         </div>
         <div class="footer-main d-flex flex-column">
@@ -17,7 +18,6 @@
                     <div class="footer-item">
                         <img src="{% static 'layout/google_logo.svg' %}">
                         <a href="https://www.google.com">Google</a>
-
                     </div>
                     <div class="footer-item">
                         <img src="{% static 'layout/facebook_logo.svg' %}">

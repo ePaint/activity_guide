@@ -21,9 +21,15 @@
     <title>Activity Guide</title>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <img id="site-logo" class="site-logo"
+    <img id="site-logo" class="site-logo user-select-none"
          role="button"
-         src="{% static 'layout/main_icon.png' %}"/>
+         src="{% static 'layout/main_icon.png' %}"
+         hx-target=".main-content"
+         hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+         hx-on::after-request="scrollToTop()"
+         hx-push-url="true"
+         hx-get="{% url 'layout-home' %}"
+         onclick="scrollToTop()"/>
     <div class="site-logo-space"></div>
     <header id="site-header" class="site-header">
         <div id="navbar"
@@ -34,7 +40,7 @@
     </header>
     
     <main role="main">
-        <div class="main-content">
+        <div id="main-content" class="main-content">
             {% block content %}{% endblock %}
         </div>
     </main>

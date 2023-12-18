@@ -36,6 +36,7 @@ CSRF_TRUSTED_ORIGINS = [
 INSTALLED_APPS = [
     'layout.apps.LayoutConfig',
     'users.apps.UsersConfig',
+    'categories.apps.CategoriesConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_htmx',

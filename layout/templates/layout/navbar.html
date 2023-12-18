@@ -1,14 +1,13 @@
 {% load static %}
-<footer class="site-footer">
-    <div class="footer-content">
-<div class="navbar-main container-fluid">
+<div class="navbar-main container-fluid user-select-none">
     <div class="d-flex flex-row flex-nowrap">
         <div class="col-2 flex-shrink-0 site-logo-mobile-slot">
             <img class="site-logo-mobile"
                  role="button"
                  src="{% static 'layout/main_icon.png' %}"
                  hx-target=".main-content"
-                 hx-trigger="click"
+                 hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+                 hx-on::after-request="scrollToTop()"
                  hx-push-url="true"
                  hx-get="{% url 'layout-home' %}"
                  onclick="scrollToTop()"/>
@@ -20,7 +19,8 @@
                         <div class="rounded orange-hover"
                              role="button"
                              hx-target=".main-content"
-                             hx-trigger="click"
+                             hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+                             hx-on::after-request="scrollToTop()"
                              hx-push-url="true"
                              hx-get="{% url 'layout-home' %}"
                              onclick="scrollToTop()">
@@ -31,21 +31,23 @@
                         <div class="rounded orange-hover"
                              role="button"
                              hx-target=".main-content"
-                             hx-trigger="click"
+                             hx-trigger="click[window.location.pathname != '{% url "categories-home" %}']"
+                             hx-on::after-request="scrollToTop()"
                              hx-push-url="true"
-                             hx-get="{% url 'layout-categories' %}"
+                             hx-get="{% url 'categories-home' %}"
                              onclick="scrollToTop()">
-                            Categories
+                            Categories 
                         </div>
                     </div>
                     <div class="header-item">
                         <div class="rounded orange-hover"
                              role="button"
                              hx-target=".main-content"
-                             hx-trigger="click"
+                             hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+                             hx-on::after-request="scrollToElementId('about-us')"
                              hx-push-url="true"
-                             hx-get="{% url 'layout-about' %}"
-                             onclick="scrollToTop()">
+                             hx-get="{% url 'layout-home' %}"
+                             onclick="scrollToElementId('about-us')">
                             About Us
                         </div>
                     </div>
@@ -56,10 +58,11 @@
                         <div class="rounded orange-hover"
                              role="button"
                              hx-target=".main-content"
-                             hx-trigger="click"
+                             hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+                             hx-on::after-request="scrollToElementId('contact')"
                              hx-push-url="true"
-                             hx-get="{% url 'layout-contact' %}"
-                             onclick="scrollToTop()">
+                             hx-get="{% url 'layout-home' %}"
+                             onclick="scrollToElementId('contact')">
                             Contact
                         </div>
                     </div>
@@ -89,98 +92,4 @@
             </div>
         </div>
     </div>
-<!--    <div class="container">-->
-<!--        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">-->
-<!--            <a class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"-->
-<!--               href="{% url 'layout-home' %}"-->
-<!--               hx-target=".main-content"-->
-<!--               hx-trigger="click"-->
-<!--               hx-push-url="true"-->
-<!--               hx-get="{% url 'layout-home' %}">-->
-<!--                <img class="bi me-2"-->
-<!--                     width="70"-->
-<!--                     height="70"-->
-<!--                     role="img"-->
-<!--                     src="{% static 'layout/main_icon.png' %}"/>-->
-<!--            </a>-->
-
-<!--            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">-->
-<!--                <li><a class="nav-link px-2 orange-hover rounded"-->
-<!--                       href="{% url 'layout-home' %}"-->
-<!--                       hx-target=".main-content"-->
-<!--                       hx-trigger="click"-->
-<!--                       hx-push-url="true"-->
-<!--                       hx-get="{% url 'layout-home' %}">Home</a></li>-->
-<!--                <li><a class="nav-link px-2 orange-hover rounded"-->
-<!--                       href="{% url 'layout-categories' %}"-->
-<!--                       hx-target=".main-content"-->
-<!--                       hx-trigger="click"-->
-<!--                       hx-push-url="true"-->
-<!--                       hx-get="{% url 'layout-categories' %}">Categories</a></li>-->
-<!--                <li><a class="nav-link px-2 orange-hover rounded"-->
-<!--                       href="{% url 'layout-about' %}"-->
-<!--                       hx-target=".main-content"-->
-<!--                       hx-trigger="click"-->
-<!--                       hx-push-url="true"-->
-<!--                       hx-get="{% url 'layout-about' %}">About Us</a></li>-->
-<!--                <li><a class="nav-link px-2 orange-hover rounded"-->
-<!--                       href="{% url 'layout-contact' %}"-->
-<!--                       hx-target=".main-content"-->
-<!--                       hx-trigger="click"-->
-<!--                       hx-push-url="true"-->
-<!--                       hx-get="{% url 'layout-contact' %}">Contact</a></li>-->
-<!--            </ul>-->
-
-<!--            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">-->
-<!--                <input type="search" class="form-control form-control-dark" placeholder="Search activities..." aria-label="Search">-->
-<!--            </form>-->
-
-<!--            {% if user.is_authenticated %}-->
-<!--                <div class="btn-group">-->
-<!--                    <button type="button" class="btn orange-hover dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">-->
-<!--                        <img class="pfp-small" src="{{ user.profile.profile_image_url }}">-->
-<!--                    </button>-->
-<!--                    <ul class="dropdown-menu dropdown-menu-end">-->
-<!--                        <li><a class="dropdown-item orange-hover"-->
-<!--                               href="{% url 'users-profile' %}"-->
-<!--                               hx-target=".main-content"-->
-<!--                               hx-trigger="click"-->
-<!--                               hx-push-url="true"-->
-<!--                               hx-get="{% url 'users-profile' %}">Profile</a></li>-->
-<!--                        <li><hr class="dropdown-divider"></li>-->
-<!--                        {% if user.is_provider %}-->
-<!--                            <li><a class="dropdown-item orange-hover" href="#">Provider Dashboard</a></li>-->
-<!--                            <li><hr class="dropdown-divider"></li>-->
-<!--                        {% endif %}-->
-<!--                        {% if user.is_member %}-->
-<!--                            <li><a class="dropdown-item orange-hover" href="#">Member Dashboard</a></li>-->
-<!--                            <li><hr class="dropdown-divider"></li>-->
-<!--                        {% endif %}-->
-<!--                        <li><a class="dropdown-item red-hover"-->
-<!--                               href="{% url 'users-logout' %}"-->
-<!--                               hx-target=".main-content"-->
-<!--                               hx-trigger="click"-->
-<!--                               hx-push-url="true"-->
-<!--                               hx-get="{% url 'users-logout' %}">Logout</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            {% else %}-->
-<!--                <div class="text-end">-->
-<!--                    <button type="button"-->
-<!--                            class="btn orange-hover"-->
-<!--                            hx-target=".main-content"-->
-<!--                            hx-trigger="click"-->
-<!--                            hx-push-url="true"-->
-<!--                            hx-vals='{"next": "/categories/"}'-->
-<!--                            hx-get="{% url 'users-login' %}">Login</button>-->
-<!--                    <button type="button"-->
-<!--                            class="btn blue-hover"-->
-<!--                            hx-target=".main-content"-->
-<!--                            hx-trigger="click"-->
-<!--                            hx-push-url="true"-->
-<!--                            hx-get="{% url 'users-register' %}">Sign-up</button>-->
-<!--                </div>-->
-<!--            {% endif %}-->
-<!--        </div>-->
-<!--    </div>-->
 </div>
