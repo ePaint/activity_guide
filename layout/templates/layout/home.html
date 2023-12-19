@@ -185,65 +185,87 @@
     <hr class="hr my-5" />
     <div id="contact">
         <h1 class="text-center green">Contact</h1>
-        <div class="row py-2">
-            <div class="col-sm-3 py-3">
+        <div class="row">
+            <div class="col-md-6">
                 <div class="row">
-                    <div class="text-start text-nowrap orange fs-5 fw-bold">
-                        Address
+                    <div class="col d-flex flex-column justify-content-start align-items-center pb-4">
+                        <div class="text-start text-nowrap blue fs-5 fw-bold">
+                            Address
+                        </div>
+                        <div class="text-start text-nowrap orange fs-6">
+                            1234 56th street<br>City<br>A1B 2C3
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="text-start text-nowrap orange fs-6">
-                        1234 56th street<br>City<br>A1B 2C3
-                    </div>
-                </div>
-    
-            </div>
-            <div class="col-sm-3 py-3">
-                <div class="row">
-                    <div class="text-start text-nowrap orange fs-5 fw-bold">
-                        Phone
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="text-start text-nowrap orange fs-6">
-                        1.234.567.8901
+                    <div class="col d-flex flex-column justify-content-start align-items-center pb-4">
+                        <div class="text-start text-nowrap blue fs-5 fw-bold">
+                            Phone
+                        </div>
+                        <div class="text-start text-nowrap orange fs-6">
+                            250.819.4896
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 py-3">
+            <div class="col-md-6">
                 <div class="row">
-                    <div class="text-start text-nowrap orange fs-5 fw-bold">
-                        Email
+                    <div class="col d-flex flex-column justify-content-start align-items-center pb-4">
+                        <div class="text-start text-nowrap blue fs-5 fw-bold">
+                            Email
+                        </div>
+                        <div class="text-start text-nowrap orange fs-6">
+                            <a class="orange" href="mailto:anke@activityguide.ca">anke@activityguide.ca</a>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="text-start text-nowrap orange fs-6">
-                        1234 56th street<br>City<br>A1B 2C3
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 py-3">
-                <div class="row">
-                    <div class="text-start text-nowrap orange fs-5 fw-bold">
-                        Stay Connected
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="text-start text-nowrap orange fs-6">
-                        Social Media Icons Here
+                    <div class="col d-flex flex-column justify-content-start align-items-center pb-4">
+                        <div class="text-start text-nowrap blue fs-5 fw-bold">
+                            Stay Connected
+                        </div>
+                        <div class="text-start text-nowrap orange fs-6 d-flex flex-row flex-nowrap gap-2">
+                            <div class="footer-item">
+                                <img src="{% static "layout/facebook_logo.svg"%}">
+                                <a class="orange" href="https://www.facebook.com/activityguide.ca">Facebook</a>
+                            </div>
+                            <div class="footer-item">
+                                <img src="{% static "layout/instagram_logo.svg"%}">
+                                <a class="orange" href="https://www.instagram.com/kamloopsactivityguide">Instagram</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row py-1">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8 py-4">
-                <div class="pt-5 pb-5 border blue-hover rounded text-center text-nowrap shadow-sm" style="height:200px;">
+        <div class="row pb-4 gap-0 justify-content-center align-items-center px-2">
+            <div class="contact-form round bg-white border">
+                <div class="fs-6 fw-bold text-center">
                     Contact Form
                 </div>
+                <div class="small text-muted">
+                    Your email
+                </div>
+                <div class="">
+                    <input type="text" class="form-control" placeholder="Email">
+                </div>
+                <div class="small text-muted pt-2">
+                    Your message to us
+                </div>
+                <div class="">
+                    <textarea class="form-control" placeholder="Message"></textarea>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="button"
+                            class="btn btn-primary w-50 align-self-end my-3"
+                            hx-target=".main-content"
+                            hx-trigger="click"
+                            hx-push-url="true"
+                            hx-get="{% url 'layout-search-results' %}"
+                            onclick="scrollToTop()">
+                        Send
+                    </button>
+                </div>
+                <div class="small text-left text-muted pt-2">
+                    Email us with any questions or inquiries. We would be happy to answer your questions and set up a meeting with you. Activity Guide is here to help you find the perfect activity for your child. We will try to respond within 24-72 hours.
+                </div>
             </div>
-            <div class="col-sm-2"></div>
         </div>
     </div>
 </div>

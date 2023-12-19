@@ -438,6 +438,10 @@ footer {
     padding-right: 0 !important;
 }
 
+.contact-form {
+    max-width: 640px;
+}
+
 .home-category-item {
     height: 163.2px;
     display: flex;
