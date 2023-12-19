@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     # Creates 20 basic activities per category (Sports, Art, and Science)
     def custom_task(self, schema_editor):
         to_create = [
-            # 20 Sports activities
+            # 20 Sports offers
             {
                 "name": "Soccer",
                 "description": "Global team sport played with a ball and feet, aiming to score goals in the opponent's net.",
@@ -130,7 +130,7 @@ class Migration(migrations.Migration):
                 "slugName": "sailing"
             },
             
-            # 20 Art activities
+            # 20 Art offers
             {
                 "name": "Painting",
                 "description": "Visual art form involving the application of pigments to a surface, expressing creativity and emotion.",
@@ -252,7 +252,7 @@ class Migration(migrations.Migration):
                 "slugName": "pottery"
             },
 
-            # 20 Science activities
+            # 20 Science offers
             {
                 "name": "Chemistry Experiments",
                 "description": "Engaging in hands-on experiments to explore chemical reactions and principles.",
@@ -375,12 +375,12 @@ class Migration(migrations.Migration):
             }
         ]
 
-        Activity = self.get_model('activities', 'Activity')
+        Offer = self.get_model('offers', 'Offer')
         Category = self.get_model('categories', 'Category')
         
         for item in to_create:
             category = Category.objects.get(slug=item['category'])
-            Activity.objects.get_or_create(
+            Offer.objects.get_or_create(
                 name=item['name'],
                 description=item['description'],
                 category=category,
@@ -388,7 +388,7 @@ class Migration(migrations.Migration):
             )
 
     dependencies = [
-        ('activities', '0002_alter_activity_options'),
+        ('offers', '0001_initial'),
     ]
 
     operations = [

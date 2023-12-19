@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
 
 
     dependencies = [
-        ('categories', '0002_alter_category_options'),
+        ('categories', '0001_initial'),
     ]
 
     operations = [

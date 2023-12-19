@@ -2,10 +2,10 @@ from django.db import models
 from django.urls import reverse
 
 
-class Activity(models.Model):
+class Offer(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='activities', blank=True, null=True)
+    image = models.ImageField(upload_to='offers', blank=True, null=True)
     category = models.ForeignKey('categories.Category', on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
@@ -17,9 +17,9 @@ class Activity(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('activity-detail', kwargs={'slug': self.slug})
+        return reverse('offer-detail', kwargs={'slug': self.slug})
     
     class Meta:
-        verbose_name = 'Activity'
-        verbose_name_plural = 'Activities'
+        verbose_name = 'Offer'
+        verbose_name_plural = 'Offers'
         ordering = ['created_at']

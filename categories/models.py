@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from activities.models import Activity
+from offers.models import Offer
 
 
 class Category(models.Model):
@@ -32,14 +32,14 @@ class Category(models.Model):
     def get_root_category(self):
         return self if self.is_root_category() else self.parent.get_root_category()
     
-    def get_activities(self):
-        activities = []
+    def get_offers(self):
+        offers = []
         if self.is_root_category():
             for child in self.get_children():
-                activities += child.get_activities()
+                offers += child.get_offers()
         else:
-            activities = Activity.objects.filter(category=self)
-        return activities
+            offers = Offer.objects.filter(category=self)
+        return offers
     
     class Meta:
         verbose_name = 'Category'
