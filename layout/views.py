@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from categories.models import Category
+from offers.models import Offer
 
 
 def not_found(request, exception):
@@ -31,4 +32,8 @@ def navbar(request):
 
 
 def search_results(request):
-    return render(request, 'layout/search_results.html')
+    offers = Offer.objects.all()
+    context = {
+        'offers': offers
+    }
+    return render(request, 'layout/search_results.html', context)

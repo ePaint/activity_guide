@@ -41,6 +41,15 @@ class Category(models.Model):
             offers = Offer.objects.filter(category=self)
         return offers
     
+    def get_color(self):
+        if self.slug == 'sports':
+            return 'red'
+        elif self.slug == 'art':
+            return 'green'
+        elif self.slug == 'science':
+            return 'blue'
+        return 'orange'
+    
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'

@@ -160,7 +160,7 @@
                 </div>
                 <div class="col-md-3 d-flex flex-column gap-4">
                     {% for category in categories %}
-                        <div class="home-category-item flex-fill fs-2 border round text-center text-nowrap bg-white"
+                        <div class="home-category-item flex-fill fs-2 border round text-center text-nowrap bg-{{ category.get_color }}"
                              role="button"
                              hx-target=".main-content"
                              hx-trigger="click"

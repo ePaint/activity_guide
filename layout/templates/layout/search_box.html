@@ -1,0 +1,10 @@
+<div class="round border bg-white mb-0 mb-lg-4">
+    <div class="search-box row align-items-center justify-content-end">
+        <div class="w-100 text-end"> 
+            <input class="search-input" type="text" placeholder="Search" aria-label="Search">
+        </div>
+    </div>
+    {% for offer in offers %}
+        {% include "offers/offer_line_item.html" with offer=offer %}
+    {% endfor %}
+</div>

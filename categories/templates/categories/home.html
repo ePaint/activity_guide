@@ -29,19 +29,9 @@
                  hx-get="{% url 'categories-detail' category.slug %}"
                  onclick="scrollToTop()">
                 <div class="categories-item">
-                    {% if category.slug == 'sports' %}
-                        <div class="categories-item-title bg-red border round">
-                            <h3>{{ category.name }}</h3>
-                        </div>
-                    {% elif category.slug == 'art' %}
-                        <div class="categories-item-title bg-green border round">
-                            <h3>{{ category.name }}</h3>
-                        </div>
-                    {% elif category.slug == 'science' %}
-                        <div class="categories-item-title bg-blue border round">
-                            <h3>{{ category.name }}</h3>
-                        </div>
-                    {% endif %}
+                    <div class="categories-item-title bg-{{ category.get_color }} border round">
+                        <h3>{{ category.name }}</h3>
+                    </div>
                     <div class="categories-item-text pt-3">
                         <p>{{ category.description }}</p>
                     </div>

@@ -1,0 +1,60 @@
+{% extends request.base_template %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mb-2 py-2">
+        <div class="d-md-flex gap-4">
+            <div class="d-flex justify-content-md-start justify-content-center pb-2">
+                <img class="profile-image {{ offer.category.get_color }} user-select-none"
+                    role="button"
+                    src="{% static 'layout/default_image.png' %}"/> 
+            </div>
+            <div class="d-flex w-100 flex-column bg-white round border">
+                <div class="fs-3 {{ offer.category.get_color }} align-self-center align-self-md-start d-md-flex flex-row justify-content-center align-items-center text-center">
+                    <div class="category-badge-large badge bg-{{ offer.category.get_color }} m-1"
+                         role="button"
+                         hx-target=".main-content"
+                         hx-trigger="click[window.location.pathname != '{% url "categories-detail" offer.category.slug %}']"
+                         hx-on::after-request="scrollToTop()"
+                         hx-push-url="true"
+                         hx-get="{% url 'categories-detail' offer.category.slug %}"
+                         onclick="scrollToTop()">
+                        {{ offer.category.name }}
+                    </div>
+                    <div>
+                        {{ offer.name }}
+                    </div>
+                </div>
+                <div class="">
+                    {{ offer.description }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="hr mt-0 mb-1" />
+    <div class="row mb-2 py-2">
+        <div class="d-md-flex gap-4">
+            <div class="d-flex justify-content-md-start justify-content-center pb-2">
+                <div class="width-10 d-flex flex-column justify-content-start align-items-center pt-2 pt-md-0">
+                    <div class="item-buttons d-flex flex-column gap-1 mb-2 w-100 pt-2">
+                        <div class="rounded-pill btn bg-white border btn-light">
+                            A
+                        </div>
+                        <div class="d-flex flex-row gap-1">
+                            <div class="rounded-pill btn bg-white border btn-light w-50">
+                                B
+                            </div>
+                            <div class="rounded-pill btn bg-white border btn-light btn w-50">
+                                C
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="three-columns bg-white round border">
+                {% lorem 4 b random %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
