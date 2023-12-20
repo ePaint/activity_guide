@@ -16,7 +16,6 @@ RUN set -ex && \
     rm -rf /root/.cache/
 COPY . /code
 
-RUN python manage.py makemigrations
 RUN python manage.py migrate
 
 EXPOSE 8000
