@@ -6,9 +6,19 @@
         <div class="col-lg round border bg-white mb-0 mb-lg-4">
             <div class="row no-padding">
                 <div class="col-md-6">
-                    <div class="d-flex fs-1 fw-bolder justify-content-start align-content-start">
-                        {{ category.name }} Offers
-                    </div>
+                    {% if category.slug == 'sports' %}
+                        <div class="d-flex fs-1 red fw-bolder justify-content-start align-content-start">
+                            {{ category.name }} Providers
+                        </div>
+                    {% elif category.slug == 'art' %}
+                        <div class="d-flex fs-1 green fw-bolder justify-content-start align-content-start">
+                            {{ category.name }} Providers
+                        </div>
+                    {% elif category.slug == 'science' %}
+                        <div class="d-flex fs-1 blue fw-bolder justify-content-start align-content-start">
+                            {{ category.name }} Providers
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex pt-3 justify-content-end align-content-end">
@@ -16,32 +26,74 @@
                     </div>
                 </div>
             </div>
-            {% for offer in offers %}
-                <div class="row mt-3 round bg-white border"
-                     role="button"
-                     hx-target=".main-content"
-                     hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
-                     hx-on::after-request="scrollToTop()"
-                     hx-push-url="true"
-                     hx-get="{% url 'layout-home' %}"
-                     onclick="scrollToTop()">
-                    <div class="col-md-2 d-flex align-items-center justify-content-center">
+            {% for provider in providers %}
+                <div class="row mt-3 round bg-white border">
+                    <div class="col-md-2 d-flex align-items-center justify-content-center"
+                         role="button"
+                         hx-target=".main-content"
+                         hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+                         hx-on::after-request="scrollToTop()"
+                         hx-push-url="true"
+                         hx-get="{% url 'layout-home' %}"
+                         onclick="scrollToTop()">
                         <img class="categories-detail-offer-icon user-select-none"
                              src="{% static 'layout/default_image.png' %}"/>
                     </div>
-                    <div class="col-md-2 fw-bold d-flex align-items-center justify-content-center justify-content-md-start">
-                        {{ offer.name }}
+                    <div class="col-md-2 fw-bold d-flex align-items-center justify-content-center justify-content-md-start"
+                         role="button"
+                         hx-target=".main-content"
+                         hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+                         hx-on::after-request="scrollToTop()"
+                         hx-push-url="true"
+                         hx-get="{% url 'layout-home' %}"
+                         onclick="scrollToTop()">
+                        {{ provider.name }}
                     </div>
                     <div class="col-md-5 text-muted small pt-2 pt-md-0">
-                        {{ offer.description }}
+                        {{ provider.description }}
                     </div>
 
                     <div class="col-md-3 row gap-0 small pt-2 pt-md-0">
-                        <div class="col-6 w-50 d-flex justify-content-center">
+                        <div class="col-9 w-75 d-flex justify-content-center align-items-center">
                             Short Text
                         </div>
-                        <div class="col-6 w-50 d-flex justify-content-center">
-                            Short Text
+                        <div class="col-3 w-25 d-flex flex-column flex-wrap justify-content-center align-items-start">
+                            {% for provider_category in provider.get_categories %}
+                                {% if provider_category.slug == 'sports' %}
+                                    <span class="category-badge badge bg-red m-1"
+                                          role="button"
+                                          hx-target=".main-content"
+                                          hx-trigger="click[window.location.pathname != '{% url "categories-detail" provider_category.slug %}']"
+                                          hx-on::after-request="scrollToTop()"
+                                          hx-push-url="true"
+                                          hx-get="{% url 'categories-detail' provider_category.slug %}"
+                                          onclick="scrollToTop()">
+                                        {{ provider_category.name }}
+                                    </span>
+                                {% elif provider_category.slug == 'art' %}
+                                    <span class="category-badge badge bg-green m-1"
+                                          role="button"
+                                          hx-target=".main-content"
+                                          hx-trigger="click[window.location.pathname != '{% url "categories-detail" provider_category.slug %}']"
+                                          hx-on::after-request="scrollToTop()"
+                                          hx-push-url="true"
+                                          hx-get="{% url 'categories-detail' provider_category.slug %}"
+                                          onclick="scrollToTop()">
+                                        {{ provider_category.name }}
+                                    </span>
+                                {% elif provider_category.slug == 'science' %}
+                                    <span class="category-badge badge bg-blue m-1"
+                                          role="button"
+                                          hx-target=".main-content"
+                                          hx-trigger="click[window.location.pathname != '{% url "categories-detail" provider_category.slug %}']"
+                                          hx-on::after-request="scrollToTop()"
+                                          hx-push-url="true"
+                                          hx-get="{% url 'categories-detail' provider_category.slug %}"
+                                          onclick="scrollToTop()">
+                                        {{ provider_category.name }}
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ from django.urls import reverse
 
 
 class Offer(models.Model):
+    provider = models.ForeignKey('providers.Provider', on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='offers', blank=True, null=True)

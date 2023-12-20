@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from categories.models import Category
 
 
 def not_found(request, exception):
@@ -21,7 +22,8 @@ def base(request):
 
 
 def home(request):
-    return render(request, 'layout/home.html')
+    categories = Category.objects.all().order_by('created_at')[:3]
+    return render(request, 'layout/home.html', {'categories': categories})
 
 
 def navbar(request):

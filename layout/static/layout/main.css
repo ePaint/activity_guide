@@ -54,6 +54,11 @@ body {
     border-color: #F26522;
 }
 
+.bg-orange {
+    color: #FFFFFF !important;
+    background-color: #F26522 !important;
+}
+
 .orange-hover:hover {
     color: #FFFFFF !important;
     border-color: #F26522;
@@ -63,6 +68,11 @@ body {
 .blue, .blue-hover {
     color: #00AEEF !important;
     border-color: #00AEEF;
+}
+
+.bg-blue {
+    color: #FFFFFF !important;
+    background-color: #00AEEF !important;
 }
 
 .blue-hover:hover {
@@ -76,6 +86,11 @@ body {
     border-color: #8DC63F;
 }
 
+.bg-green {
+    color: #FFFFFF !important;
+    background-color: #8DC63F !important;
+}
+
 .green-hover:hover {
     color: #FFFFFF !important;
     border-color: #8DC63F;
@@ -85,6 +100,11 @@ body {
 .red, .red-hover {
     color: #D2122E !important;
     border-color: #D2122E;
+}
+
+.bg-red {
+    color: #FFFFFF !important;
+    background-color: #D2122E !important;
 }
 
 .red-hover:hover {
@@ -421,10 +441,6 @@ footer {
     /* width: 70%; */
 }
 
-.home-category-group {
-    /* width: 30%; */
-}
-
 .fill {
     background-size: cover;
     background-position: center;
@@ -443,7 +459,7 @@ footer {
 }
 
 .home-category-item {
-    height: 163.2px;
+    min-height: 7rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -500,6 +516,11 @@ footer {
     width: 5rem;
     height: 5rem;
     border-radius: 20%;
+}
+
+.category-badge {
+    height: 1.25rem;
+    max-width: 3.5rem;
 }
 
 @media(max-width: 575px) {

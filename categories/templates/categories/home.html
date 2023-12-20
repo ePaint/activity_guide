@@ -3,17 +3,17 @@
 <div class="container">
     <div class="row gap-0">
         <div class="col-md-3 pt-4">
-            <div class="categories-ad border round bg-white">
+            <div class="categories-ad border round bg-white small text-muted">
                 Ad up to 3
             </div>
         </div>
         <div class="col-md-6 pt-4">
-            <div class="categories-ad border round bg-white">
+            <div class="categories-ad border round bg-white small text-muted">
                 Banner Ad
             </div>
         </div>
         <div class="col-md-3 pt-4">
-            <div class="categories-ad border round bg-white">
+            <div class="categories-ad border round bg-white small text-muted">
                 Small Rectangle Ad
             </div>
         </div>
@@ -29,9 +29,19 @@
                  hx-get="{% url 'categories-detail' category.slug %}"
                  onclick="scrollToTop()">
                 <div class="categories-item">
-                    <div class="categories-item-title bg-white border round">
-                        <h3>{{ category.name }}</h3>
-                    </div>
+                    {% if category.slug == 'sports' %}
+                        <div class="categories-item-title bg-red border round">
+                            <h3>{{ category.name }}</h3>
+                        </div>
+                    {% elif category.slug == 'art' %}
+                        <div class="categories-item-title bg-green border round">
+                            <h3>{{ category.name }}</h3>
+                        </div>
+                    {% elif category.slug == 'science' %}
+                        <div class="categories-item-title bg-blue border round">
+                            <h3>{{ category.name }}</h3>
+                        </div>
+                    {% endif %}
                     <div class="categories-item-text pt-3">
                         <p>{{ category.description }}</p>
                     </div>

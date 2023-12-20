@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'layout.apps.LayoutConfig',
     'users.apps.UsersConfig',
     'categories.apps.CategoriesConfig',
+    'providers.apps.ProvidersConfig',
     'offers.apps.OffersConfig',
     'crispy_forms',
     'crispy_bootstrap5',

@@ -11,384 +11,448 @@ class Migration(migrations.Migration):
             # 20 Sports offers
             {
                 "name": "Soccer",
-                "description": "Global team sport played with a ball and feet, aiming to score goals in the opponent's net.",
+                "description": "Team-based sport involving kicking a ball into the opponent's goal. Develops teamwork, coordination, and agility.",
                 "category": "sports",
-                "slugName": "soccer"
+                "slugName": "soccer",
+                "providerSlug": "playful-learning"
             },
             {
                 "name": "Basketball",
-                "description": "Fast-paced team sport where players shoot a ball through the opponent's hoop to score points.",
+                "description": "Fast-paced sport where two teams compete to score points by shooting a ball through the opponent's hoop. Enhances agility and teamwork.",
                 "category": "sports",
-                "slugName": "basketball"
+                "slugName": "basketball",
+                "providerSlug": "little-athlete"
             },
             {
                 "name": "Swimming",
-                "description": "Individual or team aquatic sport where participants move through water using various strokes.",
+                "description": "Water-based activity involving various strokes to move through the water. Promotes fitness, endurance, and water safety.",
                 "category": "sports",
-                "slugName": "swimming"
-            },
-            {
-                "name": "Tennis",
-                "description": "Racket sport played between two opponents or teams, involving hitting a ball over a net.",
-                "category": "sports",
-                "slugName": "tennis"
-            },
-            {
-                "name": "Volleyball",
-                "description": "Team sport played with a ball over a net, aiming to score points by grounding the ball in the opponent's court.",
-                "category": "sports",
-                "slugName": "volleyball"
-            },
-            {
-                "name": "Ice Hockey",
-                "description": "Fast-paced team sport played on ice, where players use sticks to score goals by shooting a puck into the opponent's net.",
-                "category": "sports",
-                "slugName": "ice-hockey"
-            },
-            {
-                "name": "Baseball",
-                "description": "Bat-and-ball sport played between two teams, aiming to score runs by hitting a pitched ball and running around bases.",
-                "category": "sports",
-                "slugName": "baseball"
-            },
-            {
-                "name": "Table Tennis",
-                "description": "Indoor racket sport played with a lightweight ball, requiring quick reflexes and precise shots over a table.",
-                "category": "sports",
-                "slugName": "table-tennis"
-            },
-            {
-                "name": "Golf",
-                "description": "Precision sport where players use clubs to hit a ball into a series of holes on a course with the fewest strokes.",
-                "category": "sports",
-                "slugName": "golf"
-            },
-            {
-                "name": "Running",
-                "description": "Individual or team activity involving rapid movement on foot over varying distances, often in races.",
-                "category": "sports",
-                "slugName": "running"
-            },
-            {
-                "name": "Cycling",
-                "description": "Sport and recreational activity involving riding bicycles, promoting physical fitness and outdoor exploration.",
-                "category": "sports",
-                "slugName": "cycling"
-            },
-            {
-                "name": "Martial Arts",
-                "description": "Various disciplines of combat training and techniques, often practiced for self-defense, fitness, and discipline.",
-                "category": "sports",
-                "slugName": "martial-arts"
-            },
-            {
-                "name": "Badminton",
-                "description": "Racket sport played with a shuttlecock, aiming to score points by hitting it over a net into the opponent's side.",
-                "category": "sports",
-                "slugName": "badminton"
+                "slugName": "swimming",
+                "providerSlug": "adventure-seekers"
             },
             {
                 "name": "Gymnastics",
-                "description": "Sport involving physical exercises requiring strength, flexibility, balance, and control, often performed on apparatus or in routines.",
+                "description": "Artistic and rhythmic exercises requiring strength, flexibility, and coordination. Builds physical fitness and body awareness.",
                 "category": "sports",
-                "slugName": "gymnastics"
+                "slugName": "gymnastics",
+                "providerSlug": "artistic-explorers"
             },
             {
-                "name": "Skiing",
-                "description": "Winter sport involving sliding on snow using skis, with various disciplines such as alpine, cross-country, and freestyle.",
+                "name": "Tennis",
+                "description": "Racket sport played between two players or pairs. Improves hand-eye coordination, agility, and strategic thinking.",
                 "category": "sports",
-                "slugName": "skiing"
+                "slugName": "tennis",
+                "providerSlug": "language-explorers"
             },
             {
-                "name": "Surfing",
-                "description": "Water sport where participants ride waves on a board, balancing and maneuvering in the ocean.",
+                "name": "Baseball",
+                "description": "Bat-and-ball sport with teams taking turns batting and fielding. Enhances hand-eye coordination, teamwork, and strategic thinking.",
                 "category": "sports",
-                "slugName": "surfing"
+                "slugName": "baseball",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Athletics",
+                "description": "Track and field events including running, jumping, and throwing. Promotes overall fitness, speed, and endurance.",
+                "category": "sports",
+                "slugName": "athletics",
+                "providerSlug": "super-chef-junior"
+            },
+            {
+                "name": "Karate",
+                "description": "Martial art focused on strikes, kicks, and blocks. Builds discipline, self-defense skills, and physical fitness.",
+                "category": "sports",
+                "slugName": "karate",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Cycling",
+                "description": "Sport or recreational activity of riding bicycles. Improves cardiovascular health, leg strength, and coordination.",
+                "category": "sports",
+                "slugName": "cycling",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Volleyball",
+                "description": "Team sport where players use their hands to hit a ball over a net. Enhances teamwork, coordination, and agility.",
+                "category": "sports",
+                "slugName": "volleyball",
+                "providerSlug": "adventure-seekers"
             },
             {
                 "name": "Archery",
-                "description": "Skill-based sport involving using a bow to shoot arrows at a target, emphasizing precision and focus.",
+                "description": "Sport involving using a bow to shoot arrows at a target. Develops focus, precision, and upper body strength.",
                 "category": "sports",
-                "slugName": "archery"
+                "slugName": "archery",
+                "providerSlug": "robot-builders"
+            },
+            {
+                "name": "Hockey",
+                "description": "Fast-paced sport played on a field or rink, involving hitting a ball or puck into the opponent's goal. Enhances teamwork and stick-handling skills.",
+                "category": "sports",
+                "slugName": "hockey",
+                "providerSlug": "playful-learning"
+            },
+            {
+                "name": "Golf",
+                "description": "Precision sport where players use clubs to hit balls into a series of holes on a course. Develops focus, precision, and patience.",
+                "category": "sports",
+                "slugName": "golf",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Badminton",
+                "description": "Racket sport played with a shuttlecock, requiring fast reflexes and agility. Enhances hand-eye coordination and cardiovascular fitness.",
+                "category": "sports",
+                "slugName": "badminton",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Table Tennis",
+                "description": "Fast-paced indoor sport played with small paddles and a lightweight ball on a rectangular table. Enhances reflexes and coordination.",
+                "category": "sports",
+                "slugName": "table-tennis",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Rugby",
+                "description": "Contact sport played with an oval ball, involving running, passing, and tackling. Builds teamwork, strength, and endurance.",
+                "category": "sports",
+                "slugName": "rugby",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Martial Arts",
+                "description": "Various disciplines of combat and self-defense, promoting physical fitness, discipline, and mental focus.",
+                "category": "sports",
+                "slugName": "martial-arts",
+                "providerSlug": "little-athlete"
             },
             {
                 "name": "Rock Climbing",
-                "description": "Activity involving ascending natural or artificial rock formations, requiring strength, technique, and mental focus.",
+                "description": "Sport or recreational activity of climbing indoor or outdoor rock walls. Builds strength, endurance, and problem-solving skills.",
                 "category": "sports",
-                "slugName": "rock-climbing"
+                "slugName": "rock-climbing",
+                "providerSlug": "super-chef-junior"
             },
             {
-                "name": "Wrestling",
-                "description": "Combat sport involving grappling techniques to throw or pin opponents, emphasizing strength, strategy, and agility.",
+                "name": "Skateboarding",
+                "description": "Action sport involving riding and performing tricks on a skateboard. Enhances balance, coordination, and creativity.",
                 "category": "sports",
-                "slugName": "wrestling"
+                "slugName": "skateboarding",
+                "providerSlug": "adventure-seekers"
             },
             {
-                "name": "Sailing",
-                "description": "Water sport involving controlling a sailboat, harnessing wind power to navigate across bodies of water.",
+                "name": "Fencing",
+                "description": "Combat sport involving duels with bladed weapons. Develops agility, focus, and strategic thinking.",
                 "category": "sports",
-                "slugName": "sailing"
+                "slugName": "fencing",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Surfing",
+                "description": "Water sport involving riding waves on a surfboard. Enhances balance, coordination, and a connection to nature.",
+                "category": "sports",
+                "slugName": "surfing",
+                "providerSlug": "adventure-seekers"
             },
             
             # 20 Art offers
             {
-                "name": "Painting",
-                "description": "Visual art form involving the application of pigments to a surface, expressing creativity and emotion.",
+                "name": "Painting Workshop",
+                "description": "Creative painting sessions for artistic expression. Explore various techniques and styles.",
                 "category": "art",
-                "slugName": "painting"
+                "slugName": "painting-workshop",
+                "providerSlug": "artistic-explorers"
             },
             {
-                "name": "Dancing",
-                "description": "Expressive movement to music, encompassing various styles and cultural forms of artistic dance.",
+                "name": "Pottery Class",
+                "description": "Hands-on pottery experience to mold and create unique clay masterpieces.",
                 "category": "art",
-                "slugName": "dancing"
+                "slugName": "pottery-class",
+                "providerSlug": "crafty-creations"
             },
             {
-                "name": "Photography",
-                "description": "Artistic practice of capturing and creating images using a camera, exploring visual storytelling.",
+                "name": "Dance Class",
+                "description": "Expressive dance classes to learn different dance styles and foster creativity.",
                 "category": "art",
-                "slugName": "photography"
+                "slugName": "dance-class",
+                "providerSlug": "dance-magic"
             },
             {
-                "name": "Sculpture",
-                "description": "Artistic practice of creating three-dimensional forms using materials such as clay, metal, or stone.",
+                "name": "Music Ensemble",
+                "description": "Collaborative music sessions to explore instruments and create harmonious tunes.",
                 "category": "art",
-                "slugName": "sculpture"
+                "slugName": "music-ensemble",
+                "providerSlug": "musical-melodies"
             },
             {
-                "name": "Music Composition",
-                "description": "Creative process of writing and arranging musical pieces, exploring harmony, melody, and rhythm.",
+                "name": "Photography Workshop",
+                "description": "Introduction to photography techniques and artistic composition.",
                 "category": "art",
-                "slugName": "music-composition"
+                "slugName": "photography-workshop",
+                "providerSlug": "language-explorers"
             },
             {
-                "name": "Drawing",
-                "description": "Visual art form using various tools to create images on paper or other surfaces, exploring lines, shapes, and shading.",
+                "name": "Crafting Bonanza",
+                "description": "Craft and DIY activities to unleash creativity and make unique projects.",
                 "category": "art",
-                "slugName": "drawing"
+                "slugName": "crafting-bonanza",
+                "providerSlug": "crafty-creations"
             },
             {
-                "name": "Digital Art",
-                "description": "Artistic creation using digital tools and technology, exploring new media and visual expressions.",
+                "name": "Theater Arts Camp",
+                "description": "Immersive theater experiences, including acting, scriptwriting, and stage performances.",
                 "category": "art",
-                "slugName": "digital-art"
+                "slugName": "theater-arts-camp",
+                "providerSlug": "imagination-theater"
             },
             {
-                "name": "Theater Acting",
-                "description": "Performing in stage productions, bringing characters to life through dialogue, movement, and expression.",
+                "name": "Ceramics Studio",
+                "description": "Specialized studio for creating intricate ceramic artworks with guidance from experts.",
                 "category": "art",
-                "slugName": "theater-acting"
+                "slugName": "ceramics-studio",
+                "providerSlug": "crafty-creations"
             },
             {
-                "name": "Film Making",
-                "description": "Creative process of producing visual stories through filmmaking, involving scripting, directing, and editing.",
+                "name": "Fashion Design Class",
+                "description": "Explore the world of fashion design, from sketching to creating wearable art.",
                 "category": "art",
-                "slugName": "film-making"
+                "slugName": "fashion-design-class",
+                "providerSlug": "artistic-explorers"
             },
             {
-                "name": "Ceramics",
-                "description": "Art and craft of creating objects from clay, often shaped on a potter's wheel and fired in a kiln.",
+                "name": "Sculpture Sculptors",
+                "description": "Sculpting workshops for creating three-dimensional artworks using various materials.",
                 "category": "art",
-                "slugName": "ceramics"
+                "slugName": "sculpture-sculptors",
+                "providerSlug": "crafty-creations"
             },
             {
-                "name": "Fashion Design",
-                "description": "Art and practice of creating clothing and accessories, exploring style, fabric, and design aesthetics.",
+                "name": "Street Art Crew",
+                "description": "Explore street art techniques, including graffiti and mural creation.",
                 "category": "art",
-                "slugName": "fashion-design"
+                "slugName": "street-art-crew",
+                "providerSlug": "imagination-theater"
             },
             {
-                "name": "Graphic Design",
-                "description": "Visual communication through the use of images, typography, and layout, often for print or digital media.",
+                "name": "Calligraphy Class",
+                "description": "Master the art of calligraphy with beautiful lettering and artistic styles.",
                 "category": "art",
-                "slugName": "graphic-design"
+                "slugName": "calligraphy-class",
+                "providerSlug": "language-explorers"
             },
             {
-                "name": "Poetry Writing",
-                "description": "Artistic expression through the written word, exploring rhythm, imagery, and emotion in poetic form.",
+                "name": "Digital Art Lab",
+                "description": "Create digital art using various software and tools to express artistic visions.",
                 "category": "art",
-                "slugName": "poetry-writing"
+                "slugName": "digital-art-lab",
+                "providerSlug": "science-wonders"
             },
             {
-                "name": "Mural Painting",
-                "description": "Large-scale visual art created on walls or surfaces, often reflecting cultural, social, or political themes.",
+                "name": "Comic Book Creators",
+                "description": "Learn the art of comic book creation, from storytelling to illustrating.",
                 "category": "art",
-                "slugName": "mural-painting"
+                "slugName": "comic-book-creators",
+                "providerSlug": "language-explorers"
             },
             {
-                "name": "Jewelry Making",
-                "description": "Craft of creating wearable art, often using metals, gemstones, and other materials to design unique pieces.",
+                "name": "Ballet Academy",
+                "description": "Structured ballet training for dancers to develop grace, technique, and performance skills.",
                 "category": "art",
-                "slugName": "jewelry-making"
+                "slugName": "ballet-academy",
+                "providerSlug": "dance-magic"
             },
             {
-                "name": "Printmaking",
-                "description": "Artistic technique involving the creation of images on surfaces for reproduction, such as etching or linocut.",
+                "name": "Mixed Media Madness",
+                "description": "Explore mixed media art by combining various materials and techniques for unique creations.",
                 "category": "art",
-                "slugName": "printmaking"
+                "slugName": "mixed-media-madness",
+                "providerSlug": "artistic-explorers"
             },
             {
-                "name": "Calligraphy",
-                "description": "Art of beautiful handwriting, often emphasizing decorative lettering styles, shapes, and flourishes.",
+                "name": "Jazz Music Jam",
+                "description": "Jazz music sessions for young musicians to explore improvisation and ensemble playing.",
                 "category": "art",
-                "slugName": "calligraphy"
+                "slugName": "jazz-music-jam",
+                "providerSlug": "musical-melodies"
             },
             {
-                "name": "Collage Art",
-                "description": "Artistic composition created by assembling various materials, such as paper, fabric, or found objects, into a unified whole.",
+                "name": "Puppetry Playhouse",
+                "description": "Puppetry workshops to create and perform with unique puppets and characters.",
                 "category": "art",
-                "slugName": "collage-art"
+                "slugName": "puppetry-playhouse",
+                "providerSlug": "imagination-theater"
             },
             {
-                "name": "Stand-up Comedy",
-                "description": "Performance art involving a comedian presenting humorous stories, jokes, and observations to entertain an audience.",
+                "name": "Abstract Art Explorers",
+                "description": "Expressive journey into abstract art, exploring color, form, and self-expression.",
                 "category": "art",
-                "slugName": "stand-up-comedy"
+                "slugName": "abstract-art-explorers",
+                "providerSlug": "science-wonders"
             },
             {
-                "name": "Pottery",
-                "description": "Art and craft of creating objects from clay, often shaped on a potter's wheel and fired in a kiln.",
+                "name": "Folk Music Fiesta",
+                "description": "Celebration of folk music traditions with hands-on experiences in playing traditional instruments.",
                 "category": "art",
-                "slugName": "pottery"
+                "slugName": "folk-music-fiesta",
+                "providerSlug": "musical-melodies"
             },
 
             # 20 Science offers
             {
-                "name": "Chemistry Experiments",
-                "description": "Engaging in hands-on experiments to explore chemical reactions and principles.",
+                "name": "Chemistry Lab Explorers",
+                "description": "Hands-on experiments exploring chemical reactions and fundamental principles of chemistry.",
                 "category": "science",
-                "slugName": "chemistry-experiments"
+                "slugName": "chemistry-lab-explorers",
+                "providerSlug": "science-wonders"
             },
             {
-                "name": "Astronomy Observation",
-                "description": "Studying celestial objects and phenomena through telescopes and observations.",
+                "name": "Astronomy Adventure Camp",
+                "description": "Explore the wonders of the universe, including stars, planets, and galaxies.",
                 "category": "science",
-                "slugName": "astronomy-observation"
+                "slugName": "astronomy-adventure-camp",
+                "providerSlug": "playful-learning"
             },
             {
-                "name": "Botany Study",
-                "description": "Exploring plant life, anatomy, and growth patterns to understand the world of plants.",
+                "name": "Robotics Workshop",
+                "description": "Introduction to robotics, programming, and building simple robots for hands-on learning.",
                 "category": "science",
-                "slugName": "botany-study"
+                "slugName": "robotics-workshop",
+                "providerSlug": "robot-builders"
             },
             {
-                "name": "Physics Experiments",
-                "description": "Engaging in experiments to explore physical principles and phenomena, involving measurements and observations.",
+                "name": "Environmental Explorers",
+                "description": "Learn about ecosystems, conservation, and environmental science through outdoor activities.",
                 "category": "science",
-                "slugName": "physics-experiments"
+                "slugName": "environmental-explorers",
+                "providerSlug": "nature-discovery"
             },
             {
-                "name": "Ecology Research",
-                "description": "Study of the relationships between living organisms and their environment, exploring ecosystems and biodiversity.",
+                "name": "Physics Fun Fair",
+                "description": "Interactive physics experiments and demonstrations to explore principles of motion, energy, and forces.",
                 "category": "science",
-                "slugName": "ecology-research"
+                "slugName": "physics-fun-fair",
+                "providerSlug": "science-wonders"
             },
             {
-                "name": "Geology Exploration",
-                "description": "Investigating Earth's structure, composition, and processes through the study of rocks, minerals, and landscapes.",
+                "name": "Paleontology Quest",
+                "description": "Dive into the world of dinosaurs and fossils with hands-on paleontological activities.",
                 "category": "science",
-                "slugName": "geology-exploration"
+                "slugName": "paleontology-quest",
+                "providerSlug": "nature-discovery"
             },
             {
-                "name": "Zoology Observation",
-                "description": "Observing and studying animals to understand their behavior, physiology, and ecological roles.",
+                "name": "Microbiology Marvels",
+                "description": "Explore the microscopic world of bacteria and microorganisms through lab experiments.",
                 "category": "science",
-                "slugName": "zoology-observation"
+                "slugName": "microbiology-marvels",
+                "providerSlug": "science-wonders"
             },
             {
-                "name": "Meteorology Experiments",
-                "description": "Conducting experiments to explore atmospheric phenomena, weather patterns, and climate science.",
+                "name": "Coding for Kids",
+                "description": "Introduction to coding and computer science concepts through fun and interactive activities.",
                 "category": "science",
-                "slugName": "meteorology-experiments"
+                "slugName": "coding-for-kids",
+                "providerSlug": "tech-tots-coding"
             },
             {
-                "name": "Microbiology Research",
-                "description": "Studying microscopic organisms, including bacteria, viruses, and fungi, to understand their biology and impact.",
+                "name": "Zoology Zoo",
+                "description": "Discover the diversity of animal life through hands-on experiences, games, and activities.",
                 "category": "science",
-                "slugName": "microbiology-research"
+                "slugName": "zoology-zoo",
+                "providerSlug": "animal-safari"
             },
             {
-                "name": "Genetics Analysis",
-                "description": "Exploring genetic principles, inheritance patterns, and DNA structure through experimental analysis.",
+                "name": "Geology Rocks!",
+                "description": "Explore the Earth's geological features, rocks, and minerals through exciting experiments.",
                 "category": "science",
-                "slugName": "genetics-analysis"
+                "slugName": "geology-rocks",
+                "providerSlug": "nature-discovery"
             },
             {
-                "name": "Chemical Engineering",
-                "description": "Applying chemical principles to design and optimize processes for the production of chemicals and materials.",
+                "name": "Space Exploration Club",
+                "description": "Journey into space exploration, including rocket building and astronomy activities.",
                 "category": "science",
-                "slugName": "chemical-engineering"
+                "slugName": "space-exploration-club",
+                "providerSlug": "playful-learning"
             },
             {
-                "name": "Astrophysics Research",
-                "description": "Conducting theoretical and observational studies to understand the physical properties and behavior of celestial bodies.",
+                "name": "Weather Watchers",
+                "description": "Learn about meteorology and weather phenomena through experiments and observations.",
                 "category": "science",
-                "slugName": "astrophysics-research"
+                "slugName": "weather-watchers",
+                "providerSlug": "nature-discovery"
             },
             {
-                "name": "Environmental Monitoring",
-                "description": "Collecting and analyzing data to assess the impact of human activities on the environment and ecosystems.",
+                "name": "Electricity and Magnetism Lab",
+                "description": "Hands-on experiments exploring the principles of electricity and magnetism.",
                 "category": "science",
-                "slugName": "environmental-monitoring"
+                "slugName": "electricity-magnetism-lab",
+                "providerSlug": "tech-tots-coding"
             },
             {
-                "name": "Neuroscience Investigations",
-                "description": "Studying the nervous system, including the brain and nervous tissue, to understand cognitive and physiological processes.",
+                "name": "Marine Biology Expedition",
+                "description": "Explore marine ecosystems, marine life, and ocean conservation through engaging activities.",
                 "category": "science",
-                "slugName": "neuroscience-investigations"
+                "slugName": "marine-biology-expedition",
+                "providerSlug": "animal-safari"
             },
             {
-                "name": "Materials Science Experiments",
-                "description": "Exploring the properties and applications of materials, including metals, polymers, and composites.",
+                "name": "Archaeology Adventure",
+                "description": "Uncover the mysteries of the past through archaeological digs and artifact exploration.",
                 "category": "science",
-                "slugName": "materials-science-experiments"
+                "slugName": "archaeology-adventure",
+                "providerSlug": "nature-discovery"
             },
             {
-                "name": "Renewable Energy Projects",
-                "description": "Designing and implementing projects to harness renewable energy sources, such as solar, wind, and hydro power.",
+                "name": "Math Puzzles and Games",
+                "description": "Fun and challenging math puzzles and games to enhance mathematical skills.",
                 "category": "science",
-                "slugName": "renewable-energy-projects"
+                "slugName": "math-puzzles-games",
+                "providerSlug": "math-wizards"
             },
             {
-                "name": "Astrobiology Research",
-                "description": "Exploring the potential for life beyond Earth and studying extreme environments as analogs for extraterrestrial habitats.",
+                "name": "Ecology Explorers",
+                "description": "Learn about ecological systems, biodiversity, and conservation through outdoor adventures.",
                 "category": "science",
-                "slugName": "astrobiology-research"
+                "slugName": "ecology-explorers",
+                "providerSlug": "nature-discovery"
             },
             {
-                "name": "Mathematics Investigations",
-                "description": "Exploring mathematical theories, theorems, and applications through analytical and computational methods.",
+                "name": "Chemical Engineering Creations",
+                "description": "Hands-on activities exploring the principles of chemical engineering and material science.",
                 "category": "science",
-                "slugName": "mathematics-investigations"
+                "slugName": "chemical-engineering-creations",
+                "providerSlug": "science-wonders"
             },
             {
-                "name": "Nuclear Physics Experiments",
-                "description": "Conducting experiments to study the behavior and properties of atomic nuclei, including nuclear reactions.",
+                "name": "Computer Science Quest",
+                "description": "Introduction to computer science concepts, algorithms, and problem-solving through interactive projects.",
                 "category": "science",
-                "slugName": "nuclear-physics-experiments"
-            },
-            {
-                "name": "Oceanography Studies",
-                "description": "Investigating the physical, chemical, and biological properties of the oceans, including marine life and ecosystems.",
-                "category": "science",
-                "slugName": "oceanography-studies"
+                "slugName": "computer-science-quest",
+                "providerSlug": "tech-tots-coding"
             }
         ]
 
         Offer = self.get_model('offers', 'Offer')
         Category = self.get_model('categories', 'Category')
+        Provider = self.get_model('providers', 'Provider')
         
         for item in to_create:
             category = Category.objects.get(slug=item['category'])
+            print('Provider: ' + item['providerSlug'])
             Offer.objects.get_or_create(
                 name=item['name'],
                 description=item['description'],
                 category=category,
-                slug=item['slugName']
+                slug=item['slugName'],
+                provider=Provider.objects.get(slug=item['providerSlug'])
             )
 
     dependencies = [
         ('offers', '0001_initial'),
+        ('providers', '0002_basic_providers'),
     ]
 
     operations = [

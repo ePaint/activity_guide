@@ -10,6 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('categories', '0001_initial'),
+        ('providers', '0001_initial'),
     ]
 
     operations = [
@@ -17,6 +18,7 @@ class Migration(migrations.Migration):
             name='Offer',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('provider', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='providers.provider')),
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField()),
                 ('image', models.ImageField(blank=True, null=True, upload_to='offers')),
