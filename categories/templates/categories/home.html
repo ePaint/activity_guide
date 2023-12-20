@@ -3,18 +3,18 @@
 <div class="container">
     <div class="row gap-0">
         <div class="col-md-3 pt-4">
-            <div class="categories-ad border round bg-white small text-muted">
-                Ad up to 3
+            <div class="categories-ad border round bg-white small text-muted crossed">
+                
             </div>
         </div>
         <div class="col-md-6 pt-4">
-            <div class="categories-ad border round bg-white small text-muted">
-                Banner Ad
+            <div class="categories-ad border round bg-white small text-muted crossed">
+                
             </div>
         </div>
         <div class="col-md-3 pt-4">
-            <div class="categories-ad border round bg-white small text-muted">
-                Small Rectangle Ad
+            <div class="categories-ad border round bg-white small text-muted crossed">
+                
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                  hx-get="{% url 'categories-detail' category.slug %}"
                  onclick="scrollToTop()">
                 <div class="categories-item h-100 bg-white round border">
-                    <div class="categories-item-title round mt-2 align-self-start border-thick-{{ category.get_color }} {{ category.get_color }}-hover">
+                    <div class="categories-item-title round mt-2 border-thick-{{ category.get_color }} {{ category.get_color }}-hover">
                         <h3>{{ category.name }}</h3>
                     </div>
                     <div class="categories-item-text pt-3 align-self-start h-100">
