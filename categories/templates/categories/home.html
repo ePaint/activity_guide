@@ -18,9 +18,9 @@
             </div>
         </div>
     </div>
-    <div class="row gap-0">
+    <div class="row gap-0 mt-4">
         {% for category in categories %}
-            <div class="col-md-4 pt-4"
+            <div class="col-md-4 pt-3"
                  role="button"
                  hx-target=".main-content"
                  hx-trigger="click[window.location.pathname != '{% url "categories-detail" category.slug %}']"
@@ -28,12 +28,12 @@
                  hx-push-url="true"
                  hx-get="{% url 'categories-detail' category.slug %}"
                  onclick="scrollToTop()">
-                <div class="categories-item">
-                    <div class="categories-item-title bg-{{ category.get_color }} border round">
+                <div class="categories-item h-100 bg-white round border">
+                    <div class="categories-item-title round mt-2 align-self-start border-thick-{{ category.get_color }} {{ category.get_color }}-hover">
                         <h3>{{ category.name }}</h3>
                     </div>
-                    <div class="categories-item-text pt-3">
-                        <p>{{ category.description }}</p>
+                    <div class="categories-item-text pt-3 align-self-start h-100">
+                        <p class="paragraph fl-{{ category.get_color }}">{{ category.description }}</p>
                     </div>
                 </div>
             </div>
