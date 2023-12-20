@@ -139,7 +139,7 @@
                             {% for offer in offers %}
                                 <div class="carousel-item round border-thick-{{ offer.category.get_color }} fill {% if forloop.first %}active{% endif %}"
                                         style="background-image: url('{{ offer.image }}');">
-                                    <div class="carousel-caption d-none d-md-block bg-white round border"
+                                    <div class="carousel-caption bg-white round border"
                                             role="button"
                                             hx-target=".main-content"
                                             hx-trigger="click[window.location.pathname != '{% url "offer-detail" offer.slug %}']"
