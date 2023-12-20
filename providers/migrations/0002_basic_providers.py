@@ -108,6 +108,7 @@ class Migration(migrations.Migration):
                 "description": "Robotics and engineering activities for kids, fostering creativity and problem-solving skills through hands-on building and programming."
             }
         ]
+
         Provider = apps.get_model('providers', 'Provider')
 
         for provider in to_create:

@@ -440,18 +440,17 @@ class Migration(migrations.Migration):
         Provider = self.get_model('providers', 'Provider')
         
         for item in to_create:
-            category = Category.objects.get(slug=item['category'])
-            print('Provider: ' + item['providerSlug'])
             Offer.objects.get_or_create(
                 name=item['name'],
                 description=item['description'],
-                category=category,
+                category=Category.objects.get(slug=item['category']),
                 slug=item['slugName'],
                 provider=Provider.objects.get(slug=item['providerSlug'])
             )
 
     dependencies = [
         ('offers', '0001_initial'),
+        ('categories', '0002_basic_categories'),
         ('providers', '0002_basic_providers'),
     ]
 

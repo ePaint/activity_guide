@@ -3,11 +3,11 @@ from django.urls import reverse
 
 
 class Offer(models.Model):
-    provider = models.ForeignKey('providers.Provider', on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='offers', blank=True, null=True)
     category = models.ForeignKey('categories.Category', on_delete=models.CASCADE)
+    provider = models.ForeignKey('providers.Provider', on_delete=models.CASCADE, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

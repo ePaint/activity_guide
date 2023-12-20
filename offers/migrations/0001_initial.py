@@ -18,16 +18,16 @@ class Migration(migrations.Migration):
             name='Offer',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('provider', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='providers.provider')),
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField()),
                 ('image', models.ImageField(blank=True, null=True, upload_to='offers')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='categories.category')),
+                ('provider', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='providers.provider')),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_featured', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('slug', models.SlugField(unique=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='categories.category')),
             ],
             options={
                 'verbose_name': 'Offer',
