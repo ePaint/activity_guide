@@ -26,8 +26,8 @@
                          hx-push-url="true"
                          hx-get="{% url 'provider-profile' provider.slug %}"
                          onclick="scrollToTop()">
-                        <img class="item-row-icon user-select-none"
-                             src="{% static 'layout/default_image.png' %}"/>
+                        <img class="item-row-icon border-orange p-01 user-select-none"
+                             src="{{ provider.image }}"/>
                     </div>
                     <div class="col-md-2 fw-bold d-flex align-items-center justify-content-center justify-content-md-start text-center"
                          role="button"

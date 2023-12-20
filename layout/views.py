@@ -24,7 +24,12 @@ def base(request):
 
 def home(request):
     categories = Category.objects.all().order_by('created_at')[:3]
-    return render(request, 'layout/home.html', {'categories': categories})
+    offers = Offer.objects.all().order_by('?')[:5]
+    context = {
+        'categories': categories,
+        'offers': offers
+    }
+    return render(request, 'layout/home.html', context)
 
 
 def navbar(request):

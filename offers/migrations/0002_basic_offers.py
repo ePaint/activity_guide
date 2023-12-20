@@ -445,7 +445,8 @@ class Migration(migrations.Migration):
                 description=item['description'],
                 category=Category.objects.get(slug=item['category']),
                 slug=item['slugName'],
-                provider=Provider.objects.get(slug=item['providerSlug'])
+                provider=Provider.objects.get(slug=item['providerSlug']),
+                image=f'/static/offers/{item['slugName']}.png'
             )
 
     dependencies = [

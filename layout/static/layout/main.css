@@ -30,6 +30,10 @@ body {
   }
 }
 
+.p-01 {
+    padding: 0.1rem;
+}
+
 .main-content {
     display: flex;
     flex-flow: column wrap;
@@ -65,6 +69,14 @@ body {
     background-color: #F26522;
 }
 
+.border-orange {
+    border: 1px solid #F26522;
+}
+
+.border-thick-orange {
+    border: 4px solid #F26522;
+}
+
 .blue, .blue-hover {
     color: #00AEEF !important;
     border-color: #00AEEF;
@@ -79,6 +91,14 @@ body {
     color: #FFFFFF !important;
     border-color: #00AEEF;
     background-color: #00AEEF;
+}
+
+.border-blue {
+    border: 1px solid #00AEEF;
+}
+
+.border-thick-blue {
+    border: 4px solid #00AEEF;
 }
 
 .green, .green-hover {
@@ -97,6 +117,14 @@ body {
     background-color: #8DC63F;
 }
 
+.border-green {
+    border: 1px solid #8DC63F;
+}
+
+.border-thick-green {
+    border: 4px solid #8DC63F;
+}
+
 .red, .red-hover {
     color: #D2122E !important;
     border-color: #D2122E;
@@ -111,6 +139,14 @@ body {
     color: #FFFFFF !important;
     border-color: #D2122E;
     background-color: #D2122E;
+}
+
+.border-red {
+    border: 1px solid #D2122E;
+}
+
+.border-thick-red {
+    border: 4px solid #D2122E;
 }
 
 .pfp-small {
@@ -148,17 +184,13 @@ body {
     height: 3rem;
 }
 
-.result-box{
-    /* width: 100%; */
-    /* display: flex; */
-    /* flex-flow: row wrap; */
-    /* justify-content: flex-start; */
-    /* align-items: center; */
-    /* gap: 1rem; */
-    /* padding: 0.5rem; */
-    /* border-radius: 0.5rem; */
-    /* background-color: #FFFFFF; */
-    /* margin: 0.4rem; */
+.carousel-caption {
+    opacity: 0.75;
+    transition: all 0.2s ease-in-out;
+}
+
+.carousel-caption:hover {
+    opacity: 1;
 }
 
 .big-ad {

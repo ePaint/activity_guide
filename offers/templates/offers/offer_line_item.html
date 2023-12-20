@@ -1,9 +1,8 @@
-{% load static %}
 <div class="row mb-2 py-2 bg-white round border">
     <div class="col-md-2 d-flex align-items-center justify-content-center">
-        <img class="item-row-icon user-select-none"
+        <img class="item-row-icon border-{{ offer.category.get_color }} p-01 user-select-none"
             role="button"
-            src="{% static 'layout/default_image.png' %}"
+            src="{{ offer.image }}"
             hx-target=".main-content"
             hx-trigger="click[window.location.pathname != '{% url "offer-detail" offer.slug %}']"
             hx-on::after-request="scrollToTop()"

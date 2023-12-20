@@ -112,7 +112,12 @@ class Migration(migrations.Migration):
         Provider = apps.get_model('providers', 'Provider')
 
         for provider in to_create:
-            Provider.objects.create(**provider)
+            Provider.objects.create(
+                name=provider['name'],
+                slug=provider['slug'],
+                description=provider['description'],
+                image=f'/static/providers/{provider['slug']}.png'
+            )
         
 
     dependencies = [
