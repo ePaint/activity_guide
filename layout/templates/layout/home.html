@@ -147,8 +147,8 @@
                                             hx-push-url="true"
                                             hx-get="{% url 'offer-detail' offer.slug %}"
                                             onclick="scrollToTop()">
-                                        <div class="d-flex flex-row flex-nowrap justify-content-center">
-                                            <span class="category-badge badge bg-{{ offer.category.get_color }} m-1">
+                                        <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center">
+                                            <span class="category-badge badge bg-{{ offer.category.get_color }} m-1 align-self-center align-self-sm-start">
                                                 {{ offer.category.name }}
                                             </span>
                                             <h5 class="{{ offer.category.get_color }}">{{ offer.name }}</h5>
