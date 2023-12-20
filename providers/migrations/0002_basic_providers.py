@@ -119,7 +119,7 @@ class Migration(migrations.Migration):
                 name=provider['name'],
                 slug=provider['slug'],
                 description=provider['description'],
-                image=f'{image_prefix}/providers/{provider['slug']}.png'
+                image=f'{image_prefix}/providers/{provider['slug']}.jpg'
             )
         
 
