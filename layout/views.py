@@ -37,8 +37,8 @@ def navbar(request):
 
 
 def search_results(request):
-    actitivies = Activity.objects.all()
+    activities = Activity.objects.all()
     context = {
-        'actitivies': actitivies
+        'activities': activities
     }
     return render(request, 'layout/search_results.html', context)
