@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     # Creates 20 basic activities per category (Sports, Art, and Science)
     def custom_task(self, schema_editor):
         to_create = [
-            # 20 Sports offers
+            # 20 Sports activities
             {
                 "name": "Soccer",
                 "description": "Team-based sport involving kicking a ball into the opponent's goal. Develops teamwork, coordination, and agility.",
@@ -158,7 +158,7 @@ class Migration(migrations.Migration):
                 "providerSlug": "adventure-seekers"
             },
             
-            # 20 Art offers
+            # 20 Art activities
             {
                 "name": "Painting Workshop",
                 "description": "Creative painting sessions for artistic expression. Explore various techniques and styles.",
@@ -300,7 +300,7 @@ class Migration(migrations.Migration):
                 "providerSlug": "musical-melodies"
             },
 
-            # 20 Science offers
+            # 20 Science activities
             {
                 "name": "Chemistry Lab Explorers",
                 "description": "Hands-on experiments exploring chemical reactions and fundamental principles of chemistry.",
@@ -436,24 +436,24 @@ class Migration(migrations.Migration):
             }
         ]
 
-        Offer = self.get_model('offers', 'Offer')
+        Activity = self.get_model('activities', 'Activity')
         Category = self.get_model('categories', 'Category')
         Provider = self.get_model('providers', 'Provider')
 
         image_prefix = 'https://activity-guide-files.s3.amazonaws.com'
         
         for item in to_create:
-            Offer.objects.get_or_create(
+            Activity.objects.get_or_create(
                 name=item['name'],
                 description=item['description'],
                 category=Category.objects.get(slug=item['category']),
                 slug=item['slugName'],
                 provider=Provider.objects.get(slug=item['providerSlug']),
-                image=f'{image_prefix}/offers/{item['slugName']}.jpg'
+                image=f'{image_prefix}/activities/{item['slugName']}.jpg'
             )
 
     dependencies = [
-        ('offers', '0001_initial'),
+        ('activities', '0001_initial'),
         ('categories', '0002_basic_categories'),
         ('providers', '0002_basic_providers'),
     ]

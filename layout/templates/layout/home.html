@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-xxl">
     <div class="row gap-4 justify-content-center">
-        <div class="col-md-3 order-1 order-xl-0 search-form border bg-white round d-flex flex-column justify-content-center">
+        <div class="col-md-3 search-form border bg-white round d-flex flex-column justify-content-center">
             <div class="search-form-title">
                 Search Form
             </div>
@@ -131,29 +131,29 @@
                 <div class="col-md-9 home-carousel pb-4 pb-md-0">
                     <div id="carouselExampleCaptions" class="carousel carousel-dark slide h-100 w-100" data-bs-ride="carousel">
                         <div class="carousel-indicators">
-                            {% for offer in offers %}
+                            {% for activity in actitivies %}
                                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
                             {% endfor %}
                         </div>
                         <div class="carousel-inner h-100">
-                            {% for offer in offers %}
-                                <div class="carousel-item round border-thick-{{ offer.category.get_color }} fill {% if forloop.first %}active{% endif %}"
-                                        style="background-image: url('{{ offer.image }}');">
+                            {% for activity in actitivies %}
+                                <div class="carousel-item round border-thick-{{ activity.category.get_color }} fill {% if forloop.first %}active{% endif %}"
+                                        style="background-image: url('{{ activity.image }}');">
                                     <div class="carousel-caption bg-white round border"
                                             role="button"
                                             hx-target=".main-content"
-                                            hx-trigger="click[window.location.pathname != '{% url "offer-detail" offer.slug %}']"
+                                            hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
                                             hx-on::after-request="scrollToTop()"
                                             hx-push-url="true"
-                                            hx-get="{% url 'offer-detail' offer.slug %}"
+                                            hx-get="{% url 'activity-detail' activity.slug %}"
                                             onclick="scrollToTop()">
                                         <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center">
-                                            <span class="category-badge badge bg-{{ offer.category.get_color }} m-1 align-self-center align-self-sm-start">
-                                                {{ offer.category.name }}
+                                            <span class="category-badge badge bg-{{ activity.category.get_color }} m-1 align-self-center align-self-sm-start">
+                                                {{ activity.category.name }}
                                             </span>
-                                            <h5 class="{{ offer.category.get_color }}">{{ offer.name }}</h5>
+                                            <h5 class="{{ activity.category.get_color }}">{{ activity.name }}</h5>
                                         </div>
-                                        <p>{{ offer.description }}</p>
+                                        <p>{{ activity.description }}</p>
                                     </div>
                                 </div>
                             {% endfor %}

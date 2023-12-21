@@ -15,12 +15,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Offer',
+            name='Activity',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField()),
-                ('image', models.ImageField(blank=True, null=True, upload_to='offers')),
+                ('image', models.ImageField(blank=True, null=True, upload_to='activities')),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='categories.category')),
                 ('provider', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='providers.provider')),
                 ('is_active', models.BooleanField(default=True)),
@@ -30,8 +30,8 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(unique=True)),
             ],
             options={
-                'verbose_name': 'Offer',
-                'verbose_name_plural': 'Offers',
+                'verbose_name': 'Activity',
+                'verbose_name_plural': 'Activities',
                 'ordering': ['created_at'],
             },
         ),

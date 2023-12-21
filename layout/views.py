@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from categories.models import Category
-from offers.models import Offer
+from activities.models import Activity
 
 
 def not_found(request, exception):
@@ -24,10 +24,10 @@ def base(request):
 
 def home(request):
     categories = Category.objects.all().order_by('created_at')[:3]
-    offers = Offer.objects.all().order_by('?')[:5]
+    activities = Activity.objects.all().order_by('?')[:5]
     context = {
         'categories': categories,
-        'offers': offers
+        'activities': activities
     }
     return render(request, 'layout/home.html', context)
 
@@ -37,8 +37,8 @@ def navbar(request):
 
 
 def search_results(request):
-    offers = Offer.objects.all()
+    actitivies = Activity.objects.all()
     context = {
-        'offers': offers
+        'actitivies': actitivies
     }
     return render(request, 'layout/search_results.html', context)

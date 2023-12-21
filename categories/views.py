@@ -11,13 +11,13 @@ def home(request):
 
 def detail(request, slug):
     category = Category.objects.get(slug=slug)
-    offers = category.offer_set.all().order_by('-created_at')
+    activities = category.activity_set.all().order_by('-created_at')
     providers = set()
-    for offer in offers:
-        providers.add(offer.provider)
+    for activity in activities:
+        providers.add(activity.provider)
     context = {
         'category': category,
-        'offers': offers,
+        'activities': activities,
         'providers': providers,
     }
     return render(request, 'categories/detail.html', context)

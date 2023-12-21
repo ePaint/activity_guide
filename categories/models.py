@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from offers.models import Offer
+from activities.models import Activity
 
 
 class Category(models.Model):
@@ -32,14 +32,14 @@ class Category(models.Model):
     def get_root_category(self):
         return self if self.is_root_category() else self.parent.get_root_category()
     
-    def get_offers(self):
-        offers = []
+    def get_activities(self):
+        activities = []
         if self.is_root_category():
             for child in self.get_children():
-                offers += child.get_offers()
+                activities += child.get_activities()
         else:
-            offers = Offer.objects.filter(category=self)
-        return offers
+            activities = Activity.objects.filter(category=self)
+        return activities
     
     def get_color(self):
         if self.slug == 'sports':

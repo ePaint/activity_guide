@@ -23,8 +23,8 @@ class Provider(models.Model):
     def get_absolute_url(self):
         return reverse('provider-detail', kwargs={'slug': self.slug})
     
-    def get_offers(self):
-        return self.offer_set.all().order_by('-created_at')
+    def get_activities(self):
+        return self.activity_set.all().order_by('-created_at')
     
     def get_categories(self):
-        return {offer.category for offer in self.offer_set.all()}
+        return {activity.category for activity in self.activity_set.all()}

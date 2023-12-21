@@ -4,7 +4,7 @@
             <input class="search-input" type="text" placeholder="Search" aria-label="Search">
         </div>
     </div>
-    {% for offer in offers %}
-        {% include "offers/offer_line_item.html" with offer=offer %}
+    {% for activity in activities %}
+        {% include "activities/activity_line_item.html" with activity=activity %}
     {% endfor %}
 </div>

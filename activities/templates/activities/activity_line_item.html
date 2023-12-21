@@ -1,40 +1,40 @@
 <div class="row mb-2 py-2 bg-white round border">
     <div class="col-md-2 d-flex align-items-center justify-content-center">
-        <img class="item-row-icon border-{{ offer.category.get_color }} p-01 user-select-none"
+        <img class="item-row-icon border-{{ activity.category.get_color }} p-01 user-select-none"
             role="button"
-            src="{{ offer.image }}"
+            src="{{ activity.image }}"
             hx-target=".main-content"
-            hx-trigger="click[window.location.pathname != '{% url "offer-detail" offer.slug %}']"
+            hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
             hx-on::after-request="scrollToTop()"
             hx-push-url="true"
-            hx-get="{% url 'offer-detail' offer.slug %}"
+            hx-get="{% url 'activity-detail' activity.slug %}"
             onclick="scrollToTop()"/> 
     </div>
     <div class="col-md-2 d-flex flex-column align-items-start justify-content-center">
         <span class="fw-bold ms-0 ms-md-1 align-self-md-start align-self-center"
               role="button"
               hx-target=".main-content"
-              hx-trigger="click[window.location.pathname != '{% url "offer-detail" offer.slug %}']"
+              hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
               hx-on::after-request="scrollToTop()"
               hx-push-url="true"
-              hx-get="{% url 'offer-detail' offer.slug %}"
+              hx-get="{% url 'activity-detail' activity.slug %}"
               onclick="scrollToTop()">
-            {{ offer.name }}
+            {{ activity.name }}
         </span>
-        <span class="w-100 category-badge badge bg-{{ offer.category.get_color }} m-1"
+        <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1"
               role="button"
               hx-target=".main-content"
-              hx-trigger="click[window.location.pathname != '{% url "categories-detail" offer.category.slug %}']"
+              hx-trigger="click[window.location.pathname != '{% url "categories-detail" activity.category.slug %}']"
               hx-on::after-request="scrollToTop()"
               hx-push-url="true"
-              hx-get="{% url 'categories-detail' offer.category.slug %}"
+              hx-get="{% url 'categories-detail' activity.category.slug %}"
               onclick="scrollToTop()">
-            {{ offer.category.name }}
+            {{ activity.category.name }}
         </span>
     </div>
     <div class="col-md-6 d-flex flex-row gap-1">
         <span class="align-top small text-muted two-columns pt-2">
-            {{ offer.description }}
+            {{ activity.description }}
         </span>   
     </div>
     <div class="col-md-2 d-flex flex-column justify-content-center align-items-center pt-2 pt-md-0">
