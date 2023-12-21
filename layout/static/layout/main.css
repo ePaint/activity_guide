@@ -545,7 +545,7 @@ footer {
 
 }
 
-@media(max-width: 575px) {
+@media(max-width: 576px) {
     .main-content {
         margin-top: 1rem;
     }
@@ -566,6 +566,7 @@ footer {
 
     .site-header {
         height: 4.5rem;
+        transition: all 0.2s ease-in-out;
     }
 
     .footer-logo {
