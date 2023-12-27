@@ -32,9 +32,11 @@ def base(request):
 def home(request):
     categories = Category.objects.all().order_by('created_at')[:3]
     activities = Activity.objects.all().order_by('?')[:5]
+    contact_form = ContactForm()
     context = {
         'categories': categories,
-        'activities': activities
+        'activities': activities,
+        'contact_form': contact_form
     }
     return render(request, 'layout/home.html', context)
 

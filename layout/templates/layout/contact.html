@@ -1,36 +1,31 @@
 {% load crispy_forms_tags %}
-<form method="post" class="contact-form round bg-white border">
-    {% csrf_token %}
+{% load static %}
+<div class="contact-form round bg-white border user-select-none">
+    <form method="post" class="">
+        {% csrf_token %}
 
-    <div class="fs-6 fw-bold text-center">
-        Contact Form
-    </div>
+        <div class="fs-6 fw-bold text-center">
+            Contact Form
+        </div>
 
-    <div class="small text-muted">Your name <span class="small text-muted">(optional)</span></div>
-    <input type="text" id="name" name="name" class="form-control" placeholder="Name">
+        <fieldset class="form-group" id="contact-form-fieldset">
+            <legend class="border-bottom">Contact Us</legend>
+            {{ form | crispy }}
+        </fieldset>
 
-    <div class="small text-muted pt-2">Your email</div>
-    <input type="text" id="email" name="email" class="form-control" placeholder="Email">
-
-    <div class="small text-muted pt-2">Your phone <span class="small text-muted">(optional)</span></div>
-    <input type="tel" id="phone" name="phone" class="form-control" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
-
-    <div class="small text-muted pt-2">Your message to us</div>
-    <textarea id="message" name="message" class="form-control" placeholder="Message"></textarea>
-
-<!--    <fieldset class="form-group">-->
-<!--        <legend class="border-bottom">Contact Us</legend>-->
-<!--        {{ form | crispy }}-->
-<!--    </fieldset>-->
-
-    <div class="d-flex justify-content-center align-items-center">
-        <button type="submit"
-                class="btn btn-primary w-50 align-self-end my-3"
-                hx-post="{% url 'layout-contact' %}">
-            Send
-        </button>
-    </div>
-    <div class="small text-left text-muted pt-2">
-        Email us with any questions or inquiries. We would be happy to answer your questions and set up a meeting with you. Activity Guide is here to help you find the perfect activity for your child. We will try to respond within 24-72 hours.
-    </div>
-</form>
+        <div class="d-flex justify-content-center align-items-center">
+            <button id="contact-form-submit"
+                    type="submit"
+                    class="btn orange-hover w-50 align-self-end my-3"
+                    hx-post="{% url 'layout-contact' %}"
+                    hx-target="#contact-form"
+                    hx-on::before-request="disableContactForm()">
+                Send
+            </button>
+        </div>
+        <div class="small text-left text-muted pt-2">
+            Email us with any questions or inquiries. We would be happy to answer your questions and set up a meeting with you. Activity Guide is here to help you find the perfect activity for your child. We will try to respond within 24-72 hours.
+        </div>
+    </form>
+    <div id="contact-form-spinner" class="spinner-border text-orange d-none" style="width: 5rem; height: 5rem;" role="status" />
+</div>

@@ -4,13 +4,15 @@ from django.template import loader
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.exceptions import ValidationError
+from phonenumber_field.formfields import PhoneNumberField
 
 
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100, required=True)
-    email = forms.EmailField(required=True)
-    phone = forms.CharField(max_length=20, required=False)
-    message = forms.CharField(widget=forms.Textarea, required=True)
+    name = forms.CharField(max_length=100, required=True, label='Your name', widget=forms.TextInput(attrs={'placeholder': 'John Doe'}))
+    email = forms.EmailField(required=True, label='Your email', widget=forms.TextInput(attrs={'placeholder': 'john.doe@gmail.com'}))
+    # phone = forms.CharField(max_length=20, required=False, label='Your phone', widget=forms.TextInput(attrs={'placeholder': '555-555-5555'}))
+    phone = PhoneNumberField(required=False, label='Your phone')
+    message = forms.CharField(widget=forms.Textarea, required=True, label='Your message')
 
     def clean_name(self):
         name = self.cleaned_data['name']
