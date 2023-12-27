@@ -175,3 +175,11 @@ if DEBUG:
     ...
 else:
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
+EMAIL_BACKEND = 'django_ses.SESBackend'
+
+AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
+
+AWS_SES_REGION_ENDPOINT = os.getenv('AWS_SES_REGION_ENDPOINT')
+
+CONTACT_ENABLED = os.getenv('CONTACT_ENABLED') == 'True'

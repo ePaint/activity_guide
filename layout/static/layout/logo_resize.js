@@ -25,10 +25,8 @@ function resizeHeader(page_y_offset) {
     
     if (distance > 0) {
         header_element.style.top = '-4.5rem';
-        console.log('up')
     } else {
         header_element.style.top = '0';
-        console.log('down')
     }
 
     prev_page_y_offset = page_y_offset;

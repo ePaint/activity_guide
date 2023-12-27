@@ -1,6 +1,13 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.core.mail import send_mail
+from django.template import loader, Context
+
 from categories.models import Category
 from activities.models import Activity
+from django.core.mail import EmailMultiAlternatives
+
+from layout.forms import ContactForm
 
 
 def not_found(request, exception):
@@ -42,3 +49,14 @@ def search_results(request):
         'activities': activities
     }
     return render(request, 'layout/search_results.html', context)
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.send_email()
+            return render(request, 'layout/contact_success.html')
+    else:
+        form = ContactForm()
+    return render(request, 'layout/contact.html', {'form': form})
