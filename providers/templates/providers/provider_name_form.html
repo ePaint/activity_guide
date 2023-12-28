@@ -1,0 +1,34 @@
+{% load crispy_forms_tags %}
+<form method="post" class="d-flex justify-content-between" onkeydown="return event.key != 'Enter';">
+    {% csrf_token %}  
+    <fieldset class="border-0 orange p-0 flex-grow-1" id="contact-form-fieldset">
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field }}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <p class="text-danger fs-6">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </fieldset>
+</form>
+
+<style>
+    input {
+        border: none;
+        color: #F58220;
+        width: 100% !important;
+    }
+</style>
+
+<script>
+    (() => {
+        const element = document.getElementById('id_name');
+        element.setAttribute('hx-post', "{% url 'provider-name-update' form.instance.slug %}");
+        element.setAttribute('hx-trigger', "keyup delay:500ms");
+        element.setAttribute('hx-on::before-request', "showSpinner('provider-update-spinner')");
+        element.setAttribute('hx-on::after-request', "hideSpinner('provider-update-spinner')");
+    })();
+</script>

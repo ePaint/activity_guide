@@ -61,4 +61,4 @@ def contact(request):
             return render(request, 'layout/contact_success.html')
     else:
         form = ContactForm()
-    return render(request, 'layout/contact.html', {'form': form})
+    return render(request, 'layout/contact_form.html', {'form': form})

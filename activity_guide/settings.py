@@ -28,6 +28,7 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://activity-guide.fly.dev',
     'https://activityguide.ca',
+    'https://cke4.ckeditor.com',
 ]
 
 
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'livereload',
     'phonenumber_field',
+    'ckeditor',
+    'ckeditor_uploader',
     'django.contrib.staticfiles',
     'storages',
 ]
@@ -171,6 +174,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 if DEBUG:
     ...

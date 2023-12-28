@@ -1,0 +1,94 @@
+{% load static %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<form action="{% url 'provider-description-update' form.instance.slug %}"
+      method="post"
+      class="d-flex flex-column pt-3"
+      onkeydown="return event.key != 'Enter';"
+      id="provider-description-form">
+    {% csrf_token %}
+    <div id="ckeditor-description">
+        <fieldset id="provider-description-fieldset" class="border-0 orange p-0 flex-grow-1 w-100">
+            {% for field in form %}
+                <div class="fieldWrapper w-100">
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p class="text-danger fs-6">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </fieldset>
+        <div id="provider-buttons">
+            <button type="submit"
+                    id="provider-description-update-button"
+                    class="btn orange-hover"
+                    hx-post="{% url 'provider-description-update' form.instance.slug %}"
+                    hx-trigger="click"
+                    hx-target="#provider-description-form-container"
+                    hx-on::before-request="showSpinner('provider-update-spinner')"
+                    hx-on::after-request="hideCkEditor()"
+                    hx-swap="innerHTML swap:1ms">
+                Save
+            </button>
+            <button id="provider-description-update-button"
+                    class="btn orange-hover"
+                    hx-post="{% url 'provider-description-update' form.instance.slug %}"
+                    hx-trigger="click"
+                    hx-target="#provider-description-form-container"
+                    hx-on::before-request="showSpinner('provider-update-spinner')"
+                    hx-on::after-request="hideCkEditor()"
+                    hx-swap="innerHTML swap:1ms">
+                Save
+            </button>
+        </div>
+    </div>
+    <div id="rendered-description"
+         onclick="showCkEditor()">
+        {{ form.instance.description|safe }}
+    </div>
+</form>
+
+<style>
+    #ckeditor-description {
+        display: none;
+    }
+
+    #provider-description-update-button {
+        width: 5rem;
+    }
+</style>
+
+<script>
+    function showCkEditor() {
+        document.getElementById('ckeditor-description').style.display = 'block';
+        document.getElementById('rendered-description').style.display = 'none';
+    }
+
+    function hideCkEditor() {
+        hideSpinner('provider-update-spinner');
+        document.getElementById('ckeditor-description').style.display = 'none';
+        document.getElementById('rendered-description').style.display = 'block';
+    }
+
+    function handleDescriptionUpdateResponse() {
+        
+        hideCkEditor();
+        
+    }
+    (() => {
+
+        CKEDITOR.on("instanceReady", function(event) {
+            
+        });
+    })();
+
+    (() => {
+        document.getElementById('provider-description-update-button').addEventListener('htmx:configRequest', (evt) => {
+            if (evt.detail.triggeringEvent.type === 'click') {
+                evt.detail.parameters['description'] = CKEDITOR.instances['id_description'].getData();
+            }
+        })
+    })();
+</script>
