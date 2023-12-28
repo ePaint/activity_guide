@@ -1,7 +1,7 @@
 {% load crispy_forms_tags %}
 <form method="post" class="d-flex justify-content-between" onkeydown="return event.key != 'Enter';">
     {% csrf_token %}  
-    <fieldset class="border-0 orange p-0 flex-grow-1" id="contact-form-fieldset">
+    <fieldset  class="border-0 orange p-0 flex-grow-1">
         {% for field in form %}
             <div class="fieldWrapper">
                 {{ field }}
@@ -16,10 +16,18 @@
 </form>
 
 <style>
-    input {
+    .fieldWrapper > input {
         border: none;
-        color: #F58220;
+        color: #F26522;
         width: 100% !important;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-weight: inherit;
+        font-style: inherit;
+        font-family: inherit;
+        font-size: 100%;
+        vertical-align: baseline;
     }
 </style>
 

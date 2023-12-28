@@ -24,10 +24,10 @@
         <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1"
               role="button"
               hx-target=".main-content"
-              hx-trigger="click[window.location.pathname != '{% url "categories-detail" activity.category.slug %}']"
+              hx-trigger="click[window.location.pathname != '{% url "category-detail" activity.category.slug %}']"
               hx-on::after-request="scrollToTop()"
               hx-push-url="true"
-              hx-get="{% url 'categories-detail' activity.category.slug %}"
+              hx-get="{% url 'category-detail' activity.category.slug %}"
               onclick="scrollToTop()">
             {{ activity.category.name }}
         </span>

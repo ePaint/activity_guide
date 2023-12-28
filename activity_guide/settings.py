@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'providers.apps.ProvidersConfig',
     'activities.apps.ActivitiesConfig',
+    'members.apps.MembersConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_htmx',

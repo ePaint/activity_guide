@@ -31,10 +31,10 @@
                         <div class="rounded orange-hover"
                              role="button"
                              hx-target=".main-content"
-                             hx-trigger="click[window.location.pathname != '{% url "categories-home" %}']"
+                             hx-trigger="click[window.location.pathname != '{% url "category-home" %}']"
                              hx-on::after-request="scrollToTop()"
                              hx-push-url="true"
-                             hx-get="{% url 'categories-home' %}"
+                             hx-get="{% url 'category-home' %}"
                              onclick="scrollToTop()">
                             Categories 
                         </div>

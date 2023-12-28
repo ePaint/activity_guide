@@ -9,30 +9,34 @@
         </div>
         <div class="d-flex flex-row justify-content-between bg-white round border w-100">
             <div class="d-flex flex-column w-100">
-                <div class="fs-3 align-self-center align-self-md-start w-100">
-                    {% include 'providers/provider_name_form.html' with form=name_form %}
+                <div class="fs-3 align-self-center align-self-md-start w-100 d-flex flex-row flex-nowrap justify-content-between">
+                    <div class="flex-grow-1">
+                        {% include 'providers/provider_name_form.html' with form=name_form %}
+                    </div>
+                    <div class="text-orange mt-1 ms-3"
+                         id="provider-update-spinner"
+                         style="font-size: 1.5rem;">✏️</div>
                 </div>
-                <div id="provider-description-form-container">
-                    {% include 'providers/provider_description_form.html' with form=description_form %}
-                </div>
-                <div class="mt-md-auto mt-3 mb-4 align-self-center align-self-md-start">
-                    {% for provider_category in provider.get_categories %}
-                        <span class="category-badge badge bg-{{ provider_category.get_color }} m-1"
-                                role="button"
-                                hx-target=".main-content"
-                                hx-trigger="click[window.location.pathname != '{% url "categories-detail" provider_category.slug %}']"
-                                hx-on::after-request="scrollToTop()"
-                                hx-push-url="true"
-                                hx-get="{% url 'categories-detail' provider_category.slug %}"
-                                onclick="scrollToTop()">
-                            {{ provider_category.name }}
-                        </span>
-                    {% endfor %}
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <div id="provider-description-form-container">
+                        {% include 'providers/provider_description_form.html' with form=description_form %}
+                    </div>
+                    <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start">
+                        {% for provider_category in provider.get_categories %}
+                            <span class="category-badge badge bg-{{ provider_category.get_color }} m-1"
+                                    role="button"
+                                    hx-target=".main-content"
+                                    hx-trigger="click[window.location.pathname != '{% url "category-detail" provider_category.slug %}']"
+                                    hx-on::after-request="scrollToTop()"
+                                    hx-push-url="true"
+                                    hx-get="{% url 'category-detail' provider_category.slug %}"
+                                    onclick="scrollToTop()">
+                                {{ provider_category.name }}
+                            </span>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-            <div class="text-orange mt-1 ms-3"
-                id="provider-update-spinner"
-                style="font-size: 1.5rem;">✏️</div>
         </div>
     </div>
     <hr class="hr my-4" />

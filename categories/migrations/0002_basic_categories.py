@@ -21,9 +21,9 @@ class Migration(migrations.Migration):
                 'slug': 'art',
             },
             {
-                'name': 'Science',
-                'description': 'Science is a systematic enterprise that builds and organizes knowledge in the form of testable explanations and predictions about the universe.',
-                'slug': 'science',
+                'name': 'STEM',
+                'description': 'STEM (Science, Technology, Engineering, and Mathematics) is a comprehensive and interdisciplinary approach to learning and problem-solving. It brings together the principles and methodologies of science, technology, engineering, and mathematics to address real-world challenges.',
+                'slug': 'stem',
             },
         ]
         

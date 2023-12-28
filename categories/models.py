@@ -46,7 +46,7 @@ class Category(models.Model):
             return 'red'
         elif self.slug == 'art':
             return 'green'
-        elif self.slug == 'science':
+        elif self.slug == 'stem':
             return 'blue'
         return 'orange'
     

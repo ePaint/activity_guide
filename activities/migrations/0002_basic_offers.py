@@ -304,133 +304,133 @@ class Migration(migrations.Migration):
             {
                 "name": "Chemistry Lab Explorers",
                 "description": "Hands-on experiments exploring chemical reactions and fundamental principles of chemistry.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "chemistry-lab-explorers",
                 "providerSlug": "science-wonders"
             },
             {
                 "name": "Astronomy Adventure Camp",
                 "description": "Explore the wonders of the universe, including stars, planets, and galaxies.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "astronomy-adventure-camp",
                 "providerSlug": "playful-learning"
             },
             {
                 "name": "Robotics Workshop",
                 "description": "Introduction to robotics, programming, and building simple robots for hands-on learning.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "robotics-workshop",
                 "providerSlug": "robot-builders"
             },
             {
                 "name": "Environmental Explorers",
                 "description": "Learn about ecosystems, conservation, and environmental science through outdoor activities.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "environmental-explorers",
                 "providerSlug": "nature-discovery"
             },
             {
                 "name": "Physics Fun Fair",
                 "description": "Interactive physics experiments and demonstrations to explore principles of motion, energy, and forces.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "physics-fun-fair",
                 "providerSlug": "science-wonders"
             },
             {
                 "name": "Paleontology Quest",
                 "description": "Dive into the world of dinosaurs and fossils with hands-on paleontological activities.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "paleontology-quest",
                 "providerSlug": "nature-discovery"
             },
             {
                 "name": "Microbiology Marvels",
                 "description": "Explore the microscopic world of bacteria and microorganisms through lab experiments.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "microbiology-marvels",
                 "providerSlug": "science-wonders"
             },
             {
                 "name": "Coding for Kids",
                 "description": "Introduction to coding and computer science concepts through fun and interactive activities.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "coding-for-kids",
                 "providerSlug": "tech-tots-coding"
             },
             {
                 "name": "Zoology Zoo",
                 "description": "Discover the diversity of animal life through hands-on experiences, games, and activities.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "zoology-zoo",
                 "providerSlug": "animal-safari"
             },
             {
                 "name": "Geology Rocks!",
                 "description": "Explore the Earth's geological features, rocks, and minerals through exciting experiments.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "geology-rocks",
                 "providerSlug": "nature-discovery"
             },
             {
                 "name": "Space Exploration Club",
                 "description": "Journey into space exploration, including rocket building and astronomy activities.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "space-exploration-club",
                 "providerSlug": "playful-learning"
             },
             {
                 "name": "Weather Watchers",
                 "description": "Learn about meteorology and weather phenomena through experiments and observations.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "weather-watchers",
                 "providerSlug": "nature-discovery"
             },
             {
                 "name": "Electricity and Magnetism Lab",
                 "description": "Hands-on experiments exploring the principles of electricity and magnetism.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "electricity-magnetism-lab",
                 "providerSlug": "tech-tots-coding"
             },
             {
                 "name": "Marine Biology Expedition",
                 "description": "Explore marine ecosystems, marine life, and ocean conservation through engaging activities.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "marine-biology-expedition",
                 "providerSlug": "animal-safari"
             },
             {
                 "name": "Archaeology Adventure",
                 "description": "Uncover the mysteries of the past through archaeological digs and artifact exploration.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "archaeology-adventure",
                 "providerSlug": "nature-discovery"
             },
             {
                 "name": "Math Puzzles and Games",
                 "description": "Fun and challenging math puzzles and games to enhance mathematical skills.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "math-puzzles-games",
                 "providerSlug": "math-wizards"
             },
             {
                 "name": "Ecology Explorers",
                 "description": "Learn about ecological systems, biodiversity, and conservation through outdoor adventures.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "ecology-explorers",
                 "providerSlug": "nature-discovery"
             },
             {
                 "name": "Chemical Engineering Creations",
                 "description": "Hands-on activities exploring the principles of chemical engineering and material science.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "chemical-engineering-creations",
                 "providerSlug": "science-wonders"
             },
             {
                 "name": "Computer Science Quest",
                 "description": "Introduction to computer science concepts, algorithms, and problem-solving through interactive projects.",
-                "category": "science",
+                "category": "stem",
                 "slugName": "computer-science-quest",
                 "providerSlug": "tech-tots-coding"
             }

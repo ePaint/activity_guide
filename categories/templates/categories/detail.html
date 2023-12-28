@@ -49,10 +49,10 @@
                                 <span class="category-badge badge bg-{{ provider_category.get_color }} m-1"
                                         role="button"
                                         hx-target=".main-content"
-                                        hx-trigger="click[window.location.pathname != '{% url "categories-detail" provider_category.slug %}']"
+                                        hx-trigger="click[window.location.pathname != '{% url "category-detail" provider_category.slug %}']"
                                         hx-on::after-request="scrollToTop()"
                                         hx-push-url="true"
-                                        hx-get="{% url 'categories-detail' provider_category.slug %}"
+                                        hx-get="{% url 'category-detail' provider_category.slug %}"
                                         onclick="scrollToTop()">
                                     {{ provider_category.name }}
                                 </span>
@@ -63,7 +63,7 @@
             {% endfor %}
         </div>
         <div class="col-lg-2 pb-4 pb-lg-0 no-padding">
-            <div class="categories-detail-ad border round bg-white text-muted small text-center d-flex justify-content-center align-items-center crossed">
+            <div class="category-detail-ad border round bg-white text-muted small text-center d-flex justify-content-center align-items-center crossed">
                 
             </div>
         </div>

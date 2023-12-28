@@ -14,10 +14,10 @@
                     <div class="category-badge-large badge bg-{{ activity.category.get_color }} m-1"
                          role="button"
                          hx-target=".main-content"
-                         hx-trigger="click[window.location.pathname != '{% url "categories-detail" activity.category.slug %}']"
+                         hx-trigger="click[window.location.pathname != '{% url "category-detail" activity.category.slug %}']"
                          hx-on::after-request="scrollToTop()"
                          hx-push-url="true"
-                         hx-get="{% url 'categories-detail' activity.category.slug %}"
+                         hx-get="{% url 'category-detail' activity.category.slug %}"
                          onclick="scrollToTop()">
                         {{ activity.category.name }}
                     </div>
@@ -25,8 +25,20 @@
                         {{ activity.name }}
                     </div>
                 </div>
-                <div class="">
-                    {{ activity.description }}
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <div class="">
+                        {{ activity.description }}
+                    </div>
+                    <div class="align-self-end"
+                         role="button"
+                         hx-target=".main-content"
+                         hx-trigger="click[window.location.pathname != '{% url "provider-profile" activity.provider.slug %}']"
+                         hx-on::after-request="scrollToTop()"
+                         hx-push-url="true"
+                         hx-get="{% url 'provider-profile' activity.provider.slug %}"
+                         onclick="scrollToTop()">
+                        By <span class="fw-bold orange">{{ activity.provider.name }}</span>
+                    </div>
                 </div>
             </div>
         </div>
