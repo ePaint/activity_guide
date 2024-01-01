@@ -519,6 +519,10 @@ footer {
     align-items: center;
 }
 
+.category-detail-ad {
+    min-height: 20rem;
+}
+
 .categories-item {
     display: flex;
     flex-flow: column nowrap;
@@ -566,7 +570,7 @@ footer {
 
 .category-badge {
     height: 1.3rem !important;
-    max-width: 3.5rem;
+    max-width: 8rem;
 }
 
 .category-badge-large {

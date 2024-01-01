@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     # Creates 20 basic activities per category (Sports, Art, and Science)
     def custom_task(self, schema_editor):
-        to_create = [
+        to_create_old = [
             # 20 Sports activities
             {
                 "name": "Soccer",
@@ -436,6 +436,745 @@ class Migration(migrations.Migration):
             }
         ]
 
+        to_create_old2 = [
+            {
+                "name": "Soccer Training Drills",
+                "description": "Improve your soccer skills with a set of effective training drills.",
+                "category": "soccer",
+                "slugName": "soccer-training-drills",
+                "providerSlug": "playful-learning"
+            },
+            {
+                "name": "Hockey Shootout Challenge",
+                "description": "Test your hockey shooting accuracy in this exciting shootout challenge.",
+                "category": "hockey",
+                "slugName": "hockey-shootout-challenge",
+                "providerSlug": "fun-fitness"
+            },
+            {
+                "name": "Artistic Expression Workshop",
+                "description": "Unleash your creativity in this hands-on workshop exploring various art forms.",
+                "category": "art",
+                "slugName": "artistic-expression-workshop",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "STEM Robotics Lab",
+                "description": "Engage in a robotics lab to learn the fundamentals of STEM through hands-on activities.",
+                "category": "stem",
+                "slugName": "stem-robotics-lab",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Cheerleading Choreography Class",
+                "description": "Join a fun class to learn and perform energetic cheerleading routines.",
+                "category": "cheer",
+                "slugName": "cheerleading-choreography-class",
+                "providerSlug": "dance-magic"
+            },
+            {
+                "name": "Golf Swing Technique Workshop",
+                "description": "Refine your golf swing technique with expert guidance in this workshop.",
+                "category": "golf",
+                "slugName": "golf-swing-technique-workshop",
+                "providerSlug": "fun-fitness"
+            },
+            {
+                "name": "Digital Art Masterclass",
+                "description": "Explore the world of digital art in this advanced masterclass for artists.",
+                "category": "art",
+                "slugName": "digital-art-masterclass",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Introduction to Physics Principles",
+                "description": "Discover the basic principles of physics through interactive experiments.",
+                "category": "stem",
+                "slugName": "introduction-to-physics-principles",
+                "providerSlug": "science-wonders"
+            },
+            {
+                "name": "Soccer Quest Youth Camp",
+                "description": "Enroll in the Soccer Quest youth camp for a week of soccer fun and skill development.",
+                "category": "soccer",
+                "slugName": "soccer-quest-youth-camp",
+                "providerSlug": "super-chef-junior"
+            },
+            {
+                "name": "Broadway Dance Workshop",
+                "description": "Immerse yourself in the world of Broadway dance with this exciting workshop.",
+                "category": "dance",
+                "slugName": "broadway-dance-workshop",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Math Puzzles Challenge",
+                "description": "Exercise your brain with a series of engaging math puzzles for all skill levels.",
+                "category": "stem",
+                "slugName": "math-puzzles-challenge",
+                "providerSlug": "math-wizards"
+            },
+            {
+                "name": "Baseball Fun Skills Clinic",
+                "description": "Join a baseball skills clinic to enhance your batting, pitching, and fielding abilities.",
+                "category": "baseball",
+                "slugName": "baseball-fun-skills-clinic",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Nature Sketching Adventure",
+                "description": "Embark on a nature sketching adventure to capture the beauty of the outdoors.",
+                "category": "art",
+                "slugName": "nature-sketching-adventure",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Robot Builders Workshop",
+                "description": "Build your own robots in this interactive workshop focused on robotics and engineering.",
+                "category": "stem",
+                "slugName": "robot-builders-workshop",
+                "providerSlug": "robot-builders"
+            },
+            {
+                "name": "Storybook Drama Play",
+                "description": "Participate in a drama play inspired by classic and modern storybooks.",
+                "category": "theatre",
+                "slugName": "storybook-drama-play",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Swimming Skills Development",
+                "description": "Improve your swimming skills with expert guidance in this skill development program.",
+                "category": "swimming",
+                "slugName": "swimming-skills-development",
+                "providerSlug": "fun-fitness"
+            },
+            {
+                "name": "Crafty Creations Workshop",
+                "description": "Create beautiful crafts and DIY projects in this hands-on creative workshop.",
+                "category": "art",
+                "slugName": "crafty-creations-workshop",
+                "providerSlug": "crafty-creations"
+            },
+            {
+                "name": "Junior Yoga Harmony",
+                "description": "Experience harmony through junior yoga, promoting balance and relaxation.",
+                "category": "sports",
+                "slugName": "junior-yoga-harmony",
+                "providerSlug": "junior-yoga-harmony"
+            },
+            {
+                "name": "Sculpting Masterclass",
+                "description": "Hone your sculpting skills with expert guidance in this advanced masterclass.",
+                "category": "art",
+                "slugName": "sculpting-masterclass",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Little Gardeners Club",
+                "description": "Join the Little Gardeners Club to learn about gardening and environmental responsibility.",
+                "category": "art",
+                "slugName": "little-gardeners-club",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Adventure Seekers Outdoor Challenge",
+                "description": "Embark on an outdoor adventure challenge with the Adventure Seekers Club.",
+                "category": "sports",
+                "slugName": "adventure-seekers-outdoor-challenge",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Tennis Fundamentals Workshop",
+                "description": "Learn the fundamentals of tennis in this interactive workshop for beginners.",
+                "category": "tennis",
+                "slugName": "tennis-fundamentals-workshop",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Drawing and Painting Fusion",
+                "description": "Combine drawing and painting techniques in this fusion art workshop.",
+                "category": "art",
+                "slugName": "drawing-and-painting-fusion",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Language Learning Playtime",
+                "description": "Enhance language skills through play, songs, and interactive language activities.",
+                "category": "theatre",
+                "slugName": "language-learning-playtime",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Robot Coding Adventures",
+                "description": "Embark on coding adventures and learn programming skills through interactive challenges.",
+                "category": "stem",
+                "slugName": "robot-coding-adventures",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Creative Cooking for Kids",
+                "description": "Explore the world of cooking with fun and creative recipes designed for kids.",
+                "category": "art",
+                "slugName": "creative-cooking-for-kids",
+                "providerSlug": "super-chef-junior"
+            },
+            {
+                "name": "Wildlife Safari Exploration",
+                "description": "Embark on a wildlife safari exploration to learn about animals, habitats, and conservation.",
+                "category": "art",
+                "slugName": "wildlife-safari-exploration",
+                "providerSlug": "animal-safari"
+            },
+            {
+                "name": "Musical Melodies Jam Session",
+                "description": "Join a jam session to explore musical melodies, instruments, and creative expression.",
+                "category": "dance",
+                "slugName": "musical-melodies-jam-session",
+                "providerSlug": "musical-melodies"
+            },
+            {
+                "name": "Outdoor Yoga Adventure",
+                "description": "Experience the tranquility of outdoor yoga while connecting with nature and promoting well-being.",
+                "category": "sports",
+                "slugName": "outdoor-yoga-adventure",
+                "providerSlug": "junior-yoga-harmony"
+            },
+            {
+                "name": "Math Wizards Puzzle Marathon",
+                "description": "Participate in a puzzle marathon to sharpen math skills and problem-solving abilities.",
+                "category": "stem",
+                "slugName": "math-wizards-puzzle-marathon",
+                "providerSlug": "math-wizards"
+            },
+            {
+                "name": "Playful Theatre Workshop",
+                "description": "Engage in a playful theatre workshop, fostering creativity, self-expression, and confidence.",
+                "category": "theatre",
+                "slugName": "playful-theatre-workshop",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Gardening Adventures for Kids",
+                "description": "Embark on gardening adventures, learning about plants, gardening techniques, and environmental responsibility.",
+                "category": "gardening",
+                "slugName": "gardening-adventures-for-kids",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Mountain Biking Excursion",
+                "description": "Experience the thrill of mountain biking on an adventurous and scenic excursion.",
+                "category": "mountain-biking",
+                "slugName": "mountain-biking-excursion",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Creative Dance Fusion",
+                "description": "Explore the fusion of different dance styles in this creative and expressive dance workshop.",
+                "category": "dance",
+                "slugName": "creative-dance-fusion",
+                "providerSlug": "dance-magic"
+            },
+            {
+                "name": "Little Athlete Olympics",
+                "description": "Participate in the Little Athlete Olympics, showcasing sportsmanship and athletic skills.",
+                "category": "sports",
+                "slugName": "little-athlete-olympics",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Diving Adventure",
+                "description": "Embark on a diving adventure, learning the basics of diving and water safety.",
+                "category": "diving",
+                "slugName": "diving-adventure",
+                "providerSlug": "fun-fitness"
+            },
+            {
+                "name": "Dance and Drama Fusion",
+                "description": "Experience the fusion of dance and drama in this creative and expressive workshop.",
+                "category": "dance",
+                "slugName": "dance-and-drama-fusion",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Painting with Nature",
+                "description": "Create beautiful paintings using natural elements and inspiration from the outdoors.",
+                "category": "art",
+                "slugName": "painting-with-nature",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Interactive Gymnastics Challenge",
+                "description": "Engage in an interactive gymnastics challenge, showcasing balance, strength, and flexibility.",
+                "category": "gymnastics",
+                "slugName": "interactive-gymnastics-challenge",
+                "providerSlug": "fun-fitness"
+            },
+            {
+                "name": "Tennis Doubles Tournament",
+                "description": "Participate in a tennis doubles tournament, showcasing teamwork and tennis skills.",
+                "category": "tennis",
+                "slugName": "tennis-doubles-tournament",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Theater Arts Exploration",
+                "description": "Explore various aspects of theater arts, including acting, stage design, and storytelling.",
+                "category": "theatre",
+                "slugName": "theater-arts-exploration",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Drawing Marathon Challenge",
+                "description": "Participate in a drawing marathon challenge, showcasing creativity and artistic skills.",
+                "category": "art",
+                "slugName": "drawing-marathon-challenge",
+                "providerSlug": "digital-creations"
+            },
+            {
+                "name": "Language Learning Journey",
+                "description": "Embark on a language learning journey, exploring new languages and cultures through play.",
+                "category": "theatre",
+                "slugName": "language-learning-journey",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Robot Building Extravaganza",
+                "description": "Join a robot building extravaganza, fostering creativity and engineering skills.",
+                "category": "stem",
+                "slugName": "robot-building-extravaganza",
+                "providerSlug": "robot-builders"
+            }
+        ]
+
+        to_create = [
+            # 20 Sports activities
+            {
+                "name": "Soccer",
+                "description": "Team-based sport involving kicking a ball into the opponent's goal. Develops teamwork, coordination, and agility.",
+                "category": "soccer-quest",
+                "slugName": "soccer",
+                "providerSlug": "playful-learning"
+            },
+            {
+                "name": "Basketball",
+                "description": "Fast-paced sport where two teams compete to score points by shooting a ball through the opponent's hoop. Enhances agility and teamwork.",
+                "category": "sports",
+                "slugName": "basketball",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Swimming",
+                "description": "Water-based activity involving various strokes to move through the water. Promotes fitness, endurance, and water safety.",
+                "category": "swimming",
+                "slugName": "swimming",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Gymnastics",
+                "description": "Artistic and rhythmic exercises requiring strength, flexibility, and coordination. Builds physical fitness and body awareness.",
+                "category": "gymnastics",
+                "slugName": "gymnastics",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Tennis",
+                "description": "Racket sport played between two players or pairs. Improves hand-eye coordination, agility, and strategic thinking.",
+                "category": "tennis",
+                "slugName": "tennis",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Baseball",
+                "description": "Bat-and-ball sport with teams taking turns batting and fielding. Enhances hand-eye coordination, teamwork, and strategic thinking.",
+                "category": "baseball",
+                "slugName": "baseball",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Athletics",
+                "description": "Track and field events including running, jumping, and throwing. Promotes overall fitness, speed, and endurance.",
+                "category": "gymnastics",
+                "slugName": "athletics",
+                "providerSlug": "super-chef-junior"
+            },
+            {
+                "name": "Karate",
+                "description": "Martial art focused on strikes, kicks, and blocks. Builds discipline, self-defense skills, and physical fitness.",
+                "category": "sports",
+                "slugName": "karate",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Cycling",
+                "description": "Sport or recreational activity of riding bicycles. Improves cardiovascular health, leg strength, and coordination.",
+                "category": "mountain-biking",
+                "slugName": "cycling",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Volleyball",
+                "description": "Team sport where players use their hands to hit a ball over a net. Enhances teamwork, coordination, and agility.",
+                "category": "sports",
+                "slugName": "volleyball",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Archery",
+                "description": "Sport involving using a bow to shoot arrows at a target. Develops focus, precision, and upper body strength.",
+                "category": "sports",
+                "slugName": "archery",
+                "providerSlug": "robot-builders"
+            },
+            {
+                "name": "Hockey",
+                "description": "Fast-paced sport played on a field or rink, involving hitting a ball or puck into the opponent's goal. Enhances teamwork and stick-handling skills.",
+                "category": "hockey",
+                "slugName": "hockey",
+                "providerSlug": "playful-learning"
+            },
+            {
+                "name": "Golf",
+                "description": "Precision sport where players use clubs to hit balls into a series of holes on a course. Develops focus, precision, and patience.",
+                "category": "golf",
+                "slugName": "golf",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Badminton",
+                "description": "Racket sport played with a shuttlecock, requiring fast reflexes and agility. Enhances hand-eye coordination and cardiovascular fitness.",
+                "category": "sports",
+                "slugName": "badminton",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Table Tennis",
+                "description": "Fast-paced indoor sport played with small paddles and a lightweight ball on a rectangular table. Enhances reflexes and coordination.",
+                "category": "tennis",
+                "slugName": "table-tennis",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Rugby",
+                "description": "Contact sport played with an oval ball, involving running, passing, and tackling. Builds teamwork, strength, and endurance.",
+                "category": "sports",
+                "slugName": "rugby",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Martial Arts",
+                "description": "Various disciplines of combat and self-defense, promoting physical fitness, discipline, and mental focus.",
+                "category": "sports",
+                "slugName": "martial-arts",
+                "providerSlug": "little-athlete"
+            },
+            {
+                "name": "Rock Climbing",
+                "description": "Sport or recreational activity of climbing indoor or outdoor rock walls. Builds strength, endurance, and problem-solving skills.",
+                "category": "sports",
+                "slugName": "rock-climbing",
+                "providerSlug": "super-chef-junior"
+            },
+            {
+                "name": "Skateboarding",
+                "description": "Action sport involving riding and performing tricks on a skateboard. Enhances balance, coordination, and creativity.",
+                "category": "sports",
+                "slugName": "skateboarding",
+                "providerSlug": "adventure-seekers"
+            },
+            {
+                "name": "Fencing",
+                "description": "Combat sport involving duels with bladed weapons. Develops agility, focus, and strategic thinking.",
+                "category": "sports",
+                "slugName": "fencing",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Surfing",
+                "description": "Water sport involving riding waves on a surfboard. Enhances balance, coordination, and a connection to nature.",
+                "category": "swimming",
+                "slugName": "surfing",
+                "providerSlug": "adventure-seekers"
+            },
+
+            # 20 Art activities
+            {
+                "name": "Painting Workshop",
+                "description": "Creative painting sessions for artistic expression. Explore various techniques and styles.",
+                "category": "drawing",
+                "slugName": "painting-workshop",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Pottery Class",
+                "description": "Hands-on pottery experience to mold and create unique clay masterpieces.",
+                "category": "sculpting",
+                "slugName": "pottery-class",
+                "providerSlug": "crafty-creations"
+            },
+            {
+                "name": "Dance Class",
+                "description": "Expressive dance classes to learn different dance styles and foster creativity.",
+                "category": "dance",
+                "slugName": "dance-class",
+                "providerSlug": "dance-magic"
+            },
+            {
+                "name": "Music Ensemble",
+                "description": "Collaborative music sessions to explore instruments and create harmonious tunes.",
+                "category": "art",
+                "slugName": "music-ensemble",
+                "providerSlug": "musical-melodies"
+            },
+            {
+                "name": "Photography Workshop",
+                "description": "Introduction to photography techniques and artistic composition.",
+                "category": "art",
+                "slugName": "photography-workshop",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Crafting Bonanza",
+                "description": "Craft and DIY activities to unleash creativity and make unique projects.",
+                "category": "sculpting",
+                "slugName": "crafting-bonanza",
+                "providerSlug": "crafty-creations"
+            },
+            {
+                "name": "Theater Arts Camp",
+                "description": "Immersive theater experiences, including acting, scriptwriting, and stage performances.",
+                "category": "theatre",
+                "slugName": "theater-arts-camp",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Ceramics Studio",
+                "description": "Specialized studio for creating intricate ceramic artworks with guidance from experts.",
+                "category": "sculpting",
+                "slugName": "ceramics-studio",
+                "providerSlug": "crafty-creations"
+            },
+            {
+                "name": "Fashion Design Class",
+                "description": "Explore the world of fashion design, from sketching to creating wearable art.",
+                "category": "drawing",
+                "slugName": "fashion-design-class",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Sculpture Sculptors",
+                "description": "Sculpting workshops for creating three-dimensional artworks using various materials.",
+                "category": "sculpting",
+                "slugName": "sculpture-sculptors",
+                "providerSlug": "crafty-creations"
+            },
+            {
+                "name": "Street Art Crew",
+                "description": "Explore street art techniques, including graffiti and mural creation.",
+                "category": "painting",
+                "slugName": "street-art-crew",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Calligraphy Class",
+                "description": "Master the art of calligraphy with beautiful lettering and artistic styles.",
+                "category": "art",
+                "slugName": "calligraphy-class",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Digital Art Lab",
+                "description": "Create digital art using various software and tools to express artistic visions.",
+                "category": "drawing",
+                "slugName": "digital-art-lab",
+                "providerSlug": "science-wonders"
+            },
+            {
+                "name": "Comic Book Creators",
+                "description": "Learn the art of comic book creation, from storytelling to illustrating.",
+                "category": "drawing",
+                "slugName": "comic-book-creators",
+                "providerSlug": "language-explorers"
+            },
+            {
+                "name": "Ballet Academy",
+                "description": "Structured ballet training for dancers to develop grace, technique, and performance skills.",
+                "category": "dance",
+                "slugName": "ballet-academy",
+                "providerSlug": "dance-magic"
+            },
+            {
+                "name": "Mixed Media Madness",
+                "description": "Explore mixed media art by combining various materials and techniques for unique creations.",
+                "category": "art",
+                "slugName": "mixed-media-madness",
+                "providerSlug": "artistic-explorers"
+            },
+            {
+                "name": "Jazz Music Jam",
+                "description": "Jazz music sessions for young musicians to explore improvisation and ensemble playing.",
+                "category": "art",
+                "slugName": "jazz-music-jam",
+                "providerSlug": "musical-melodies"
+            },
+            {
+                "name": "Puppetry Playhouse",
+                "description": "Puppetry workshops to create and perform with unique puppets and characters.",
+                "category": "theatre",
+                "slugName": "puppetry-playhouse",
+                "providerSlug": "imagination-theater"
+            },
+            {
+                "name": "Abstract Art Explorers",
+                "description": "Expressive journey into abstract art, exploring color, form, and self-expression.",
+                "category": "art",
+                "slugName": "abstract-art-explorers",
+                "providerSlug": "science-wonders"
+            },
+            {
+                "name": "Folk Music Fiesta",
+                "description": "Celebration of folk music traditions with hands-on experiences in playing traditional instruments.",
+                "category": "art",
+                "slugName": "folk-music-fiesta",
+                "providerSlug": "musical-melodies"
+            },
+
+            # 20 Science activities
+            {
+                "name": "Chemistry Lab Explorers",
+                "description": "Hands-on experiments exploring chemical reactions and fundamental principles of chemistry.",
+                "category": "stem",
+                "slugName": "chemistry-lab-explorers",
+                "providerSlug": "science-wonders"
+            },
+            {
+                "name": "Astronomy Adventure Camp",
+                "description": "Explore the wonders of the universe, including stars, planets, and galaxies.",
+                "category": "stem",
+                "slugName": "astronomy-adventure-camp",
+                "providerSlug": "playful-learning"
+            },
+            {
+                "name": "Robotics Workshop",
+                "description": "Introduction to robotics, programming, and building simple robots for hands-on learning.",
+                "category": "stem",
+                "slugName": "robotics-workshop",
+                "providerSlug": "robot-builders"
+            },
+            {
+                "name": "Environmental Explorers",
+                "description": "Learn about ecosystems, conservation, and environmental science through outdoor activities.",
+                "category": "stem",
+                "slugName": "environmental-explorers",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Physics Fun Fair",
+                "description": "Interactive physics experiments and demonstrations to explore principles of motion, energy, and forces.",
+                "category": "stem",
+                "slugName": "physics-fun-fair",
+                "providerSlug": "science-wonders"
+            },
+            {
+                "name": "Paleontology Quest",
+                "description": "Dive into the world of dinosaurs and fossils with hands-on paleontological activities.",
+                "category": "stem",
+                "slugName": "paleontology-quest",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Microbiology Marvels",
+                "description": "Explore the microscopic world of bacteria and microorganisms through lab experiments.",
+                "category": "stem",
+                "slugName": "microbiology-marvels",
+                "providerSlug": "science-wonders"
+            },
+            {
+                "name": "Coding for Kids",
+                "description": "Introduction to coding and computer science concepts through fun and interactive activities.",
+                "category": "stem",
+                "slugName": "coding-for-kids",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Zoology Zoo",
+                "description": "Discover the diversity of animal life through hands-on experiences, games, and activities.",
+                "category": "stem",
+                "slugName": "zoology-zoo",
+                "providerSlug": "animal-safari"
+            },
+            {
+                "name": "Geology Rocks!",
+                "description": "Explore the Earth's geological features, rocks, and minerals through exciting experiments.",
+                "category": "stem",
+                "slugName": "geology-rocks",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Space Exploration Club",
+                "description": "Journey into space exploration, including rocket building and astronomy activities.",
+                "category": "stem",
+                "slugName": "space-exploration-club",
+                "providerSlug": "playful-learning"
+            },
+            {
+                "name": "Weather Watchers",
+                "description": "Learn about meteorology and weather phenomena through experiments and observations.",
+                "category": "stem",
+                "slugName": "weather-watchers",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Electricity and Magnetism Lab",
+                "description": "Hands-on experiments exploring the principles of electricity and magnetism.",
+                "category": "stem",
+                "slugName": "electricity-magnetism-lab",
+                "providerSlug": "tech-tots-coding"
+            },
+            {
+                "name": "Marine Biology Expedition",
+                "description": "Explore marine ecosystems, marine life, and ocean conservation through engaging activities.",
+                "category": "stem",
+                "slugName": "marine-biology-expedition",
+                "providerSlug": "animal-safari"
+            },
+            {
+                "name": "Archaeology Adventure",
+                "description": "Uncover the mysteries of the past through archaeological digs and artifact exploration.",
+                "category": "stem",
+                "slugName": "archaeology-adventure",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Math Puzzles and Games",
+                "description": "Fun and challenging math puzzles and games to enhance mathematical skills.",
+                "category": "stem",
+                "slugName": "math-puzzles-games",
+                "providerSlug": "math-wizards"
+            },
+            {
+                "name": "Ecology Explorers",
+                "description": "Learn about ecological systems, biodiversity, and conservation through outdoor adventures.",
+                "category": "stem",
+                "slugName": "ecology-explorers",
+                "providerSlug": "nature-discovery"
+            },
+            {
+                "name": "Chemical Engineering Creations",
+                "description": "Hands-on activities exploring the principles of chemical engineering and material science.",
+                "category": "stem",
+                "slugName": "chemical-engineering-creations",
+                "providerSlug": "science-wonders"
+            },
+            {
+                "name": "Computer Science Quest",
+                "description": "Introduction to computer science concepts, algorithms, and problem-solving through interactive projects.",
+                "category": "stem",
+                "slugName": "computer-science-quest",
+                "providerSlug": "tech-tots-coding"
+            }
+        ]
+
         Activity = self.get_model('activities', 'Activity')
         Category = self.get_model('categories', 'Category')
         Provider = self.get_model('providers', 'Provider')
@@ -443,6 +1182,7 @@ class Migration(migrations.Migration):
         image_prefix = 'https://activity-guide-files.s3.amazonaws.com'
         
         for item in to_create:
+            print(item)
             Activity.objects.get_or_create(
                 name=item['name'],
                 description=item['description'],
