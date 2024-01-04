@@ -42,11 +42,12 @@ class Category(models.Model):
         return activities
     
     def get_color(self):
-        if self.slug == 'sports':
+        slug = self.get_root_category().slug
+        if slug == 'sports':
             return 'red'
-        elif self.slug == 'art':
+        elif slug == 'art':
             return 'green'
-        elif self.slug == 'stem':
+        elif slug == 'stem':
             return 'blue'
         return 'orange'
     
