@@ -1,3 +1,4 @@
+import os
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
@@ -5,6 +6,9 @@ from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.exceptions import ValidationError
 from phonenumber_field.formfields import PhoneNumberField
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class ContactForm(forms.Form):
@@ -45,8 +49,8 @@ class ContactForm(forms.Form):
         })
 
         email = EmailMultiAlternatives(subject='Customer Inquiry',
-                                       to=['nsuepaint@gmail.com'],
-                                       from_email='jonathanselman24@gmail.com',
+                                       to=[os.getenv('CONTACT_TO_EMAIL')],
+                                       from_email=os.getenv('CONTACT_FROM_EMAIL'),
                                        reply_to=[email])
         email.attach_alternative(html, 'text/html')
         email.send()
