@@ -427,6 +427,25 @@ footer {
     padding-top: 0.6rem;
 }
 
+.round-noborder-left {
+    border-radius: 2.5rem;
+    border-left: 0;
+    padding-left: 2.1rem;
+    padding-right: 2.1rem;
+    padding-bottom: 0.6rem;
+    padding-top: 0.6rem;
+}
+
+
+.round-noborder-right {
+    border-radius: 2.5rem;
+    border-right: 0;
+    padding-left: 2.1rem;
+    padding-right: 2.1rem;
+    padding-bottom: 0.6rem;
+    padding-top: 0.6rem;
+}
+
 .search-form {
     min-width: 300px;
     height: 722px;
@@ -576,6 +595,30 @@ footer {
 .category-badge-large {
     height: 2.1rem !important;
     max-width: 7rem;
+}
+
+.subcategory-item {
+    height: 2rem;
+    line-height: 50%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-align: center;
+    letter-spacing: 0.1rem;
+}
+
+.subcategory-item-moreinfo {
+    width: 5%;
+    height: 2rem;
+    line-height: 50%;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.subcategory-button {
+    font-size: small;
+    height:auto;
 }
 
 .width-10 {

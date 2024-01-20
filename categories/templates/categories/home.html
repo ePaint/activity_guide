@@ -20,20 +20,69 @@
     </div>
     <div class="row gap-0 mt-4">
         {% for category in categories %}
-            <div class="col-md-4 pt-3"
-                 role="button"
-                 hx-target=".main-content"
-                 hx-trigger="click[window.location.pathname != '{% url "category-detail" category.slug %}']"
-                 hx-on::after-request="scrollToTop()"
-                 hx-push-url="true"
-                 hx-get="{% url 'category-detail' category.slug %}"
-                 onclick="scrollToTop()">
-                <div class="categories-item h-100 bg-white round border">
-                    <div class="categories-item-title round mt-2 border-thick-{{ category.get_color }} {{ category.get_color }}-hover">
+            <div class="col-xl-4 pt-3">
+                <div class="categories-item bg-white round border">
+                    <div class="categories-item-title round mt-2 border-thick-{{ category.get_color }} {{ category.get_color }}-hover"role="button"
+                    hx-target=".main-content"
+                    hx-trigger="click[window.location.pathname != '{% url "category-detail" category.slug %}']"
+                    hx-on::after-request="scrollToTop()"
+                    hx-push-url="true"
+                    hx-get="{% url 'category-detail' category.slug %}"
+                    onclick="scrollToTop()">
                         <h3>{{ category.name }}</h3>
                     </div>
-                    <div class="categories-item-text pt-3 align-self-start h-100">
+                    <div class="categories-item-text pt-3 align-self-start h-100 w-100">
                         <p class="paragraph fl-{{ category.get_color }}">{{ category.description }}</p>
+                        
+                        <input class="form-control mr-sm-2 my-2" type="search" placeholder="Search" aria-label="Search">
+                        {% for child_category in category.get_children %}
+                            {% if child_category.get_children.count == 0 %}
+                                <div class="subcategory-item w-100 text-start round m-2 my-1 border-{{ category.get_color }} {{ category.get_color }}-hover"
+                                role="button"
+                                hx-target=".main-content"
+                                hx-trigger="click[window.location.pathname != '{% url "category-detail" child_category.slug %}']"
+                                hx-on::after-request="scrollToTop()"
+                                hx-push-url="true"
+                                hx-get="{% url 'category-detail' child_category.slug %}"
+                                onclick="scrollToTop()">
+                                    {{ child_category.name }}
+                                </div>
+                            {% else %}
+                                <div class="btn-group w-100" role="group">
+                                    <div class="btn subcategory-item w-100 text-start round-noborder-right ms-2 my-1 border-{{ child_category.get_color }} {{ child_category.get_color }}-hover"
+                                    role="button"
+                                    hx-target=".main-content"
+                                    hx-trigger="click[window.location.pathname != '{% url "category-detail" child_category.slug %}']"
+                                    hx-on::after-request="scrollToTop()"
+                                    hx-push-url="true"
+                                    hx-get="{% url 'category-detail' child_category.slug %}"
+                                    onclick="scrollToTop()">
+                                        {{ child_category.name }}
+                                    </div>
+                                    <div class="subcategory-item-moreinfo btn align-end text-start round-noborder-left me-2 my-1 border-{{ child_category.get_color }} {{ child_category.get_color }}-hover" 
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseCategory-{{ child_category.slug }}" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapseCategory-{{ child_category.slug }}">
+                                    ▼
+                                    </div>
+                                </div>
+                                    <div class="subcategory-info round w-100 collapse" id="collapseCategory-{{ child_category.slug }}">
+                                        {% for child_subcategory in child_category.get_children %}
+                                            <div class="subcategory-button w-100 text-start round border {{ child_subcategory.get_color }}-hover"
+                                            role="button"
+                                            hx-target=".main-content"
+                                            hx-trigger="click[window.location.pathname != '{% url "category-detail" child_subcategory.slug %}']"
+                                            hx-on::after-request="scrollToTop()"
+                                            hx-push-url="true"
+                                            hx-get="{% url 'category-detail' child_subcategory.slug %}"
+                                            onclick="scrollToTop()">
+                                                {{ child_subcategory.name }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

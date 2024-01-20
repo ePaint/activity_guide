@@ -3,7 +3,7 @@ from categories.models import Category
 
 
 def home(request):
-    categories = Category.objects.all().order_by('created_at')[:3]
+    categories = Category.objects.filter(is_active=True, parent=None)[:3]
     context = {
         'categories': categories,
     }
