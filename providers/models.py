@@ -7,6 +7,11 @@ class Provider(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='providers', blank=True, null=True)
     is_active = models.BooleanField(default=True)
+    
+    # NO = 0
+    # PENDING = 1
+    # ACTIVE = 2
+    # BANNED = 3
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

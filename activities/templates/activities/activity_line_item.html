@@ -1,55 +1,68 @@
 <div class="row mb-2 py-2 bg-white round border">
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-        <img class="item-row-icon border-{{ activity.category.get_color }} p-01 user-select-none"
-            role="button"
-            src="{{ activity.image }}"
-            hx-target=".main-content"
-            hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
-            hx-on::after-request="scrollToTop()"
-            hx-push-url="true"
-            hx-get="{% url 'activity-detail' activity.slug %}"
-            onclick="scrollToTop()"/> 
+  <div class="col-md-3 d-flex flex-column align-items-center justify-content-center">
+    <span class="fw-bold ms-0 ms-md-1 text-center" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}" onclick="scrollToTop()">{{ activity.name }}</span>
+    <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button" src="{{ activity.image }}" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}" onclick="scrollToTop()" />
+    <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">{{ activity.category.name }}</span>
+  </div>
+  <div class="col d-flex flex-column gap-1 justify-content-center align-items-center">
+    <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4">
+      <div class="d-flex flex-column small align-items-center align-items-md-start">
+        <span class="text-muted small">From Date</span>
+        <span class="">1 Jan 2024</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">To Date</span>
+        <span class="">31 Jan 2024</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Start Time</span>
+        <span class="">8:00 am</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">End Time</span>
+        <span class="">3:00 pm</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Duration</span>
+        <span class="">7h</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Weekday</span>
+        <span class="">Wednesday</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Age Group</span>
+        <span class="">6-11</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Position</span>
+        <span class="">Player</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Location</span>
+        <span class="">School</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Price</span>
+        <span class="">$1200/yr</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Capacity</span>
+        <span class="">50</span>
+      </div>
+      <div class="d-flex flex-column small align-items-center align-items-md-start pb-2">
+        <span class="text-muted small">Activity Type</span>
+        <span class="">Outdoors</span>
+      </div>
     </div>
-    <div class="col-md-2 d-flex flex-column align-items-start justify-content-center">
-        <span class="fw-bold ms-0 ms-md-1 align-self-md-start align-self-center"
-              role="button"
-              hx-target=".main-content"
-              hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
-              hx-on::after-request="scrollToTop()"
-              hx-push-url="true"
-              hx-get="{% url 'activity-detail' activity.slug %}"
-              onclick="scrollToTop()">
-            {{ activity.name }}
-        </span>
-        <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1"
-              role="button"
-              hx-target=".main-content"
-              hx-trigger="click[window.location.pathname != '{% url "category-detail" activity.category.slug %}']"
-              hx-on::after-request="scrollToTop()"
-              hx-push-url="true"
-              hx-get="{% url 'category-detail' activity.category.slug %}"
-              onclick="scrollToTop()">
-            {{ activity.category.name }}
-        </span>
+  </div>
+  <div class="col-md-2 d-flex flex-column justify-content-center align-items-center pt-2 pt-md-0">
+    <div class="item-buttons d-flex flex-column gap-1 mb-2 w-100 pt-2">
+      <div class="rounded-pill btn border btn-light">A</div>
+      <div class="d-flex flex-row gap-1">
+        <div class="rounded-pill btn border btn-light w-50">B</div>
+        <div class="rounded-pill btn border btn-light btn w-50">C</div>
+      </div>
     </div>
-    <div class="col-md-6 d-flex flex-row gap-1">
-        <span class="align-top small text-muted two-columns pt-2">
-            {{ activity.description }}
-        </span>   
-    </div>
-    <div class="col-md-2 d-flex flex-column justify-content-center align-items-center pt-2 pt-md-0">
-        <div class="item-buttons d-flex flex-column gap-1 mb-2 w-100 pt-2">
-            <div class="rounded-pill btn border btn-light">
-                A
-            </div>
-            <div class="d-flex flex-row gap-1">
-                <div class="rounded-pill btn border btn-light w-50">
-                    B
-                </div>
-                <div class="rounded-pill btn border btn-light btn w-50">
-                    C
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

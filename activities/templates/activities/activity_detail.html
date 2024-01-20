@@ -1,72 +1,113 @@
 {% extends request.base_template %}
 {% load static %}
 {% block content %}
-<div class="container">
-    <div class="row mb-2 py-2">
-        <div class="d-md-flex gap-4">
-            <div class="d-flex justify-content-md-start justify-content-center pb-2">
-                <img class="profile-image {{ activity.category.get_color }} user-select-none"
-                    role="button"
-                    src="{{ activity.image }}"/> 
-            </div>
-            <div class="d-flex w-100 flex-column bg-white round border">
-                <div class="fs-3 {{ activity.category.get_color }} align-self-center align-self-md-start d-md-flex flex-row justify-content-center align-items-center text-center">
-                    <div class="category-badge-large badge bg-{{ activity.category.get_color }} m-1"
-                         role="button"
-                         hx-target=".main-content"
-                         hx-trigger="click[window.location.pathname != '{% url "category-detail" activity.category.slug %}']"
-                         hx-on::after-request="scrollToTop()"
-                         hx-push-url="true"
-                         hx-get="{% url 'category-detail' activity.category.slug %}"
-                         onclick="scrollToTop()">
-                        {{ activity.category.name }}
-                    </div>
-                    <div>
-                        {{ activity.name }}
-                    </div>
+  <div class="container">
+    <div class="d-flex flex-lg-row flex-column">
+      <div class="me-5 w-100 d-flex justify-content-lg-start justify-content-center pb-2">
+        <img class="profile-image-big {{ activity.category.get_color }} user-select-none" role="button" src="{{ activity.image }}" />
+      </div>
+      <div class="">
+        <div class="row mb-2 pb-2">
+          <div class="d-md-flex gap-4 bg-white round border profile-description">
+            <div class="d-flex w-100 flex-column">
+              <div class="w-100 fs-3 align-self-center align-self-md-start d-md-flex flex-row justify-content-center align-items-center text-center">
+                <div class="category-badge-large badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">{{ activity.category.name }}</div>
+                <div class="flex-grow-1 d-flex justify-content-start {{ activity.category.get_color }}">{{ activity.name }}</div>
+                <div class="fs-6 d-flex justify-content-end" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'provider-profile' activity.provider.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop()">
+                  By&nbsp;<span class="fw-bold orange">{{ activity.provider.name }}</span>
                 </div>
-                <div class="d-flex flex-column justify-content-between h-100">
-                    <div class="">
-                        {{ activity.description }}
-                    </div>
-                    <div class="align-self-end"
-                         role="button"
-                         hx-target=".main-content"
-                         hx-trigger="click[window.location.pathname != '{% url "provider-profile" activity.provider.slug %}']"
-                         hx-on::after-request="scrollToTop()"
-                         hx-push-url="true"
-                         hx-get="{% url 'provider-profile' activity.provider.slug %}"
-                         onclick="scrollToTop()">
-                        By <span class="fw-bold orange">{{ activity.provider.name }}</span>
-                    </div>
+              </div>
+              <hr class="hr mt-0 mb-1" />
+              <div class="d-flex flex-column justify-content-between h-100">
+                <div class="two-columns">
+                  {{ activity.description }}
+                  {% lorem 2 b random %}
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <hr class="hr mt-0 mb-1" />
-    <div class="row mb-2 py-2">
-        <div class="d-md-flex gap-4">
+        <hr class="hr mt-0 mb-1" />
+        <div class="row mb-2 py-2">
+          <div class="d-flex flex-xl-row flex-column">
+            <div class="px-2 mx-0 flex-grow-1">
+              <div class="row row-cols-1 row-cols-xl-3">
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="from-date" value="test@example.com" disabled />
+                  <label class="ps-4" for="from-date">From Date</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="to-date" value="test@example.com" disabled />
+                  <label class="ps-4" for="to-date">To Date</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="weekday" value="test@example.com" disabled />
+                  <label class="ps-4" for="weekday">Weekday</label>
+                </form>
+              </div>
+              <div class="row row-cols-1 row-cols-xl-3">
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="start-time" value="test@example.com" disabled />
+                  <label class="ps-4" for="start-time">Start Time</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="end-time" value="test@example.com" disabled />
+                  <label class="ps-4" for="end-time">End Time</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="duration" value="test@example.com" disabled />
+                  <label class="ps-4" for="duration">Duration</label>
+                </form>
+              </div>
+              <div class="row row-cols-1 row-cols-xl-3">
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="age-group" value="test@example.com" disabled />
+                  <label class="ps-4" for="age-group">Age Group</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="position" value="test@example.com" disabled />
+                  <label class="ps-4" for="position">Position</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="location" value="test@example.com" disabled />
+                  <label class="ps-4" for="location">Location</label>
+                </form>
+              </div>
+              <div class="row row-cols-1 row-cols-xl-3">
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="price" value="test@example.com" disabled />
+                  <label class="ps-4" for="price">Price</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="capacity" value="test@example.com" disabled />
+                  <label class="ps-4" for="capacity">Capacity</label>
+                </form>
+                <form class="form-floating pb-2">
+                  <input class="form-control bg-white round" id="activity-type" value="test@example.com" disabled />
+                  <label class="ps-4" for="activity-type">Activity Type</label>
+                </form>
+              </div>
+            </div>
             <div class="d-flex justify-content-md-start justify-content-center pb-2">
-                <div class="width-10 d-flex flex-column justify-content-start align-items-center pt-2 pt-md-0">
-                    <div class="item-buttons d-flex flex-column gap-1 mb-2 w-100 pt-2">
-                        <div class="rounded-pill btn bg-white border btn-light">
-                            A
-                        </div>
-                        <div class="d-flex flex-row gap-1">
-                            <div class="rounded-pill btn bg-white border btn-light w-50">
-                                B
-                            </div>
-                            <div class="rounded-pill btn bg-white border btn-light btn w-50">
-                                C
-                            </div>
-                        </div>
+              <div class="w-100 d-flex flex-column justify-content-start align-items-center pt-2 pt-md-0">
+                <div class="item-buttons d-flex justify-content-center align-items-center flex-column gap-1 mb-2 w-100 pt-2">
+                  <div class="rounded-pill btn bg-orange border btn-light w-100">
+                    Book
+                  </div>
+                  <div class="d-flex flex-row gap-1">
+                    <div class="rounded-pill btn bg-white border btn-light w-50 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'layout/star.svg' %}" />
                     </div>
+                    <div class="rounded-pill btn bg-white border btn-light w-50 d-flex justify-content-center align-items-center">
+                      <img src="{% static 'layout/share-fill.svg' %}" />
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="three-columns bg-white round border">
-                {% lorem 4 b random %}
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 {% endblock %}
