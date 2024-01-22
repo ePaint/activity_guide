@@ -314,7 +314,7 @@ body {
 }
 
 .item-buttons {
-    max-width: 7rem !important;
+    min-width: 7rem !important;
 }
 
 .site-logo {

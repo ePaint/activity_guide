@@ -28,67 +28,16 @@
           </div>
         </div>
         <hr class="hr mt-0 mb-1" />
-        <div class="row mb-2 py-2">
+        <div class="d-flex mb-2 py-2">
           <div class="d-flex flex-xl-row flex-column">
-            <div class="px-2 mx-0 flex-grow-1">
-              <div class="row row-cols-1 row-cols-xl-3">
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="from-date" value="test@example.com" disabled />
-                  <label class="ps-4" for="from-date">From Date</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="to-date" value="test@example.com" disabled />
-                  <label class="ps-4" for="to-date">To Date</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="weekday" value="test@example.com" disabled />
-                  <label class="ps-4" for="weekday">Weekday</label>
-                </form>
-              </div>
-              <div class="row row-cols-1 row-cols-xl-3">
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="start-time" value="test@example.com" disabled />
-                  <label class="ps-4" for="start-time">Start Time</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="end-time" value="test@example.com" disabled />
-                  <label class="ps-4" for="end-time">End Time</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="duration" value="test@example.com" disabled />
-                  <label class="ps-4" for="duration">Duration</label>
-                </form>
-              </div>
-              <div class="row row-cols-1 row-cols-xl-3">
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="age-group" value="test@example.com" disabled />
-                  <label class="ps-4" for="age-group">Age Group</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="position" value="test@example.com" disabled />
-                  <label class="ps-4" for="position">Position</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="location" value="test@example.com" disabled />
-                  <label class="ps-4" for="location">Location</label>
-                </form>
-              </div>
-              <div class="row row-cols-1 row-cols-xl-3">
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="price" value="test@example.com" disabled />
-                  <label class="ps-4" for="price">Price</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="capacity" value="test@example.com" disabled />
-                  <label class="ps-4" for="capacity">Capacity</label>
-                </form>
-                <form class="form-floating pb-2">
-                  <input class="form-control bg-white round" id="activity-type" value="test@example.com" disabled />
-                  <label class="ps-4" for="activity-type">Activity Type</label>
-                </form>
+            <div class="mx-2 flex-grow-1">
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-xl-4">
+                {% include "activities/partials/activity_fields.html" with activity=activity %}
               </div>
             </div>
-            {% include "activities/partials/activity_interaction.html" with activity=activity %}
+            <div class="mx-2">
+                {% include "activities/partials/activity_interaction.html" with activity=activity %}
+            </div>
           </div>
         </div>
       </div>

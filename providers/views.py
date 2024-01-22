@@ -12,7 +12,7 @@ def provider_profile(request, slug):
     return render(request, 'providers/provider_profile.html', context)
 
 
-def provider_dashboard(request, slug):
+def provider_edit(request, slug):
     provider = Provider.objects.get(slug=slug)
     name_form = ProviderNameForm(instance=provider)
     description_form = ProviderDescriptionForm(instance=provider)
@@ -21,7 +21,7 @@ def provider_dashboard(request, slug):
         'name_form': name_form,
         'description_form': description_form,
     }
-    return render(request, 'providers/provider_dashboard.html', context)
+    return render(request, 'providers/provider_edit.html', context)
 
 
 def provider_name_update(request, slug):

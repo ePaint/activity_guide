@@ -5,58 +5,16 @@
     <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">{{ activity.category.name }}</span>
   </div>
   <div class="col d-flex flex-column gap-1 justify-content-center align-items-center pt-3 pt-sm-0">
+    <span class="editasd">{{ edit }}</span>
     <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4">
-      <div class="d-flex flex-column small align-items-start align-items-md-start">
-        <span class="text-muted small">From Date</span>
-        <span class="">1 Jan 2024</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">To Date</span>
-        <span class="">31 Jan 2024</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Start Time</span>
-        <span class="">8:00 am</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">End Time</span>
-        <span class="">3:00 pm</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Duration</span>
-        <span class="">7h</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Weekday</span>
-        <span class="">Wednesday</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Age Group</span>
-        <span class="">6-11</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Position</span>
-        <span class="">Player</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Location</span>
-        <span class="">School</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Price</span>
-        <span class="">$1200/yr</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Capacity</span>
-        <span class="">50</span>
-      </div>
-      <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
-        <span class="text-muted small">Activity Type</span>
-        <span class="">Outdoors</span>
-      </div>
+      {% if edit %}
+        {% include "activities/partials/activity_fields_edit.html" with activity=activity %}
+      {% else %}
+        {% include "activities/partials/activity_fields.html" with activity=activity %}
+      {% endif %}
     </div>
   </div>
-  <div class="col-lg-2">
+  <div class="col-lg-1 d-flex justify-content-center align-items-center">
     {% include "activities/partials/activity_interaction.html" with activity=activity %}
   </div>
 </div>

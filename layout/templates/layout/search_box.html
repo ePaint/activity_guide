@@ -5,6 +5,6 @@
         </div>
     </div>
     {% for activity in activities %}
-        {% include "activities/partials/activity_line_item.html" with activity=activity %}
+        {% include "activities/partials/activity_line_item.html" with activity=activity edit=edit %}
     {% endfor %}
 </div>
