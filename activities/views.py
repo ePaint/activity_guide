@@ -8,3 +8,10 @@ def activity_detail(request, slug):
         'activity': activity
     }
     return render(request, 'activities/activity_detail.html', context)
+
+def activity_edit(request, slug):
+    activity = Activity.objects.get(slug=slug)
+    context = {
+        'activity': activity
+    }
+    return render(request, 'activities/activity_edit.html', context)

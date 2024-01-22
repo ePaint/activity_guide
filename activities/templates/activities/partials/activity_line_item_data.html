@@ -1,0 +1,16 @@
+{% if edit %}
+  <div class="col d-flex flex-column gap-1 justify-content-center align-items-center pt-3 pt-sm-0">
+    <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4">
+      {% include "activities/partials/activity_fields_edit.html" with activity=activity %}
+    </div>
+  </div>
+{% else %}
+  <div class="col d-flex flex-column gap-1 justify-content-center align-items-center pt-3 pt-sm-0">
+    <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4">
+      {% include "activities/partials/activity_fields.html" with activity=activity %}
+    </div>
+  </div>
+  <div class="col-lg-1 d-flex justify-content-center align-items-center">
+    {% include "activities/partials/activity_interaction.html" with activity=activity %}
+  </div>
+{% endif %}

@@ -1,20 +1,50 @@
 <div class="row mb-2 py-2 bg-white round border">
   <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center">
-    <span class="fw-bold ms-0 ms-md-1 text-center" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}" onclick="scrollToTop()">{{ activity.name }}</span>
-    <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button" src="{{ activity.image }}" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}" onclick="scrollToTop()" />
-    <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">{{ activity.category.name }}</span>
+    {% if edit %}
+      <span class="fw-bold ms-0 ms-md-1 text-center"
+          role="button"
+          hx-target=".main-content"
+          hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
+          hx-on::after-request="scrollToTop()"
+          hx-push-url="true"
+          hx-get="{% url 'activity-edit' activity.slug %}"
+          onclick="scrollToTop()">{{ activity.name }}</span>
+      <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none"
+          role="button"
+          src="{{ activity.image }}"
+          hx-target=".main-content"
+          hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
+          hx-on::after-request="scrollToTop()"
+          hx-push-url="true"
+          hx-get="{% url 'activity-edit' activity.slug %}"
+          onclick="scrollToTop()" />
+    {% else %}
+      <span class="fw-bold ms-0 ms-md-1 text-center"
+            role="button"
+            hx-target=".main-content"
+            hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
+            hx-on::after-request="scrollToTop()"
+            hx-push-url="true"
+            hx-get="{% url 'activity-detail' activity.slug %}"
+            onclick="scrollToTop()">{{ activity.name }}</span>
+      <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none"
+           role="button"
+           src="{{ activity.image }}"
+           hx-target=".main-content"
+           hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
+           hx-on::after-request="scrollToTop()"
+           hx-push-url="true"
+           hx-get="{% url 'activity-detail' activity.slug %}"
+           onclick="scrollToTop()" />
+    {% endif %}
+    <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1"
+          role="button"
+          hx-target=".main-content"
+          hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
+          hx-on::after-request="scrollToTop()"
+          hx-push-url="true"
+          hx-get="{% url 'category-detail' activity.category.slug %}"
+          onclick="scrollToTop()">{{ activity.category.name }}</span>
   </div>
-  <div class="col d-flex flex-column gap-1 justify-content-center align-items-center pt-3 pt-sm-0">
-    <span class="editasd">{{ edit }}</span>
-    <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4">
-      {% if edit %}
-        {% include "activities/partials/activity_fields_edit.html" with activity=activity %}
-      {% else %}
-        {% include "activities/partials/activity_fields.html" with activity=activity %}
-      {% endif %}
-    </div>
-  </div>
-  <div class="col-lg-1 d-flex justify-content-center align-items-center">
-    {% include "activities/partials/activity_interaction.html" with activity=activity %}
-  </div>
+  {% include 'activities/partials/activity_line_item_data.html' with activity=activity edit=edit %}
 </div>
