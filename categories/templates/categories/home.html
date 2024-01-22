@@ -33,8 +33,6 @@
                     </div>
                     <div class="categories-item-text pt-3 align-self-start h-100 w-100">
                         <p class="paragraph fl-{{ category.get_color }}">{{ category.description }}</p>
-                        
-                        <input class="form-control mr-sm-2 my-2" type="search" placeholder="Search" aria-label="Search">
                         {% for child_category in category.get_children %}
                             {% if child_category.get_children.count == 0 %}
                                 <div class="subcategory-item w-100 text-start round m-2 my-1 border-{{ category.get_color }} {{ category.get_color }}-hover"
