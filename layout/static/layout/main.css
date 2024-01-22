@@ -314,7 +314,7 @@ body {
 }
 
 .item-buttons {
-    max-width: 7rem !important;
+    min-width: 7rem !important;
 }
 
 .site-logo {
@@ -587,6 +587,12 @@ footer {
     border-radius: 20%;
 }
 
+.item-row-icon-offer {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 20%;
+}
+
 .category-badge {
     height: 1.3rem !important;
     max-width: 8rem;
@@ -633,7 +639,20 @@ footer {
     padding: 5px;
     background-position: center center;
     background-size: cover;
+}
 
+.profile-image-big {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 25%;
+    border: 2px solid;
+    padding: 5px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.profile-description {
+    min-height: 20rem;
 }
 
 .h-1 {
@@ -654,6 +673,26 @@ footer {
 
 .h-5 {
     height: 2.25rem;
+}
+
+.h-6 {
+    height: 2.5rem;
+}
+
+.h-7 {
+    height: 3rem;
+}
+
+.h-8 {
+    height: 3.5rem;
+}
+
+.h-9 {
+    height: 4rem;
+}
+
+.h-10 {
+    height: 5rem;
 }
 
 .w-1 {
@@ -774,5 +813,11 @@ footer {
 
     .home-main {
         width: 95%;
+    }
+
+    .two-columns {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
     }
 }
