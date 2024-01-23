@@ -60,6 +60,7 @@ class FamilyMember(models.Model):
 
 class Member(models.Model):
     user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='member')
+    liked_activities = models.ManyToManyField(Activity, related_name='liked_by')
 
     class Meta:
         db_table = 'member'

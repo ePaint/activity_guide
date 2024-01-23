@@ -34,6 +34,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='member', to=settings.AUTH_USER_MODEL)),
+                ('liked_activities', models.ManyToManyField(related_name='liked_by', to='activities.activity')),
             ],
             options={
                 'verbose_name': 'Member',

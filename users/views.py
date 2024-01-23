@@ -13,8 +13,8 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_member = form.cleaned_data.get('is_member', False)
-            user.is_provider = form.cleaned_data.get('is_provider', False)
+            user.is_member = True
+            user.is_provider = False
             user.save()
             return redirect('users-login')
     else:
@@ -41,7 +41,7 @@ def login(request):
                 return response
     else:
         initial = {
-            'next': request.GET.get('next', '/home/'),
+            'next': request.GET.get('next', '/'),
         }
         form = UserLoginForm(initial=initial)
     return render(request, 'users/login.html', {'form': form})
