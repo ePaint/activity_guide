@@ -9,6 +9,8 @@ from django.core.mail import EmailMultiAlternatives
 
 from layout.forms import ContactForm
 
+from django.shortcuts import render
+
 
 def not_found(request, exception):
     print(f'404 error')
@@ -62,3 +64,4 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'layout/contact_form.html', {'form': form})
+

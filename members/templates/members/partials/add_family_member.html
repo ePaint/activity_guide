@@ -1,0 +1,10 @@
+{% load crispy_forms_tags %}
+<form method="post" 
+    hx-post="{% url 'add-family-member' %}" 
+    hx-target="#family_member_list" 
+    hx-trigger="submit">
+    {% csrf_token %}
+    <input type="hidden" name="member_id" value="{{ request.user.member.id }}">
+    {{ form | crispy }}
+    <button type="submit">Submit</button>
+</form>

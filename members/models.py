@@ -2,15 +2,7 @@ from django.db import models
 from activities.models import Activity
 import datetime
 
-
-INTEREST_TYPES = {
-    "Keyword": "Keyword",
-    "Category": "Category",
-    "Topic": "Topic",
-    "Skill": "Skill",
-    "Project": "Project",
-    "Other": "Other"
-}
+from categories.models import Category
 
 
 RELATIONSHIPS = {
@@ -23,27 +15,15 @@ RELATIONSHIPS = {
 }
 
 
-class Interest(models.Model):
-    interest_type = models.CharField(max_length=50, choices=INTEREST_TYPES.items())
-    name = models.CharField(max_length=50)
-
-    class Meta:
-        db_table = 'interest'
-        verbose_name_plural = 'Interests'
-        verbose_name = 'Interest'
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-
-
 class FamilyMember(models.Model):    
     name = models.CharField(max_length=50)
     date_of_birth = models.DateField()
     relationship = models.CharField(max_length=50, choices=RELATIONSHIPS.items())
-    interests = models.ManyToManyField(Interest)
+    category_interest_1 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_1', blank=True, null=True)
+    category_interest_2 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_2', blank=True, null=True)
+    category_interest_3 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_3', blank=True, null=True)
     activities = models.ManyToManyField(Activity)
-    member = models.ForeignKey('Member', on_delete=models.CASCADE)
+    member = models.ForeignKey('Member', on_delete=models.CASCADE, related_name='family_members')
 
     class Meta:
         db_table = 'family_member'
@@ -60,6 +40,7 @@ class FamilyMember(models.Model):
 
 class Member(models.Model):
     user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='member')
+    liked_activities = models.ManyToManyField(Activity, related_name='liked_by', blank=True, null=True)
 
     class Meta:
         db_table = 'member'

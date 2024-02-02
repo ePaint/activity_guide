@@ -54,3 +54,4 @@ class ContactForm(forms.Form):
                                        reply_to=[email])
         email.attach_alternative(html, 'text/html')
         email.send()
+
