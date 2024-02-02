@@ -12,29 +12,16 @@ class Migration(migrations.Migration):
     dependencies = [
         ('activities', '0002_basic_offers'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('categories', '0001_initial'),
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Interest',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('interest_type', models.CharField(choices=[('Keyword', 'Keyword'), ('Category', 'Category'), ('Topic', 'Topic'), ('Skill', 'Skill'), ('Project', 'Project'), ('Other', 'Other')], max_length=50)),
-                ('name', models.CharField(max_length=50)),
-            ],
-            options={
-                'verbose_name': 'Interest',
-                'verbose_name_plural': 'Interests',
-                'db_table': 'interest',
-                'ordering': ['name'],
-            },
-        ),
         migrations.CreateModel(
             name='Member',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='member', to=settings.AUTH_USER_MODEL)),
-                ('liked_activities', models.ManyToManyField(related_name='liked_by', to='activities.activity')),
+                ('liked_activities', models.ManyToManyField(related_name='liked_by', to='activities.activity', blank=True, null=True)),
             ],
             options={
                 'verbose_name': 'Member',
@@ -50,8 +37,10 @@ class Migration(migrations.Migration):
                 ('date_of_birth', models.DateField()),
                 ('relationship', models.CharField(choices=[('Me', 'Me'), ('Spuose', 'Spouse'), ('Parent', 'Parent'), ('Child', 'Child'), ('Sibling', 'Sibling'), ('Other', 'Other')], max_length=50)),
                 ('activities', models.ManyToManyField(to='activities.activity')),
-                ('interests', models.ManyToManyField(to='members.interest')),
-                ('member', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='members.member')),
+                ('category_interest_1', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='category_interest_1', to='categories.Category')),
+                ('category_interest_2', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='category_interest_2', to='categories.Category')),
+                ('category_interest_3', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='category_interest_3', to='categories.Category')),
+                ('member', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='members.member', related_name='family_members')),
             ],
             options={
                 'verbose_name': 'Family Member',

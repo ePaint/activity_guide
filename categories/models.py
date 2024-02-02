@@ -15,8 +15,16 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return self.name
+        return self.get_breadcrumbs()
+
     
+    def get_breadcrumbs(self):
+        breadcrumbs = self.name
+        if self.parent:
+            breadcrumbs = f'{self.parent.get_breadcrumbs()} - {breadcrumbs}'
+        return breadcrumbs
+    
+
     def get_absolute_url(self):
         return reverse('category-detail', kwargs={'slug': self.slug})
     

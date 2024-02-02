@@ -1,0 +1,34 @@
+{% if request.user.member.family_members.count == 0 %}
+    <div class="row-lg d-flex w-100 pb-2">
+        <div class="col-sm w-100 flex-column justify-content-start">
+            No family members found
+        </div>
+    </div>
+{% endif %}
+{% for family_member in request.user.member.family_members.all %}
+    <div class="row-lg d-flex w-100 pb-2">
+        <div class="col-sm w-100 flex-column justify-content-start">
+            Family members info
+        </div>
+        <div class="col-sm-3 flex-column justify-content-start">
+            Family members buttons
+        </div>
+    </div>
+{% endfor %}
+<div class="d-flex flex-column align-items-center justify-content-center p-2">
+    <div class="add-family-member-button text-center round orange-hover border-orange"
+         id="add_family_member_button"
+         href="#family_member_form_container"
+         role="button"
+         hx-get="{% url 'add-family-member' %}"
+         hx-target="#family_member_form_container"
+         hx-trigger="click, load"
+         data-bs-toggle="collapse" 
+         aria-expanded="false" 
+         aria-controls="family_member_form_card">
+        Add Family Member
+    </div>
+    <div class="collapse multi-collapse" id="family_member_form_container">
+        <div class="card card-body" id="family_member_form_card"></div>
+    </div>
+</div>

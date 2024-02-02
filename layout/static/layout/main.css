@@ -841,3 +841,11 @@ footer {
 .user-dropdown {
     font-size: 0.9rem;
 }
+
+#family_member_form_container {
+    max-width: 480px;
+}
+
+.add-family-member-button {
+    max-width: 480px;
+}

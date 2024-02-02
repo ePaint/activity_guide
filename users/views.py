@@ -4,6 +4,9 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import resolve
+from activities.models import Activity
+
+from members.models import Member
 from .forms import UserRegisterForm, UserLoginForm, UserProfileForm, UserUpdateForm, UserProfileImageForm
 from .models import User, UserProfile
 
@@ -16,6 +19,14 @@ def register(request):
             user.is_member = True
             user.is_provider = False
             user.save()
+            member = Member(user=user)
+            member.save()
+            print(member)
+            print('Creating member...')
+            member.liked_activities.set(Activity.objects.all().order_by('?')[:5])
+            print(member)
+            print('Creating liked activities...')
+            member.save()
             return redirect('users-login')
     else:
         form = UserRegisterForm()
