@@ -46,7 +46,7 @@
                     <div class="col-md-2 row gap-0 small pt-2 pt-md-0">
                         <div class="col-3 w-25 d-flex flex-column flex-wrap justify-content-center align-items-center">
                             {% for provider_category in provider.get_categories %}
-                                <span class="category-badge badge bg-{{ provider_category.get_color }} m-1"
+                                <span class="badge bg-{{ provider_category.get_color }} m-1"
                                         role="button"
                                         hx-target=".main-content"
                                         hx-trigger="click[window.location.pathname != '{% url "category-detail" provider_category.slug %}']"

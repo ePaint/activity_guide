@@ -1,16 +1,26 @@
 {% load static %}
-<div class="item-buttons w-100 d-flex justify-content-md-start justify-content-center pb-2">
-  <div class="w-100 d-flex flex-column justify-content-start align-items-center pt-2 pt-md-0">
-    <div class="w-100 d-flex justify-content-center align-items-center flex-column gap-1 mb-2 w-100 pt-2">
-      <div class="rounded-pill btn bg-orange border btn-light w-100">Book</div>
-      <div class="w-100 d-flex flex-row gap-1">
-        <div class="w-50 rounded-pill btn bg-white border btn-light d-flex justify-content-center align-items-center">
-          <img src="{% static 'layout/star.svg' %}" />
-        </div>
-        <div class="w-50 rounded-pill btn bg-white border btn-light d-flex justify-content-center align-items-center">
-          <img src="{% static 'layout/share-fill.svg' %}" />
-        </div>
-      </div>
+<div class="item-buttons">
+    <div class="book-button btn-group">
+        <button type="button" class="w-75 btn btn-outline-primary">Book</button>
+        <button type="button" class="w-25 btn btn-outline-primary orange-hover"
+            hx-post="{% url 'activity-like' activity.slug %}?next={{ request.path }}">
+            {% include 'activities/partials/activity_like.html' with activity=activity %}
+        </button>
     </div>
-  </div>
+
+    
+    <div class="btn btn-outline-primary orange-hover border-0"
+         onclick='shareOnTwitter("{{request.get_host}}{{activity.get_absolute_url}}")'>
+        <img class="orange-filter" src="{% static 'layout/twitter-x.svg' %}" />
+    </div>
+    <div class="btn btn-outline-primary orange-hover border-0"
+         onclick='shareOnFacebook("{{request.get_host}}{{activity.get_absolute_url}}")'>
+        <img class="orange-filter" src="{% static 'layout/facebook.svg' %}" />
+    </div>
+    <div class="btn btn-outline-primary orange-hover border-0"
+         onclick='shareByCopy(this, "{{request.get_host}}{{activity.get_absolute_url}}", "{% static 'layout/clipboard-check.svg' %}")'>
+        <img class="orange-filter" src="{% static 'layout/clipboard.svg' %}" />
+    </div>
 </div>
+
+

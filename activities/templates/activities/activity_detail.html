@@ -11,7 +11,7 @@
           <div class="d-md-flex gap-4 bg-white round border profile-description">
             <div class="d-flex w-100 flex-column">
               <div class="w-100 fs-3 align-self-center align-self-md-start d-md-flex flex-row justify-content-center align-items-center text-center">
-                <div class="category-badge-large badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">{{ activity.category.name }}</div>
+                <div class="badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">{{ activity.category.name }}</div>
                 <div class="flex-grow-1 d-flex justify-content-start {{ activity.category.get_color }}">{{ activity.name }}</div>
                 <div class="fs-6 d-flex justify-content-end" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url 'provider-profile' activity.provider.slug %}']" hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop()">
                   By&nbsp;<span class="fw-bold orange">{{ activity.provider.name }}</span>

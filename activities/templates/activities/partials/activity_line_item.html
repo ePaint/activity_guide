@@ -37,7 +37,7 @@
            hx-get="{% url 'activity-detail' activity.slug %}"
            onclick="scrollToTop()" />
     {% endif %}
-    <span class="w-100 category-badge badge bg-{{ activity.category.get_color }} m-1"
+    <span class="badge bg-{{ activity.category.get_color }} m-1"
           role="button"
           hx-target=".main-content"
           hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"

@@ -1,0 +1,7 @@
+{% load static %}
+
+  {% if activity in request.user.member.liked_activities.all %}
+    <img class="orange-filter" src="{% static 'layout/star-fill.svg' %}" />
+  {% else %}
+    <img class="orange-filter" src="{% static 'layout/star.svg' %}" />
+  {% endif %}
