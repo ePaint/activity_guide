@@ -333,6 +333,25 @@ body {
     }   
 }
 
+.loading-circle {
+    width: 15px;
+    height: 15px;
+    border: 2px solid transparent;
+    margin-top: 5px;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .btn {
     display: flex;
     justify-content: center;
@@ -345,6 +364,12 @@ body {
     align-items: start;
     line-height: 1.25;
 }
+
+.form-control.is-invalid {
+    padding-right: 0.75rem !important;
+    background-image: none !important;
+}
+
 
 .item-buttons {
     display: grid;

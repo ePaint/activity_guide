@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 "ageGroup": "10-15",
                 "position": "Goalkeeper",
                 "location": "Madrid, Spain",
-                "priceInCents": 10000,
+                "price": 100,
                 "pricePeriod": "day",
                 "capacity": 20,
                 "activityType": "Outdoors"
@@ -47,6 +47,7 @@ class Migration(migrations.Migration):
         print(image_prefix)
         
         for item in to_create:
+            age_start, age_end = item['ageGroup'].split('-')
             Activity.objects.get_or_create(
                 name=item['name'],
                 description=item['description'],
@@ -59,10 +60,11 @@ class Migration(migrations.Migration):
                 start_time=datetime.strptime(item['startTime'], '%H:%M').time(),
                 end_time=datetime.strptime(item['endTime'], '%H:%M').time(),
                 weekday=item['weekday'],
-                age_group=item['ageGroup'],
+                age_start=age_start,
+                age_end=age_end,
                 position=item['position'],
                 location=item['location'],
-                price_in_cents=item['priceInCents'],
+                price=item['price'],
                 price_period=item['pricePeriod'],
                 capacity=item['capacity'],
                 activity_type=item['activityType'],

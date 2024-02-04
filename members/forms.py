@@ -17,4 +17,3 @@ class FamilyMemberForm(forms.ModelForm):
             'relationship': forms.Select(attrs={'placeholder': 'Relationship...'}),
         }
         exclude = ['member']
-        

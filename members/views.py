@@ -1,5 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from members.models import Member
+from layout.views import field_edit
+from members.models import FORM_MAPPER, FamilyMember, Member
 from .forms import FamilyMemberForm
 
 
@@ -33,3 +35,7 @@ def add_family_member(request):
     else:
         form = FamilyMemberForm()
     return render(request, 'members/partials/add_family_member.html', {'form': form})
+
+def family_member_field_edit(request, pk, field):
+    return field_edit(request, FamilyMember, pk, field, FORM_MAPPER[field])
+        

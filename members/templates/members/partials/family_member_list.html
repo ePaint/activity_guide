@@ -1,3 +1,4 @@
+
 {% if request.user.member.family_members.count == 0 %}
     <div class="row-lg d-flex w-100 pb-2">
         <div class="col-sm w-100 flex-column justify-content-start">
@@ -5,79 +6,13 @@
         </div>
     </div>
 {% else %}
-    <div>
-        <div class="d-flex flex-row w-100 pb-2">
-            <div class="flex-grow-1 d-flex flex-column">
-                <div class="text-muted text-center"> Name </div>
-                {% for family_member in request.user.member.family_members.all %}
-                    <div class="family-member-info d-flex">
-                        {{ family_member.name }}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="d-flex flex-column">
-                <div class="text-muted text-center"> Rel. </div>
-                {% for family_member in request.user.member.family_members.all %}
-                    <div class="family-member-info">
-                        {{ family_member.relationship }}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="d-flex flex-column">
-                <div class="text-muted text-center"> Age </div>
-                {% for family_member in request.user.member.family_members.all %}
-                    <div class="family-member-info">
-                        {{ family_member.get_age }}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="d-flex flex-column">
-                <div class="text-muted text-center"> Interest 1</div>
-                {% for family_member in request.user.member.family_members.all %}
-                    <div class="family-member-info d-flex justify-content-start">
-                        {% if family_member.category_interest_1 %}
-                            <div class="badge bg-{{ family_member.category_interest_1.get_color }} m-1">
-                                {{ family_member.category_interest_1 }}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="d-flex flex-column">
-                <div class="text-muted text-center"> Interest 1</div>
-                {% for family_member in request.user.member.family_members.all %}
-                    <div class="family-member-info d-flex justify-content-start">
-                        {% if family_member.category_interest_2 %}
-                            <div class="badge bg-{{ family_member.category_interest_1.get_color }} m-1">
-                                {{ family_member.category_interest_2 }}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="d-flex flex-column">
-                <div class="text-muted text-center"> Interest 1</div>
-                {% for family_member in request.user.member.family_members.all %}
-                    <div class="family-member-info d-flex justify-content-start">
-                        {% if family_member.category_interest_3 %}
-                            <div class="badge bg-{{ family_member.category_interest_1.get_color }} m-1">
-                                {{ family_member.category_interest_3 }}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="d-flex flex-column">
-                <div class="text-muted text-center"> Actions </div>
-                {% for family_member in request.user.member.family_members.all %}
-                    <div class="family-member-info"
-                         role="button">
-                        tachito
-                    </div>
-                {% endfor %}
-            </div>
+    {% for family_member in request.user.member.family_members.all %}
+        <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-6 gap-0 pb-3 pb-md-2 pb-xl-1">
+            {% for form in family_member.get_edit_forms %}
+                {% include 'layout/partials/field_edit.html' with model='family_member' item=family_member form=form %}
+            {% endfor %}
         </div>
-    </div>
+    {% endfor %}
 {% endif %}
 <div class="d-flex flex-column align-items-center justify-content-center p-2">
     <div class="add-family-member-button text-center round orange-hover border-orange"
@@ -88,6 +23,7 @@
          hx-target="#family_member_form_container"
          hx-trigger="click, load"
          data-bs-toggle="collapse" 
+         data-bs-target="#family_member_form_container"
          aria-expanded="false" 
          aria-controls="family_member_form_card">
         Add Family Member

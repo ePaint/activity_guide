@@ -4,11 +4,9 @@
         <button type="button" class="w-75 btn btn-outline-primary">Book</button>
         <button type="button" class="w-25 btn btn-outline-primary orange-hover"
             hx-post="{% url 'activity-like' activity.slug %}?next={{ request.path }}">
-            {% include 'activities/partials/activity_like.html' with activity=activity %}
+            {% include 'activities/partials/like.html' with activity=activity %}
         </button>
-    </div>
-
-    
+    </div>    
     <div class="btn btn-outline-primary orange-hover border-0"
          onclick='shareOnTwitter("{{request.get_host}}{{activity.get_absolute_url}}")'>
         <img class="orange-filter" src="{% static 'layout/twitter-x.svg' %}" />

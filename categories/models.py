@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from activities.models import Activity
 
 
 class Category(models.Model):
@@ -46,7 +45,7 @@ class Category(models.Model):
             for child in self.get_children():
                 activities += child.get_activities()
         else:
-            activities = Activity.objects.filter(category=self)
+            activities = self.activities.all()
         return activities
     
     def get_color(self):

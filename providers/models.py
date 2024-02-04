@@ -29,7 +29,10 @@ class Provider(models.Model):
         return reverse('provider-detail', kwargs={'slug': self.slug})
     
     def get_activities(self):
-        return self.activity_set.all().order_by('-created_at')
+        return self.activities.all().order_by('-created_at')
+    
+    def get_active_activities(self):
+        return self.activities.filter(is_active=True).order_by('-created_at')
     
     def get_categories(self):
-        return {activity.category for activity in self.activity_set.all()}
+        return {activity.category for activity in self.activities.all()}

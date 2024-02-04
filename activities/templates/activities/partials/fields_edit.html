@@ -1,0 +1,3 @@
+{% for form in activity.get_edit_forms %}
+    {% include 'layout/partials/field_edit.html' with model='activity' item=activity form=form %}
+{% endfor %}

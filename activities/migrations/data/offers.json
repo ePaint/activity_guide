@@ -13,7 +13,7 @@
         "ageGroup": "10-15",
         "position": "Goalkeeper",
         "location": "Madrid, Spain",
-        "priceInCents": 10000,
+        "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -32,7 +32,7 @@
         "ageGroup": "10-15",
         "position": "Point Guard",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -51,7 +51,7 @@
         "ageGroup": "10-15",
         "position": "Swimmer",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -70,7 +70,7 @@
         "ageGroup": "10-15",
         "position": "Gymnast",
         "location": "Madrid, Spain",
-        "priceInCents": 25000,
+        "price": 250,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -89,7 +89,7 @@
         "ageGroup": "10-15",
         "position": "Player",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -108,7 +108,7 @@
         "ageGroup": "10-15",
         "position": "Pitcher",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -127,7 +127,7 @@
         "ageGroup": "10-15",
         "position": "Runner",
         "location": "Madrid, Spain",
-        "priceInCents": 10000,
+        "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -146,7 +146,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -165,7 +165,7 @@
         "ageGroup": "10-15",
         "position": "Cyclist",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -184,7 +184,7 @@
         "ageGroup": "10-15",
         "position": "Player",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -203,7 +203,7 @@
         "ageGroup": "10-15",
         "position": "Archer",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -222,7 +222,7 @@
         "ageGroup": "10-15",
         "position": "Player",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -241,7 +241,7 @@
         "ageGroup": "10-15",
         "position": "Golfer",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -260,7 +260,7 @@
         "ageGroup": "10-15",
         "position": "Player",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -279,7 +279,7 @@
         "ageGroup": "10-15",
         "position": "Player",
         "location": "Madrid, Spain",
-        "priceInCents": 10000,
+        "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -298,7 +298,7 @@
         "ageGroup": "10-15",
         "position": "Player",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -317,7 +317,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -336,7 +336,7 @@
         "ageGroup": "10-15",
         "position": "Climber",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -355,7 +355,7 @@
         "ageGroup": "10-15",
         "position": "Skateboarder",
         "location": "Madrid, Spain",
-        "priceInCents": 10000,
+        "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -374,7 +374,7 @@
         "ageGroup": "10-15",
         "position": "Fencer",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -393,7 +393,7 @@
         "ageGroup": "10-15",
         "position": "Surfer",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -412,7 +412,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -431,7 +431,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -450,7 +450,7 @@
         "ageGroup": "10-15",
         "position": "Dancer",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -469,7 +469,7 @@
         "ageGroup": "10-15",
         "position": "Musician",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -488,7 +488,7 @@
         "ageGroup": "10-15",
         "position": "Photographer",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -507,7 +507,7 @@
         "ageGroup": "10-15",
         "position": "Craftsman",
         "location": "Madrid, Spain",
-        "priceInCents": 10000,
+        "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -526,7 +526,7 @@
         "ageGroup": "10-15",
         "position": "Actor",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -545,7 +545,7 @@
         "ageGroup": "10-15",
         "position": "Artist",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -564,7 +564,7 @@
         "ageGroup": "10-15",
         "position": "Designer",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -583,7 +583,7 @@
         "ageGroup": "10-15",
         "position": "Sculptor",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -602,7 +602,7 @@
         "ageGroup": "10-15",
         "position": "Artist",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -621,7 +621,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -640,7 +640,7 @@
         "ageGroup": "10-15",
         "position": "Artist",
         "location": "Madrid, Spain",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -659,7 +659,7 @@
         "ageGroup": "10-15",
         "position": "Artist",
         "location": "Madrid, Spain",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -678,7 +678,7 @@
         "ageGroup": "10-15",
         "position": "Dancer",
         "location": "Toronto, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -697,7 +697,7 @@
         "ageGroup": "10-15",
         "position": "Artist",
         "location": "Vancouver, Canada",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -716,7 +716,7 @@
         "ageGroup": "10-15",
         "position": "Musician",
         "location": "Montreal, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
         "activityType": "Indoors"
@@ -735,7 +735,7 @@
         "ageGroup": "10-15",
         "position": "Puppeteer",
         "location": "Calgary, Canada",
-        "priceInCents": 15000,
+        "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
         "activityType": "Indoors"
@@ -754,7 +754,7 @@
         "ageGroup": "10-15",
         "position": "Artist",
         "location": "Toronto, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
         "activityType": "Indoors"
@@ -773,7 +773,7 @@
         "ageGroup": "10-15",
         "position": "Musician",
         "location": "Vancouver, Canada",
-        "priceInCents": 80000,
+        "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
         "activityType": "Indoors"
@@ -792,7 +792,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Montreal, Canada",
-        "priceInCents": 240000,
+        "price": 2400,
         "pricePeriod": "year",
         "capacity": 15,
         "activityType": "Indoors"
@@ -811,7 +811,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Ottawa, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
         "activityType": "Indoors"
@@ -830,7 +830,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Toronto, Canada",
-        "priceInCents": 80000,
+        "price": 800,
         "pricePeriod": "month",
         "capacity": 15,
         "activityType": "Indoors"
@@ -849,7 +849,7 @@
         "ageGroup": "10-15",
         "position": "Explorer",
         "location": "Vancouver, Canada",
-        "priceInCents": 240000,
+        "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -868,7 +868,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Montreal, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
         "activityType": "Indoors"
@@ -887,7 +887,7 @@
         "ageGroup": "10-15",
         "position": "Explorer",
         "location": "Ottawa, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
         "activityType": "Indoors"
@@ -906,7 +906,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Toronto, Canada",
-        "priceInCents": 80000,
+        "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
         "activityType": "Indoors"
@@ -925,7 +925,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Vancouver, Canada",
-        "priceInCents": 240000,
+        "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
         "activityType": "Indoors"
@@ -944,7 +944,7 @@
         "ageGroup": "10-15",
         "position": "Zoologist",
         "location": "Ottawa, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -963,7 +963,7 @@
         "ageGroup": "10-15",
         "position": "Geologist",
         "location": "Toronto, Canada",
-        "priceInCents": 80000,
+        "price": 800,
         "pricePeriod": "month",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -982,7 +982,7 @@
         "ageGroup": "10-15",
         "position": "Astronaut",
         "location": "Vancouver, Canada",
-        "priceInCents": 240000,
+        "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
         "activityType": "Indoors"
@@ -1001,7 +1001,7 @@
         "ageGroup": "10-15",
         "position": "Meteorologist",
         "location": "Montreal, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -1020,7 +1020,7 @@
         "ageGroup": "10-15",
         "position": "Physicist",
         "location": "Ottawa, Canada",
-        "priceInCents": 80000,
+        "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
         "activityType": "Indoors"
@@ -1039,7 +1039,7 @@
         "ageGroup": "10-15",
         "position": "Marine Biologist",
         "location": "Vancouver, Canada",
-        "priceInCents": 240000,
+        "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
         "activityType": "Outdoors"
@@ -1058,7 +1058,7 @@
         "ageGroup": "10-15",
         "position": "Archaeologist",
         "location": "Ottawa, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -1077,7 +1077,7 @@
         "ageGroup": "10-15",
         "position": "Mathematician",
         "location": "Toronto, Canada",
-        "priceInCents": 80000,
+        "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
         "activityType": "Indoors"
@@ -1096,7 +1096,7 @@
         "ageGroup": "10-15",
         "position": "Ecologist",
         "location": "Montreal, Canada",
-        "priceInCents": 240000,
+        "price": 2400,
         "pricePeriod": "year",
         "capacity": 15,
         "activityType": "Outdoors"
@@ -1115,7 +1115,7 @@
         "ageGroup": "10-15",
         "position": "Engineer",
         "location": "Ottawa, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
         "activityType": "Indoors"
@@ -1134,7 +1134,7 @@
         "ageGroup": "10-15",
         "position": "Student",
         "location": "Vancouver, Canada",
-        "priceInCents": 20000,
+        "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
         "activityType": "Indoors"

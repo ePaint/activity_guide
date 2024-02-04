@@ -1,0 +1,19 @@
+<form class="px-0 pb-2 small"
+      onsubmit="event.preventDefault();"
+      id="{{model}}_{{item.pk}}-{{form.visible_fields.0.name}}">
+    {% csrf_token %}
+
+    {% for field in form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+    
+    {% for field in form.visible_fields %}
+        <div class="form-floating px-1">
+            {{ field }}
+            <label class="d-flex justify-content-start w-100" for="{{item.pk}}-{{field.name}}">
+                <span>{{field.label}} </span>
+                <div id="{{item.pk}}-{{field.name}}-loading" class="loading-circle ms-2" style="display: none;"></div>
+            </label>
+        </div>
+    {% endfor %}
+</form>

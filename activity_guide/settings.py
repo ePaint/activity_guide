@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'livereload',
+    # 'livereload',
     'phonenumber_field',
     'ckeditor',
     'ckeditor_uploader',
@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django_htmx.middleware.HtmxMiddleware',
     'layout.middleware.HTMXMiddleware',
     'layout.middleware.IsReadyMiddleware',
-    'livereload.middleware.LiveReloadScript',
+    # 'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'activity_guide.urls'
@@ -94,6 +94,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'loaders': default_loaders if DEBUG else cached_loaders,
+            'builtins': [
+                'members.templatetags.dict_key',
+                'members.templatetags.add_class',
+            ],
         },
     },
 ]

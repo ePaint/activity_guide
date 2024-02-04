@@ -109,12 +109,12 @@
 </form><form class="form-floating pb-2 px-1">
   {% csrf_token %}
   <input name="field" value="age_group" hidden />
-  <input name="prev_value" value="{{activity.age_group}}" hidden />
+  <input name="prev_value" value="{{activity.get_age_group}}" hidden />
   <input class="form-control bg-white rounded"
          type="text"
          name="value"
          id="age_group"
-         value="{{activity.age_group}}"
+         value="{{activity.get_age_group}}"
          hx-post="{% url 'activity-field-edit' activity.slug %}"
          hx-trigger="keyup delay:500ms"
          onkeydown="showLoadingSpinner(this)"
@@ -197,7 +197,8 @@
     <span>Capacity</span>
     <div id="capacity-loading" class="loading-circle ms-2" style="display: none;"></div>
   </label>
-</form><form class="form-floating pb-2 px-1">
+</form>
+<form class="form-floating pb-2 px-1">
   {% csrf_token %}
   <input name="field" value="activity_type" hidden />
   <input name="prev_value" value="{{activity.activity_type}}" hidden />
@@ -217,37 +218,3 @@
     <div id="activity_type-loading" class="loading-circle ms-2" style="display: none;"></div>
   </label>
 </form>
-
-<style>
-  .loading-circle {
-    width: 15px;
-    height: 15px;
-    border: 2px solid transparent;
-    margin-top: 5px;
-    border-top-color: #3498db;
-    border-radius: 50%;
-    animation: rotate 1s linear infinite;
-  }
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-</style>
-
-<script>
-  function showLoadingSpinner(element) {
-    console.log('showing loading spinner');
-    document.getElementById(element.id + "-loading").style.display = "block";
-  }
-
-  function hideLoadingSpinner(element) {
-    console.log('hiding loading spinner. event: ', event);
-    document.getElementById(element.id + "-loading").style.display = "none";
-    element.value = event.detail.xhr.responseText;
-  }
-</script>
