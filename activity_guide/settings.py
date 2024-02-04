@@ -95,8 +95,7 @@ TEMPLATES = [
             ],
             'loaders': default_loaders if DEBUG else cached_loaders,
             'builtins': [
-                'members.templatetags.dict_key',
-                'members.templatetags.add_class',
+                'layout.templatetags.dict_key',
             ],
         },
     },
