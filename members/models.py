@@ -111,7 +111,6 @@ class FamilyMemberBaseForm(forms.ModelForm):
         self.fields['member'].widget.attrs.update({
             'value': self.instance.member.pk,
         })
-
         self.fields['prev_value'].widget.attrs.update({
             'value': getattr(self.instance, field),
         })

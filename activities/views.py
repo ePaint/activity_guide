@@ -21,7 +21,7 @@ def activity_edit(request, slug):
     return render(request, 'activities/edit.html', context)
 
 def activity_field_edit(request, pk, field):
-    return field_edit(request, Activity, pk, field, FORM_MAPPER[field])
+    return field_edit(request, Activity, 'activity', pk, field, FORM_MAPPER[field])
 
 def activity_like(request, slug):
     if not request.user.is_authenticated:
@@ -40,4 +40,4 @@ def activity_like(request, slug):
     else:
         member.liked_activities.add(activity)
         
-    return render(request, 'activities/partials/activity_like.html', {'activity': activity})
+    return render(request, 'activities/partials/like.html', {'activity': activity})

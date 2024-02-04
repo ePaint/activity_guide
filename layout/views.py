@@ -65,7 +65,7 @@ def contact(request):
         form = ContactForm()
     return render(request, 'layout/contact_form.html', {'form': form})
 
-def field_edit(request, model, pk, field, form_class):
+def field_edit(request, model, model_name, pk, field, form_class):
     if request.method == 'POST':
         item = model.objects.get(pk=pk)
         form = form_class(request.POST, instance=item, field=field)
@@ -76,7 +76,7 @@ def field_edit(request, model, pk, field, form_class):
             params[field] = request.POST.get('prev_value')
             form = form_class(params, instance=item, field=field)
         context = {
-            'model': model,
+            'model': model_name,
             'item': item,
             'form': form,
         }

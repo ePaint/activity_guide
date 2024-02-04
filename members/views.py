@@ -37,5 +37,5 @@ def add_family_member(request):
     return render(request, 'members/partials/add_family_member.html', {'form': form})
 
 def family_member_field_edit(request, pk, field):
-    return field_edit(request, FamilyMember, pk, field, FORM_MAPPER[field])
+    return field_edit(request, FamilyMember, 'family_member', pk, field, FORM_MAPPER[field])
         
