@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from providers.forms import ProviderNameForm, ProviderDescriptionForm
+from django.urls import resolve
+from providers.forms import ProviderForm, ProviderNameForm, ProviderDescriptionForm
 from providers.models import Provider
 
 
@@ -45,3 +46,22 @@ def provider_description_update(request, slug):
     else:
         form = ProviderDescriptionForm(instance=provider)
     return render(request, 'providers/provider_description_form.html', {'form': form})
+
+
+def provider_form(request):
+    if request.method == 'POST':
+        form = ProviderForm(request.POST, request.FILES)
+        if form.is_valid():
+            provider = form.save(commit=False)
+            provider.user = request.user
+            provider.save()
+            redirect_path = provider.get_absolute_url()
+            next = resolve(redirect_path)
+            print('next:', next)
+            response = next.func(request, *next.args, **next.kwargs)
+            response.headers['HX-Trigger'] = 'reloadNavBar'
+            response.headers['HX-Replace-Url'] = redirect_path
+            return response
+    else:
+        form = ProviderForm()
+    return render(request, 'providers/provider_form.html', {'form': form})

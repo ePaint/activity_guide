@@ -1,0 +1,14 @@
+{% extends request.base_template %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container p-4 border round bg-white" style="max-width:400px">
+    <form method="post" action="{% url 'provider-form' %}">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4 orange">Provider Information</legend>
+            {{ form | crispy }}
+        </fieldset>
+        <button class="btn orange-hover" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

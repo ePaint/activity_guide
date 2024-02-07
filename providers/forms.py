@@ -40,3 +40,35 @@ class ProviderDescriptionForm(forms.ModelForm):
     class Meta:
         model = Provider
         fields = ['description']
+
+
+class ProviderForm(forms.ModelForm):
+    slug = forms.SlugField(max_length=100, required=True, label='Custom URL', help_text=_('- A unique identifier for the provider. This will be used in the URL for the provider\'s profile page.</br>- Allowed characters: a-z, 0-9, and -</br>- Example: my-provider-1'))
+
+    class Meta:
+        model = Provider
+        fields = ['name', 'slug', 'description', 'image']
+
+    def clean_slug(self):
+        slug = self.cleaned_data['slug']
+        if len(slug) < 3:
+            raise ValidationError(_('Custom URL must be at least 3 characters long.'))
+
+        try:
+            provider = Provider.objects.get(slug=slug)
+        except Provider.DoesNotExist:
+            provider = None
+        
+
+        if provider and provider.id != self.instance.id:
+            raise ValidationError(_('A provider with this custom URL already exists.'))
+        
+        #validate allowed characters: a-z (lowercase only), 0-9, and -
+        print('ACA HAY UN CHAR')
+        for char in slug:
+            if not char.isalnum() and char != '-':
+                raise ValidationError(_('Custom URL can only contain a-z, 0-9, and -'))
+            if char.isupper():
+                raise ValidationError(_('Custom URL can only contain lowercase letters.'))
+            print(char.isupper())
+        return slug

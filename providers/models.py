@@ -17,6 +17,8 @@ class Provider(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=255, unique=True)
 
+    user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='provider', null=True, blank=True)
+
     def __str__(self):
         return self.name
     
@@ -26,7 +28,7 @@ class Provider(models.Model):
         ordering = ['created_at']
     
     def get_absolute_url(self):
-        return reverse('provider-detail', kwargs={'slug': self.slug})
+        return reverse('provider-profile', kwargs={'slug': self.slug})
     
     def get_activities(self):
         return self.activities.all().order_by('-created_at')
@@ -36,3 +38,10 @@ class Provider(models.Model):
     
     def get_categories(self):
         return {activity.category for activity in self.activities.all()}
+
+    def get_image(self):
+        #return image if not empty otherwise return default image
+        if self.image:
+            return self.image
+        return '/static/layout/default_image.svg'
+

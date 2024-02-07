@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('users', '0001_initial'),
     ]
 
     operations = [
@@ -23,6 +24,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('slug', models.SlugField(max_length=255, unique=True)),
+                ('user', models.OneToOneField(blank=True, null=True, on_delete=models.CASCADE, related_name='provider', to='users.User')),
             ],
             options={
                 'verbose_name': 'Provider',

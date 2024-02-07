@@ -71,6 +71,7 @@ class User(AbstractUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name
+    
 
 
 class UserProfile(models.Model):
@@ -95,4 +96,5 @@ class UserProfile(models.Model):
     def profile_image_url(self):
         if self.profile_image:
             return self.profile_image.url
-        return ''
+        return None
+

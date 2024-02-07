@@ -103,6 +103,15 @@ body {
     background-color: #E9ECEF !important;
 }
 
+.green-filter {
+    filter: invert(22%) sepia(87%) saturate(7249%) hue-rotate(107deg) brightness(105%) contrast(102%);
+}
+
+.gray-filter
+{
+    filter: invert(51%) sepia(9%) saturate(0%) hue-rotate(162deg) brightness(96%) contrast(84%);
+}
+
 .border-orange {
     border: 1px solid #F26522;
 }

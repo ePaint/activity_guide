@@ -68,11 +68,18 @@
                     </div>
                     {% if request.user.is_authenticated %}
                         <div class="header-item">
-                            <div class="header-item dropdown">
-                              <a class="header-item dropdown-toggle text-decoration-none orange" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ request.user }}
+                            <div class="header-item dropdown d-flex">
+                                <div class="align-items-center justify-content-center" style="width: 24px; height: 24px; max-width: 24px">
+                                    {% if request.user.profile_image_url != '' %}
+                                        <img src="{{ request.user.profile.profile_image_url }}" width="24" height="24" viewBox="0 0 16 16" class="rounded-circle justify-content-center align-items-center">
+                                    {% else %}
+                                        <img src="{% static 'layout/default_image.svg' %}" width="24" height="8" viewBox="0 0 16 16" class="rounded-circle justify-content-center align-items-center gray-filter">
+                                    {% endif %}
+                                </div>
+                                <a class="header-item dropdown-toggle text-decoration-none orange" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                &nbsp;{{ request.user }}
                               </a>
-                              <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
+                            <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
                                 <li><a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start" 
                                     href="#" 
                                     role="button"
@@ -81,9 +88,8 @@
                                     hx-push-url="true"
                                     hx-get="{% url 'users-profile' %}"
                                     onclick="scrollToTop()">
-                                        <img src="{% static 'layout/person-badge.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter"> &nbsp;Member Dashboard
+                                        <img src="{% static 'layout/person-badge.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter"> &nbsp;Member Profile
                                     </a></li>
-                                {% if request.user.is_provider %}
                                     <li>
                                         <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"href="#" 
                                         role="button"
@@ -91,18 +97,31 @@
                                         hx-trigger="click"
                                         hx-push-url="true"
                                         hx-get="{% url 'member-dashboard' %}">
+                                            <img src="{% static 'layout/card-list.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter"> &nbsp;Member Dashboard
+                                        </a>
+                                    </li>
+                                {% if request.user.provider %}
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"href="#" 
+                                        role="button"
+                                        hx-target=".main-content"
+                                        hx-trigger="click"
+                                        hx-push-url="true"
+                                        hx-get="{% url 'provider-profile' request.user.provider.slug %}">
                                             <img src="{% static 'layout/journal-bookmark.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter"> &nbsp;Provider Dashboard
                                         </a>
                                     </li>
                                 {% else %}
+                                <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"href="#" 
                                         role="button"
                                         hx-target=".main-content"
                                         hx-trigger="click"
                                         hx-push-url="true"
-                                        hx-get="{% url 'member-dashboard' %}">
-                                            <img src="{% static 'layout/journal-bookmark.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter"> &nbsp;Become a Provider
+                                        hx-get="{% url 'provider-form' %}">
+                                            <img src="{% static 'layout/plus.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter"> &nbsp;Become a Provider
                                         </a>
                                     </li>
                                 {% endif %}
@@ -119,9 +138,9 @@
                                         <img src="{% static 'layout/box-arrow-left.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="red-filter"> &nbsp;Logout
                                     </a>
                                 </li>
-                              </ul>
-                            </div>
-                          </div>
+                            </ul>
+                        </div>
+                    </div>
                     {% else %}
                         <div class="header-item">
                             <div class="rounded orange-hover"
