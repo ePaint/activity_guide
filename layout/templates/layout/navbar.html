@@ -70,7 +70,7 @@
                         <div class="header-item">
                             <div class="header-item dropdown d-flex">
                                 <div class="align-items-center justify-content-center" style="width: 24px; height: 24px; max-width: 24px">
-                                    {% if request.user.profile_image_url != '' %}
+                                    {% if request.user.profile_image_url %}
                                         <img src="{{ request.user.profile.profile_image_url }}" width="24" height="24" viewBox="0 0 16 16" class="rounded-circle justify-content-center align-items-center">
                                     {% else %}
                                         <img src="{% static 'layout/default_image.svg' %}" width="24" height="8" viewBox="0 0 16 16" class="rounded-circle justify-content-center align-items-center gray-filter">
