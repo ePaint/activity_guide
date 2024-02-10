@@ -25,18 +25,3 @@ const notOnHomepage = () => {
     console.log(window.location.pathname);
     return window.location.pathname != '/';
 }
-
-function disableScroll() {
-    window.removeEventListener('scroll', handleScroll);
-    if ($(document).height() > $(window).height()) {
-        const scroll_top = ($('html').scrollTop()) ? $('html').scrollTop() : $('body').scrollTop();
-        $('html').addClass('noscroll').css('top',-scroll_top);         
-    }
-}
-
-function enableScroll() {
-    window.addEventListener('scroll', handleScroll);
-    const scroll_top = parseInt($('html').css('top'));
-    $('html').removeClass('noscroll');
-    window.scrollTo({top: -scroll_top, behavior: 'instant'});
-}
