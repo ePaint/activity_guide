@@ -45,12 +45,8 @@ def login(request):
             if user is not None:
                 auth_login(request, user)
                 redirect_path = form.cleaned_data.get('next')
-                next = resolve(redirect_path)
-                print('next:', next)
-                response = next.func(request, *next.args, **next.kwargs)
-                response.headers['HX-Trigger'] = 'reloadNavBar'
-                response.headers['HX-Replace-Url'] = redirect_path
-                return response
+                # redirect to redirect_path
+                return redirect(redirect_path)
     else:
         print(request.GET)
         initial = {

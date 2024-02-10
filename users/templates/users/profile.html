@@ -2,7 +2,7 @@
 {% load static %}
 {% block user_form %}
 {% load crispy_forms_tags %}
-<form method="post" class="pb-3" hx-encoding='multipart/form-data' hx-post="{% url 'users-profile' %}">
+<form method="post" class="pb-3" hx-encoding='multipart/form-data' hx-post="{% url 'users-profile' %}" hx-push-url="true">
     {% csrf_token %}
     {% if request.user.profile_image_url %}
         <img class="bi me-2"

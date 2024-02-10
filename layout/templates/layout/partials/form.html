@@ -1,2 +1,8 @@
 {% load crispy_forms_tags %}
-{{ form|crispy }}
+{% if empty_message %}
+    <div class="alert alert-info" role="alert">
+        {{ empty_message }}
+    </div>
+{% else %}
+    {{ form|crispy }}
+{% endif %}

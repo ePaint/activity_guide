@@ -43,8 +43,5 @@ class FamilyMemberSelectorForm(forms.ModelForm):
     def __init__(self, *args, activity=None, **kwargs):
         super(FamilyMemberSelectorForm, self).__init__(*args, **kwargs)
         self.fields["family_member"].queryset = self.instance.family_members.all()
-        # set initial values for CheckboxSelectMultiple
-        # include the activity in the initial values if it exists
         filtered_activities = FamilyMember.objects.filter(activities=activity)
-        print(filtered_activities)
         self.fields["family_member"].initial = filtered_activities

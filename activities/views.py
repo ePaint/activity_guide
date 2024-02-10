@@ -30,9 +30,7 @@ def activity_like(request, slug):
         request.method = "GET"
         response = view(request)
         response.headers["HX-Retarget"] = ".main-content"
-        response.headers["HX-Push-Url"] = "/users/login/?next=" + request.GET.get(
-            "next", "/"
-        )
+        response.headers["HX-Push-Url"] = "/users/login/?next=" + request.GET.get("next", "/")
         return response
 
     member = request.user.member
@@ -62,8 +60,16 @@ def activity_book_buttons(request, slug):
 
 
 def activity_book(request, slug):
+    if not request.user.is_authenticated:
+        view = resolve("/users/login/").func
+        request.method = "GET"
+        response = view(request)
+        response.headers["HX-Retarget"] = ".main-content"
+        response.headers["HX-Push-Url"] = "/users/login/?next=" + request.GET.get("next", "/")
+        return response
+    
     activity = Activity.objects.get(slug=slug)
-
+    empty_message = None
     if request.method == "POST":
         form = FamilyMemberSelectorForm(request.POST, instance=request.user.member, activity=activity)
         if form.is_valid():
@@ -84,8 +90,10 @@ def activity_book(request, slug):
             response.headers['HX-Trigger'] = ", ".join(hx_triggers)
             return response
     else:
+        if not request.user.member.family_members.exists():
+            empty_message = "You need to add a family member before you can book an activity."
         form = FamilyMemberSelectorForm(instance=request.user.member, activity=activity)
-    return render(request, "layout/partials/form.html", {"form": form})
+    return render(request, "layout/partials/form.html", {"form": form, "empty_message": empty_message})
 
 
 def activity_book_direct(request, slug):
