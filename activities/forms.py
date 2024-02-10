@@ -19,7 +19,6 @@ class ProviderNameForm(forms.ModelForm):
             provider = Provider.objects.get(name=name)
         except Provider.DoesNotExist:
             provider = None
-        
 
         if provider and provider.id != self.instance.id:
             print('form:', provider.id)

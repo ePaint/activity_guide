@@ -1,0 +1,9 @@
+{% if family_member %}
+    {% include 'activities/partials/book_direct.html' with activity=activity family_member=family_member %}
+{% else %}
+    {% include 'activities/partials/book_selector.html' with activity=activity %}
+{% endif %}
+<button type="button" class="w-25 btn btn-outline-primary orange-hover"
+    hx-post="{% url 'activity-like' activity.slug %}?next={{ request.path }}">
+    {% include 'activities/partials/like.html' with activity=activity %}
+</button>

@@ -18,6 +18,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
+print(os.getenv('AWS_STORAGE_BUCKET_NAME'))
+print("IS_DEBUG:", os.getenv('DJANGO_DEBUG'))
 
 IS_READY = os.getenv('IS_READY') == 'True'
 
@@ -184,6 +186,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+print('DEBUG:', DEBUG)
 if DEBUG:
     ...
 else:
@@ -197,3 +200,6 @@ AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
 AWS_SES_REGION_ENDPOINT = os.getenv('AWS_SES_REGION_ENDPOINT')
 
 CONTACT_ENABLED = os.getenv('CONTACT_ENABLED') == 'True'
+
+LOGIN_URL='/users/login'
+LOGIN_REDIRECT_URL='/members/dashboard'

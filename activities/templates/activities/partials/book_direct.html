@@ -1,0 +1,19 @@
+{% if family_member in activity.family_members.all %}
+    <button id="activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}"
+            class="w-75 btn btn-outline-primary red-hover"
+            type="button"
+            hx-post="{% url 'activity-book-direct' activity.slug %}?family_member_pk={{family_member.pk}}&action=remove"
+            hx-trigger="click"
+            hx-swap="outerHTML">
+        Opt-out
+    </button>
+{% else %}
+    <button id="activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}"
+            class="w-75 btn btn-outline-primary orange-hover"
+            type="button"
+            hx-post="{% url 'activity-book-direct' activity.slug %}?family_member_pk={{family_member.pk}}&action=add"
+            hx-trigger="click"
+            hx-swap="outerHTML">
+        Book
+    </button>
+{% endif %}

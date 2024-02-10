@@ -72,6 +72,7 @@ def field_edit(request, model, model_name, pk, field, form_class):
         if form.is_valid():
             form.save()
         else:
+            print(form.errors.as_data())
             params = request.POST.copy()
             params[field] = request.POST.get('prev_value')
             form = form_class(params, instance=item, field=field)

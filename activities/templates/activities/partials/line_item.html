@@ -46,5 +46,5 @@
           hx-get="{% url 'category-detail' activity.category.slug %}"
           onclick="scrollToTop()">{{ activity.category.name }}</span>
   </div>
-  {% include 'activities/partials/line_item_fields.html' with activity=activity edit=edit %}
+  {% include 'activities/partials/line_item_fields.html' with activity=activity edit=edit family_member=family_member %}
 </div>

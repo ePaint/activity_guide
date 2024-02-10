@@ -1,0 +1,33 @@
+<button class="w-75 btn btn-outline-primary orange-hover" type="button" data-bs-toggle="modal"
+    data-bs-target="#modal_interaction_selector_{{activity.slug}}_{{family_member.pk}}"
+    hx-get="{% url 'activity-book' activity.slug %}" hx-trigger="click"
+    hx-target="#modal_interaction_selector_form_{{activity.slug}}_{{family_member.pk}}">
+    Book
+</button>
+
+<div class="modal fade" id="modal_interaction_selector_{{activity.slug}}_{{family_member.pk}}" tabindex="-1"
+    aria-labelledby="modal_interaction_selector_label_{{activity.slug}}_{{family_member.pk}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_interaction_selector_label_{{activity.slug}}_{{family_member.pk}}">
+                    Choose family member
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form hx-post="{% url 'activity-book' activity.slug %}"
+                hx-target="#modal_interaction_selector_form_{{activity.slug}}_{{family_member.pk}}"
+                hx-trigger="submit"
+                hx-on::after-request="">
+                {% csrf_token %}
+                <div class="modal-body" id="modal_interaction_selector_form_{{activity.slug}}_{{family_member.pk}}">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn orange-hover" data-bs-dismiss="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

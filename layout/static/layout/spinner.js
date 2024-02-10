@@ -31,3 +31,7 @@ function hideLoadingSpinner(element) {
     document.getElementById(element.id + "-loading").style.display = "none";
     element.value = event.detail.xhr.responseText;
 }
+
+function rotateFirstImg(element) {
+    element.querySelector("img").classList.toggle('rotate-180');
+}

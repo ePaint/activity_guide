@@ -1,0 +1,61 @@
+{% load static %}
+<div id="family_member_row_{{family_member.pk}}">
+    <div class="d-flex gap-4">
+        <div class="d-flex flex-column justify-content-around align-items-center gap-1">
+            <div class="btn btn-outline-primary red-hover border-0"
+                data-bs-toggle="modal"
+                data-bs-target="#modal_family_member_delete_{{family_member.pk}}">
+                <img class="red-filter"  src="{% static 'layout/trash.svg' %}" />
+            </div>
+            <div class="btn btn-outline-primary orange-hover border-0"
+                data-bs-toggle="collapse" 
+                data-bs-target="#family_member_{{family_member.pk}}_container"
+                aria-expanded="false" 
+                aria-controls="family_member_{{family_member.pk}}_card"
+                onclick="rotateFirstImg(this)">
+                <img class="orange-filter rotate-animated"
+                    src="{% static 'layout/caret-down-fill.svg' %}" />
+            </div>
+        </div>
+        <div class="pt-2 row row-cols-2 row-cols-lg-3 row-cols-xl-6 gap-0 pb-3 pb-md-2 pb-xl-1">
+            {% for form in family_member.get_edit_forms %}
+                {% include 'layout/partials/field_edit.html' with model='family_member' item=family_member form=form %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="collapse multi-collapse" id="family_member_{{family_member.pk}}_container">
+        <div id="family_member_{{family_member.pk}}_card"
+             hx-get="{% url 'family-member-search-box' family_member.pk %}"
+             hx-trigger="searchBoxUpdate-{{family_member.pk}} from:body">
+            {% include "layout/search_box.html" with activities=family_member.activities.all family_member=family_member %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_family_member_delete_{{family_member.pk}}" tabindex="-1"
+    aria-labelledby="modal_family_member_delete_label_{{family_member.pk}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_family_member_delete_label_{{family_member.pk}}">
+                    Delete family member
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form hx-post="{% url 'remove-family-member' family_member.pk %}"
+                hx-target="#family_member_row_{{family_member.pk}}"
+                hx-trigger="submit">
+                {% csrf_token %}
+                <div class="modal-body" id="modal_family_member_delete_form_{{family_member.pk}}">
+                    <p>Are you sure you want to delete this family member? <b class="red">This action cannot be undone.</b></p>
+                    <h6>Family member: {{family_member.name}}</h6>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn red-hover" data-bs-dismiss="modal">Yes, delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

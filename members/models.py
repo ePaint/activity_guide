@@ -1,3 +1,4 @@
+import uuid
 from django import forms
 from django.db import models
 from activities.models import Activity
@@ -22,7 +23,7 @@ class FamilyMember(models.Model):
     category_interest_1 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_1', blank=True, null=True)
     category_interest_2 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_2', blank=True, null=True)
     category_interest_3 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_3', blank=True, null=True)
-    activities = models.ManyToManyField(Activity)
+    activities = models.ManyToManyField(Activity, related_name='family_members', blank=True, null=True)
     member = models.ForeignKey('Member', on_delete=models.CASCADE, related_name='family_members')
 
     class Meta:
@@ -66,6 +67,7 @@ class FamilyMember(models.Model):
         ]
 
 class Member(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='member')
     liked_activities = models.ManyToManyField(Activity, related_name='liked_by', blank=True, null=True)
 
@@ -93,7 +95,7 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class FamilyMemberBaseForm(forms.ModelForm):
-    member = forms.IntegerField(widget=forms.HiddenInput())
+    member = forms.UUIDField(widget=forms.HiddenInput())
     prev_value = forms.CharField(widget=forms.HiddenInput())
 
     def __init__(self, *args, field=None, **kwargs):
@@ -101,7 +103,7 @@ class FamilyMemberBaseForm(forms.ModelForm):
         self.fields[field].widget.attrs.update({
             'id': f'{self.instance.pk}-{field}',
             'hx-post': f'/members/{self.instance.pk}/{field}/edit',
-            'hx-target': f'#family_member_{self.instance.pk}-{field}',
+            'hx-target': f'#family_member_{self.instance.id}-{field}',
             'hx-trigger': 'keyup delay:500ms, change delay:500ms',
             'onkeydown': 'showLoadingSpinner(this)',
             'onchange': 'showLoadingSpinner(this)',
@@ -164,3 +166,4 @@ FORM_MAPPER = {
     'category_interest_2': FamilyMemberCategoryInterest2Form,
     'category_interest_3': FamilyMemberCategoryInterest3Form
 }
+        

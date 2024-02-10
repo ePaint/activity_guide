@@ -1,24 +1,20 @@
 {% load static %}
 <div class="item-buttons">
-    <div class="book-button btn-group">
-        <button type="button" class="w-75 btn btn-outline-primary">Book</button>
-        <button type="button" class="w-25 btn btn-outline-primary orange-hover"
-            hx-post="{% url 'activity-like' activity.slug %}?next={{ request.path }}">
-            {% include 'activities/partials/like.html' with activity=activity %}
-        </button>
-    </div>    
+    <div class="book-button btn-group"
+         hx-get="{% url 'activity-book-buttons' activity.slug %}?family_member_pk={{family_member.pk}}"
+         hx-trigger="interactionButtonsUpdate-{{activity.slug}}-{{family_member.pk}} from:body">
+        {% include 'activities/partials/book_buttons.html' with activity=activity family_member=family_member %}
+    </div>
     <div class="btn btn-outline-primary orange-hover border-0"
-         onclick='shareOnTwitter("{{request.get_host}}{{activity.get_absolute_url}}")'>
+        onclick='shareOnTwitter("{{request.get_host}}{{activity.get_absolute_url}}")'>
         <img class="orange-filter" src="{% static 'layout/twitter-x.svg' %}" />
     </div>
     <div class="btn btn-outline-primary orange-hover border-0"
-         onclick='shareOnFacebook("{{request.get_host}}{{activity.get_absolute_url}}")'>
+        onclick='shareOnFacebook("{{request.get_host}}{{activity.get_absolute_url}}")'>
         <img class="orange-filter" src="{% static 'layout/facebook.svg' %}" />
     </div>
     <div class="btn btn-outline-primary orange-hover border-0"
-         onclick='shareByCopy(this, "{{request.get_host}}{{activity.get_absolute_url}}", "{% static 'layout/clipboard-check.svg' %}")'>
+        onclick='shareByCopy(this, "{{request.get_host}}{{activity.get_absolute_url}}", "{% static 'layout/clipboard-check.svg' %}")'>
         <img class="orange-filter" src="{% static 'layout/clipboard.svg' %}" />
     </div>
 </div>
-
-

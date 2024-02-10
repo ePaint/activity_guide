@@ -20,3 +20,14 @@ function hideSpinner(elementId) {
         }, 1500);
     }, 300);
 }
+
+function showLoadingSpinner(element) {
+    console.log('showing loading spinner\nelement.id:', element.id);
+    document.getElementById(element.id + "-loading").style.display = "block";
+}
+
+function hideLoadingSpinner(element) {
+    console.log('hiding loading spinner\nelement.id:', element.id, '\nevent: ', event);
+    document.getElementById(element.id + "-loading").style.display = "none";
+    element.value = event.detail.xhr.responseText;
+}
