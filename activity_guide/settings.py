@@ -16,6 +16,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG') == 'True'
+print(os.getenv('AWS_STORAGE_BUCKET_NAME'))
+print("IS_DEBUG:", os.getenv('DJANGO_DEBUG'))
 
 IS_READY = os.getenv('IS_READY') == 'True'
 
@@ -49,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # 'livereload',
+    'livereload',
     'phonenumber_field',
     'ckeditor',
     'ckeditor_uploader',
@@ -69,7 +71,7 @@ MIDDLEWARE = [
     'django_htmx.middleware.HtmxMiddleware',
     'layout.middleware.HTMXMiddleware',
     'layout.middleware.IsReadyMiddleware',
-    # 'livereload.middleware.LiveReloadScript',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'activity_guide.urls'
@@ -171,6 +173,7 @@ AUTH_PROFILE_MODULE = 'users.UserProfile'
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = os.getenv('AWS_REGION_NAME')
 AWS_REGION_NAME = os.getenv('AWS_REGION_NAME')
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
@@ -181,9 +184,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+print('DEBUG:', DEBUG)
 if DEBUG:
     ...
 else:
+    STATIC_URL = f'https://{os.getenv('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 EMAIL_BACKEND = 'django_ses.SESBackend'
@@ -193,3 +198,6 @@ AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
 AWS_SES_REGION_ENDPOINT = os.getenv('AWS_SES_REGION_ENDPOINT')
 
 CONTACT_ENABLED = os.getenv('CONTACT_ENABLED') == 'True'
+
+LOGIN_URL='/users/login'
+LOGIN_REDIRECT_URL='/members/dashboard'

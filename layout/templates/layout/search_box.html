@@ -1,10 +1,16 @@
 <div class="round border bg-white mb-0 mb-lg-4">
-    <div class="search-box row align-items-center justify-content-end">
-        <div class="w-100 text-end"> 
-            <input class="search-input" type="text" placeholder="Search" aria-label="Search">
+    {% if activities.count == 0 %}
+        <div class="text-center p-4">
+            <h4>No activities found</h4>
         </div>
-    </div>
-    {% for activity in activities %}
-        {% include "activities/partials/line_item.html" with activity=activity edit=edit %}
-    {% endfor %}
+    {% else %}
+        <div class="search-box row align-items-center justify-content-end">
+            <div class="w-100 text-end"> 
+                <input class="search-input" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+        {% for activity in activities %}
+            {% include "activities/partials/line_item.html" with activity=activity edit=edit family_member=family_member %}
+        {% endfor %}
+    {% endif %}
 </div>

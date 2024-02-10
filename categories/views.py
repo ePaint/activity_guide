@@ -11,7 +11,8 @@ def home(request):
 
 def detail(request, slug):
     category = Category.objects.get(slug=slug)
-    activities = category.activities.all().order_by('-created_at')
+    # activities = category.activities.all().order_by('-created_at')
+    activities = category.get_activities().order_by('-created_at')
     providers = set()
     for activity in activities:
         providers.add(activity.provider)

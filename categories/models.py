@@ -16,13 +16,16 @@ class Category(models.Model):
     def __str__(self):
         return self.get_breadcrumbs()
 
+    def get_breadcrumb_items(self):
+        items = []
+        if self.parent:
+            items += self.parent.get_breadcrumb_items()
+        items.append(self)
+        return items
     
     def get_breadcrumbs(self):
-        breadcrumbs = self.name
-        if self.parent:
-            breadcrumbs = f'{self.parent.get_breadcrumbs()} - {breadcrumbs}'
-        return breadcrumbs
-    
+        breadcrumb_items = self.get_breadcrumb_items()
+        return ' > '.join([item.name for item in breadcrumb_items])
 
     def get_absolute_url(self):
         return reverse('category-detail', kwargs={'slug': self.slug})
@@ -33,6 +36,14 @@ class Category(models.Model):
     def get_children(self):
         return Category.objects.filter(parent=self)
     
+    def get_descendants(self, include_self=False):
+        descendants = []
+        if include_self:
+            descendants.append(self)
+        for child in self.get_children():
+            descendants += child.get_descendants(include_self=True)
+        return descendants
+    
     def is_root_category(self):
         return not self.parent
     
@@ -40,13 +51,9 @@ class Category(models.Model):
         return self if self.is_root_category() else self.parent.get_root_category()
     
     def get_activities(self):
-        activities = []
-        if self.is_root_category():
-            for child in self.get_children():
-                activities += child.get_activities()
-        else:
-            activities = self.activities.all()
-        return activities
+        # get model of activities.Activity
+        activity_model = self.activities.model
+        return activity_model.objects.filter(category__in=self.get_descendants(include_self=True))
     
     def get_color(self):
         slug = self.get_root_category().slug
