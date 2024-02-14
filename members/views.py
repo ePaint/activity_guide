@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from layout.decorators import login_required
+from layout.forms import ConfirmForm
 from layout.views import field_edit
 from members.models import FORM_MAPPER, FamilyMember, Member
 from .forms import FamilyMemberForm
-from django.contrib.auth.decorators import login_required
 
 
 def member_profile(request):
@@ -29,19 +30,50 @@ def add_family_member(request):
             family_member = form.save(commit=False)
             family_member.member = Member.objects.get(user=request.user)
             family_member.save()
-            return redirect('family-member-list')
-        response = render(request, 'members/partials/add_family_member.html', {'form': form})
-        response['HX-Retarget'] = "#family_member_form_container"
-        return response
+            response = HttpResponse(status=204)
+            response.headers['HX-Trigger'] = 'reload-family-member-list'
+            return response
     else:
         form = FamilyMemberForm()
-    return render(request, 'members/partials/add_family_member.html', {'form': form})
+    
+    context = {
+        'form': form,
+        'title': 'Add Family Member',
+        'submit_label': 'Add',
+        'endpoint': request.path,
+        'close_on_submit': True,
+    }
+    return render(request, 'layout/partials/form.html', context)
 
 
 def remove_family_member(request, pk):
     family_member = FamilyMember.objects.get(pk=pk)
-    family_member.delete()
-    return HttpResponse('')
+
+    submit_label = 'Yes, delete'
+    submit_color = 'red'
+    confirm_label = f'Are you sure you want to delete {family_member.name}?'
+    confirm_message=f'You are about to delete a family member. All information and activities booked by this person will be lost.</br></br><b class="red">This action cannot be undone.</b>'
+    
+    
+    if request.method == "POST":
+        form = ConfirmForm(request.POST, confirm_label=confirm_label, confirm_message=confirm_message)
+        if form.is_valid():
+            family_member.delete()
+            response = HttpResponse(status=204)
+            response.headers['HX-Trigger'] = 'reload-family-member-list'
+            return response
+    else:
+        form = ConfirmForm(confirm_label=confirm_label, confirm_message=confirm_message)
+    
+    context = {
+        'form': form,
+        'title': 'Confirm Action',
+        'submit_label': submit_label,
+        'submit_color': submit_color,
+        'endpoint': request.path,
+        'close_on_submit': True,
+    }
+    return render(request, "layout/partials/form.html", context)
 
 
 def family_member_field_edit(request, pk, field):

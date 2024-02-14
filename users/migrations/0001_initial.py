@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('city', models.CharField(blank=True, default='', max_length=255)),
                 ('state', models.CharField(blank=True, default='', max_length=255)),
                 ('zip_code', models.CharField(blank=True, default='', max_length=20)),
-                ('profile_image', models.ImageField(blank=True, default='', upload_to='profile_images')),
+                ('image', models.ImageField(blank=True, default='', upload_to='profile_images')),
                 ('bio', models.TextField(blank=True, default='')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='profile', to=settings.AUTH_USER_MODEL)),
             ],

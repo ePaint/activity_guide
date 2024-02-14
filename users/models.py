@@ -1,6 +1,8 @@
 from django.contrib.auth.models import UserManager, AbstractUser, PermissionsMixin
 from django.db import models
 
+from activity_guide.settings import STATIC_URL
+
 
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
@@ -81,7 +83,7 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=255, blank=True, default='')
     state = models.CharField(max_length=255, blank=True, default='')
     zip_code = models.CharField(max_length=20, blank=True, default='')
-    profile_image = models.ImageField(upload_to='profile_images', blank=True, default='')
+    image = models.ImageField(upload_to='profile_images', blank=True, default='')
     bio = models.TextField(blank=True, default='')
 
     class Meta:
@@ -92,9 +94,8 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.email}'
 
-    @property
-    def profile_image_url(self):
-        if self.profile_image:
-            return self.profile_image.url
-        return None
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        return STATIC_URL + 'layout/person-fill.svg'
 

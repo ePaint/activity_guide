@@ -30,7 +30,7 @@ function resizeHeader(page_y_offset) {
     }
 
     prev_page_y_offset = page_y_offset;
-    window.onscroll = () => handleScroll();
+    window.addEventListener('scroll', handleScroll);
 }
 
 function handleScroll() {
@@ -42,4 +42,4 @@ function handleScroll() {
 }
 
 resizeLogo(window.pageYOffset);
-window.onscroll = () => handleScroll();
+window.addEventListener('scroll', handleScroll);

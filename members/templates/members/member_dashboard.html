@@ -7,8 +7,20 @@
         <div class="row-sm w-100">
             <h1 class="text-start orange pb-3">My Family</h1>
         </div>
-        <div id="family_member_list">
+        <div id="family_member_list"
+            hx-get="{% url 'family-member-list' %}"
+            hx-trigger="reload-family-member-list from:body">
             {% include 'members/partials/family_member_list.html' %}
+        </div>
+        <div class="d-flex flex-column align-items-center justify-content-center p-2">
+            <button class="btn green-hover"
+                 data-bs-toggle="modal" 
+                 data-bs-target="#modal_global"
+                 hx-get="{% url 'add-family-member' %}"
+                 hx-trigger="click"
+                 hx-target="#modal_global">
+                Add Family Member
+            </button>
         </div>
     </div>
     <div class="row-sm bg-white round border">

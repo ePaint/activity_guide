@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 from phonenumber_field.formfields import PhoneNumberField
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 class ContactForm(forms.Form):
@@ -55,3 +55,14 @@ class ContactForm(forms.Form):
         email.attach_alternative(html, 'text/html')
         email.send()
 
+
+class ConfirmForm(forms.Form):
+    confirm = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'd-none'}))
+
+    class Meta:
+        fields = ['confirm']
+        
+    def __init__(self, *args, confirm_label=None, confirm_message=None, **kwargs):
+        super(ConfirmForm, self).__init__(*args, **kwargs)
+        self.fields['confirm'].label = confirm_label
+        self.fields['confirm'].help_text = f'</br>{confirm_message}'

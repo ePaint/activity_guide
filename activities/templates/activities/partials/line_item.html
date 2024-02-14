@@ -11,7 +11,7 @@
           onclick="scrollToTop()">{{ activity.name }}</span>
       <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none"
           role="button"
-          src="{{ activity.image }}"
+          src="{{ activity.image_url }}"
           hx-target=".main-content"
           hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
           hx-on::after-request="scrollToTop()"
@@ -29,7 +29,7 @@
             onclick="scrollToTop()">{{ activity.name }}</span>
       <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none"
            role="button"
-           src="{{ activity.image }}"
+           src="{{ activity.image_url }}"
            hx-target=".main-content"
            hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
            hx-on::after-request="scrollToTop()"

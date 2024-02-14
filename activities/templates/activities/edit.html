@@ -16,10 +16,10 @@
                 <div class="fs-6 d-flex justify-content-end"
                      role="button"
                      hx-target=".main-content"
-                     hx-trigger="click[window.location.pathname != '{% url 'provider-edit' activity.provider.slug %}']"
+                     hx-trigger="click[window.location.pathname != '{% url 'provider-dashboard' %}']"
                      hx-on::after-request="scrollToTop()"
                      hx-push-url="true"
-                     hx-get="{% url 'provider-edit' activity.provider.slug %}"
+                     hx-get="{% url 'provider-dashboard' %}"
                      onclick="scrollToTop()">
                   By&nbsp;<span class="fw-bold orange">{{ activity.provider.name }}</span>
                 </div>

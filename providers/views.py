@@ -1,8 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import resolve
-from providers.forms import ProviderForm, ProviderNameForm, ProviderDescriptionForm
-from providers.models import Provider
+from layout.decorators import login_required, provider_required
+from layout.views import field_edit
+from providers.forms import ProviderForm, ProviderImageForm, ProviderNameForm, ProviderDescriptionForm
+from providers.models import FORM_MAPPER, Provider
 
 
 def provider_profile(request, slug):
@@ -12,17 +14,13 @@ def provider_profile(request, slug):
     }
     return render(request, 'providers/provider_profile.html', context)
 
-
-def provider_edit(request, slug):
-    provider = Provider.objects.get(slug=slug)
-    name_form = ProviderNameForm(instance=provider)
-    description_form = ProviderDescriptionForm(instance=provider)
+@provider_required
+def provider_dashboard(request):
+    provider = Provider.objects.get(user=request.user)
     context = {
         'provider': provider,
-        'name_form': name_form,
-        'description_form': description_form,
     }
-    return render(request, 'providers/provider_edit.html', context)
+    return render(request, 'providers/provider_dashboard.html', context)
 
 
 def provider_name_update(request, slug):
@@ -39,7 +37,6 @@ def provider_name_update(request, slug):
 def provider_description_update(request, slug):
     provider = Provider.objects.get(slug=slug)
     if request.method == 'POST':
-        print(request.POST)
         form = ProviderDescriptionForm(request.POST, instance=provider)
         if form.is_valid():
             form.save()
@@ -48,20 +45,43 @@ def provider_description_update(request, slug):
     return render(request, 'providers/provider_description_form.html', {'form': form})
 
 
-def provider_form(request):
+def provider_request_form(request):
+    try:
+        provider = Provider.objects.get(user=request.user)
+    except Provider.DoesNotExist:
+        provider = Provider(user=request.user)
     if request.method == 'POST':
-        form = ProviderForm(request.POST, request.FILES)
+        form = ProviderForm(request.POST, request.FILES, instance=provider)
         if form.is_valid():
             provider = form.save(commit=False)
-            provider.user = request.user
             provider.save()
-            redirect_path = provider.get_absolute_url()
-            next = resolve(redirect_path)
-            print('next:', next)
-            response = next.func(request, *next.args, **next.kwargs)
-            response.headers['HX-Trigger'] = 'reloadNavBar'
-            response.headers['HX-Replace-Url'] = redirect_path
+            request.user.is_provider = True
+            request.user.save()
+            response = render(request, 'providers/provider_dashboard.html', {'provider': provider})
+            response.headers['HX-Replace-Url'] = provider.get_absolute_url()
+            response.headers['HX-Retarget'] = '#main-content'
+            response.headers['HX-Trigger'] = 'close-modal, reload-navbar'
             return response
     else:
-        form = ProviderForm()
-    return render(request, 'providers/provider_form.html', {'form': form})
+        form = ProviderForm(instance=provider)
+    context = {
+        'form': form,
+        'title': 'Become a Provider',
+        'submit_label': 'Submit Request',
+        'endpoint': request.path,
+        'close_on_submit': False,
+    }
+    return render(request, 'layout/partials/form.html', context)
+
+
+def provider_image_update(request):
+    if request.method == 'POST':
+        form = ProviderImageForm(request.POST, instance=request.user.provider)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=200)
+    return HttpResponse(status=400)
+
+
+def provider_field_edit(request, pk, field):
+    return field_edit(request, Provider, 'provider', pk, field, FORM_MAPPER[field])

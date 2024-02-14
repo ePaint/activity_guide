@@ -8,9 +8,11 @@ from activities.views import (
     activity_book,
     activity_book_buttons,
     activity_book_direct,
+    activity_create,
 )
 
 urlpatterns = [
+    path("create/", activity_create, name="activity-create"),
     path("<slug:slug>/", activity_detail, name="activity-detail"),
     path("<slug:slug>/edit", activity_edit, name="activity-edit"),
     path("<int:pk>/<str:field>/edit", activity_field_edit, name="activity-field-edit"),

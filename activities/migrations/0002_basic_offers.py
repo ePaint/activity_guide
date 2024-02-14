@@ -7,7 +7,7 @@ from django.conf import settings
 from django.db import migrations
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 class Migration(migrations.Migration):

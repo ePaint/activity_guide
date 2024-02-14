@@ -1,12 +1,14 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import resolve
 from activities.models import Activity
+from layout.decorators import login_required
 
 from members.models import Member
+from providers.models import Provider
 from .forms import UserRegisterForm, UserLoginForm, UserProfileForm, UserUpdateForm, UserProfileImageForm
 from .models import User, UserProfile
 
@@ -21,16 +23,23 @@ def register(request):
             user.save()
             member = Member(user=user)
             member.save()
-            print(member)
-            print('Creating member...')
             member.liked_activities.set(Activity.objects.all().order_by('?')[:5])
-            print(member)
-            print('Creating liked activities...')
             member.save()
-            return redirect('users-login')
+            auth_login(request, user)
+            response = HttpResponse()
+            response.headers['HX-Trigger'] = 'reload-page'
+            return response
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+        
+    context = {
+        'form': form,
+        'title': 'Create an account',
+        'submit_label': 'Sign Up',
+        'endpoint': request.path,
+        'close_on_submit': False,
+    }
+    return render(request, 'layout/partials/form.html', context)
 
 
 def login(request):
@@ -44,53 +53,60 @@ def login(request):
             )
             if user is not None:
                 auth_login(request, user)
-                redirect_path = form.cleaned_data.get('next')
-                # redirect to redirect_path
-                return redirect(redirect_path)
+                response = HttpResponse()
+                response.headers['HX-Trigger'] = 'reload-page'
+                return response
     else:
-        print(request.GET)
-        initial = {
-            'next': request.GET.get('next', '/'),
-        }
-        form = UserLoginForm(initial=initial)
-    return render(request, 'users/login.html', {'form': form})
+        form = UserLoginForm()
+        
+    context = {
+        'form': form,
+        'title': 'Login to your account',
+        'submit_label': 'Sign In',
+        'endpoint': request.path,
+        'close_on_submit': False,
+    }
+    return render(request, 'layout/partials/form.html', context)
 
 
 def logout(request):
     auth_logout(request)
-    response = render(request, 'users/logout.html')
-    response.headers['HX-Trigger'] = 'reloadNavBar'
-    response.headers['HX-Replace-Url'] = '/users/logout/'
+    response = HttpResponse()
+    response['HX-Redirect'] = '/'
+    response.headers['HX-Trigger'] = 'reload-page'
     return response
 
 
 @login_required
 def profile(request):
     if request.method == 'POST':
-        image_form = UserProfileImageForm(request.POST, request.FILES, instance=request.user.profile)
         user_form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
         context = {
             'user_form': user_form,
             'profile_form': profile_form,
-            'image_form': image_form,
         }
         if user_form.is_valid() and profile_form.is_valid():
-            image_form.save()
             user_form.save()
             profile_form.save()
 
             response = render(request, 'users/profile.html', context)
-            response.headers['HX-Trigger'] = 'reloadNavBar'
+            response.headers['HX-Trigger'] = 'reload-navbar'
             return response
     else:
-        image_form = UserProfileImageForm(instance=request.user.profile)
         user_form = UserUpdateForm(instance=request.user)
         profile_form = UserProfileForm(instance=request.user.profile)
+        
     context = {
         'user_form': user_form,
         'profile_form': profile_form,
-        'image_form': image_form,
     }
     return render(request, 'users/profile.html', context)
 
+def profile_image_update(request):
+    if request.method == 'POST':
+        form = UserProfileImageForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=200)
+    return HttpResponse(status=400)

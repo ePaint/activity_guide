@@ -1,6 +1,7 @@
 {% load static %}
 <div class="item-buttons">
     <div class="book-button btn-group"
+         id="activity_interaction_book_like_family_member_{{activity.slug}}_{{family_member.pk}}"
          hx-get="{% url 'activity-book-buttons' activity.slug %}?family_member_pk={{family_member.pk}}"
          hx-trigger="interactionButtonsUpdate-{{activity.slug}}-{{family_member.pk}} from:body">
         {% include 'activities/partials/book_buttons.html' with activity=activity family_member=family_member %}

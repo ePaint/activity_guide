@@ -2,6 +2,7 @@ from datetime import date, datetime
 from django import forms
 from django.db import models
 from django.urls import reverse
+from activity_guide.settings import STATIC_URL
 from categories.models import Category
 
 
@@ -73,6 +74,11 @@ class Activity(models.Model):
 
     def get_price(self):
         return f'{self.price} {self.price_currency} / {self.price_period}'
+    
+    def image_url(self):
+        if self.image:
+            return self.image
+        return STATIC_URL + 'layout/image-alt.svg' 
     
     def get_name_form(self):
         return ActivityNameForm(instance=self, field='name')

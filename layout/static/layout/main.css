@@ -288,7 +288,7 @@ body {
 }
 
 .carousel-caption {
-    opacity: 0.75;
+    opacity: 0.9;
     transition: all 0.2s ease-in-out;
 }
 
@@ -461,6 +461,10 @@ body {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
     height: 2.5rem;
     z-index: 999;
+}
+
+.site-header > .modal {
+    z-index: 99999;
 }
 
 .header-item {
@@ -1009,4 +1013,25 @@ footer {
     overflow-y: scroll !important;
     overflow-x: scroll !important;
     overflow: auto !important;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+label {
+    user-select: none;
+}
+
+.form-text {
+    user-select: none;
+}
+
+.form-check-label {
+    font-weight: 600;
+}
+
+.provider-description-form {
+    min-height: 94px !important;
 }

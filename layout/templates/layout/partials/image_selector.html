@@ -1,0 +1,129 @@
+{% load static %}
+<div class="d-flex justify-content-center align-items-center">
+    <label for="id_image" class="center image-upload">
+        <img class="profile-image orange user-select-none" width="200" height="200" role="img" id="preview_image"
+            src="{{ source_image }}" />
+        <img src="{% static 'layout/pencil.svg' %}" alt="Add Image" width="50" height="50" class="edit-overlay orange-filter" />
+    </label>
+    <input type="file" id="id_image" accept="image/png, image/jpeg" />
+    
+</div>
+
+<div id="crop-select"></div>
+<canvas id="canvas" width="200" height="200" class="border" style="display:none;"></canvas>
+<img id="canvas_image" src="" style="display:none;">
+
+<style>
+    input[type="file"] {
+        display: none;
+    }
+
+    .image-upload {
+        width: 160px !important;
+        display: grid;
+        place-items: center;
+    }
+
+    .image-upload>* {
+        grid-row: 1;
+        grid-column: 1;
+    }
+
+    .edit-overlay {
+        display: none;
+        z-index: 10;
+    }
+
+    .image-upload:hover .profile-image {
+        filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(260deg) brightness(106%) contrast(50%);
+    }
+
+    .image-upload:hover .edit-overlay {
+        display: block;
+    }
+</style>
+
+<script>
+    var image_metadata = {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+    };
+
+    $('#id_image').on('change', function (event) {
+        $('#modal_form_submit').text('Crop and Save');
+        $('#modal_form_submit').attr('data-bs-dismiss', 'modal');
+        $('#modal_form_submit').attr('type', 'button');
+        $('#modal_form_submit').on('click', handleImageUpdateSubmit);
+        console.log('modal shown');
+        console.log('event:', event);
+        const element = $('#modal_global_form').CropSelectJs({
+            imageSrc: URL.createObjectURL(this.files[0]),
+            aspectRatio: 1,
+            animatedBorder: false,
+            selectionResize: (payload) => {
+                image_metadata.width = payload.widthScaledToImage;
+                image_metadata.height = payload.heightScaledToImage;
+            },
+            selectionMove: (payload) => {
+                image_metadata.x = payload.xScaledToImage;
+                image_metadata.y = payload.yScaledToImage;
+            },
+        });
+        modal.show();
+        setTimeout(() => {
+            $(element).CropSelectJs('selectCentredSquare');
+            console.log('CropSelectJs instance created', element);
+        }, 250);
+    });
+
+    function handleImageUpdateSubmit() {
+        console.log('Image update submit');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const canvas_image = document.getElementById('canvas_image');
+        const modal_form = $('#modal_global_form');
+        canvas_image.src = modal_form.CropSelectJs('getImageSrc');
+        context.drawImage(
+            canvas_image,
+            image_metadata.x,
+            image_metadata.y,
+            image_metadata.width,
+            image_metadata.height,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+        uploadToServer();
+    }
+
+    $('#modal_global').on('hidden.bs.modal', function (event) {
+        console.log('modal hidden');
+        document.getElementById('modal_global_form').innerHTML = '';
+        $('#id_image').val('');
+    });
+
+    function uploadToServer() {
+        const form_data = new FormData();
+        form_data.append('image_data_url', canvas.toDataURL());
+        $.ajax({
+            type: 'POST',
+            url: '{{ endpoint }}',
+            data: form_data,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRFToken': "{{ csrf_token }}"
+            },
+            success: function (response) {
+                console.log('Image uploaded successfully', response);
+                location.reload();
+            },
+            error: function (error) {
+                console.error('Error uploading image', error);
+            }
+        });
+    }
+</script>

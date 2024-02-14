@@ -1,5 +1,8 @@
+from django import forms
 from django.db import models
 from django.urls import reverse
+
+from activity_guide.settings import STATIC_URL
 
 
 class Provider(models.Model):
@@ -7,11 +10,6 @@ class Provider(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='providers', blank=True, null=True)
     is_active = models.BooleanField(default=True)
-    
-    # NO = 0
-    # PENDING = 1
-    # ACTIVE = 2
-    # BANNED = 3
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -39,9 +37,50 @@ class Provider(models.Model):
     def get_categories(self):
         return {activity.category for activity in self.activities.all()}
 
-    def get_image(self):
-        #return image if not empty otherwise return default image
+    def image_url(self):
         if self.image:
-            return self.image
-        return '/static/layout/default_image.svg'
+            return self.image.url
+        return  STATIC_URL + 'layout/image-alt.svg'
+    
+    def get_name_form(self):
+        return ProviderNameForm(instance=self, field='name')
+    
+    def get_description_form(self):
+        return ProviderDescriptionForm(instance=self, field='description')
 
+class ProviderBaseForm(forms.ModelForm):
+    prev_value = forms.CharField(widget=forms.HiddenInput())
+
+    def __init__(self, *args, field=None, **kwargs):
+        super(ProviderBaseForm, self).__init__(*args, **kwargs)
+        self.fields[field].widget.attrs.update({
+            'id': f'{self.instance.pk}-{field}',
+            'hx-post': f'/providers/{self.instance.pk}/{field}/edit',
+            'hx-target': f'#provider_{self.instance.id}-{field}',
+            'hx-trigger': 'keyup delay:500ms, change delay:500ms',
+            'onkeydown': 'showLoadingSpinner(this)',
+            'onchange': 'showLoadingSpinner(this)',
+            'hx-on::after-request': 'hideLoadingSpinner(this)',
+            'hx-swap': 'outerHTML',
+        })
+        self.fields['prev_value'].widget.attrs.update({
+            'value': getattr(self.instance, field),
+        })
+        
+class ProviderNameForm(ProviderBaseForm):
+    class Meta:
+        model = Provider
+        fields = ['name']
+        widgets = {'name': forms.TextInput(attrs={'class': 'form-control'})}
+        
+class ProviderDescriptionForm(ProviderBaseForm):
+    class Meta:
+        model = Provider
+        fields = ['description']
+        widgets = {'description': forms.Textarea(attrs={'class': 'form-control provider-description-form'})}
+        
+
+FORM_MAPPER = {
+    'name': ProviderNameForm,
+    'description': ProviderDescriptionForm,
+}

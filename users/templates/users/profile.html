@@ -2,30 +2,25 @@
 {% load static %}
 {% block user_form %}
 {% load crispy_forms_tags %}
-<form method="post" class="pb-3" hx-encoding='multipart/form-data' hx-post="{% url 'users-profile' %}" hx-push-url="true">
-    {% csrf_token %}
-    {% if request.user.profile_image_url %}
-        <img class="bi me-2"
-            width="200"
-            height="200"
-            role="img"
-            src="{{ user.profile.profile_image_url }}"/>
-    {% else %}
-        <img class="bi me-2"
-            width="200"
-            height="200"
-            role="img"
-            src="{% static 'layout/default_image.svg' %}"/>
-    {% endif %}
-    <fieldset class="form-group">
-        <legend class="border-bottom pb-3 orange">Profile Picture</legend>
-        {{ image_form | crispy }}
-        {{ user_form | crispy }}
-        {{ profile_form | crispy }}
-    </fieldset>
-    <div class="form-group">
-        <button class="btn btn-outline-info orange-hover"
-                type="submit">Save</button>
-    </div>
-</form>
+<div class="container" id="user_profile_form">
+    <h3 class="orange text-center">User Profile</h3>
+
+    <form method="post"
+          id="profile_form"
+          class="pb-3">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {% url 'users-profile-image' as endpoint %}
+            {% include 'layout/partials/image_selector.html' with endpoint=endpoint source_image=user.profile.image_url %}
+            {{ user_form | crispy }}
+            {{ profile_form | crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info orange-hover"
+                    type="submit">Save</button>
+        </div>
+    </form>
+</div>
+
+
 {% endblock %}

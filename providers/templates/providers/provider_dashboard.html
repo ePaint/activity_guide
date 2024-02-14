@@ -1,0 +1,50 @@
+{% extends request.base_template %}
+{% block content %}
+<div class="container">
+    <div class="d-md-flex gap-4">
+        <div class="d-flex justify-content-md-start justify-content-center align-items-start pb-2 pb-md-0">
+            <!-- <img class="profile-image orange user-select-none" role="button" src="{{ provider.image }}"/> -->
+            {% url 'provider-image-update' as endpoint %}
+            {% include 'layout/partials/image_selector.html' with endpoint=endpoint source_image=provider.image_url %}
+        </div>
+        <div class="d-flex flex-row justify-content-between w-100">
+            <div class="d-flex flex-column w-100">
+                <div class="align-self-center align-self-md-start w-100 d-flex flex-row flex-nowrap justify-content-between">
+                    {% include 'layout/partials/field_edit.html' with model='provider' item=provider form=provider.get_name_form %}
+                </div>
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <div id="provider-description-form-container">
+                        {% include 'layout/partials/field_edit.html' with model='provider' item=provider form=provider.get_description_form %}
+                    </div>
+                    <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start">
+                        {% for provider_category in provider.get_categories %}
+                            <span class="category-badge badge bg-{{ provider_category.get_color }} m-1"
+                                    role="button"
+                                    hx-target=".main-content"
+                                    hx-trigger="click[window.location.pathname != '{% url "category-detail" provider_category.slug %}']"
+                                    hx-on::after-request="scrollToTop()"
+                                    hx-push-url="true"
+                                    hx-get="{% url 'category-detail' provider_category.slug %}"
+                                    onclick="scrollToTop()">
+                                {{ provider_category.name }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="hr my-4" />
+    {% include "layout/search_box.html" with activities=provider.get_activities edit=1 %}
+    <div class="d-flex flex-column align-items-center justify-content-center p-2">
+        <button class="btn green-hover"
+                data-bs-toggle="modal" 
+                data-bs-target="#modal_global"
+                hx-get="{% url 'activity-create' %}"
+                hx-trigger="click"
+                hx-target="#modal_global">
+            Create Activity
+        </button>
+    </div>
+</div>
+{% endblock %}

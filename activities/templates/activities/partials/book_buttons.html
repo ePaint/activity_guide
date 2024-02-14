@@ -1,9 +1,61 @@
-{% if family_member %}
-    {% include 'activities/partials/book_direct.html' with activity=activity family_member=family_member %}
+{% if request.user.is_authenticated %}
+    {% if family_member %}
+        {% if family_member in activity.family_members.all %}
+            <button id="activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}"
+                    class="w-75 btn btn-outline-primary red-hover"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal_global"
+                    hx-get="{% url 'activity-book-direct' activity.slug %}?family_member_pk={{family_member.pk}}&action=remove"
+                    hx-trigger="click"
+                    hx-target="#modal_global">
+                Opt-out
+            </button>
+        {% else %}
+            <button id="activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}"
+                    class="w-75 btn btn-outline-primary orange-hover"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal_global"
+                    hx-get="{% url 'activity-book-direct' activity.slug %}?family_member_pk={{family_member.pk}}&action=add"
+                    hx-trigger="click"
+                    hx-target="#modal_global">
+                Book
+            </button>
+        {% endif %}
+    {% else %}
+        <button class="w-75 btn btn-outline-primary orange-hover"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modal_global"
+                hx-get="{% url 'activity-book' activity.slug %}"
+                hx-trigger="click"
+                hx-target="#modal_global">
+            Book
+        </button>
+    {% endif %}
+    <button type="button" class="w-25 btn btn-outline-primary orange-hover"
+            hx-post="{% url 'activity-like' activity.slug %}">
+        {% include 'activities/partials/like.html' with activity=activity %}
+    </button>
 {% else %}
-    {% include 'activities/partials/book_selector.html' with activity=activity %}
+    <button id="activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}"
+            class="w-75 btn btn-outline-primary orange-hover"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modal_global"
+            hx-get="{% url 'users-login' %}"
+            hx-trigger="click"
+            hx-target="#modal_global">
+        Book
+    </button>
+    <button class="w-25 btn btn-outline-primary orange-hover"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modal_global"
+            hx-get="{% url 'users-login' %}"
+            hx-trigger="click"
+            hx-target="#modal_global">
+        {% include 'activities/partials/like.html' with activity=activity %}
+    </button>
 {% endif %}
-<button type="button" class="w-25 btn btn-outline-primary orange-hover"
-    hx-post="{% url 'activity-like' activity.slug %}?next={{ request.path }}">
-    {% include 'activities/partials/like.html' with activity=activity %}
-</button>
