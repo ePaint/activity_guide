@@ -1,0 +1,28 @@
+{% load static %}
+<div id="family_member_row_{{family_member.pk}}">
+    <div class="pt-2 row row-cols-2 row-cols-md-4 gap-0 pb-3 pb-md-2 pb-xl-1">
+        <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
+            <span class="text-muted small">Name</span>
+            <span class="">{{family_member.name|default_if_none:"-"}}</span>
+        </div>
+        <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
+            <span class="text-muted small">Age</span>
+            <span class="">{{family_member.get_age_label|default_if_none:"-"}}</span>
+        </div>
+        <div class="d-flex flex-column small align-items-start align-items-md-start">
+            <span class="text-muted small">Guardian</span>
+            <span class="">{{family_member.member|default_if_none:"-"}}</span>
+        </div>
+        <div class="d-flex flex-column small align-items-start align-items-md-start pb-2">
+            <span class="text-muted small">Relationship</span>
+            <span class="">{{family_member.get_relationship_to_member|default_if_none:"-"}}</span>
+        </div>
+    </div>
+    <div class="collapse multi-collapse" id="family_member_{{family_member.pk}}_container">
+        <div id="family_member_{{family_member.pk}}_card"
+             hx-get="{% url 'family-member-search-box' family_member.pk %}"
+             hx-trigger="searchBoxUpdate-{{family_member.pk}} from:body">
+            {% include "layout/search_box.html" with activities=family_member.activities.all family_member=family_member %}
+        </div>
+    </div>
+</div>

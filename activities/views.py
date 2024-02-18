@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import resolve
 from django.core.exceptions import ValidationError
-from activities.forms import ActivityForm
+from activities.forms import ActivityForm, ActivityImageForm
 from activities.models import FORM_MAPPER, Activity
 from layout.decorators import login_required, provider_required
 from layout.forms import ConfirmForm
@@ -14,11 +14,14 @@ from members.models import FamilyMember
 def activity_detail(request, slug):
     activity = Activity.objects.get(slug=slug)
     context = {"activity": activity}
+    print(activity.image.__dict__)
     return render(request, "activities/view.html", context)
 
 
 def activity_edit(request, slug):
     activity = Activity.objects.get(slug=slug)
+    if activity.provider != request.user.provider:
+        raise ValidationError("You are not authorized to edit this activity.")
     context = {"activity": activity}
     return render(request, "activities/edit.html", context)
 
@@ -151,7 +154,7 @@ def activity_create(request):
             activity.provider = request.user.provider
             activity.save()
             response = HttpResponse(status=204)
-            response.headers['HX-Trigger'] = 'reload-family-member-list'
+            response.headers['HX-Trigger'] = 'reload-activity-list'
             return response
     else:
         form = ActivityForm()
@@ -164,3 +167,20 @@ def activity_create(request):
         'close_on_submit': True,
     }
     return render(request, 'layout/partials/form.html', context)
+
+
+@provider_required
+def activity_provider_edit_list(request):
+    activities = request.user.provider.activities.all()
+    context = {"activities": activities, "edit": 1}
+    return render(request, "layout/search_box.html", context)
+
+
+def activity_image_update(request, slug):
+    activity = Activity.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = ActivityImageForm(request.POST, instance=activity)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=200)
+    return HttpResponse(status=400)

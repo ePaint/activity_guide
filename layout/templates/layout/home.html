@@ -138,7 +138,7 @@
                         <div class="carousel-inner h-100">
                             {% for activity in activities %}
                                 <div class="carousel-item round border-thick-{{ activity.category.get_color }} fill {% if forloop.first %}active{% endif %}"
-                                        style="background-image: url('{{ activity.image }}');">
+                                        style="background-image: url('{{ activity.image_url }}');">
                                     <div class="carousel-caption bg-white round border"
                                             role="button"
                                             hx-target=".main-content"

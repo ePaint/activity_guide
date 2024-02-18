@@ -37,6 +37,14 @@ class FamilyMember(models.Model):
         
     def get_age(self):
         return int((datetime.date.today() - self.date_of_birth).days / 365.25)
+    
+    def get_age_label(self):
+        return f'{self.get_age()} years old'
+    
+    def get_relationship_to_member(self):
+        if self.relationship == 'Me':
+            return 'Themselves'
+        return self.relationship
 
     def get_name_form(self):
         return FamilyMemberNameForm(instance=self, field='name')
@@ -75,6 +83,9 @@ class Member(models.Model):
         db_table = 'member'
         verbose_name_plural = 'Members'
         verbose_name = 'Member'
+        
+    def __str__(self):
+        return str(self.user)
 
     def get_family_members(self):
         return FamilyMember.objects.filter(member=self)

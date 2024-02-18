@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
                 category=Category.objects.get(slug=item['category']),
                 slug=item['slugName'],
                 provider=Provider.objects.get(slug=item['providerSlug']),
-                image=f'{image_prefix}/activities/{item['slugName']}.jpg',
+                image=f'activities/{item['slugName']}.jpg',
                 from_date=datetime.strptime(item['fromDate'], '%Y-%m-%d').date(),
                 to_date=datetime.strptime(item['toDate'], '%Y-%m-%d').date(),
                 start_time=datetime.strptime(item['startTime'], '%H:%M').time(),

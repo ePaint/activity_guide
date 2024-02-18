@@ -49,7 +49,7 @@ class ProviderForm(forms.ModelForm):
 
     class Meta:
         model = Provider
-        fields = ['name', 'slug', 'description', 'image']
+        fields = ['name', 'slug', 'description', 'site_url']
 
     def clean_slug(self):
         slug = self.cleaned_data['slug']
@@ -65,8 +65,6 @@ class ProviderForm(forms.ModelForm):
         if provider and provider.id != self.instance.id:
             raise ValidationError(_('A provider with this custom URL already exists.'))
         
-        #validate allowed characters: a-z (lowercase only), 0-9, and -
-        print('ACA HAY UN CHAR')
         for char in slug:
             if not char.isalnum() and char != '-':
                 raise ValidationError(_('Custom URL can only contain a-z, 0-9, and -'))

@@ -58,7 +58,7 @@ def provider_request_form(request):
             request.user.is_provider = True
             request.user.save()
             response = render(request, 'providers/provider_dashboard.html', {'provider': provider})
-            response.headers['HX-Replace-Url'] = provider.get_absolute_url()
+            response.headers['HX-Replace-Url'] = '/providers/dashboard'
             response.headers['HX-Retarget'] = '#main-content'
             response.headers['HX-Trigger'] = 'close-modal, reload-navbar'
             return response

@@ -1,50 +1,32 @@
 <div class="row mb-2 py-2 bg-white round border">
-  <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center">
-    {% if edit %}
-      <span class="fw-bold ms-0 ms-md-1 text-center"
-          role="button"
-          hx-target=".main-content"
-          hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
-          hx-on::after-request="scrollToTop()"
-          hx-push-url="true"
-          hx-get="{% url 'activity-edit' activity.slug %}"
-          onclick="scrollToTop()">{{ activity.name }}</span>
-      <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none"
-          role="button"
-          src="{{ activity.image_url }}"
-          hx-target=".main-content"
-          hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
-          hx-on::after-request="scrollToTop()"
-          hx-push-url="true"
-          hx-get="{% url 'activity-edit' activity.slug %}"
-          onclick="scrollToTop()" />
-    {% else %}
-      <span class="fw-bold ms-0 ms-md-1 text-center"
-            role="button"
-            hx-target=".main-content"
-            hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
-            hx-on::after-request="scrollToTop()"
-            hx-push-url="true"
-            hx-get="{% url 'activity-detail' activity.slug %}"
-            onclick="scrollToTop()">{{ activity.name }}</span>
-      <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none"
-           role="button"
-           src="{{ activity.image_url }}"
-           hx-target=".main-content"
-           hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
-           hx-on::after-request="scrollToTop()"
-           hx-push-url="true"
-           hx-get="{% url 'activity-detail' activity.slug %}"
-           onclick="scrollToTop()" />
-    {% endif %}
-    <span class="badge bg-{{ activity.category.get_color }} m-1"
-          role="button"
-          hx-target=".main-content"
-          hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
-          hx-on::after-request="scrollToTop()"
-          hx-push-url="true"
-          hx-get="{% url 'category-detail' activity.category.slug %}"
-          onclick="scrollToTop()">{{ activity.category.name }}</span>
-  </div>
-  {% include 'activities/partials/line_item_fields.html' with activity=activity edit=edit family_member=family_member %}
+    <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center">
+        {% if edit %}
+            <span class="fw-bold ms-0 ms-md-1 text-center" role="button" hx-target=".main-content"
+                hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
+                hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-edit' activity.slug %}"
+                onclick="scrollToTop()">{{ activity.name }}</span>
+            <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button"
+                src="{{ activity.image_url }}" hx-target=".main-content"
+                hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
+                hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-edit' activity.slug %}"
+                onclick="scrollToTop()" />
+        {% else %}
+            <span class="fw-bold ms-0 ms-md-1 text-center" role="button" hx-target=".main-content"
+                hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
+                hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}"
+                onclick="scrollToTop()">{{ activity.name }}</span>
+            <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button"
+                src="{{ activity.image_url }}" hx-target=".main-content"
+                hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
+                hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}"
+                onclick="scrollToTop()" />
+            {% endif %}
+            <span class="badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content"
+                hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
+                hx-on::after-request="scrollToTop()" hx-push-url="true"
+                hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">
+                {{activity.category.name }}
+            </span>
+    </div>
+    {% include 'activities/partials/line_item_fields.html' with activity=activity edit=edit family_member=family_member %}
 </div>

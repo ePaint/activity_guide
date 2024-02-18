@@ -13,8 +13,8 @@ class Provider(models.Model):
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    site_url = models.URLField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
-
     user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='provider', null=True, blank=True)
 
     def __str__(self):

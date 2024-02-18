@@ -1,12 +1,11 @@
 {% load static %}
-<div class="d-flex justify-content-center align-items-center">
+<div class="p-0 m-0 {{size}}">
     <label for="id_image" class="center image-upload">
-        <img class="profile-image orange user-select-none" width="200" height="200" role="img" id="preview_image"
+        <img class="profile-image{{class}} orange user-select-none" width="200" height="200" role="img" id="preview_image"
             src="{{ source_image }}" />
         <img src="{% static 'layout/pencil.svg' %}" alt="Add Image" width="50" height="50" class="edit-overlay orange-filter" />
     </label>
     <input type="file" id="id_image" accept="image/png, image/jpeg" />
-    
 </div>
 
 <div id="crop-select"></div>
@@ -34,8 +33,8 @@
         z-index: 10;
     }
 
-    .image-upload:hover .profile-image {
-        filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(260deg) brightness(106%) contrast(50%);
+    .image-upload:hover .profile-image, .image-upload:hover .profile-image-big {
+        filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(260deg) brightness(106%) contrast(50%) !important;
     }
 
     .image-upload:hover .edit-overlay {

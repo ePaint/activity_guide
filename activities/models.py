@@ -66,6 +66,9 @@ class Activity(models.Model):
         return reverse('activity-detail', kwargs={'slug': self.slug})
     
     def get_duration(self):
+        if not self.start_time or not self.end_time:
+            return None
+        
         timespan = datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)
         return f'{timespan.seconds // 3600}h {timespan.seconds % 3600 // 60}m'
 
@@ -73,11 +76,17 @@ class Activity(models.Model):
         return f'{self.age_start}-{self.age_end}'
 
     def get_price(self):
+        if not self.price:
+            return 'Free'
+        
+        if not self.price_period:
+            return f'{self.price} {self.price_currency}'
+        
         return f'{self.price} {self.price_currency} / {self.price_period}'
     
     def image_url(self):
         if self.image:
-            return self.image
+            return self.image.url
         return STATIC_URL + 'layout/image-alt.svg' 
     
     def get_name_form(self):

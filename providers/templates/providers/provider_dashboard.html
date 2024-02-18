@@ -35,7 +35,10 @@
         </div>
     </div>
     <hr class="hr my-4" />
-    {% include "layout/search_box.html" with activities=provider.get_activities edit=1 %}
+    <div hx-get="{% url 'activity-provider-edit-list' %}"
+         hx-trigger="reload-activity-list from:body">
+        {% include "layout/search_box.html" with activities=provider.get_activities edit=1 %}
+    </div>
     <div class="d-flex flex-column align-items-center justify-content-center p-2">
         <button class="btn green-hover"
                 data-bs-toggle="modal" 

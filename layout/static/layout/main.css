@@ -751,6 +751,11 @@ footer {
     background-size: cover;
 }
 
+.rem20 {
+    width: 20rem;
+    height: 20rem;
+}
+
 .profile-image-big {
     width: 20rem;
     height: 20rem;

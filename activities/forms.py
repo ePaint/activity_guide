@@ -5,6 +5,8 @@ from activities.models import Activity
 from providers.models import Provider
 from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget
+from django.core.files.base import ContentFile
+import base64
 
 
 class ProviderNameForm(forms.ModelForm):
@@ -92,3 +94,33 @@ class ActivityForm(forms.ModelForm):
             "activity_type": forms.Select(attrs={'class': 'form-control'}),
             "slug": forms.TextInput(attrs={"placeholder": "Slug here..."}),
         }
+        
+        
+class ActivityImageForm(forms.ModelForm):
+    image_data_url = forms.CharField(widget=forms.HiddenInput(), required=False)
+    
+    class Meta:
+        model = Activity
+        fields = ['image']
+    
+    def save(self, commit=True):
+        form_object = super().save(commit=False)
+        image_data_url = self.cleaned_data.get('image_data_url')
+        image = self.cleaned_data.get('image')
+        if image_data_url:
+            format, imgstr = image_data_url.split(';base64,')
+            ext = format.split('/')[-1]
+            form_object.image.save(
+                f"activity_image.{ext}",
+                ContentFile(base64.b64decode(imgstr)),
+                save=False
+            )
+            
+        if image:
+            self.instance.image = image
+        print(f'Image: {image}. Instance: {self.instance}. Commit: {commit}')
+        
+        if commit:
+            form_object.save()
+        return form_object
+    
