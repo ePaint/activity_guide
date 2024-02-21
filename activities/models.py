@@ -24,25 +24,25 @@ PRICE_PERIODS = [
 ]
 
 LOCATIONS = [
-    ('Kamloops', 'Kamloops'),
     ('Aberdeen', 'Aberdeen'),
-    ('Batchlor Heights', 'Batchlor Heights'),
     ('Barnhartvale', 'Barnhartvale'),
+    ('Batchlor Heights', 'Batchlor Heights'),
     ('Brocklehurst', 'Brocklehurst'),
     ('Campble Creek', 'Campble Creek'),
     ('Dallas', 'Dallas'),
     ('Downtown', 'Downtown'),
     ('Harper Mountain', 'Harper Mountain'),
     ('Juniper Ridge', 'Juniper Ridge'),
+    ('Kamloops', 'Kamloops'),
     ('McArthur Island', 'McArthur Island'),
     ('North Kamloops', 'North Kamloops'),
     ('Rayleigh/ Heffley', 'Rayleigh / Heffley'),
-    ('Sahali Upper', 'Sahali Upper'),
     ('Sahali Lower', 'Sahali Lower'),
+    ('Sahali Upper', 'Sahali Upper'),
     ('Sun Peaks', 'Sun Peaks'),
     ('TRU', 'TRU'),
     ('Valleyview', 'Valleyview'),
-    ('Westsyde', 'Westsyde'),
+    ('Westsyde', 'Westsyde')
 ]
 
 ACTIVITY_TYPES = [
@@ -291,7 +291,7 @@ class ActivityLocationForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['location']
-        widgets = {'location': forms.TextInput(attrs={'class': 'form-control'})}
+        widgets = {'location': forms.Select(attrs={'class': 'form-control'})}
 
 class ActivityPriceForm(ActivityBaseForm):
     class Meta:

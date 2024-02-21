@@ -26,9 +26,6 @@ class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['email', 'password']
-    
-    def __init__(self, *args, **kwargs):
-        super(AuthenticationForm, self).__init__(*args, **kwargs)
 
 
 class UserUpdateForm(forms.ModelForm):

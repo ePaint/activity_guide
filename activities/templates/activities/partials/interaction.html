@@ -30,9 +30,36 @@
         onclick='shareByCopy(this, "{{request.get_host}}{{activity.get_absolute_url}}", "{% static 'layout/clipboard-check.svg' %}")'>
         <img class="orange-filter" src="{% static 'layout/clipboard.svg' %}" />
     </div>
+    <div id="activity_interaction_accesibility_1_{{activity.slug}}_{{family_member.pk}}"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        title="Auditory adaptive"
+        data-bs-content="Auditory adaptability is a feature that allows people with hearing disabilities to enjoy the activity."
+        class="btn border-0 user-select-none">
+        <img class="gray-filter" src="{% static 'layout/ear-fill.svg' %}" />
+    </div>
+    <div id="activity_interaction_accesibility_2_{{activity.slug}}_{{family_member.pk}}"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        title="Visually adaptive"
+        data-bs-content="Visually adaptability is a feature that allows people with visual disabilities to enjoy the activity."
+        class="btn border-0 user-select-none">
+        <img class="gray-filter" src="{% static 'layout/eye-fill.svg' %}" />
+    </div>
+    <div id="activity_interaction_accesibility_3_{{activity.slug}}_{{family_member.pk}}"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        title="Physically adaptive"
+        data-bs-content="Physically adaptability is a feature that allows people with physical disabilities to enjoy the activity."
+        class="btn border-0 user-select-none">
+        <img class="gray-filter" src="{% static 'layout/person-wheelchair.svg' %}" />
+    </div>
 </div>
 <script>
     initializePopover("activity_interaction_share_twitter_{{activity.slug}}_{{family_member.pk}}");
     initializePopover("activity_interaction_share_facebook_{{activity.slug}}_{{family_member.pk}}");
     initializePopover("activity_interaction_share_copy_{{activity.slug}}_{{family_member.pk}}");
+    initializePopover("activity_interaction_accesibility_1_{{activity.slug}}_{{family_member.pk}}");
+    initializePopover("activity_interaction_accesibility_2_{{activity.slug}}_{{family_member.pk}}");
+    initializePopover("activity_interaction_accesibility_3_{{activity.slug}}_{{family_member.pk}}");
 </script>
