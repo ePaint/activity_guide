@@ -23,10 +23,34 @@ PRICE_PERIODS = [
     ('year', 'year')
 ]
 
-CURRENCIES = [
-    ('CAD', 'CAD'),
-    ('USD', 'USD')
+LOCATIONS = [
+    ('Kamloops', 'Kamloops'),
+    ('Aberdeen', 'Aberdeen'),
+    ('Batchlor Heights', 'Batchlor Heights'),
+    ('Barnhartvale', 'Barnhartvale'),
+    ('Brocklehurst', 'Brocklehurst'),
+    ('Campble Creek', 'Campble Creek'),
+    ('Dallas', 'Dallas'),
+    ('Downtown', 'Downtown'),
+    ('Harper Mountain', 'Harper Mountain'),
+    ('Juniper Ridge', 'Juniper Ridge'),
+    ('McArthur Island', 'McArthur Island'),
+    ('North Kamloops', 'North Kamloops'),
+    ('Rayleigh/ Heffley', 'Rayleigh / Heffley'),
+    ('Sahali Upper', 'Sahali Upper'),
+    ('Sahali Lower', 'Sahali Lower'),
+    ('Sun Peaks', 'Sun Peaks'),
+    ('TRU', 'TRU'),
+    ('Valleyview', 'Valleyview'),
+    ('Westsyde', 'Westsyde'),
 ]
+
+ACTIVITY_TYPES = [
+    ('Indoor', 'Indoor'),
+    ('Outdoor', 'Outdoor'),
+    ('Mixed', 'Mixed'),
+]
+
 
 class Activity(models.Model):
     name = models.CharField(max_length=100)
@@ -42,12 +66,11 @@ class Activity(models.Model):
     age_start = models.IntegerField(blank=True, null=True)
     age_end = models.IntegerField(blank=True, null=True)
     position = models.CharField(max_length=20, blank=True, null=True)
-    location = models.CharField(max_length=100, blank=True, null=True)
+    location = models.CharField(max_length=20, choices=LOCATIONS, blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     price_period = models.CharField(max_length=20, choices=PRICE_PERIODS, blank=True, null=True)
-    price_currency = models.CharField(max_length=3, default='CAD', choices=CURRENCIES)
     capacity = models.IntegerField(blank=True, null=True)
-    activity_type = models.CharField(max_length=20, blank=True, null=True)
+    activity_type = models.CharField(max_length=20, choices=ACTIVITY_TYPES, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -80,9 +103,9 @@ class Activity(models.Model):
             return 'Free'
         
         if not self.price_period:
-            return f'{self.price} {self.price_currency}'
+            return f'{self.price} CAD'
         
-        return f'{self.price} {self.price_currency} / {self.price_period}'
+        return f'{self.price} CAD / {self.price_period}'
     
     def image_url(self):
         if self.image:
@@ -134,9 +157,6 @@ class Activity(models.Model):
     def get_price_period_form(self):
         return ActivityPricePeriodForm(instance=self, field='price_period')
     
-    def get_price_currency_form(self):
-        return ActivityPriceCurrencyForm(instance=self, field='price_currency')
-    
     def get_capacity_form(self):
         return ActivityCapacityForm(instance=self, field='capacity')
     
@@ -157,7 +177,6 @@ class Activity(models.Model):
             self.get_weekday_form(),
             self.get_position_form(),
             self.get_price_form(),
-            self.get_price_currency_form(),
             self.get_price_period_form(),
             self.get_location_form(),
             self.get_capacity_form(),
@@ -286,12 +305,6 @@ class ActivityPricePeriodForm(ActivityBaseForm):
         fields = ['price_period']
         widgets = {'price_period': forms.Select(attrs={'class': 'form-control'})}
 
-class ActivityPriceCurrencyForm(ActivityBaseForm):
-    class Meta:
-        model = Activity
-        fields = ['price_currency']
-        widgets = {'price_currency': forms.Select(attrs={'class': 'form-control'})}
-
 class ActivityCapacityForm(ActivityBaseForm):
     class Meta:
         model = Activity
@@ -302,7 +315,7 @@ class ActivityActivityTypeForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['activity_type']
-        widgets = {'activity_type': forms.TextInput(attrs={'class': 'form-control'})}
+        widgets = {'activity_type': forms.Select(attrs={'class': 'form-control'})}
 
 class ActivityIsActiveForm(ActivityBaseForm):
     class Meta:
@@ -327,7 +340,6 @@ FORM_MAPPER = {
     'location': ActivityLocationForm,
     'price': ActivityPriceForm,
     'price_period': ActivityPricePeriodForm,
-    'price_currency': ActivityPriceCurrencyForm,
     'capacity': ActivityCapacityForm,
     'activity_type': ActivityActivityTypeForm,
     'is_active': ActivityIsActiveForm,

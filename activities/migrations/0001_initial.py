@@ -4,6 +4,35 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
+LOCATIONS = [
+    ('Kamloops', 'Kamloops'),
+    ('Aberdeen', 'Aberdeen'),
+    ('Batchlor Heights', 'Batchlor Heights'),
+    ('Barnhartvale', 'Barnhartvale'),
+    ('Brocklehurst', 'Brocklehurst'),
+    ('Campble Creek', 'Campble Creek'),
+    ('Dallas', 'Dallas'),
+    ('Downtown', 'Downtown'),
+    ('Harper Mountain', 'Harper Mountain'),
+    ('Juniper Ridge', 'Juniper Ridge'),
+    ('McArthur Island', 'McArthur Island'),
+    ('North Kamloops', 'North Kamloops'),
+    ('Rayleigh / Heffley', 'Rayleigh / Heffley'),
+    ('Sahali Upper', 'Sahali Upper'),
+    ('Sahali Lower', 'Sahali Lower'),
+    ('Sun Peaks', 'Sun Peaks'),
+    ('TRU', 'TRU'),
+    ('Valleyview', 'Valleyview'),
+    ('Westsyde', 'Westsyde'),
+]
+
+ACTIVITY_TYPES = [
+    ('Indoor', 'Indoor'),
+    ('Outdoor', 'Outdoor'),
+    ('Mixed', 'Mixed'),
+]
+
+
 class Migration(migrations.Migration):
 
     initial = True
@@ -31,12 +60,11 @@ class Migration(migrations.Migration):
                 ('age_start', models.IntegerField(blank=True, null=True)),
                 ('age_end', models.IntegerField(blank=True, null=True)),
                 ('position', models.CharField(blank=True, max_length=20, null=True)),
-                ('location', models.CharField(blank=True, max_length=100, null=True)),
+                ('location', models.CharField(blank=True, choices=LOCATIONS, max_length=20, null=True)),
                 ('price', models.DecimalField(blank=True, max_digits=10, decimal_places=2, null=True)),
                 ('price_period', models.CharField(blank=True, choices=[('day', 'day'), ('week', 'week'), ('month', 'month'), ('year', 'year')], max_length=20, null=True)),
-                ('price_currency', models.CharField(max_length=3, default='CAD', choices=[('CAD', 'CAD'), ('USD', 'USD')])),
                 ('capacity', models.IntegerField(blank=True, null=True)),
-                ('activity_type', models.CharField(blank=True, max_length=20, null=True)),
+                ('activity_type', models.CharField(blank=True, choices=ACTIVITY_TYPES, max_length=20, null=True)),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_featured', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),

@@ -150,6 +150,14 @@ body {
     background-color: #00AEEF;
 }
 
+.blue-filter {
+    filter: invert(57%) sepia(51%) saturate(2978%) hue-rotate(159deg) brightness(93%) contrast(103%);
+}
+
+.blue-hover:hover .blue-filter {
+    filter: invert(100%) sepia(67%) saturate(2%) hue-rotate(185deg) brightness(117%) contrast(101%);
+}
+
 .border-blue {
     border: 1px solid #00AEEF;
 }
@@ -756,6 +764,10 @@ footer {
     height: 20rem;
 }
 
+.text-container {
+    max-width: 75ch !important;
+}
+
 .profile-image-big {
     width: 20rem;
     height: 20rem;
@@ -1039,4 +1051,10 @@ label {
 
 .provider-description-form {
     min-height: 94px !important;
+}
+
+.btn-eye {
+    margin-top: 32px;
+    height: 38px;
+    width: 38px;
 }

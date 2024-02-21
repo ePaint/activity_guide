@@ -58,7 +58,7 @@ class Category(models.Model):
     def get_color(self):
         slug = self.get_root_category().slug
         if slug == 'sports':
-            return 'red'
+            return 'orange'
         elif slug == 'art':
             return 'green'
         elif slug == 'stem':

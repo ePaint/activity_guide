@@ -53,6 +53,8 @@ class TimeInput(forms.TimeInput):
 
         
 class ActivityForm(forms.ModelForm):
+    slug = forms.SlugField(max_length=100, required=True, label='Custom URL', help_text=_('- A unique identifier for the activity. This will be used in the URL for the activity page.</br>- Allowed characters: a-z, 0-9, and -</br>- Example: my-activity-1'))
+
     class Meta:
         model = Activity
         fields = [
@@ -70,7 +72,6 @@ class ActivityForm(forms.ModelForm):
             "location",
             "price",
             "price_period",
-            "price_currency",
             "capacity",
             "activity_type",
             "slug",
@@ -89,11 +90,31 @@ class ActivityForm(forms.ModelForm):
             "location": forms.TextInput(attrs={"placeholder": "Location here..."}),
             "price": forms.NumberInput(attrs={"placeholder": "Price here..."}),
             "price_period": forms.Select(attrs={'class': 'form-control'}),
-            "price_currency": forms.Select(attrs={'class': 'form-control'}),
             "capacity": forms.NumberInput(attrs={"placeholder": "Capacity here..."}),
             "activity_type": forms.Select(attrs={'class': 'form-control'}),
             "slug": forms.TextInput(attrs={"placeholder": "Slug here..."}),
         }
+    
+    def clean_slug(self):
+        slug = self.cleaned_data['slug']
+        if len(slug) < 3:
+            raise ValidationError(_('Custom URL must be at least 3 characters long.'))
+
+        try:
+            activity = Activity.objects.get(slug=slug)
+        except Provider.DoesNotExist:
+            activity = None
+        
+
+        if activity and activity.id != self.instance.id:
+            raise ValidationError(_('An activity with this custom URL already exists.'))
+        
+        for char in slug:
+            if not char.isalnum() and char != '-':
+                raise ValidationError(_('Custom URL can only contain a-z, 0-9, and -'))
+            if char.isupper():
+                raise ValidationError(_('Custom URL can only contain lowercase letters.'))
+        return slug
         
         
 class ActivityImageForm(forms.ModelForm):

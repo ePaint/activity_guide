@@ -138,14 +138,14 @@
                                 {% endif %}
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <a class="dropdown-item user-dropdown red-hover d-flex align-items-center text-start" 
+                                    <a class="dropdown-item user-dropdown blue-hover d-flex align-items-center text-start" 
                                     href="#" 
                                     role="button"
                                     hx-target=".main-content"
                                     hx-trigger="click"
                                     hx-push-url="true"
                                     hx-get="{% url 'users-logout' %}">
-                                        <img src="{% static 'layout/box-arrow-left.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="red-filter">
+                                        <img src="{% static 'layout/box-arrow-left.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="blue-filter">
                                         &nbsp;Logout
                                     </a>
                                 </li>

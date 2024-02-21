@@ -1,6 +1,29 @@
 {% load static %}
 {% if activity in request.user.member.liked_activities.all %}
-    <img class="orange-filter" src="{% static 'layout/star-fill.svg' %}" />
+    <button id="activity_interaction_like_{{activity.slug}}_{{family_member.pk}}"
+        type="button"
+        class="w-25 btn btn-outline-primary orange-hover"
+        hx-post="{% url 'activity-like' activity.slug %}"
+        hx-swap="outerHTML"
+        onclick="deletePopover(this)"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        data-bs-content="Remove activity from favorites">
+        <img class="orange-filter" src="{% static 'layout/star-fill.svg' %}" />
+    </button>
 {% else %}
-    <img class="orange-filter" src="{% static 'layout/star.svg' %}" />
+    <button id="activity_interaction_like_{{activity.slug}}_{{family_member.pk}}"
+        type="button"
+        class="w-25 btn btn-outline-primary orange-hover"
+        hx-post="{% url 'activity-like' activity.slug %}"
+        hx-swap="outerHTML"
+        onclick="deletePopover(this)"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        data-bs-content="Add activity to favorites">
+        <img class="orange-filter" src="{% static 'layout/star.svg' %}" />
+    </button>
 {% endif %}
+<script>
+    initializePopover("activity_interaction_like_{{activity.slug}}_{{family_member.pk}}");
+</script>

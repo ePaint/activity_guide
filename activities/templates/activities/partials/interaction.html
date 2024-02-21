@@ -6,16 +6,33 @@
          hx-trigger="interactionButtonsUpdate-{{activity.slug}}-{{family_member.pk}} from:body">
         {% include 'activities/partials/book_buttons.html' with activity=activity family_member=family_member %}
     </div>
-    <div class="btn btn-outline-primary orange-hover border-0"
+    <div id="activity_interaction_share_twitter_{{activity.slug}}_{{family_member.pk}}"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        data-bs-content="Share activity on X (Twitter)"
+        class="btn btn-outline-primary orange-hover border-0"
         onclick='shareOnTwitter("{{request.get_host}}{{activity.get_absolute_url}}")'>
         <img class="orange-filter" src="{% static 'layout/twitter-x.svg' %}" />
     </div>
-    <div class="btn btn-outline-primary orange-hover border-0"
+    <div id="activity_interaction_share_facebook_{{activity.slug}}_{{family_member.pk}}"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        data-bs-content="Share activity on Facebook"
+        class="btn btn-outline-primary orange-hover border-0"
         onclick='shareOnFacebook("{{request.get_host}}{{activity.get_absolute_url}}")'>
         <img class="orange-filter" src="{% static 'layout/facebook.svg' %}" />
     </div>
-    <div class="btn btn-outline-primary orange-hover border-0"
+    <div id="activity_interaction_share_copy_{{activity.slug}}_{{family_member.pk}}"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        data-bs-content="Copy link to clipboard"
+        class="btn btn-outline-primary orange-hover border-0"
         onclick='shareByCopy(this, "{{request.get_host}}{{activity.get_absolute_url}}", "{% static 'layout/clipboard-check.svg' %}")'>
         <img class="orange-filter" src="{% static 'layout/clipboard.svg' %}" />
     </div>
 </div>
+<script>
+    initializePopover("activity_interaction_share_twitter_{{activity.slug}}_{{family_member.pk}}");
+    initializePopover("activity_interaction_share_facebook_{{activity.slug}}_{{family_member.pk}}");
+    initializePopover("activity_interaction_share_copy_{{activity.slug}}_{{family_member.pk}}");
+</script>

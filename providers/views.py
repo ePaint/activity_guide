@@ -14,6 +14,7 @@ def provider_profile(request, slug):
     }
     return render(request, 'providers/provider_profile.html', context)
 
+
 @provider_required
 def provider_dashboard(request):
     provider = Provider.objects.get(user=request.user)

@@ -17,7 +17,8 @@ def activity_detail(request, slug):
     print(activity.image.__dict__)
     return render(request, "activities/view.html", context)
 
-
+@login_required
+@provider_required
 def activity_edit(request, slug):
     activity = Activity.objects.get(slug=slug)
     if activity.provider != request.user.provider:

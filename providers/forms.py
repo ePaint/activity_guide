@@ -70,7 +70,6 @@ class ProviderForm(forms.ModelForm):
                 raise ValidationError(_('Custom URL can only contain a-z, 0-9, and -'))
             if char.isupper():
                 raise ValidationError(_('Custom URL can only contain lowercase letters.'))
-            print(char.isupper())
         return slug
 
 

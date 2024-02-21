@@ -35,7 +35,13 @@
             </div>
             <div class="h-50 text-muted small w-75 align-self-center">
                 <em>
-                    Longer message about how we are not responsible for random stuff. 2023 Activity Guide. All rights reserved.
+                    2024 Activity Guide. All rights reserved. <a href="{% url 'layout-privacy-policy' %}"
+                                                                 hx-target=".main-content"
+                                                                 hx-trigger="click[window.location.pathname != '{% url "layout-privacy-policy" %}']"
+                                                                 hx-on::after-request="scrollToTop()"
+                                                                 hx-push-url="true"
+                                                                 hx-get="{% url 'layout-privacy-policy' %}"
+                                                                 onclick="scrollToTop()">Privacy policy.</a>
                 </em>
             </div>
         </div>

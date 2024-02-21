@@ -43,6 +43,10 @@ def home(request):
     return render(request, 'layout/home.html', context)
 
 
+def privacy_policy(request):
+    return render(request, 'layout/privacy_policy.html')
+
+
 def navbar(request):
     return render(request, 'layout/navbar.html')
 

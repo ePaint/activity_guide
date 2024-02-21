@@ -148,10 +148,10 @@
                                             hx-get="{% url 'activity-detail' activity.slug %}"
                                             onclick="scrollToTop()">
                                         <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center">
-                                            <span class="category-badge badge bg-{{ activity.category.get_color }} m-1 align-self-center align-self-sm-start">
+                                            <span class="badge bg-{{ activity.category.get_color }} m-1 align-self-center align-self-sm-start">
                                                 {{ activity.category.name }}
                                             </span>
-                                            <h5 class="{{ activity.category.get_color }}">{{ activity.name }}</h5>
+                                            <h5 class="{{ activity.category.get_color }} pt-1">{{ activity.name }}</h5>
                                         </div>
                                         <p>{{ activity.description }}</p>
                                     </div>
