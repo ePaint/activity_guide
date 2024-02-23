@@ -10,7 +10,7 @@ class HTMXMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
         # if request.htmx:
         #     response['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0'
-        response['Cache-Control'] = 'max-age=' + str(60 * 60 * 24 * 365)
+        response['Cache-Control'] = 'public, max-age=315360000'
         return response
 
 
