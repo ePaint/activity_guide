@@ -8,7 +8,7 @@ from categories.models import Category
 
 RELATIONSHIPS = {
     "Me": "Me",
-    "Spuose": "Spouse",
+    "Spouse": "Spouse",
     "Parent": "Parent",
     "Child": "Child",
     "Sibling": "Sibling",
