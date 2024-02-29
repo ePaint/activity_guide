@@ -8,10 +8,11 @@ class HTMXMiddleware(MiddlewareMixin):
         request.base_template = 'layout/fragment.html' if request.htmx else 'layout/base.html'
 
     def process_response(self, request, response):
-        if DEBUG:
-            response['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0'
-        else:
-            response['Cache-Control'] = 'public, max-age=315360000, must-revalidate'
+        # if DEBUG:
+        #     response['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0'
+        # else:
+        #     response['Cache-Control'] = 'public, max-age=315360000, must-revalidate'
+        response['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0'
         return response
 
 
