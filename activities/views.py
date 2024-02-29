@@ -9,6 +9,7 @@ from layout.forms import ConfirmForm
 from layout.views import field_edit
 from members.forms import FamilyMemberSelectorForm
 from members.models import FamilyMember
+from users.forms import UserLoginForm
 
 
 def activity_detail(request, slug):
@@ -68,13 +69,38 @@ def activity_book_buttons(request, slug):
 
 def activity_book(request, slug):
     activity = Activity.objects.get(slug=slug)
-    empty_message = None
+    messages = [
+        {
+            'text': f'You can also visit this activity\'s page to book it: </br><a href="{activity.url}">{activity.name}</a>',
+            'type': 'info',
+        },
+        {
+            'text': f'Alternatively, you can visit the provider\'s page: </br><a href="{activity.provider.url}">{activity.provider.name}</a>',
+            'type': 'info',
+        }
+    ]
+    
+    if not request.user.is_authenticated:
+        form = UserLoginForm()
+        extra_htmls = [
+            f'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
+        ]
+        context = {
+            'form': form,
+            'messages': messages,
+            'extra_htmls': extra_htmls,
+            'title': 'Log in to Book Activity',
+            'submit_label': 'Log In',
+            'endpoint': '/users/login/',
+        }
+        return render(request, "layout/partials/form.html", context)
+    
     if request.method == "POST":
         form = FamilyMemberSelectorForm(request.POST, instance=request.user.member, activity=activity)
         if form.is_valid():
             family_members = request.user.member.family_members.all()
             selected_family_members = form.cleaned_data["family_member"]
-            hx_triggers = []
+            hx_triggers = ['close-modal']
             for family_member in family_members:
                 if family_member in selected_family_members:
                     if activity not in family_member.activities.all():
@@ -90,16 +116,24 @@ def activity_book(request, slug):
             return response
     else:
         if not request.user.member.family_members.exists():
-            empty_message = "You need to add a family member before you can book an activity."
+            messages.insert(0, {
+                'text': 'You need to add a family member before you can book an activity within this platform.',
+                'type': 'warning',
+            })
         form = FamilyMemberSelectorForm(instance=request.user.member, activity=activity)
+    
+    extra_htmls = [
+        f'<a class="btn d-inline green-hover" data-bs-target="#modal_global" hx-get="/members/add_family_member/?redirect_target={request.get_full_path()}&redirect_target_slug={slug}" hx-trigger="click" hx-target="#modal_global">Create New Family Member</a>',
+    ]
     
     context = {
         'form': form,
-        'empty_message': empty_message,
+        'messages': messages,
+        'extra_htmls': extra_htmls,
         'title': 'Select Family Members to Book Activity',
         'submit_label': 'Save Changes',
         'endpoint': request.path,
-        'close_on_submit': True,
+        'close_on_submit': False,
     }
     return render(request, "layout/partials/form.html", context)
 
@@ -147,17 +181,20 @@ def activity_book_direct(request, slug):
     return render(request, "layout/partials/form.html", context)
 
 
+@provider_required
 def activity_create(request):
     if request.method == 'POST':
+        status = 400
         form = ActivityForm(request.POST)
         if form.is_valid():
             activity = form.save(commit=False)
             activity.provider = request.user.provider
             activity.save()
             response = HttpResponse(status=204)
-            response.headers['HX-Trigger'] = 'reload-activity-list'
+            response.headers['HX-Trigger'] = 'reload-activity-list, close-modal'
             return response
     else:
+        status = 200
         form = ActivityForm()
     
     context = {
@@ -165,9 +202,9 @@ def activity_create(request):
         'title': 'Create Activity',
         'submit_label': 'Create',
         'endpoint': request.path,
-        'close_on_submit': True,
+        'close_on_submit': False,
     }
-    return render(request, 'layout/partials/form.html', context)
+    return render(request, 'layout/partials/form.html', context, status=status)
 
 
 @provider_required

@@ -1,65 +1,56 @@
 {% load static %}
-<div class="item-buttons">
-    <div class="book-button btn-group"
-         id="activity_interaction_book_like_family_member_{{activity.slug}}_{{family_member.pk}}"
-         hx-get="{% url 'activity-book-buttons' activity.slug %}?family_member_pk={{family_member.pk}}"
-         hx-trigger="interactionButtonsUpdate-{{activity.slug}}-{{family_member.pk}} from:body">
-        {% include 'activities/partials/book_buttons.html' with activity=activity family_member=family_member %}
+<div class="d-flex flex-column align-items-center justify-content-center">
+    <div class="item-buttons">
+        <div class="book-button btn-group"
+            id="activity_interaction_book_like_family_member_{{activity.slug}}_{{family_member.pk}}"
+            hx-get="{% url 'activity-book-buttons' activity.slug %}?family_member_pk={{family_member.pk}}"
+            hx-trigger="interactionButtonsUpdate-{{activity.slug}}-{{family_member.pk}} from:body">
+            {% include 'activities/partials/book_buttons.html' with activity=activity family_member=family_member %}
+        </div>
+        <div id="activity_interaction_share_twitter_{{activity.slug}}_{{family_member.pk}}"
+            data-bs-toggle="popover"
+            data-bs-placement="top"
+            data-bs-content="Share activity on X (Twitter)"
+            class="btn btn-outline-primary orange-hover border-0"
+            onclick='shareOnTwitter("{{request.get_host}}{{activity.get_absolute_url}}")'>
+            <img class="orange-filter" src="{% static 'layout/twitter-x.svg' %}" />
+        </div>
+        <div id="activity_interaction_share_facebook_{{activity.slug}}_{{family_member.pk}}"
+            data-bs-toggle="popover"
+            data-bs-placement="top"
+            data-bs-content="Share activity on Facebook"
+            class="btn btn-outline-primary orange-hover border-0"
+            onclick='shareOnFacebook("{{request.get_host}}{{activity.get_absolute_url}}")'>
+            <img class="orange-filter" src="{% static 'layout/facebook.svg' %}" />
+        </div>
+        <div id="activity_interaction_share_copy_{{activity.slug}}_{{family_member.pk}}"
+            data-bs-toggle="popover"
+            data-bs-placement="top"
+            data-bs-content="Copy link to clipboard"
+            class="btn btn-outline-primary orange-hover border-0"
+            onclick='shareByCopy(this, "{{request.get_host}}{{activity.get_absolute_url}}", "{% static 'layout/clipboard-check.svg' %}")'>
+            <img class="orange-filter" src="{% static 'layout/clipboard.svg' %}" />
+        </div>
     </div>
-    <div id="activity_interaction_share_twitter_{{activity.slug}}_{{family_member.pk}}"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        data-bs-content="Share activity on X (Twitter)"
-        class="btn btn-outline-primary orange-hover border-0"
-        onclick='shareOnTwitter("{{request.get_host}}{{activity.get_absolute_url}}")'>
-        <img class="orange-filter" src="{% static 'layout/twitter-x.svg' %}" />
-    </div>
-    <div id="activity_interaction_share_facebook_{{activity.slug}}_{{family_member.pk}}"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        data-bs-content="Share activity on Facebook"
-        class="btn btn-outline-primary orange-hover border-0"
-        onclick='shareOnFacebook("{{request.get_host}}{{activity.get_absolute_url}}")'>
-        <img class="orange-filter" src="{% static 'layout/facebook.svg' %}" />
-    </div>
-    <div id="activity_interaction_share_copy_{{activity.slug}}_{{family_member.pk}}"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        data-bs-content="Copy link to clipboard"
-        class="btn btn-outline-primary orange-hover border-0"
-        onclick='shareByCopy(this, "{{request.get_host}}{{activity.get_absolute_url}}", "{% static 'layout/clipboard-check.svg' %}")'>
-        <img class="orange-filter" src="{% static 'layout/clipboard.svg' %}" />
-    </div>
-    <div id="activity_interaction_accesibility_1_{{activity.slug}}_{{family_member.pk}}"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        title="Auditory adaptive"
-        data-bs-content="Auditory adaptability is a feature that allows people with hearing disabilities to enjoy the activity."
-        class="btn border-0 user-select-none">
-        <img class="gray-filter" src="{% static 'layout/ear-fill.svg' %}" />
-    </div>
-    <div id="activity_interaction_accesibility_2_{{activity.slug}}_{{family_member.pk}}"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        title="Visually adaptive"
-        data-bs-content="Visually adaptability is a feature that allows people with visual disabilities to enjoy the activity."
-        class="btn border-0 user-select-none">
-        <img class="gray-filter" src="{% static 'layout/eye-fill.svg' %}" />
-    </div>
-    <div id="activity_interaction_accesibility_3_{{activity.slug}}_{{family_member.pk}}"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        title="Physically adaptive"
-        data-bs-content="Physically adaptability is a feature that allows people with physical disabilities to enjoy the activity."
-        class="btn border-0 user-select-none">
-        <img class="gray-filter" src="{% static 'layout/person-wheelchair.svg' %}" />
+    <div class="d-flex">
+        {% for adaptive_field in activity.get_adaptive_fields %}
+            <div id="activity_interaction_accesibility_{{adaptive_field.slug}}_{{activity.slug}}_{{family_member.pk}}"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                title="{{ adaptive_field.title }}"
+                data-bs-content="{{ adaptive_field.description }}"
+                class="btn border-0 user-select-none">
+                <img class="gray-filter" src="{{ adaptive_field.icon }}" />
+            </div>
+        {% endfor %}
     </div>
 </div>
 <script>
     initializePopover("activity_interaction_share_twitter_{{activity.slug}}_{{family_member.pk}}");
     initializePopover("activity_interaction_share_facebook_{{activity.slug}}_{{family_member.pk}}");
     initializePopover("activity_interaction_share_copy_{{activity.slug}}_{{family_member.pk}}");
-    initializePopover("activity_interaction_accesibility_1_{{activity.slug}}_{{family_member.pk}}");
-    initializePopover("activity_interaction_accesibility_2_{{activity.slug}}_{{family_member.pk}}");
-    initializePopover("activity_interaction_accesibility_3_{{activity.slug}}_{{family_member.pk}}");
+
+    {% for adaptive_field in activity.get_adaptive_fields %}
+        initializePopover("activity_interaction_accesibility_{{adaptive_field.slug}}_{{activity.slug}}_{{family_member.pk}}");
+    {% endfor %}
 </script>

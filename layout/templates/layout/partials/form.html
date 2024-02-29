@@ -12,41 +12,51 @@
               hx-trigger="submit">
             {% csrf_token %}
             <div class="modal-body" id="modal_global_form">
-                {% if empty_message %}
-                    <div class="alert alert-info user-select-none" role="alert">
-                        {{ empty_message }}
-                    </div>
-                {% else %}
-                    {% for field in form %}
-                        {% if field.label == 'Password' %}
-                            <div class="d-flex w-100">
-                                {{ field | as_crispy_field }}
-                                <button class="btn btn-outline-secondary btn-eye" type="button" onclick="passwordRevealToggle()">
-                                    <img src="{% static 'layout/eye.svg' %}">
-                                </button>
-                            </div>
-                        {% else %}
+                {% for field in form %}
+                    {% if field.label == 'Password' %}
+                        <div class="d-flex w-100 w-100-child">
                             {{ field | as_crispy_field }}
-                        {% endif %}
-                    {% endfor %}
+                            <button class="btn btn-outline-secondary btn-eye" type="button" onclick="passwordRevealToggle()">
+                                <img src="{% static 'layout/eye.svg' %}">
+                            </button>
+                        </div>
+                    {% else %}
+                        {{ field | as_crispy_field }}
+                    {% endif %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger user-select-none" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+
+                {% if extra_htmls %}
+                    <div class="pt-3 d-flex flex-column">
+                        {% for extra_html in extra_htmls %}
+                            <span class="small text-muted">{{ extra_html|safe }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if messages %}
+                    <div class="pt-3">
+                        {% for message in messages %}
+                            <div class="alert alert-{{message.type}} user-select-none" role="alert">
+                                {{ message.text|safe }}
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                {% if close_on_submit %}
-                    {% if submit_color %}
-                        <button type="submit" class="btn bg-{{submit_color}}" data-bs-dismiss="modal">{{submit_label}}</button>
-                    {% else %}
-                        <button type="submit" class="btn bg-green" data-bs-dismiss="modal">{{submit_label}}</button>
-                    {% endif %}
-                {% else %}
-                    {% if submit_color %}
-                        <button type="submit" class="btn bg-{{submit_color}}">{{submit_label}}</button>
-                    {% else %}
-                        <button type="submit" class="btn bg-green" id="modal_form_submit">{{submit_label}}</button>
-                    {% endif %}
-                {% endif %}
+                <button type="submit"
+                        class="btn bg-{{submit_color|default:'green'}}"
+                        {% if close_on_submit %}data-bs-dismiss="modal"{% endif %}>
+                    {{submit_label}}
+                </button>
             </div>
         </form>
     </div>

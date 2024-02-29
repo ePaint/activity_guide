@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+from multiselectfield import MultiSelectField
 
 
 LOCATIONS = [
@@ -65,11 +66,16 @@ class Migration(migrations.Migration):
                 ('price_period', models.CharField(blank=True, choices=[('day', 'day'), ('week', 'week'), ('month', 'month'), ('year', 'year')], max_length=20, null=True)),
                 ('capacity', models.IntegerField(blank=True, null=True)),
                 ('activity_type', models.CharField(blank=True, choices=ACTIVITY_TYPES, max_length=20, null=True)),
+                ('is_visually_adaptive', models.BooleanField(default=False)),
+                ('is_hearing_adaptive', models.BooleanField(default=False)),
+                ('is_mobility_adaptive', models.BooleanField(default=False)),
+                ('is_cognitive_adaptive', models.BooleanField(default=False)),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_featured', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('slug', models.SlugField(unique=True)),
+                ('url', models.URLField(blank=True, null=True)),
             ],
             options={
                 'verbose_name': 'Activity',

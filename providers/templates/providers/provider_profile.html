@@ -27,7 +27,7 @@
                 <div id="provider-description-form-container">
                     {{ provider.description|safe }}
                 </div>
-                <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start">
+                <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start d-flex">
                     {% for provider_category in provider.get_categories %}
                         <span class="badge bg-{{ provider_category.get_color }} m-1"
                                 role="button"

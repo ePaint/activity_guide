@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django.contrib.staticfiles',
     'storages',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [

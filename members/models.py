@@ -33,7 +33,7 @@ class FamilyMember(models.Model):
         ordering = ['date_of_birth']
 
     def __str__(self):
-        return self.name
+        return f'{self.name} ({self.relationship}) ({self.get_age_label()})'
         
     def get_age(self):
         return int((datetime.date.today() - self.date_of_birth).days / 365.25)

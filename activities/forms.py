@@ -74,7 +74,12 @@ class ActivityForm(forms.ModelForm):
             "price_period",
             "capacity",
             "activity_type",
+            "is_visually_adaptive",
+            "is_hearing_adaptive",
+            "is_mobility_adaptive",
+            "is_cognitive_adaptive",
             "slug",
+            "url",
         ]
         widgets = {
             "name": forms.TextInput(attrs={"placeholder": "Name here..."}),
@@ -92,7 +97,12 @@ class ActivityForm(forms.ModelForm):
             "price_period": forms.Select(attrs={'class': 'form-control'}),
             "capacity": forms.NumberInput(attrs={"placeholder": "Capacity here..."}),
             "activity_type": forms.Select(attrs={'class': 'form-control'}),
+            "is_visually_adaptive": forms.CheckboxInput(),
+            "is_hearing_adaptive": forms.CheckboxInput(),
+            "is_mobility_adaptive": forms.CheckboxInput(),
+            "is_cognitive_adaptive": forms.CheckboxInput(),
             "slug": forms.TextInput(attrs={"placeholder": "Slug here..."}),
+            "url": forms.URLInput(attrs={"placeholder": "URL here..."}),
         }
     
     def clean_slug(self):
@@ -102,7 +112,7 @@ class ActivityForm(forms.ModelForm):
 
         try:
             activity = Activity.objects.get(slug=slug)
-        except Provider.DoesNotExist:
+        except Activity.DoesNotExist:
             activity = None
         
 

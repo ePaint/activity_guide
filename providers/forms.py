@@ -49,7 +49,7 @@ class ProviderForm(forms.ModelForm):
 
     class Meta:
         model = Provider
-        fields = ['name', 'slug', 'description', 'site_url']
+        fields = ['name', 'slug', 'description', 'url']
 
     def clean_slug(self):
         slug = self.cleaned_data['slug']

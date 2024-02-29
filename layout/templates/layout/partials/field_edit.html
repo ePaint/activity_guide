@@ -8,12 +8,22 @@
     {% endfor %}
     
     {% for field in form.visible_fields %}
-        <div class="form-floating px-1">
-            {{ field }}
-            <label class="d-flex justify-content-start w-100" for="{{item.pk}}-{{field.name}}">
-                <span>{{field.label}} </span>
-                <div id="{{item.pk}}-{{field.name}}-loading" class="loading-circle ms-2" style="display: none;"></div>
-            </label>
-        </div>
+        {% if field.field.widget.attrs.class == 'form-check-input form-control w-25 ms-auto' %}
+            <div class="form-floating px-1">
+                {{field}}
+                <label class="d-flex justify-content-start w-75" for="{{item.pk}}-{{field.name}}">
+                    <span>{{field.label}} </span>
+                    <div id="{{item.pk}}-{{field.name}}-loading" class="loading-circle ms-2" style="display: none;"></div>
+                </label>
+            </div>
+        {% else %}
+            <div class="form-floating px-1">
+                {{ field }}
+                <label class="d-flex justify-content-start w-100" for="{{item.pk}}-{{field.name}}">
+                    <span>{{field.label}} </span>
+                    <div id="{{item.pk}}-{{field.name}}-loading" class="loading-circle ms-2" style="display: none;"></div>
+                </label>
+            </div>
+        {% endif %}
     {% endfor %}
 </form>

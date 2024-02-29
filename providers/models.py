@@ -13,9 +13,9 @@ class Provider(models.Model):
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    site_url = models.URLField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
     user = models.OneToOneField('users.User', on_delete=models.CASCADE, related_name='provider', null=True, blank=True)
+    url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -47,6 +47,9 @@ class Provider(models.Model):
     
     def get_description_form(self):
         return ProviderDescriptionForm(instance=self, field='description')
+    
+    def get_url_form(self):
+        return ProviderUrlForm(instance=self, field='url')
 
 class ProviderBaseForm(forms.ModelForm):
     prev_value = forms.CharField(widget=forms.HiddenInput())
@@ -79,8 +82,15 @@ class ProviderDescriptionForm(ProviderBaseForm):
         fields = ['description']
         widgets = {'description': forms.Textarea(attrs={'class': 'form-control provider-description-form'})}
         
+class ProviderUrlForm(ProviderBaseForm):
+    class Meta:
+        model = Provider
+        fields = ['url']
+        widgets = {'url': forms.URLInput(attrs={'class': 'form-control'})}
+        
 
 FORM_MAPPER = {
     'name': ProviderNameForm,
     'description': ProviderDescriptionForm,
+    'url': ProviderUrlForm,
 }

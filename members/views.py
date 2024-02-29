@@ -1,5 +1,7 @@
-from django.http import HttpResponse
+import copy
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import resolve, reverse
 from layout.decorators import login_required
 from layout.forms import ConfirmForm
 from layout.views import field_edit
@@ -24,24 +26,39 @@ def family_member_list(request):
 
 
 def add_family_member(request):
+    redirect_target = request.GET.get('redirect_target')
+    redirect_target_slug = request.GET.get('redirect_target_slug')
     if request.method == 'POST':
         form = FamilyMemberForm(request.POST)
         if form.is_valid():
             family_member = form.save(commit=False)
             family_member.member = Member.objects.get(user=request.user)
             family_member.save()
-            response = HttpResponse(status=204)
-            response.headers['HX-Trigger'] = 'reload-family-member-list'
+
+            if not redirect_target and not redirect_target_slug:
+                response = HttpResponse(status=204)
+                response.headers['HX-Trigger'] = 'reload-family-member-list'
+                return response
+            
+            redirect_path = reverse("activity-book", args=[redirect_target_slug])
+            view = resolve(redirect_path).func
+            new_request = copy.copy(request)
+            new_request.method = 'GET'
+            new_request.path = redirect_path
+            response = view(new_request, redirect_target_slug)
+            print('Redirecting to:', redirect_target, redirect_target_slug)
+            response.headers['HX-Retarget'] = '#modal_global'
+            
             return response
     else:
         form = FamilyMemberForm()
-    
+        
     context = {
         'form': form,
         'title': 'Add Family Member',
         'submit_label': 'Add',
-        'endpoint': request.path,
-        'close_on_submit': True,
+        'endpoint': request.get_full_path(),
+        'close_on_submit': not redirect_target,
     }
     return render(request, 'layout/partials/form.html', context)
 

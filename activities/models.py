@@ -4,6 +4,7 @@ from django.db import models
 from django.urls import reverse
 from activity_guide.settings import STATIC_URL
 from categories.models import Category
+from multiselectfield import MultiSelectField
 
 
 WEEKDAYS = [
@@ -51,7 +52,6 @@ ACTIVITY_TYPES = [
     ('Mixed', 'Mixed'),
 ]
 
-
 class Activity(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -71,11 +71,16 @@ class Activity(models.Model):
     price_period = models.CharField(max_length=20, choices=PRICE_PERIODS, blank=True, null=True)
     capacity = models.IntegerField(blank=True, null=True)
     activity_type = models.CharField(max_length=20, choices=ACTIVITY_TYPES, blank=True, null=True)
+    is_visually_adaptive = models.BooleanField(default=False)
+    is_hearing_adaptive = models.BooleanField(default=False)
+    is_mobility_adaptive = models.BooleanField(default=False)
+    is_cognitive_adaptive = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
+    url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -96,7 +101,13 @@ class Activity(models.Model):
         return f'{timespan.seconds // 3600}h {timespan.seconds % 3600 // 60}m'
 
     def get_age_group(self):
-        return f'{self.age_start}-{self.age_end}'
+        if not self.age_start and not self.age_end:
+            return 'All ages'
+        if not self.age_start:
+            return f'Up to {self.age_end} years old'
+        if not self.age_end:
+            return f'From {self.age_start} years old'
+        return f'From {self.age_start} to {self.age_end} years old'
 
     def get_price(self):
         if not self.price:
@@ -111,6 +122,40 @@ class Activity(models.Model):
         if self.image:
             return self.image.url
         return STATIC_URL + 'layout/image-alt.svg' 
+    
+    def get_adaptive_fields(self):
+        fields = [
+            {
+                'slug': 'visually-adaptive',
+                'title': 'Visually adaptive',
+                'description': 'Visually adaptability is a feature that allows people with visual disabilities to enjoy the activity.',
+                'icon': STATIC_URL + 'layout/eye-fill.svg',
+                'enabled': self.is_visually_adaptive,
+            },
+            {
+                'slug': 'hearing-adaptive',
+                'title': 'Hearing adaptive',
+                'description': 'Hearing adaptability is a feature that allows people with hearing disabilities to enjoy the activity.',
+                'icon': STATIC_URL + 'layout/ear-fill.svg',
+                'enabled': self.is_hearing_adaptive,
+            },
+            {
+                'slug': 'mobility-adaptive',
+                'title': 'Mobility adaptive',
+                'description': 'Mobility adaptability is a feature that allows people with mobility disabilities to enjoy the activity.',
+                'icon': STATIC_URL + 'layout/person-wheelchair.svg',
+                'enabled': self.is_mobility_adaptive,
+            },
+            {
+                'slug': 'cognitive-adaptive',
+                'title': 'Cognitive adaptive',
+                'description': 'Cognitive adaptability is a feature that allows people with cognitive disabilities to enjoy the activity.',
+                'icon': STATIC_URL + 'layout/lightbulb-fill.svg',
+                'enabled': self.is_cognitive_adaptive,
+            }
+        ]
+        
+        return [field for field in fields if field['enabled']]
     
     def get_name_form(self):
         return ActivityNameForm(instance=self, field='name')
@@ -163,6 +208,21 @@ class Activity(models.Model):
     def get_activity_type_form(self):
         return ActivityActivityTypeForm(instance=self, field='activity_type')
     
+    def get_url_form(self):
+        return ActivityUrlForm(instance=self, field='url')
+    
+    def get_is_visually_adaptive_form(self):
+        return ActivityIsVisuallyAdaptiveForm(instance=self, field='is_visually_adaptive')
+
+    def get_is_hearing_adaptive_form(self):
+        return ActivityIsHearingAdaptiveForm(instance=self, field='is_hearing_adaptive')
+    
+    def get_is_mobility_adaptive_form(self):
+        return ActivityIsMobilityAdaptiveForm(instance=self, field='is_mobility_adaptive')
+    
+    def get_is_cognitive_adaptive_form(self):
+        return ActivityIsCognitiveAdaptiveForm(instance=self, field='is_cognitive_adaptive')
+    
     def get_is_active_form(self):
         return ActivityIsActiveForm(instance=self, field='is_active')
     
@@ -181,6 +241,11 @@ class Activity(models.Model):
             self.get_location_form(),
             self.get_capacity_form(),
             self.get_activity_type_form(),
+            self.get_url_form(),
+            self.get_is_visually_adaptive_form(),
+            self.get_is_hearing_adaptive_form(),
+            self.get_is_mobility_adaptive_form(),
+            self.get_is_cognitive_adaptive_form(),
             self.get_is_active_form(),
         ]
     
@@ -316,12 +381,42 @@ class ActivityActivityTypeForm(ActivityBaseForm):
         model = Activity
         fields = ['activity_type']
         widgets = {'activity_type': forms.Select(attrs={'class': 'form-control'})}
+        
+class ActivityUrlForm(ActivityBaseForm):
+    class Meta:
+        model = Activity
+        fields = ['url']
+        widgets = {'url': forms.URLInput(attrs={'class': 'form-control'})}
+        
+class ActivityIsVisuallyAdaptiveForm(ActivityBaseForm):
+    class Meta:
+        model = Activity
+        fields = ['is_visually_adaptive']
+        widgets = {'is_visually_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
+
+class ActivityIsHearingAdaptiveForm(ActivityBaseForm):
+    class Meta:
+        model = Activity
+        fields = ['is_hearing_adaptive']
+        widgets = {'is_hearing_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
+
+class ActivityIsMobilityAdaptiveForm(ActivityBaseForm):
+    class Meta:
+        model = Activity
+        fields = ['is_mobility_adaptive']
+        widgets = {'is_mobility_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
+        
+class ActivityIsCognitiveAdaptiveForm(ActivityBaseForm):
+    class Meta:
+        model = Activity
+        fields = ['is_cognitive_adaptive']
+        widgets = {'is_cognitive_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
 
 class ActivityIsActiveForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['is_active']
-        widgets = {'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'})}
+        widgets = {'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
 
 
 FORM_MAPPER = {
@@ -342,5 +437,10 @@ FORM_MAPPER = {
     'price_period': ActivityPricePeriodForm,
     'capacity': ActivityCapacityForm,
     'activity_type': ActivityActivityTypeForm,
+    'url': ActivityUrlForm,
+    'is_visually_adaptive': ActivityIsVisuallyAdaptiveForm,
+    'is_hearing_adaptive': ActivityIsHearingAdaptiveForm,
+    'is_mobility_adaptive': ActivityIsMobilityAdaptiveForm,
+    'is_cognitive_adaptive': ActivityIsCognitiveAdaptiveForm,
     'is_active': ActivityIsActiveForm,
 }

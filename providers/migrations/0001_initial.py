@@ -23,9 +23,9 @@ class Migration(migrations.Migration):
                 ('is_featured', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('site_url', models.URLField(blank=True, null=True)),
                 ('slug', models.SlugField(max_length=255, unique=True)),
                 ('user', models.OneToOneField(blank=True, null=True, on_delete=models.CASCADE, related_name='provider', to='users.User')),
+                ('url', models.URLField(blank=True, null=True)),
             ],
             options={
                 'verbose_name': 'Provider',

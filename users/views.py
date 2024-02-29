@@ -15,6 +15,7 @@ from .models import User, UserProfile
 
 def register(request):
     if request.method == 'POST':
+        status = 400
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
@@ -30,20 +31,27 @@ def register(request):
             response.headers['HX-Trigger'] = 'reload-page'
             return response
     else:
+        status = 200
         form = UserRegisterForm()
-        
+    
+    extra_htmls = [
+        f'You already have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/login/" hx-trigger="click" hx-target="#modal_global">Login</a>',
+    ]
+    
     context = {
         'form': form,
+        'extra_htmls': extra_htmls,
         'title': 'Create an account',
         'submit_label': 'Sign Up',
         'endpoint': request.path,
         'close_on_submit': False,
     }
-    return render(request, 'layout/partials/form.html', context)
+    return render(request, 'layout/partials/form.html', context, status=status)
 
 
 def login(request):
     if request.method == 'POST':
+        status = 400
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
             user = authenticate(
@@ -57,16 +65,21 @@ def login(request):
                 response.headers['HX-Trigger'] = 'reload-page'
                 return response
     else:
+        status = 200
         form = UserLoginForm()
-        
+    
+    extra_htmls = [
+        f'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
+    ]
     context = {
         'form': form,
+        'extra_htmls': extra_htmls,
         'title': 'Login to your account',
         'submit_label': 'Sign In',
         'endpoint': request.path,
         'close_on_submit': False,
     }
-    return render(request, 'layout/partials/form.html', context)
+    return render(request, 'layout/partials/form.html', context, status=status)
 
 
 def logout(request):
@@ -80,6 +93,7 @@ def logout(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
+        status = 400
         user_form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
         context = {
@@ -94,6 +108,7 @@ def profile(request):
             response.headers['HX-Trigger'] = 'reload-navbar'
             return response
     else:
+        status = 200
         user_form = UserUpdateForm(instance=request.user)
         profile_form = UserProfileForm(instance=request.user.profile)
         
@@ -101,7 +116,7 @@ def profile(request):
         'user_form': user_form,
         'profile_form': profile_form,
     }
-    return render(request, 'users/profile.html', context)
+    return render(request, 'users/profile.html', context, status=status)
 
 def profile_image_update(request):
     if request.method == 'POST':

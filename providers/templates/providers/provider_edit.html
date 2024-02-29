@@ -21,7 +21,7 @@
                     <div id="provider-description-form-container">
                         {% include 'providers/provider_description_form.html' with form=description_form %}
                     </div>
-                    <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start">
+                    <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start d-flex">
                         {% for provider_category in provider.get_categories %}
                             <span class="category-badge badge bg-{{ provider_category.get_color }} m-1"
                                     role="button"

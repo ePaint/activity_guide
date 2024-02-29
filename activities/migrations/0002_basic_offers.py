@@ -3,6 +3,7 @@
 import json
 import os
 from datetime import datetime
+import random
 from django.conf import settings
 from django.db import migrations
 from dotenv import load_dotenv
@@ -46,6 +47,22 @@ class Migration(migrations.Migration):
         image_prefix = f'https://{os.getenv('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com'
         print(image_prefix)
         
+        random_urls = [
+            'https://www.google.com',
+            'https://www.youtube.com',
+            'https://www.facebook.com',
+            'https://www.twitter.com',
+            'https://www.instagram.com',
+            'https://www.linkedin.com',
+            'https://www.pinterest.com',
+            'https://www.tiktok.com',
+            'https://www.snapchat.com',
+            'https://www.reddit.com',
+            'https://www.tumblr.com',
+            'https://www.flickr.com',
+            'https://www.whatsapp.com',
+        ]
+        
         for item in to_create:
             age_start, age_end = item['ageGroup'].split('-')
             Activity.objects.get_or_create(
@@ -68,6 +85,11 @@ class Migration(migrations.Migration):
                 price_period=item['pricePeriod'],
                 capacity=item['capacity'],
                 activity_type=item['activityType'],
+                is_visually_adaptive=bool(random.getrandbits(1)),
+                is_hearing_adaptive=bool(random.getrandbits(1)),
+                is_mobility_adaptive=bool(random.getrandbits(1)),
+                is_cognitive_adaptive=bool(random.getrandbits(1)),
+                url=random.choice(random_urls),
             )
 
     dependencies = [
