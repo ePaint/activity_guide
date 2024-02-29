@@ -14,9 +14,7 @@ from .models import User, UserProfile
 
 
 def register(request):
-    messages = []
     if request.method == 'POST':
-        status = 400
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
@@ -31,15 +29,7 @@ def register(request):
             response = HttpResponse()
             response.headers['HX-Trigger'] = 'reload-page'
             return response
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.append({
-                        'type': 'danger',
-                        'message': f'{field}: {error}',
-                    })
     else:
-        status = 200
         form = UserRegisterForm()
     
     extra_htmls = [
@@ -54,12 +44,11 @@ def register(request):
         'endpoint': request.path,
         'close_on_submit': False,
     }
-    return render(request, 'layout/partials/form.html', context, status=status)
+    return render(request, 'layout/partials/form.html', context)
 
 
 def login(request):
     if request.method == 'POST':
-        status = 400
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
             user = authenticate(
@@ -73,7 +62,6 @@ def login(request):
                 response.headers['HX-Trigger'] = 'reload-page'
                 return response
     else:
-        status = 200
         form = UserLoginForm()
     
     extra_htmls = [
@@ -87,7 +75,7 @@ def login(request):
         'endpoint': request.path,
         'close_on_submit': False,
     }
-    return render(request, 'layout/partials/form.html', context, status=status)
+    return render(request, 'layout/partials/form.html', context)
 
 
 def logout(request):
@@ -101,7 +89,6 @@ def logout(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        status = 400
         user_form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
         context = {
@@ -116,7 +103,6 @@ def profile(request):
             response.headers['HX-Trigger'] = 'reload-navbar'
             return response
     else:
-        status = 200
         user_form = UserUpdateForm(instance=request.user)
         profile_form = UserProfileForm(instance=request.user.profile)
         
@@ -124,7 +110,7 @@ def profile(request):
         'user_form': user_form,
         'profile_form': profile_form,
     }
-    return render(request, 'users/profile.html', context, status=status)
+    return render(request, 'users/profile.html', context)
 
 def profile_image_update(request):
     if request.method == 'POST':

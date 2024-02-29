@@ -184,7 +184,6 @@ def activity_book_direct(request, slug):
 @provider_required
 def activity_create(request):
     if request.method == 'POST':
-        status = 400
         form = ActivityForm(request.POST)
         if form.is_valid():
             activity = form.save(commit=False)
@@ -194,7 +193,6 @@ def activity_create(request):
             response.headers['HX-Trigger'] = 'reload-activity-list, close-modal'
             return response
     else:
-        status = 200
         form = ActivityForm()
     
     context = {
@@ -204,7 +202,7 @@ def activity_create(request):
         'endpoint': request.path,
         'close_on_submit': False,
     }
-    return render(request, 'layout/partials/form.html', context, status=status)
+    return render(request, 'layout/partials/form.html', context)
 
 
 @provider_required
