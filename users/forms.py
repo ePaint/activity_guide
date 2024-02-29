@@ -15,6 +15,7 @@ user_type_choices = (
 
 
 class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField(required=True)
     class Meta:
         model = User
         fields = ['first_name', 'last_name','email', 'password1', 'password2']

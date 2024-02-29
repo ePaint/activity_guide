@@ -14,6 +14,7 @@ from .models import User, UserProfile
 
 
 def register(request):
+    messages = []
     if request.method == 'POST':
         status = 400
         form = UserRegisterForm(request.POST)
@@ -30,6 +31,13 @@ def register(request):
             response = HttpResponse()
             response.headers['HX-Trigger'] = 'reload-page'
             return response
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.append({
+                        'type': 'danger',
+                        'message': f'{field}: {error}',
+                    })
     else:
         status = 200
         form = UserRegisterForm()
