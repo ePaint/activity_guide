@@ -48,6 +48,7 @@ def add_family_member(request):
             response = view(new_request, redirect_target_slug)
             print('Redirecting to:', redirect_target, redirect_target_slug)
             response.headers['HX-Retarget'] = '#modal_global'
+            response.headers['HX-Trigger'] = 'reload-family-member-list'
             
             return response
     else:
