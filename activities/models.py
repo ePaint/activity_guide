@@ -4,7 +4,6 @@ from django.db import models
 from django.urls import reverse
 from activity_guide.settings import STATIC_URL
 from categories.models import Category
-from multiselectfield import MultiSelectField
 
 
 WEEKDAYS = [
