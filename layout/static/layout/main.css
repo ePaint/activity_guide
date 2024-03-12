@@ -548,10 +548,10 @@ footer {
 .round-noborder-left {
     border-radius: 2.5rem;
     border-left: 0;
-    padding-left: 2.1rem;
+    /* padding-left: 2.1rem; */
     padding-right: 2.1rem;
-    padding-bottom: 0.6rem;
-    padding-top: 0.6rem;
+    /* padding-bottom: 0.6rem; */
+    /* padding-top: 0.6rem; */
 }
 
 
@@ -723,21 +723,40 @@ footer {
 
 .subcategory-item {
     height: 2rem;
+    width: calc(100% - 1rem) !important;
     line-height: 50%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    text-align: center;
+    display: block;
+    letter-spacing: 0.1rem;
+}
+
+.subcategory-item-provider {
+    height: 2rem;
+    line-height: 100%;
+    padding-left: 1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
     letter-spacing: 0.1rem;
 }
 
 .subcategory-item-moreinfo {
-    width: 5%;
+    width: 1rem !important;
     height: 2rem;
-    line-height: 50%;
+    line-height: 100%;
     letter-spacing: 0.1rem;
-    text-align: center;
+    display: block;
     font-size: 0.9rem;
+}
+
+.subcategory-providers {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border: 1px solid #dee2e6;
+    overflow: hidden;
 }
 
 .subcategory-button {
@@ -963,6 +982,19 @@ footer {
 }
 
 .family-member-info {
+    height: 1.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    letter-spacing: 0;
+}
+
+#subcategory_container {
+    max-width: 480px;
+}
+
+.subcategory-info {
     height: 1.5rem;
     text-overflow: ellipsis;
     white-space: nowrap;

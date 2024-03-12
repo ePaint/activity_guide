@@ -122,6 +122,7 @@ class Activity(models.Model):
             return self.image.url
         return STATIC_URL + 'layout/image-alt.svg' 
     
+    
     def get_adaptive_fields(self):
         fields = [
             {

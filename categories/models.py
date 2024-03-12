@@ -32,9 +32,25 @@ class Category(models.Model):
     
     def get_parent(self):
         return self.parent.name if self.parent else None
-    
+
     def get_children(self):
         return Category.objects.filter(parent=self)
+    
+    def get_activities(self):
+        return self.activities.all()
+    
+    def get_unique_providers(self):
+        max_providers = 2
+        providers = set([activity.provider for activity in self.get_activities()])
+        sorted_providers = sorted(providers, key=lambda provider: provider.name)[:max_providers]
+        return {
+            'items': sorted_providers,
+            'show_more': len(providers) > max_providers
+        }
+
+    
+    def get_sorted_children(self):
+        return self.get_children().order_by('name')
     
     def get_descendants(self, include_self=False):
         descendants = []
