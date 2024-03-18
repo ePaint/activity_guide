@@ -66,14 +66,19 @@ def search_box_results(request):
     family_member = request.GET.get('family_member')
     member = request.GET.get('member')
     category = request.GET.get('category')
+    provider = request.GET.get('provider')
+    edit = request.GET.get('edit')
     stage = request.GET.get('stage')
     model = request.GET.get('model', 'activity')
     query = Q()
+    print('MODEL:', model)
     if model == 'activity':
         if q:
             query = query & Q(name__icontains=q) | (Q(category__name__icontains=q) | Q(category__parent__name__icontains=q))
         if member and stage == 'member_dashboard':
             query = query & Q(liked_by__id=member)
+        if provider and stage == 'provider_dashboard':
+            query = query & Q(provider__id=provider)
         if family_member:
             query = query & Q(family_members__id=family_member)
         items = Activity.objects.filter(query).distinct()
@@ -85,7 +90,8 @@ def search_box_results(request):
         items = Provider.objects.filter(query).distinct()
     context = {
         'items': items,
-        'model': model
+        'model': model,
+        'edit': edit,
     }
     print(query, "sarasaaaaaaaaaa")
     return render(request, 'layout/partials/search_box_results.html', context)
