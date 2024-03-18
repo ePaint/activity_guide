@@ -5,62 +5,13 @@
     <div class="row gap-4">
         <div class="col-lg round border bg-white mb-0 mb-lg-4">
             <div class="row no-padding">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="d-flex fs-1 {{ category.get_color }} fw-bolder justify-content-start align-content-start">
                         {{ category.name }} Providers
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="d-flex pt-3 justify-content-end align-content-end">
-                        <input class="" type="text" class="form-control" placeholder="Search">
-                    </div>
-                </div>
             </div>
-            {% for provider in providers %}
-                <div class="row mt-3 round bg-white border">
-                    <div class="col-md-2 d-flex align-items-center justify-content-center"
-                         role="button"
-                         hx-target=".main-content"
-                         hx-trigger="click[window.location.pathname != '{% url "provider-profile" provider.slug %}']"
-                         hx-on::after-request="scrollToTop()"
-                         hx-push-url="true"
-                         hx-get="{% url 'provider-profile' provider.slug %}"
-                         onclick="scrollToTop()">
-                        <img class="item-row-icon border-orange p-01 user-select-none"
-                             src="{{ provider.image_url }}"/>
-                    </div>
-                    <div class="col-md-2 fw-bold d-flex align-items-center justify-content-center justify-content-md-start text-center"
-                         role="button"
-                         hx-target=".main-content"
-                         hx-trigger="click[window.location.pathname != '{% url "provider-profile" provider.slug %}']"
-                         hx-on::after-request="scrollToTop()"
-                         hx-push-url="true"
-                         hx-get="{% url 'provider-profile' provider.slug %}"
-                         onclick="scrollToTop()">
-                        {{ provider.name }}
-                    </div>
-                    <div class="col-md-6 text-muted small pt-2 pt-md-0 two-columns">
-                        {{ provider.description }}
-                    </div>
-
-                    <div class="col-md-2 row gap-0 small pt-2 pt-md-0">
-                        <div class="col-3 w-25 d-flex flex-column flex-wrap justify-content-center align-items-center">
-                            {% for provider_category in provider.get_categories %}
-                                <span class="badge bg-{{ provider_category.get_color }} m-1"
-                                        role="button"
-                                        hx-target=".main-content"
-                                        hx-trigger="click[window.location.pathname != '{% url "category-detail" provider_category.slug %}']"
-                                        hx-on::after-request="scrollToTop()"
-                                        hx-push-url="true"
-                                        hx-get="{% url 'category-detail' provider_category.slug %}"
-                                        onclick="scrollToTop()">
-                                    {{ provider_category.name }}
-                                </span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+            {% include 'layout/search_box.html' with items=providers model='provider' %}
         </div>
         <div class="col-lg-2 mb-4 pb-lg-0 no-padding">
             <div class="category-detail-ad h-100 border round bg-white text-muted small text-center d-flex justify-content-center align-items-center crossed">

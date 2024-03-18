@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.template import loader, Context
+from django.db.models import Q
 
 from categories.models import Category
 from activities.models import Activity
@@ -10,6 +11,8 @@ from django.core.mail import EmailMultiAlternatives
 from layout.forms import ContactForm
 
 from django.shortcuts import render
+
+from providers.models import Provider
 
 
 def not_found(request, exception):
@@ -52,11 +55,40 @@ def navbar(request):
 
 
 def search_results(request):
-    activities = Activity.objects.all()
     context = {
-        'activities': activities
+        'activities': Activity.objects.all()
     }
     return render(request, 'layout/search_results.html', context)
+
+
+def search_box_results(request):
+    q = request.GET.get('q')
+    family_member = request.GET.get('family_member')
+    member = request.GET.get('member')
+    category = request.GET.get('category')
+    stage = request.GET.get('stage')
+    model = request.GET.get('model', 'activity')
+    query = Q()
+    if model == 'activity':
+        if q:
+            query = query & Q(name__icontains=q) | (Q(category__name__icontains=q) | Q(category__parent__name__icontains=q))
+        if member and stage == 'member_dashboard':
+            query = query & Q(liked_by__id=member)
+        if family_member:
+            query = query & Q(family_members__id=family_member)
+        items = Activity.objects.filter(query).distinct()
+    elif model == 'provider':
+        if q:
+            query = query & Q(name__icontains=q)
+        if category:
+            query = query & (Q(activities__category__slug=category) | Q(activities__category__parent__slug=category))
+        items = Provider.objects.filter(query).distinct()
+    context = {
+        'items': items,
+        'model': model
+    }
+    print(query, "sarasaaaaaaaaaa")
+    return render(request, 'layout/partials/search_box_results.html', context)
 
 
 def contact(request):

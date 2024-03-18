@@ -22,7 +22,7 @@
         <div id="family_member_{{family_member.pk}}_card"
              hx-get="{% url 'family-member-search-box' family_member.pk %}"
              hx-trigger="searchBoxUpdate-{{family_member.pk}} from:body">
-            {% include "layout/search_box.html" with activities=family_member.activities.all family_member=family_member %}
+            {% include "layout/search_box.html" with items=family_member.activities.all family_member=family_member model='activity' %}
         </div>
     </div>
 </div>

@@ -1,0 +1,21 @@
+{% if model == 'activity' %}
+    {% if items.count == 0 %}
+        <div class="text-center p-4 text-muted fst-italic">
+            <h4>No activities found</h4>
+        </div>
+    {% else %}
+        {% for item in items %}
+            {% include "activities/partials/line_item.html" with activity=item edit=edit family_member=family_member %} 
+        {% endfor %}
+    {% endif %}
+{% elif model == 'provider' %}
+    {% if items.count == 0 %}
+        <div class="text-center p-4 text-muted fst-italic">
+            <h4>No providers found</h4>
+        </div>
+    {% else %}
+        {% for item in items %}
+            {% include "providers/partials/line_item.html" with provider=item %} 
+        {% endfor %}
+    {% endif %}
+{% endif %}
