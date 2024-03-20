@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.template import loader, Context
 from django.db.models import Q
 
+from activities.forms import ActivitySearchForm
 from categories.models import Category
 from activities.models import Activity
 from django.core.mail import EmailMultiAlternatives
@@ -38,10 +39,12 @@ def home(request):
     categories = Category.objects.all().order_by('created_at')[:3]
     activities = Activity.objects.all().order_by('?')[:5]
     contact_form = ContactForm()
+    search_form = ActivitySearchForm()
     context = {
         'categories': categories,
         'activities': activities,
-        'contact_form': contact_form
+        'contact_form': contact_form,
+        'search_form': search_form
     }
     return render(request, 'layout/home.html', context)
 
@@ -55,8 +58,10 @@ def navbar(request):
 
 
 def search_results(request):
+    search_form = ActivitySearchForm()
     context = {
-        'activities': Activity.objects.all()
+        'activities': Activity.objects.all(),
+        'search_form': search_form
     }
     return render(request, 'layout/search_results.html', context)
 
@@ -101,6 +106,7 @@ def contact(request):
         form = ContactForm()
     return render(request, 'layout/contact_form.html', {'form': form})
 
+
 def field_edit(request, model, model_name, pk, field, form_class):
     if request.method == 'POST':
         item = model.objects.get(pk=pk)
@@ -118,4 +124,3 @@ def field_edit(request, model, model_name, pk, field, form_class):
             'form': form,
         }
         return render(request, 'layout/partials/field_edit.html', context)
-

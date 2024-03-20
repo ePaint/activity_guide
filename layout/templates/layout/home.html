@@ -1,117 +1,15 @@
 {% extends request.base_template %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container-xxl">
     <div class="row gap-4 justify-content-center">
-        <div class="col-md-3 search-form border bg-white round d-flex flex-column justify-content-center">
+        <div class="col-md-3 search-form border px-3 py-3 bg-white round d-flex flex-column justify-content-center">
             <div class="search-form-title">
                 Search Form
             </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-100">
-                    <div class="search-field-label">
-                        Field1
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field1">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-100">
-                    <div class="search-field-label">
-                        Field2
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field2">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-100">
-                    <div class="search-field-label">
-                        Field3
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field3">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-100">
-                    <div class="search-field-label">
-                        Field4
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field4">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-100">
-                    <div class="search-field-label">
-                        Field5
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field5">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-100">
-                    <div class="search-field-label">
-                        Field6
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field6">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-50">
-                    <div class="search-field-label">
-                        Field7
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field7">
-                    </div>
-                </div>
-                <div class="search-field-item w-50">
-                    <div class="search-field-label">
-                        Field8
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field8">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-50">
-                    <div class="search-field-label">
-                        Field9
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field9">
-                    </div>
-                </div>
-                <div class="search-field-item w-50">
-                    <div class="search-field-label">
-                        Field10
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field10">
-                    </div>
-                </div>
-            </div>
-            <div class="search-field-row">
-                <div class="search-field-item w-100">
-                    <div class="search-field-label">
-                        Field11
-                    </div>
-                    <div class="search-field-input">
-                        <input type="text" class="form-control" placeholder="Field11">
-                    </div>
-                </div>
+            <div class="w-100 h-100" style="overflow-y: scroll">
+                {{ search_form|crispy }}
             </div>
             <button type="button"
                     class="btn btn-primary w-50 align-self-end my-3"

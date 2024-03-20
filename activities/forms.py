@@ -155,3 +155,54 @@ class ActivityImageForm(forms.ModelForm):
             form_object.save()
         return form_object
     
+class ActivitySearchForm(forms.ModelForm):
+    class Meta:
+        model = Activity
+        fields = [
+            "name",
+            "description",
+            "category",
+            "from_date",
+            "to_date",
+            "start_time",
+            "end_time",
+            "weekday",
+            "age_start",
+            "age_end",
+            "position",
+            "location",
+            "price",
+            "price_period",
+            "capacity",
+            "activity_type",
+            "is_visually_adaptive",
+            "is_hearing_adaptive",
+            "is_mobility_adaptive",
+            "is_cognitive_adaptive",
+            "url",
+        ]
+        widgets = {
+            "name": forms.TextInput(attrs={"placeholder": "Name here..."}),
+            "description": forms.Textarea(attrs={"placeholder": "Description here..."}),
+            "from_date": DateInput(),
+            "to_date": DateInput(),
+            "start_time": TimeInput(),
+            "end_time": TimeInput(),
+            "weekday": forms.Select(attrs={'class': 'form-control'}),
+            "age_start": forms.NumberInput(attrs={"placeholder": "Start age here..."}),
+            "age_end": forms.NumberInput(attrs={"placeholder": "End age here..."}),
+            "position": forms.TextInput(attrs={"placeholder": "Position here..."}),
+            "location": forms.TextInput(attrs={"placeholder": "Location here..."}),
+            "price": forms.NumberInput(attrs={"placeholder": "Price here..."}),
+            "price_period": forms.Select(attrs={'class': 'form-control'}),
+            "capacity": forms.NumberInput(attrs={"placeholder": "Capacity here..."}),
+            "activity_type": forms.Select(attrs={'class': 'form-control'}),
+            "is_visually_adaptive": forms.CheckboxInput(),
+            "is_hearing_adaptive": forms.CheckboxInput(),
+            "is_mobility_adaptive": forms.CheckboxInput(),
+            "is_cognitive_adaptive": forms.CheckboxInput(),
+            "url": forms.URLInput(attrs={"placeholder": "URL here..."}),
+        }
+
+
+    
