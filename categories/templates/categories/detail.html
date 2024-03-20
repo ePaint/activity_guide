@@ -3,15 +3,8 @@
 {% block content %}
 <div class="container">
     <div class="row gap-4">
-        <div class="col-lg round border bg-white mb-0 mb-lg-4">
-            <div class="row no-padding">
-                <div class="col-md-12">
-                    <div class="d-flex fs-1 {{ category.get_color }} fw-bolder justify-content-start align-content-start">
-                        {{ category.name }} Providers
-                    </div>
-                </div>
-            </div>
-            {% include 'layout/search_box.html' with items=providers model='provider' %}
+        <div class="col-lg mb-0 mb-lg-4">
+            {% include 'layout/search_box.html' with items=providers model='provider' title=category.name|add:" Providers" %}
         </div>
         <div class="col-lg-2 mb-4 pb-lg-0 no-padding">
             <div class="category-detail-ad h-100 border round bg-white text-muted small text-center d-flex justify-content-center align-items-center crossed">

@@ -23,13 +23,6 @@
             </button>
         </div>
     </div>
-    <div class="row-sm bg-white round border">
-        <div class="row-sm w-100">
-            <h1 class="text-start orange">Liked Activities</h1>
-            </div>
-                {% include "layout/search_box.html" with items=request.user.member.liked_activities.all stage='member_dashboard' model='activity' %}
-            </div>
-        </div>
-    </div>
+    {% include "layout/search_box.html" with items=request.user.member.liked_activities.all stage='member_dashboard' model='activity' title='Liked Activities' %}
 </div>
 {% endblock%}
