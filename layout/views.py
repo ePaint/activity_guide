@@ -85,9 +85,9 @@ def _build_search_query(form: ActivitySearchForm):
     if description:
         query = query & Q(description__icontains=description)
     if from_date:
-        query = query & Q(to_date__gte=from_date)
+        query = query & Q(from_date__lte=from_date) & Q(to_date__gte=from_date)
     if to_date:
-        query = query & Q(from_date__lte=to_date)
+        query = query & Q(to_date__lte=to_date) & Q(from_date__lte=to_date)
     if start_time:
         query = query & Q(end_time__gte=start_time)
     if end_time:
