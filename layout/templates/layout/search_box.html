@@ -6,7 +6,7 @@
             <h4>No activities found</h4>
         </div>
     {% else %}
-        {% if hide_search == 0 %}
+        {% if hide_search != 1 %}
             <div class="search-box row align-items-center justify-content-end">
                 <div class="w-100 text-end"> 
                     <form hx-trigger="submit, keyup changed delay:500ms from:find .search-input"
