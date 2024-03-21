@@ -161,7 +161,7 @@ def search_box_results(request):
             query = query & Q(name__icontains=q) | (Q(category__name__icontains=q) | Q(category__parent__name__icontains=q))
         if member and stage == 'member_dashboard':
             query = query & Q(liked_by__id=member)
-        if provider and stage == 'provider_dashboard':
+        if provider:
             query = query & Q(provider__id=provider)
         if family_member:
             query = query & Q(family_members__id=family_member)

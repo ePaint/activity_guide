@@ -45,6 +45,6 @@
         </div>
     </div>
     <hr class="hr my-4" />
-    {% include "layout/search_box.html" with items=provider.get_active_activities model='activity' %}
+    {% include "layout/search_box.html" with items=provider.get_active_activities model='activity' provider=provider %}
 </div>
 {% endblock %}
