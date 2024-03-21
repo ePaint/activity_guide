@@ -85,21 +85,21 @@ def _build_search_query(form: ActivitySearchForm):
     if description:
         query = query & Q(description__icontains=description)
     if from_date:
-        query = query & Q(from_date__gte=from_date)
+        query = query & Q(to_date__gte=from_date)
     if to_date:
-        query = query & Q(to_date__lte=to_date)
+        query = query & Q(from_date__lte=to_date)
     if start_time:
-        query = query & Q(start_time__gte=start_time)
+        query = query & Q(end_time__gte=start_time)
     if end_time:
-        query = query & Q(end_time__lte=end_time)
+        query = query & Q(start_time__lte=end_time)
     if category:
         query = query & Q(category__name__icontains=category)
     if weekday:
         query = query & Q(weekday=weekday)
     if age_start:
-        query = query & Q(age_start__gte=age_start)
+        query = query & Q(age_end__gte=age_start)
     if age_end:
-        query = query & Q(age_end__lte=age_end)
+        query = query & Q(age_start__lte=age_end)
     if position:
         query = query & Q(position__icontains=position)
     if location:
