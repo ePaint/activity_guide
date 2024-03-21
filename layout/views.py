@@ -56,14 +56,92 @@ def privacy_policy(request):
 def navbar(request):
     return render(request, 'layout/navbar.html')
 
+def _build_search_query(form: ActivitySearchForm):
+    form.is_valid()
+    data = form.cleaned_data
+    
+    name = data.get('name')
+    description = data.get('description')
+    from_date = data.get('from_date')
+    to_date = data.get('to_date')
+    start_time = data.get('start_time')
+    end_time = data.get('end_time')
+    category = data.get('category')
+    weekday = data.get('weekday')
+    age_start = data.get('age_start')
+    age_end = data.get('age_end')
+    position = data.get('position')
+    location = data.get('location')
+    activity_type = data.get('activity_type')
+    url = data.get('url')
+    is_visually_adaptive = data.get('is_visually_adaptive')
+    is_hearing_adaptive = data.get('is_hearing_adaptive')
+    is_mobility_adaptive = data.get('is_mobility_adaptive')
+    is_cognitive_adaptive = data.get('is_cognitive_adaptive')
+    
+    query = Q()
+    if name:
+        query = query & Q(name__icontains=name)
+    if description:
+        query = query & Q(description__icontains=description)
+    if from_date:
+        query = query & Q(from_date__gte=from_date)
+    if to_date:
+        query = query & Q(to_date__lte=to_date)
+    if start_time:
+        query = query & Q(start_time__gte=start_time)
+    if end_time:
+        query = query & Q(end_time__lte=end_time)
+    if category:
+        query = query & Q(category__name__icontains=category)
+    if weekday:
+        query = query & Q(weekday=weekday)
+    if age_start:
+        query = query & Q(age_start__gte=age_start)
+    if age_end:
+        query = query & Q(age_end__lte=age_end)
+    if position:
+        query = query & Q(position__icontains=position)
+    if location:
+        query = query & Q(location__icontains=location)
+    if activity_type:
+        query = query & Q(activity_type=activity_type)
+    if url:
+        query = query & Q(url__icontains=url)
+    if is_visually_adaptive:
+        query = query & Q(is_visually_adaptive=is_visually_adaptive)
+    if is_hearing_adaptive:
+        query = query & Q(is_hearing_adaptive=is_hearing_adaptive)
+    if is_mobility_adaptive:
+        query = query & Q(is_mobility_adaptive=is_mobility_adaptive)
+    if is_cognitive_adaptive:
+        query = query & Q(is_cognitive_adaptive=is_cognitive_adaptive)
+        
+    return query
 
 def search_results(request):
-    search_form = ActivitySearchForm()
+    form = ActivitySearchForm(request.POST)
+    query = _build_search_query(form)
+    activities = Activity.objects.filter(query)    
+    
     context = {
-        'activities': Activity.objects.all(),
-        'search_form': search_form
+        'activities': activities,
+        'search_form': form
     }
     return render(request, 'layout/search_results.html', context)
+
+
+def search_results_partial(request):
+    form = ActivitySearchForm(request.POST)
+    query = _build_search_query(form)
+    activities = Activity.objects.filter(query)
+    context = {
+        'items': activities,
+        'model': 'activity',
+        'edit': False,
+        'hide_search': 1
+    }
+    return render(request, 'layout/partials/search_box_results.html', context)
 
 
 def search_box_results(request):

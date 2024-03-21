@@ -47,7 +47,6 @@ class Category(models.Model):
             'items': sorted_providers,
             'show_more': len(providers) > max_providers
         }
-
     
     def get_sorted_children(self):
         return self.get_children().order_by('name')

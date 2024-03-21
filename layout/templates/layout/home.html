@@ -4,23 +4,23 @@
 {% block content %}
 <div class="container-xxl">
     <div class="row gap-4 justify-content-center">
-        <div class="col-md-3 search-form border px-3 py-3 bg-white round d-flex flex-column justify-content-center">
-            <div class="search-form-title">
-                Search Form
+        <form class="col-md-3 search-form border px-3 py-3 bg-white round d-flex flex-column justify-content-center"
+              hx-target=".main-content"
+              hx-trigger="submit"
+              hx-push-url="true"
+              hx-post="{% url 'layout-search-results' %}">
+            <h2 class="text-center orange pb-3">Search Form</h1>
+            <div class="align-self-center row row-cols-2 w-100" style="overflow-y: scroll;">
+                {% for field in search_form %}
+                    {{ field|as_crispy_field }}
+                {% endfor %}
             </div>
-            <div class="w-100 h-100" style="overflow-y: scroll">
-                {{ search_form|crispy }}
-            </div>
-            <button type="button"
-                    class="btn btn-primary w-50 align-self-end my-3"
-                    hx-target=".main-content"
-                    hx-trigger="click"
-                    hx-push-url="true"
-                    hx-get="{% url 'layout-search-results' %}"
+            <button type="submit"
+                    class="btn orange-hover w-100 align-self-center my-3"
                     onclick="scrollToTop()">
                 Go!
             </button>
-        </div>
+        </form>
         <div class="col-md-8 home-main d-flex flex-column gap-4 no-padding">
             <div class="home-banner-ad-wide border round bg-white small text-muted crossed">
                 

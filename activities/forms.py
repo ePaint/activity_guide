@@ -161,33 +161,31 @@ class ActivitySearchForm(forms.ModelForm):
         fields = [
             "name",
             "description",
-            "category",
             "from_date",
             "to_date",
             "start_time",
             "end_time",
+            "category",
             "weekday",
             "age_start",
             "age_end",
             "position",
             "location",
-            "price",
-            "price_period",
-            "capacity",
             "activity_type",
+            "url",
             "is_visually_adaptive",
             "is_hearing_adaptive",
             "is_mobility_adaptive",
             "is_cognitive_adaptive",
-            "url",
         ]
         widgets = {
             "name": forms.TextInput(attrs={"placeholder": "Name here..."}),
-            "description": forms.Textarea(attrs={"placeholder": "Description here..."}),
+            "description": forms.TextInput(attrs={"placeholder": "Description here..."}),
             "from_date": DateInput(),
             "to_date": DateInput(),
             "start_time": TimeInput(),
             "end_time": TimeInput(),
+            "category": forms.Select(attrs={'class': 'form-control'}),
             "weekday": forms.Select(attrs={'class': 'form-control'}),
             "age_start": forms.NumberInput(attrs={"placeholder": "Start age here..."}),
             "age_end": forms.NumberInput(attrs={"placeholder": "End age here..."}),
@@ -195,14 +193,19 @@ class ActivitySearchForm(forms.ModelForm):
             "location": forms.TextInput(attrs={"placeholder": "Location here..."}),
             "price": forms.NumberInput(attrs={"placeholder": "Price here..."}),
             "price_period": forms.Select(attrs={'class': 'form-control'}),
-            "capacity": forms.NumberInput(attrs={"placeholder": "Capacity here..."}),
             "activity_type": forms.Select(attrs={'class': 'form-control'}),
+            "url": forms.TextInput(attrs={"placeholder": "URL here..."}),
             "is_visually_adaptive": forms.CheckboxInput(),
             "is_hearing_adaptive": forms.CheckboxInput(),
             "is_mobility_adaptive": forms.CheckboxInput(),
             "is_cognitive_adaptive": forms.CheckboxInput(),
-            "url": forms.URLInput(attrs={"placeholder": "URL here..."}),
         }
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # make all fields not required:
+        for field in self.fields:
+            self.fields[field].required = False
 
 
     

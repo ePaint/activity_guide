@@ -6,28 +6,30 @@
             <h4>No activities found</h4>
         </div>
     {% else %}
-        <div class="search-box row align-items-center justify-content-end">
-            <div class="w-100 text-end"> 
-                <form hx-trigger="submit, keyup changed delay:500ms from:find .search-input"
-                      hx-get="{% url 'layout-search-box-results' %}"
-                      hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}"
-                      method="get">
-                    <input class="search-input"
-                       name="q"
-                       type="text"
-                       placeholder="Search..."
-                       aria-label="Search">
-                    <input type="hidden" name="family_member" value="{{ family_member.id }}">
-                    <input type="hidden" name="member" value="{{ request.user.member.id }}">
-                    <input type="hidden" name="category" value="{{ category.slug }}">
-                    <input type="hidden" name="provider" value="{{ request.user.provider.id }}">
-                    <input type="hidden" name="edit" value="{{ edit }}">
-                    <input type="hidden" name="stage" value="{{ stage }}">
-                    <input type="hidden" name="model" value="{{ model }}">
-                </form>
-                
+        {% if hide_search == 0 %}
+            <div class="search-box row align-items-center justify-content-end">
+                <div class="w-100 text-end"> 
+                    <form hx-trigger="submit, keyup changed delay:500ms from:find .search-input"
+                        hx-get="{% url 'layout-search-box-results' %}"
+                        hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}"
+                        method="get">
+                        <input class="search-input"
+                        name="q"
+                        type="text"
+                        placeholder="Quick filter..."
+                        aria-label="Search">
+                        <input type="hidden" name="family_member" value="{{ family_member.id }}">
+                        <input type="hidden" name="member" value="{{ request.user.member.id }}">
+                        <input type="hidden" name="category" value="{{ category.slug }}">
+                        <input type="hidden" name="provider" value="{{ request.user.provider.id }}">
+                        <input type="hidden" name="edit" value="{{ edit }}">
+                        <input type="hidden" name="stage" value="{{ stage }}">
+                        <input type="hidden" name="model" value="{{ model }}">
+                    </form>
+                    
+                </div>
             </div>
-        </div>
+        {% endif %}
         <div id="search-results_{{ request.user.member.id }}_{{ family_member.id }}">
             {% include 'layout/partials/search_box_results.html' with items=items model=model edit=edit family_member=family_member %}
         </div>
