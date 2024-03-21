@@ -9,7 +9,7 @@
                 
             </div>
             <form class="col-md-3 border px-3 py-3 mb-4 w-100 bg-white round d-flex flex-column justify-content-center"
-                  hx-trigger="submit, keyup changed delay:500ms from:input, change delay:500ms from:input"
+                  hx-trigger="submit"
                   hx-post="{% url 'layout-search-results-partial' %}"
                   hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}">
                 <h1 class="text-start orange pb-3">Search Form</h1>

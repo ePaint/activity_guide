@@ -1,7 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.exceptions import ValidationError
-from activities.models import Activity
+from activities.models import LOCATIONS, Activity
 from providers.models import Provider
 from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget
@@ -92,7 +92,7 @@ class ActivityForm(forms.ModelForm):
             "age_start": forms.NumberInput(attrs={"placeholder": "Start age here..."}),
             "age_end": forms.NumberInput(attrs={"placeholder": "End age here..."}),
             "position": forms.TextInput(attrs={"placeholder": "Position here..."}),
-            "location": forms.TextInput(attrs={"placeholder": "Location here..."}),
+            "location": forms.Select(attrs={'class': 'form-control'}),
             "price": forms.NumberInput(attrs={"placeholder": "Price here..."}),
             "price_period": forms.Select(attrs={'class': 'form-control'}),
             "capacity": forms.NumberInput(attrs={"placeholder": "Capacity here..."}),
@@ -190,7 +190,7 @@ class ActivitySearchForm(forms.ModelForm):
             "age_start": forms.NumberInput(attrs={"placeholder": "Start age here..."}),
             "age_end": forms.NumberInput(attrs={"placeholder": "End age here..."}),
             "position": forms.TextInput(attrs={"placeholder": "Position here..."}),
-            "location": forms.TextInput(attrs={"placeholder": "Location here..."}),
+            "location": forms.Select(attrs={'class': 'form-control'}),
             "price": forms.NumberInput(attrs={"placeholder": "Price here..."}),
             "price_period": forms.Select(attrs={'class': 'form-control'}),
             "activity_type": forms.Select(attrs={'class': 'form-control'}),

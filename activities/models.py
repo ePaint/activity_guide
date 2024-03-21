@@ -36,7 +36,7 @@ LOCATIONS = [
     ('Kamloops', 'Kamloops'),
     ('McArthur Island', 'McArthur Island'),
     ('North Kamloops', 'North Kamloops'),
-    ('Rayleigh/ Heffley', 'Rayleigh / Heffley'),
+    ('Rayleigh / Heffley', 'Rayleigh / Heffley'),
     ('Sahali Lower', 'Sahali Lower'),
     ('Sahali Upper', 'Sahali Upper'),
     ('Sun Peaks', 'Sun Peaks'),
