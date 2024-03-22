@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from categories.models import Category
+from layout.views import _paginate
 
 
 def home(request):
@@ -11,14 +12,16 @@ def home(request):
 
 def detail(request, slug):
     category = Category.objects.get(slug=slug)
-    # activities = category.activities.all().order_by('-created_at')
-    activities = category.get_activities().order_by('-created_at')
+    activities = category.get_activities().order_by('-updated_at')
     providers = set()
     for activity in activities:
         providers.add(activity.provider)
+    
+    providers, next_page = _paginate(list(providers), request.GET.get('page'))
+    
     context = {
         'category': category,
-        'activities': activities,
         'providers': providers,
+        'next_page': next_page,
     }
     return render(request, 'categories/detail.html', context)

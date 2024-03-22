@@ -9,15 +9,11 @@
         {% if hide_search != 1 %}
             <div class="search-box row align-items-center justify-content-end">
                 <div class="w-100 text-end"> 
-                    <form hx-trigger="submit, keyup changed delay:500ms from:find .search-input"
-                        hx-get="{% url 'layout-search-box-results' %}"
-                        hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}"
-                        method="get">
-                        <input class="search-input"
-                        name="q"
-                        type="text"
-                        placeholder="Quick filter..."
-                        aria-label="Search">
+                    <form id="search-form_{{ request.user.member.id }}_{{ family_member.id }}"
+                        hx-trigger="submit, keyup changed delay:500ms from:find .search-input"
+                        hx-post="{% url 'layout-search-box-results' %}"
+                        hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}">
+                        <input class="search-input" name="q" type="text" placeholder="Quick filter..." aria-label="Search">
                         <input type="hidden" name="family_member" value="{{ family_member.id }}">
                         <input type="hidden" name="member" value="{{ request.user.member.id }}">
                         <input type="hidden" name="category" value="{{ category.slug }}">
@@ -26,12 +22,11 @@
                         <input type="hidden" name="stage" value="{{ stage }}">
                         <input type="hidden" name="model" value="{{ model }}">
                     </form>
-                    
                 </div>
             </div>
         {% endif %}
         <div id="search-results_{{ request.user.member.id }}_{{ family_member.id }}">
-            {% include 'layout/partials/search_box_results.html' with items=items model=model edit=edit family_member=family_member %}
+            {% include 'layout/partials/search_box_results.html' with items=items model=model edit=edit family_member=family_member hide_search=hide_search next_page=next_page show_provider_name=show_provider_name %}
         </div>
     {% endif %}
 </div>

@@ -10,13 +10,13 @@
               hx-push-url="true"
               hx-post="{% url 'layout-search-results' %}">
             <h2 class="text-center orange pb-3">Search Form</h1>
-            <div class="align-self-center row row-cols-2 w-100" style="overflow-y: scroll;">
+            <div class="align-self-center row row-cols-2 w-100">
                 {% for field in search_form %}
                     {{ field|as_crispy_field }}
                 {% endfor %}
             </div>
             <button type="submit"
-                    class="btn orange-hover w-100 align-self-center my-3"
+                    class="btn orange-hover w-100 align-self-center mb-3"
                     onclick="scrollToTop()">
                 Go!
             </button>
@@ -133,4 +133,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#id_weekdays').select2();
+    });
+</script>
 {% endblock %}

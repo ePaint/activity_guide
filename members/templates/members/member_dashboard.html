@@ -23,6 +23,6 @@
             </button>
         </div>
     </div>
-    {% include "layout/search_box.html" with items=request.user.member.liked_activities.all stage='member_dashboard' model='activity' title='Liked Activities' %}
+    {% include "layout/search_box.html" with items=activities stage='member_dashboard' model='activity' title='Liked Activities' next_page=next_page %}
 </div>
 {% endblock%}

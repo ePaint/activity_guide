@@ -46,9 +46,10 @@ LOCATIONS = [
 ]
 
 ACTIVITY_TYPES = [
-    ('Indoor', 'Indoor'),
-    ('Outdoor', 'Outdoor'),
-    ('Mixed', 'Mixed'),
+    ('Session', 'Session'),
+    ('Camp', 'Camp'),
+    ('Drop-in', 'Drop-in'),
+    ('Party', 'Party'),
 ]
 
 class Activity(models.Model):

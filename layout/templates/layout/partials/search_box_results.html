@@ -5,7 +5,11 @@
         </div>
     {% else %}
         {% for item in items %}
-            {% include "activities/partials/line_item.html" with activity=item edit=edit family_member=family_member %} 
+            {% if forloop.last %}
+                {% include "activities/partials/line_item.html" with activity=item edit=edit family_member=family_member show_provider_name=show_provider_name page=next_page hide_search=hide_search %} 
+            {% else %}
+                {% include "activities/partials/line_item.html" with activity=item edit=edit family_member=family_member show_provider_name=show_provider_name %}
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% elif model == 'provider' %}
@@ -15,7 +19,11 @@
         </div>
     {% else %}
         {% for item in items %}
-            {% include "providers/partials/line_item.html" with provider=item %} 
+            {% if forloop.last %}
+                {% include "providers/partials/line_item.html" with provider=item page=next_page hide_search=hide_search %}
+            {% else %}
+                {% include "providers/partials/line_item.html" with provider=item %}
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% endif %}

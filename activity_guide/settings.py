@@ -203,3 +203,5 @@ CONTACT_ENABLED = os.getenv('CONTACT_ENABLED') == 'True'
 
 LOGIN_URL='/users/login'
 LOGIN_REDIRECT_URL='/members/dashboard'
+
+PAGE_SIZE = 10

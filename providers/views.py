@@ -2,15 +2,19 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import resolve
 from layout.decorators import login_required, provider_required
-from layout.views import field_edit
+from layout.views import _paginate, field_edit
 from providers.forms import ProviderForm, ProviderImageForm, ProviderNameForm, ProviderDescriptionForm
 from providers.models import FORM_MAPPER, Provider
 
 
 def provider_profile(request, slug):
     provider = Provider.objects.get(slug=slug)
+    activities, next_page = _paginate(provider.get_active_activities(), request.GET.get('page'))
+    
     context = {
         'provider': provider,
+        'activities': activities,
+        'next_page': next_page,
     }
     return render(request, 'providers/provider_profile.html', context)
 

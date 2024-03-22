@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import resolve, reverse
 from layout.decorators import login_required
 from layout.forms import ConfirmForm
-from layout.views import field_edit
+from layout.views import _paginate, field_edit
 from members.models import FORM_MAPPER, FamilyMember, Member
 from .forms import FamilyMemberForm
 
@@ -14,11 +14,12 @@ def member_profile(request):
 
 @login_required
 def member_dashboard(request):
-    print(request.user)
+    activities, next_page = _paginate(request.user.member.liked_activities.all(), request.GET.get('page'))
     context = {
-        'member': Member.objects.get(user=request.user)
+        'activities': activities,
+        'next_page': next_page,
     }
-    return render(request, 'members/member_dashboard.html')
+    return render(request, 'members/member_dashboard.html', context)
 
 
 def family_member_list(request):

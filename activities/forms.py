@@ -1,7 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.exceptions import ValidationError
-from activities.models import LOCATIONS, Activity
+from activities.models import LOCATIONS, WEEKDAYS, Activity
 from providers.models import Provider
 from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget
@@ -153,48 +153,47 @@ class ActivityImageForm(forms.ModelForm):
         
         if commit:
             form_object.save()
-        return form_object
-    
+        return form_object    
+
 class ActivitySearchForm(forms.ModelForm):
+    keyword = forms.CharField(max_length=100, required=False, label='Keyword', widget=forms.TextInput())
+    age = forms.IntegerField(required=False, label='Age', widget=forms.NumberInput())
+    weekdays = forms.MultipleChoiceField(choices=WEEKDAYS, required=False, label='Weekday', widget=forms.SelectMultiple())
+    provider_name = forms.CharField(max_length=100, required=False, label='Provider', widget=forms.TextInput())
+    
     class Meta:
         model = Activity
         fields = [
-            "name",
-            "description",
+            "keyword",
+            "category",
+            "activity_type",
+            "provider_name",
+            "weekdays",
+            "age",
             "from_date",
             "to_date",
             "start_time",
             "end_time",
-            "category",
-            "weekday",
-            "age_start",
-            "age_end",
-            "position",
             "location",
-            "activity_type",
-            "url",
+            "position",
             "is_visually_adaptive",
             "is_hearing_adaptive",
             "is_mobility_adaptive",
             "is_cognitive_adaptive",
         ]
         widgets = {
-            "name": forms.TextInput(attrs={"placeholder": "Name here..."}),
-            "description": forms.TextInput(attrs={"placeholder": "Description here..."}),
+            "keyword": forms.TextInput(),
+            "category": forms.Select(),
+            "activity_type": forms.Select(attrs={'class': 'form-control'}),
+            "provider_name": forms.TextInput(),
+            "weekdays": forms.Select(attrs={'class': 'form-control', 'multiple': 'multiple'}),
+            "age": forms.NumberInput(),
             "from_date": DateInput(),
             "to_date": DateInput(),
             "start_time": TimeInput(),
             "end_time": TimeInput(),
-            "category": forms.Select(attrs={'class': 'form-control'}),
-            "weekday": forms.Select(attrs={'class': 'form-control'}),
-            "age_start": forms.NumberInput(attrs={"placeholder": "Start age here..."}),
-            "age_end": forms.NumberInput(attrs={"placeholder": "End age here..."}),
-            "position": forms.TextInput(attrs={"placeholder": "Position here..."}),
             "location": forms.Select(attrs={'class': 'form-control'}),
-            "price": forms.NumberInput(attrs={"placeholder": "Price here..."}),
-            "price_period": forms.Select(attrs={'class': 'form-control'}),
-            "activity_type": forms.Select(attrs={'class': 'form-control'}),
-            "url": forms.TextInput(attrs={"placeholder": "URL here..."}),
+            "position": forms.TextInput(),
             "is_visually_adaptive": forms.CheckboxInput(),
             "is_hearing_adaptive": forms.CheckboxInput(),
             "is_mobility_adaptive": forms.CheckboxInput(),
@@ -203,9 +202,5 @@ class ActivitySearchForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # make all fields not required:
         for field in self.fields:
             self.fields[field].required = False
-
-
-    

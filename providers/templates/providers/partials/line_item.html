@@ -1,4 +1,20 @@
-<div class="row mt-3 round bg-white border">
+{% if page %}
+    {% if hide_search %}
+        <div class="row mt-3 round bg-white border"
+            hx-post="{% url 'layout-search-results-partial' %}?page={{page}}"
+            hx-trigger="revealed"
+            hx-swap="afterend"
+            hx-include="#main_search_form">
+    {% else %}
+        <div class="row mt-3 round bg-white border"
+            hx-post="{% url 'layout-search-box-results' %}?page={{page}}"
+            hx-trigger="revealed"
+            hx-swap="afterend"
+            hx-include="#search-form_{{ request.user.member.id }}_{{ family_member.id }}">
+    {% endif %}
+{% else %}
+    <div class="row mt-3 round bg-white border">
+{% endif %}
     <div class="col-md-2 d-flex align-items-center justify-content-center"
          role="button"
          hx-target=".main-content"

@@ -16,7 +16,7 @@
         "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Basketball",
@@ -35,7 +35,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Session"
     },
     {
         "name": "Swimming",
@@ -54,7 +54,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Gymnastics",
@@ -73,7 +73,7 @@
         "price": 250,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Tennis",
@@ -92,7 +92,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Baseball",
@@ -111,7 +111,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Athletics",
@@ -130,7 +130,7 @@
         "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Karate",
@@ -149,7 +149,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Cycling",
@@ -168,7 +168,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Volleyball",
@@ -187,7 +187,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Archery",
@@ -206,7 +206,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Hockey",
@@ -225,7 +225,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Golf",
@@ -244,7 +244,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Badminton",
@@ -263,7 +263,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Table Tennis",
@@ -282,7 +282,7 @@
         "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Rugby",
@@ -301,7 +301,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Martial Arts",
@@ -320,7 +320,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Rock Climbing",
@@ -339,7 +339,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Skateboarding",
@@ -358,7 +358,7 @@
         "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Fencing",
@@ -377,7 +377,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Surfing",
@@ -396,7 +396,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Painting Workshop",
@@ -415,7 +415,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Pottery Class",
@@ -434,7 +434,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Dance Class",
@@ -453,7 +453,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Music Ensemble",
@@ -472,7 +472,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Photography Workshop",
@@ -491,7 +491,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Crafting Bonanza",
@@ -510,7 +510,7 @@
         "price": 100,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Theater Arts Camp",
@@ -529,7 +529,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Ceramics Studio",
@@ -548,7 +548,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Fashion Design Class",
@@ -567,7 +567,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Party"
     },
     {
         "name": "Sculpture Sculptors",
@@ -586,7 +586,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Street Art Crew",
@@ -605,7 +605,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Calligraphy Class",
@@ -624,7 +624,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Digital Art Lab",
@@ -643,7 +643,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Comic Book Creators",
@@ -662,7 +662,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Party"
     },
     {
         "name": "Ballet Academy",
@@ -681,7 +681,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Mixed Media Madness",
@@ -700,7 +700,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Jazz Music Jam",
@@ -719,7 +719,7 @@
         "price": 200,
         "pricePeriod": "day",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Puppetry Playhouse",
@@ -738,7 +738,7 @@
         "price": 150,
         "pricePeriod": "day",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Abstract Art Explorers",
@@ -757,7 +757,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Folk Music Fiesta",
@@ -776,7 +776,7 @@
         "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Session"
     },
     {
         "name": "Chemistry Lab Explorers",
@@ -795,7 +795,7 @@
         "price": 2400,
         "pricePeriod": "year",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Astronomy Adventure Camp",
@@ -814,7 +814,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Robotics Workshop",
@@ -833,7 +833,7 @@
         "price": 800,
         "pricePeriod": "month",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Environmental Explorers",
@@ -852,7 +852,7 @@
         "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Physics Fun Fair",
@@ -871,7 +871,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Paleontology Quest",
@@ -890,7 +890,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
-        "activityType": "Indoors"
+        "activityType": "Session"
     },
     {
         "name": "Microbiology Marvels",
@@ -909,7 +909,7 @@
         "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Party"
     },
     {
         "name": "Coding for Kids",
@@ -928,7 +928,7 @@
         "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Zoology Zoo",
@@ -947,7 +947,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Geology Rocks!",
@@ -966,7 +966,7 @@
         "price": 800,
         "pricePeriod": "month",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Space Exploration Club",
@@ -985,7 +985,7 @@
         "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Weather Watchers",
@@ -1004,7 +1004,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Electricity and Magnetism Lab",
@@ -1023,7 +1023,7 @@
         "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Marine Biology Expedition",
@@ -1042,7 +1042,7 @@
         "price": 2400,
         "pricePeriod": "year",
         "capacity": 20,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Archaeology Adventure",
@@ -1061,7 +1061,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Math Puzzles and Games",
@@ -1080,7 +1080,7 @@
         "price": 800,
         "pricePeriod": "month",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Ecology Explorers",
@@ -1099,7 +1099,7 @@
         "price": 2400,
         "pricePeriod": "year",
         "capacity": 15,
-        "activityType": "Outdoors"
+        "activityType": "Camp"
     },
     {
         "name": "Chemical Engineering Creations",
@@ -1118,7 +1118,7 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     },
     {
         "name": "Computer Science Quest",
@@ -1137,6 +1137,6 @@
         "price": 200,
         "pricePeriod": "week",
         "capacity": 20,
-        "activityType": "Indoors"
+        "activityType": "Drop-in"
     }
 ]

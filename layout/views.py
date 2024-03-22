@@ -5,6 +5,7 @@ from django.template import loader, Context
 from django.db.models import Q
 
 from activities.forms import ActivitySearchForm
+from activity_guide.settings import PAGE_SIZE
 from categories.models import Category
 from activities.models import Activity
 from django.core.mail import EmailMultiAlternatives
@@ -56,34 +57,54 @@ def privacy_policy(request):
 def navbar(request):
     return render(request, 'layout/navbar.html')
 
+def _paginate(items, page):
+    page = int(page) if page else 1
+    start = (page - 1) * PAGE_SIZE
+    end = start + PAGE_SIZE if len(items) > start + PAGE_SIZE else len(items)
+    items = items[start:end] if items else []
+    return items, page + 1
+
 def _build_search_query(form: ActivitySearchForm):
     form.is_valid()
     data = form.cleaned_data
     
-    name = data.get('name')
-    description = data.get('description')
+    keyword = data.get('keyword')
+    category = form.data.get('category')
+    activity_type = data.get('activity_type')
+    provider_name = data.get('provider_name')
+    weekdays = data.get('weekdays')
+    age = data.get('age')
     from_date = data.get('from_date')
     to_date = data.get('to_date')
     start_time = data.get('start_time')
     end_time = data.get('end_time')
-    category = form.data.get('category')
-    weekday = data.get('weekday')
-    age_start = data.get('age_start')
-    age_end = data.get('age_end')
-    position = data.get('position')
     location = data.get('location')
-    activity_type = data.get('activity_type')
-    url = form.data.get('url')
+    position = data.get('position')
     is_visually_adaptive = data.get('is_visually_adaptive')
     is_hearing_adaptive = data.get('is_hearing_adaptive')
     is_mobility_adaptive = data.get('is_mobility_adaptive')
     is_cognitive_adaptive = data.get('is_cognitive_adaptive')
     
     query = Q()
-    if name:
-        query = query & Q(name__icontains=name)
-    if description:
-        query = query & Q(description__icontains=description)
+    if keyword:
+        query = query & (
+            Q(name__icontains=keyword) | 
+            Q(description__icontains=keyword) | 
+            Q(category__name__icontains=keyword) | 
+            Q(category__parent__name__icontains=keyword) | 
+            Q(category__parent__parent__name__icontains=keyword))
+    if category:
+        query = query & (Q(category__id=category) | 
+                         Q(category__parent__id=category) | 
+                         Q(category__parent__parent__id=category))
+    if activity_type:
+        query = query & Q(activity_type__icontains=activity_type)
+    if provider_name:
+        query = query & Q(provider__name__icontains=provider_name)
+    if weekdays:
+        query = query & Q(weekday__in=weekdays)
+    if age:
+        query = query & Q(age_start__lte=age) & Q(age_end__gte=age)
     if from_date:
         query = query & Q(from_date__lte=from_date) & Q(to_date__gte=from_date)
     if to_date:
@@ -92,41 +113,32 @@ def _build_search_query(form: ActivitySearchForm):
         query = query & Q(start_time__lte=start_time) & Q(end_time__gte=start_time)
     if end_time:
         query = query & Q(end_time__gte=end_time) & Q(start_time__lte=end_time)
-    if category:
-        query = query & (Q(category__id=category) | Q(category__parent__id=category) | Q(category__parent__parent__id=category))
-    if weekday:
-        query = query & Q(weekday=weekday)
-    if age_start:
-        query = query & Q(age_start__lte=age_start) & Q(age_end__gte=age_start)
-    if age_end:
-        query = query & Q(age_end__gte=age_end) & Q(age_start__lte=age_end)
-    if position:
-        query = query & Q(position__icontains=position)
     if location:
         query = query & Q(location__icontains=location)
-    if activity_type:
-        query = query & Q(activity_type__icontains=activity_type)
-    if url:
-        query = query & Q(url__icontains=url)
+    if position:
+        query = query & Q(position__icontains=position)
     if is_visually_adaptive:
-        query = query & Q(is_visually_adaptive=is_visually_adaptive)
+        query = query & Q(is_visually_adaptive=True)
     if is_hearing_adaptive:
-        query = query & Q(is_hearing_adaptive=is_hearing_adaptive)
+        query = query & Q(is_hearing_adaptive=True)
     if is_mobility_adaptive:
-        query = query & Q(is_mobility_adaptive=is_mobility_adaptive)
+        query = query & Q(is_mobility_adaptive=True)
     if is_cognitive_adaptive:
-        query = query & Q(is_cognitive_adaptive=is_cognitive_adaptive)
+        query = query & Q(is_cognitive_adaptive=True)
         
     return query
 
 def search_results(request):
     form = ActivitySearchForm(request.POST)
     query = _build_search_query(form)
-    activities = Activity.objects.filter(query)    
+    activities = Activity.objects.filter(query)
+    activities, next_page = _paginate(activities, request.GET.get('page'))
     
     context = {
         'activities': activities,
-        'search_form': form
+        'search_form': form,
+        'next_page': next_page,
+        'show_provider_name': 1,
     }
     return render(request, 'layout/search_results.html', context)
 
@@ -135,27 +147,29 @@ def search_results_partial(request):
     form = ActivitySearchForm(request.POST)
     query = _build_search_query(form)
     activities = Activity.objects.filter(query)
-    print(query)
+    activities, next_page = _paginate(activities, request.GET.get('page'))
+    
     context = {
         'items': activities,
         'model': 'activity',
         'edit': False,
-        'hide_search': 1
+        'hide_search': 1,
+        'next_page': next_page,
+        'show_provider_name': 1,
     }
     return render(request, 'layout/partials/search_box_results.html', context)
 
 
 def search_box_results(request):
-    q = request.GET.get('q')
-    family_member = request.GET.get('family_member')
-    member = request.GET.get('member')
-    category = request.GET.get('category')
-    provider = request.GET.get('provider')
-    edit = request.GET.get('edit')
-    stage = request.GET.get('stage')
-    model = request.GET.get('model', 'activity')
+    q = request.POST.get('q')
+    family_member = request.POST.get('family_member')
+    member = request.POST.get('member')
+    category = request.POST.get('category')
+    provider = request.POST.get('provider')
+    edit = request.POST.get('edit')
+    stage = request.POST.get('stage')
+    model = request.POST.get('model', 'activity')
     query = Q()
-    print('MODEL:', model)
     if model == 'activity':
         if q:
             query = query & Q(name__icontains=q) | (Q(category__name__icontains=q) | Q(category__parent__name__icontains=q))
@@ -172,12 +186,16 @@ def search_box_results(request):
         if category:
             query = query & (Q(activities__category__slug=category) | Q(activities__category__parent__slug=category))
         items = Provider.objects.filter(query).distinct()
+    
+    items = items.order_by('-updated_at')
+    items, next_page = _paginate(items, request.GET.get('page'))
+    
     context = {
         'items': items,
         'model': model,
         'edit': edit,
+        'next_page': next_page,
     }
-    print(query, "sarasaaaaaaaaaa")
     return render(request, 'layout/partials/search_box_results.html', context)
 
 
