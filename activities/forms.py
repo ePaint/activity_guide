@@ -204,3 +204,6 @@ class ActivitySearchForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].required = False
+        # Make categories appear alphabetically
+        self.fields['category'].choices = sorted(self.fields['category'].choices, key=lambda x: x[1])
+        self.fields['activity_type'].choices = sorted(self.fields['activity_type'].choices, key=lambda x: x[1])
