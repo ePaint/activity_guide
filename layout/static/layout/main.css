@@ -285,12 +285,6 @@ body {
     color: #D2122E !important;
 }
 
-.long-ad {
-    height: 7rem;
-    margin-left: 0.025rem;
-    margin-right: 0.025rem;
-}
-
 .search-box {
     height: 3rem;
 }
@@ -302,10 +296,6 @@ body {
 
 .carousel-caption:hover {
     opacity: 1;
-}
-
-.big-ad {
-    height: 400px;
 }
 
 .result-text-2 {
@@ -594,14 +584,6 @@ footer {
     /* width: calc(100% - 300px); */
 }
 
-.home-banner-ad-wide {
-    height: calc(10rem + 78px);
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 .home-categories {
     /* width: 100%; */
 }
@@ -609,6 +591,10 @@ footer {
 .home-carousel {
     height: 538px;
     /* width: 70%; */
+}
+
+.category-detail-ad {
+    min-height: 20rem;
 }
 
 .fill {
@@ -647,17 +633,6 @@ footer {
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-}
-
-.categories-ad {
-    height: 7rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.category-detail-ad {
-    min-height: 20rem;
 }
 
 .categories-item {
@@ -1118,4 +1093,60 @@ label {
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     height: 36px !important;
     overflow-y: scroll !important;
+}
+
+.home-banner-ad-wide {
+    height: calc(10rem + 78px);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: center;
+    border-radius: 2.5rem !important;
+    max-width: 880px !important;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.categories-ad {
+    height: 7rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-radius: 2.5rem !important;
+    max-width: 306px !important;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.categories-central-ad {
+    height: 7rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 2.5rem !important;
+    max-width: 636px !important;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.search-banner-ad-wide {
+    height: 7rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border-radius: 2.5rem !important;
+    max-width: 1067px !important;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.search-banner-side-ad {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2.5rem !important;
+    max-width: 196px !important;
+    overflow: hidden;
+    cursor: pointer;
 }
