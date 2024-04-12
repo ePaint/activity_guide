@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'providers.apps.ProvidersConfig',
     'activities.apps.ActivitiesConfig',
     'members.apps.MembersConfig',
+    'ads',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_htmx',

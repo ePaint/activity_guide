@@ -1,0 +1,16 @@
+{% extends request.base_template %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="container p-4 border round bg-white" style="max-width: 800px">
+    {% for section in sections %}
+      <h4>{{ section.title }}</h4>
+      {% for form in section.forms %}
+        <form class="d-flex flex-column w-100">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn orange-hover">Submit</button>
+        </form>
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endblock %}
