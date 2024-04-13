@@ -78,20 +78,23 @@
                                     <img id="profile_image_navbar" src="{{ request.user.profile.image_url }}" width="24" height="24" viewBox="0 0 16 16" class="rounded-circle justify-content-center align-items-center">
                                 </div>
                                 <div class="header-item dropdown-toggle text-decoration-none orange" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                &nbsp;Account
+                                &nbsp;{% if request.user.is_staff %}Admin{% else %}Account{% endif %}
                               </div>
                             <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
-                                <li><a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start" 
-                                    href="#" 
-                                    role="button"
-                                    hx-target=".main-content"
-                                    hx-trigger="click"
-                                    hx-push-url="true"
-                                    hx-get="{% url 'users-profile' %}"
-                                    onclick="scrollToTop()">
-                                        <img src="{% static 'layout/person-badge.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
-                                        &nbsp;Member Profile
-                                    </a></li>
+                                {% if not request.user.is_staff %}
+                                    <li>
+                                        <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start" 
+                                            href="#" 
+                                            role="button"
+                                            hx-target=".main-content"
+                                            hx-trigger="click"
+                                            hx-push-url="true"
+                                            hx-get="{% url 'users-profile' %}"
+                                            onclick="scrollToTop()">
+                                            <img src="{% static 'layout/person-badge.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
+                                            &nbsp;Member Profile
+                                        </a>
+                                    </li>
                                     <li>
                                         <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"href="#" 
                                             role="button"
@@ -103,53 +106,54 @@
                                             &nbsp;Member Dashboard
                                         </a>
                                     </li>
-                                <li><hr class="dropdown-divider"></li>
-                                {% if request.user.provider %}
-                                    <li>
-                                        <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"
-                                            role="button"
-                                            hx-target=".main-content"
-                                            hx-trigger="click"
-                                            hx-push-url="true"
-                                            hx-get="{% url 'provider-profile' request.user.provider.slug %}">
-                                            <img src="{% static 'layout/journal.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
-                                            &nbsp;Provider Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start text-decoration-none"
-                                            role="button"
-                                            hx-target=".main-content"
-                                            hx-trigger="click"
-                                            hx-push-url="true"
-                                            hx-get="{% url 'provider-dashboard' %}">
-                                            <img src="{% static 'layout/journal-bookmark.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
-                                            &nbsp;Provider Dashboard
-                                        </a>
-                                    </li>
-                                {% else %}
-                                    <li>
-                                        <button class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start text-decoration-none"
-                                            type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modal_global"
-                                            hx-get="{% url 'provider-request-form' %}"
-                                            hx-trigger="click"
-                                            hx-target="#modal_global">
-                                            <img src="{% static 'layout/plus.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
-                                            &nbsp;Become a Provider
-                                        </button>
-                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    {% if request.user.provider %}
+                                        <li>
+                                            <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"
+                                                role="button"
+                                                hx-target=".main-content"
+                                                hx-trigger="click"
+                                                hx-push-url="true"
+                                                hx-get="{% url 'provider-profile' request.user.provider.slug %}">
+                                                <img src="{% static 'layout/journal.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
+                                                &nbsp;Provider Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start text-decoration-none"
+                                                role="button"
+                                                hx-target=".main-content"
+                                                hx-trigger="click"
+                                                hx-push-url="true"
+                                                hx-get="{% url 'provider-dashboard' %}">
+                                                <img src="{% static 'layout/journal-bookmark.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
+                                                &nbsp;Provider Dashboard
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <button class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start text-decoration-none"
+                                                type="button"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modal_global"
+                                                hx-get="{% url 'provider-request-form' %}"
+                                                hx-trigger="click"
+                                                hx-target="#modal_global">
+                                                <img src="{% static 'layout/plus.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="orange-filter">
+                                                &nbsp;Become a Provider
+                                            </button>
+                                        </li>
+                                    {% endif %}
+                                    <li><hr class="dropdown-divider"></li>
                                 {% endif %}
-                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item user-dropdown blue-hover d-flex align-items-center text-start" 
-                                    href="#" 
-                                    role="button"
-                                    hx-target=".main-content"
-                                    hx-trigger="click"
-                                    hx-push-url="true"
-                                    hx-get="{% url 'users-logout' %}">
+                                        href="#" 
+                                        role="button"
+                                        hx-target=".main-content"
+                                        hx-trigger="click"
+                                        hx-push-url="true"
+                                        hx-get="{% url 'users-logout' %}">
                                         <img src="{% static 'layout/box-arrow-left.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="blue-filter">
                                         &nbsp;Logout
                                     </a>
