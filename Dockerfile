@@ -18,6 +18,8 @@ COPY . /code
 
 RUN python manage.py migrate
 
+RUN python manage.py createsuperuser --noinput
+
 EXPOSE 8000
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "activity_guide.wsgi"]
