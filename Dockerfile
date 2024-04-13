@@ -18,7 +18,7 @@ COPY . /code
 
 RUN python manage.py migrate
 
-RUN python manage.py createsuperuser --noinput
+RUN python manage.py createsuperuser --noinput --username admin --email $DJANGO_SUPERUSER_EMAIL --password $DJANGO_SUPERUSER_PASSWORD
 
 EXPOSE 8000
 
