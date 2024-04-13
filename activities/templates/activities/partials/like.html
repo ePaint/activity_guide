@@ -1,29 +1,43 @@
 {% load static %}
-{% if activity in request.user.member.liked_activities.all %}
-    <button id="activity_interaction_like_{{activity.slug}}_{{family_member.pk}}"
-        type="button"
-        class="w-25 btn btn-outline-primary orange-hover"
-        hx-post="{% url 'activity-like' activity.slug %}"
-        hx-swap="outerHTML"
-        onclick="deletePopover(this)"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        data-bs-content="Remove activity from favorites">
-        <img class="orange-filter" src="{% static 'layout/star-fill.svg' %}" />
-    </button>
+{% if request.user.is_authenticated and not request.user.is_staff %}
+    {% if activity in request.user.member.liked_activities.all %}
+        <button id="activity_interaction_like_{{activity.slug}}_{{family_member.pk}}"
+            type="button"
+            class="w-25 btn btn-outline-primary orange-hover"
+            hx-post="{% url 'activity-like' activity.slug %}"
+            hx-swap="outerHTML"
+            onclick="deletePopover(this)"
+            data-bs-toggle="popover"
+            data-bs-placement="top"
+            data-bs-content="Remove activity from favorites">
+            <img class="orange-filter" src="{% static 'layout/star-fill.svg' %}" />
+        </button>
+    {% else %}
+        <button id="activity_interaction_like_{{activity.slug}}_{{family_member.pk}}"
+            type="button"
+            class="w-25 btn btn-outline-primary orange-hover"
+            hx-post="{% url 'activity-like' activity.slug %}"
+            hx-swap="outerHTML"
+            onclick="deletePopover(this)"
+            data-bs-toggle="popover"
+            data-bs-placement="top"
+            data-bs-content="Add activity to favorites">
+            <img class="orange-filter" src="{% static 'layout/star.svg' %}" />
+        </button>
+    {% endif %}
+    <script>
+        initializePopover("activity_interaction_like_{{activity.slug}}_{{family_member.pk}}");
+    </script>
 {% else %}
     <button id="activity_interaction_like_{{activity.slug}}_{{family_member.pk}}"
         type="button"
         class="w-25 btn btn-outline-primary orange-hover"
-        hx-post="{% url 'activity-like' activity.slug %}"
-        hx-swap="outerHTML"
-        onclick="deletePopover(this)"
-        data-bs-toggle="popover"
-        data-bs-placement="top"
-        data-bs-content="Add activity to favorites">
+        data-bs-toggle="modal"
+        data-bs-target="#modal_global"
+        hx-get="{% url 'users-login' %}"
+        hx-trigger="click"
+        hx-target="#modal_global"
+        onclick="deletePopover(this)">
         <img class="orange-filter" src="{% static 'layout/star.svg' %}" />
     </button>
 {% endif %}
-<script>
-    initializePopover("activity_interaction_like_{{activity.slug}}_{{family_member.pk}}");
-</script>
