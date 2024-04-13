@@ -8,12 +8,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 @staff_member_required
 def home(request):
     sections = []
-
-    index = 0
     for location_code, location_label in AD_LOCATIONS.items():
         ad_form_set = MODEL_FORM_SETS[location_code]
         ad_dimensions = AD_SIZES[location_code]
-        index += 1
         sections.append({
             'title': location_label,
             'location': location_code,
@@ -28,21 +25,23 @@ def home(request):
     return render(request, 'ads/home.html', context)
 
 @staff_member_required
-def save(request, location):    
-    AdFormSet = MODEL_FORM_SETS[location]
+def save(request, location):
+    ad_form_set = MODEL_FORM_SETS[location]
+    ad_dimensions = AD_SIZES[location]
     data = copy.deepcopy(request.POST)
     data['form-TOTAL_FORMS'] = MAX_ADS_PER_SECTION
     data['form-INITIAL_FORMS'] = MAX_ADS_PER_SECTION
-    formset = AdFormSet(data, request.FILES)
+    formset = ad_form_set(data, request.FILES)
     
     if formset.is_valid():
-        print('Saving formset')
         formset.save()
 
     context = {
         'title': AD_LOCATIONS[location],
         'location': location,
         'forms': MODEL_FORM_SETS[location](),
+        'width': ad_dimensions['width'],
+        'height': ad_dimensions['height'],
     }
     
     return render(request, 'ads/partials/form.html', context)

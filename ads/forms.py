@@ -1,8 +1,6 @@
 from typing import Any
 from django import forms
 from activity_guide.settings import MAX_ADS_PER_SECTION
-from django.core.files.base import ContentFile
-import base64
 from .models import Ad
 
 class AdForm(forms.ModelForm):
@@ -27,13 +25,13 @@ class AdForm(forms.ModelForm):
             
         if image:
             self.instance.image = image
+        
         print(f'Image: {image}. Instance: {self.instance}. Commit: {commit}')
         
         if commit:
             form_object.save()
         return form_object
 
-# Model form set for Ad model
 class BaseAdsFormSet(forms.BaseModelFormSet):
     def __init__(self, *args: Any, location: str = None, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
