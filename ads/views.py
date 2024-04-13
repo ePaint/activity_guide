@@ -33,15 +33,16 @@ def save(request, location):
     data = copy.deepcopy(request.POST)
     data['form-TOTAL_FORMS'] = MAX_ADS_PER_SECTION
     data['form-INITIAL_FORMS'] = MAX_ADS_PER_SECTION
-    formset = AdFormSet(data)
+    formset = AdFormSet(data, request.FILES)
     
     if formset.is_valid():
+        print('Saving formset')
         formset.save()
 
     context = {
         'title': AD_LOCATIONS[location],
         'location': location,
-        'forms': formset,
+        'forms': MODEL_FORM_SETS[location](),
     }
     
     return render(request, 'ads/partials/form.html', context)

@@ -40,7 +40,7 @@ class Provider(models.Model):
     def image_url(self):
         if self.image:
             return self.image.url
-        return  STATIC_URL + 'layout/image-alt.svg'
+        return STATIC_URL + 'layout/image-alt.svg'
     
     def get_name_form(self):
         return ProviderNameForm(instance=self, field='name')

@@ -1,5 +1,7 @@
 from django.db import models
 
+from activity_guide.settings import STATIC_URL
+
 AD_LOCATIONS = {
     'H': 'Homepage Top Ads',
     'S': 'Search Results Top Ads',
@@ -76,19 +78,24 @@ class AdClickAction(models.Model):
 
 
 class Ad(models.Model):
-    image_url = models.URLField()
+    image = models.ImageField(upload_to='ads/', null=True, blank=True)
     location = models.ForeignKey(AdLocation, on_delete=models.CASCADE, related_name='ads')
     click_action = models.ForeignKey(AdClickAction, on_delete=models.CASCADE, related_name='ads', null=True, blank=True)
     click_action_target = models.CharField(max_length=255, null=True, blank=True)
 
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        return STATIC_URL + 'layout/image-alt.svg'
+    
     def __str__(self):
-        return self.image_url
+        return self.image_url()
     
 
 def get_ads_by_location(location):
     return Ad.objects.filter(
         location__location=location,
-        image_url__isnull=False,
+        image__isnull=False,
         click_action__isnull=False,
         click_action_target__isnull=False
     )

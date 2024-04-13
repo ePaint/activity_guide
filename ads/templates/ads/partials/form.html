@@ -1,5 +1,6 @@
 {% load crispy_forms_tags %}
 <form id="ad-form-{{ location }}"
+      enctype="multipart/form-data"
       class="d-flex flex-column mb-5 border round bg-white p-4"
       hx-post="{% url 'ads-save' location %}"
       hx-trigger="submit"
@@ -15,6 +16,7 @@
             <div class="col align-self-center fs-3 orange user-select-none">{{ forloop.counter }}</div>
             <div class="col-11 mb-3 ad-form-fields">
                 {{ form|crispy }}
+
             </div>
         {% endfor %}
     </div>

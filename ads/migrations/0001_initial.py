@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
             name='Ad',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image_url', models.URLField()),
+                ('image', models.ImageField(upload_to='ads/', blank=True, null=True)),
                 ('location', models.ForeignKey(on_delete=models.CASCADE, to='ads.AdLocation', related_name='ads')),
                 ('click_action', models.ForeignKey(on_delete=models.CASCADE, to='ads.AdClickAction', related_name='ads', blank=True, null=True)),
                 ('click_action_target', models.CharField(blank=True, max_length=255, null=True)),

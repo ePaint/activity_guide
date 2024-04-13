@@ -1,29 +1,47 @@
 from typing import Any
 from django import forms
 from activity_guide.settings import MAX_ADS_PER_SECTION
+from django.core.files.base import ContentFile
+import base64
 from .models import Ad
 
 class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
-        fields = ['image_url', 'click_action', 'click_action_target']
+        fields = ['image', 'click_action', 'click_action_target']
         widgets = {
-            'image_url': forms.URLInput(),
+            'image': forms.ClearableFileInput(attrs={'accept': 'image/*'}),
             'click_action': forms.Select(),
             'click_action_target': forms.TextInput(),
         }
 
     def __init__(self, *args: Any, section: str = None, position: int = 0, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.fields['image_url'].required = False
+        self.fields['image'].required = False
         self.fields['click_action'].required = False
         self.fields['click_action_target'].required = False
+        
+    def save(self, commit=True):
+        form_object = super().save(commit=False)
+        image = self.cleaned_data.get('image')
+            
+        if image:
+            self.instance.image = image
+        print(f'Image: {image}. Instance: {self.instance}. Commit: {commit}')
+        
+        if commit:
+            form_object.save()
+        return form_object
 
 # Model form set for Ad model
 class BaseAdsFormSet(forms.BaseModelFormSet):
     def __init__(self, *args: Any, location: str = None, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.queryset = Ad.objects.filter(location__location=location)
+    
+    def save(self):
+        for form in self.forms:
+            AdForm(data=form.cleaned_data, instance=form.instance).save()
 
 class BaseHomepageTopAdsFormSet(BaseAdsFormSet):
     def __init__(self, *args: Any, **kwargs: Any) -> None:

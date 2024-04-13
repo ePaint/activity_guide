@@ -29,70 +29,70 @@ class Migration(migrations.Migration):
         
         ads_to_create = [
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/home_page.jpg",
+                "image_url": "ads/home_page.jpg",
                 "location": "H",
                 "click_action": "Open URL",
                 "click_action_target": "https://www.bcwildlife.com",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/search_results_1.png",
+                "image_url": "ads/search_results_1.png",
                 "location": "S",
                 "click_action": "Open URL",
                 "click_action_target": "https://raregroupkamloops.ca/",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/search_results_2.png",
+                "image_url": "ads/search_results_2.png",
                 "location": "S1",
                 "click_action": "Send Email",
                 "click_action_target": "marketing@activityguide.ca",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/search_results_3.png",
+                "image_url": "ads/search_results_3.png",
                 "location": "S2",
                 "click_action": "Open URL",
                 "click_action_target": "https://khykhythelabel.com/",
             },       
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/categories_1.png",
+                "image_url": "ads/categories_1.png",
                 "location": "C1",
                 "click_action": "Send Email",
                 "click_action_target": "marketing@activityguide.ca",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/categories_2.png",
+                "image_url": "ads/categories_2.png",
                 "location": "C2",
                 "click_action": "Open URL",
                 "click_action_target": "https://route1distillery.ca/",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/categories_3.png",
+                "image_url": "ads/categories_3.png",
                 "location": "C3",
                 "click_action": "Open URL",
                 "click_action_target": "https://www.facebook.com/ConsignorSports",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/arts.png",
+                "image_url": "ads/arts.png",
                 "location": "ARTS",
                 "click_action": "Open URL",
                 "click_action_target": "https://wctlive.ca/thehub/default.htm",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/sports.png",
+                "image_url": "ads/sports.png",
                 "location": "SPORTS",
                 "click_action": "Open URL",
                 "click_action_target": "https://kamloopsminorhockey.com/registration/",
             },
             
             {
-                "image_url": "https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/stem.png",
+                "image_url": "ads/stem.png",
                 "location": "STEM",
                 "click_action": "Send Email",
                 "click_action_target": "marketing@activityguide.ca",
@@ -114,7 +114,7 @@ class Migration(migrations.Migration):
         Ad = apps.get_model('ads', 'Ad')
         for ad in ads_to_create:
             Ad.objects.create(
-                image_url=ad['image_url'],
+                image=ad['image_url'],
                 location=AdLocation.objects.get(location=ad['location']),
                 click_action=AdClickAction.objects.get(action=ad.get('click_action')) if ad.get('click_action') else None,
                 click_action_target=ad['click_action_target'],
@@ -128,7 +128,7 @@ class Migration(migrations.Migration):
             
             Ad.objects.bulk_create([
                 Ad(
-                    image_url='',
+                    image=None,
                     location=AdLocation.objects.get(location=location),
                     click_action=None,
                     click_action_target=None,
