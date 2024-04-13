@@ -10,7 +10,7 @@ const scrollToElementId = (element_id) => {
 }
 
 document.addEventListener('htmx:afterRequest', function(evt) {
-    const ad_interval = 1000;
+    const ad_interval = 10000;
     document.querySelectorAll('.carousel-ads').forEach(element => {
         const carousel = bootstrap.Carousel.getOrCreateInstance(element, {
             interval: ad_interval
