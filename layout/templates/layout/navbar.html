@@ -2,69 +2,74 @@
 <div class="navbar-main container-fluid user-select-none">
     <div class="d-flex flex-row flex-nowrap">
         <div class="col-2 flex-shrink-0 site-logo-mobile-slot">
-            <img class="site-logo-mobile"
-                 role="button"
-                 src="{% static 'layout/main_icon.png' %}"
-                 hx-target=".main-content"
-                 hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
-                 hx-on::after-request="scrollToTop()"
-                 hx-push-url="true"
-                 hx-get="{% url 'layout-home' %}"
-                 onclick="scrollToTop()"/>
+            <a role="button"
+               hx-target=".main-content"
+               hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+               hx-on::after-request="scrollToTop()"
+               hx-push-url="true"
+               hx-get="{% url 'layout-home' %}"
+               href="{% url 'layout-home' %}"
+               onclick="scrollToTop()">
+                <img class="site-logo-mobile" src="{% static 'layout/main_icon.png' %}"/>
+            </a>
         </div>
         <div class="col-10 flex-grow-1">
             <div class="row text-center align-items-center">
                 <div class="col-sm-5 g-2 d-flex flex-row justify-content-around">
                     <div class="header-item">
-                        <div class="rounded orange-hover"
+                        <a class="rounded orange-hover text-decoration-none p-1"
                              role="button"
                              hx-target=".main-content"
                              hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
                              hx-on::after-request="scrollToTop()"
                              hx-push-url="true"
                              hx-get="{% url 'layout-home' %}"
+                             href="{% url 'layout-home' %}"
                              onclick="scrollToTop()">
                             Home
-                        </div>
+                    </a>
                     </div>
                     <div class="header-item">
-                        <div class="rounded orange-hover"
+                        <a class="rounded orange-hover text-decoration-none p-1"
                              role="button"
                              hx-target=".main-content"
                              hx-trigger="click[window.location.pathname != '{% url "category-home" %}']"
                              hx-on::after-request="scrollToTop()"
                              hx-push-url="true"
                              hx-get="{% url 'category-home' %}"
+                             href="{% url 'category-home' %}"
                              onclick="scrollToTop()">
                             Categories
-                        </div>
+                        </a>
                     </div>
                     <div class="header-item">
-                        <div class="rounded orange-hover"
+                        <a class="rounded orange-hover text-decoration-none p-1"
                              role="button"
                              hx-target=".main-content"
                              hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
                              hx-on::after-request="scrollToElementId('about-us')"
                              hx-push-url="true"
                              hx-get="{% url 'layout-home' %}"
+                             href="{% url 'layout-home' %}"
                              onclick="scrollToElementId('about-us')">
                             About Us
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-sm-2 header-logo"><div></div></div>
                 <div class="col-sm-5 g-2 d-flex flex-row justify-content-around">
                     <div class="header-item">
-                        <div class="rounded orange-hover"
+                        <a class="rounded orange-hover text-decoration-none p-1"
                              role="button"
                              hx-target=".main-content"
                              hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
                              hx-on::after-request="scrollToElementId('contact')"
                              hx-push-url="true"
                              hx-get="{% url 'layout-home' %}"
+                             href="{% url 'layout-home' %}"
                              onclick="scrollToElementId('contact')">
                             Contact
-                        </div>
+                        </a>
                     </div>
                     {% if request.user.is_authenticated %}
                         <div class="header-item">
@@ -72,9 +77,9 @@
                                 <div class="align-items-center justify-content-center" style="width: 24px; height: 24px; max-width: 24px">
                                     <img id="profile_image_navbar" src="{{ request.user.profile.image_url }}" width="24" height="24" viewBox="0 0 16 16" class="rounded-circle justify-content-center align-items-center">
                                 </div>
-                                <a class="header-item dropdown-toggle text-decoration-none orange" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="header-item dropdown-toggle text-decoration-none orange" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 &nbsp;Account
-                              </a>
+                              </div>
                             <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
                                 <li><a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start" 
                                     href="#" 
@@ -112,7 +117,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"
+                                        <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start text-decoration-none"
                                             role="button"
                                             hx-target=".main-content"
                                             hx-trigger="click"
@@ -124,7 +129,7 @@
                                     </li>
                                 {% else %}
                                     <li>
-                                        <button class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start"
+                                        <button class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start text-decoration-none"
                                             type="button"
                                             data-bs-toggle="modal"
                                             data-bs-target="#modal_global"

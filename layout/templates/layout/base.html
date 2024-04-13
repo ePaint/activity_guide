@@ -32,10 +32,16 @@
 </head>
 
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <img id="site-logo" class="site-logo user-select-none" role="button" src="{% static 'layout/main_icon.png' %}"
-        hx-target=".main-content" hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
-        hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'layout-home' %}"
-        onclick="scrollToTop()" />
+    <a role="button"
+        hx-target=".main-content"
+        hx-trigger="click[window.location.pathname != '{% url "layout-home" %}']"
+        hx-on::after-request="scrollToTop()"
+        hx-push-url="true"
+        hx-get="{% url 'layout-home' %}"
+        href="{% url 'layout-home' %}"
+        onclick="scrollToTop()">
+        <img id="site-logo" class="site-logo user-select-none" src="{% static 'layout/main_icon.png' %}"/>
+    </a>
     <div class="site-logo-space"></div>
     <header id="site-header" class="site-header">
         <div id="navbar" hx-target="#navbar" hx-trigger="load, reload-navbar from:body"

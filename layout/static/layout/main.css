@@ -467,7 +467,7 @@ body {
 
 .header-item {
     word-wrap: break-word;
-    width: 5rem;
+    min-width: 5rem;
 }
 
 footer {
