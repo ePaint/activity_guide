@@ -206,3 +206,5 @@ LOGIN_URL='/users/login'
 LOGIN_REDIRECT_URL='/members/dashboard'
 
 PAGE_SIZE = 10
+
+MAX_ADS_PER_SECTION = 4

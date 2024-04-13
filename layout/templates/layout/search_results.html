@@ -3,11 +3,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-    <div class="row gap-2">
+    <div class="row">
         <div class="col-lg">
-            <a class="search-banner-ad-wide border" target="_blank" href="https://raregroupkamloops.ca">
-                <img src="https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/search_results_1.png">
-            </a>
+            {% include 'layout/partials/ads_carousel.html' with ads=top_ads class='search-banner-ad-wide' %}
             <form class="col-md-3 border p-3 my-4 w-100 bg-white round d-flex flex-column justify-content-center"
                   id="main_search_form"
                   hx-trigger="submit"
@@ -28,12 +26,8 @@
             {% include "layout/search_box.html" with items=activities model='activity' hide_search=1 show_provider_name=1 %}
         </div>
         <div class="col-xxl-2 d-flex flex-column flex-sm-row flex-xxl-column gap-4 align-items-center justify-content-around justify-content-xxl-start">
-            <a class="search-banner-side-ad border" href="mailto:marketing@activityguide.ca">
-                <img src="https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/search_results_2.png">
-            </a>
-            <a class="search-banner-side-ad border" target="_blank" href="https://khykhythelabel.com/">
-                <img src="https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/search_results_3.png">
-            </a>
+            {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-ad' %}
+            {% include 'layout/partials/ads_carousel.html' with ads=sidebar_2_ads class='search-banner-side-ad' %}
         </div>
     </div>
 </div>

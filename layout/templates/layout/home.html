@@ -22,14 +22,10 @@
             </button>
         </form>
         <div class="col-md-8 home-main d-flex flex-column gap-4 no-padding">
-            <div class="w-100 d-flex justify-content-center align-items-center">
-                <a class="home-banner-ad-wide border" target="_blank" href="https://www.bcwildlife.org">
-                    <img src="https://activity-guide-bucket.s3.ca-central-1.amazonaws.com/ads/home_page.jpg">
-                </a>
-            </div>
+            {% include 'layout/partials/ads_carousel.html' with ads=ads class='home-banner-ad-wide' %}
             <div class="row home-categories">
                 <div class="col-md-9 home-carousel pb-4 pb-md-0">
-                    <div id="carouselExampleCaptions" class="carousel carousel-dark slide h-100 w-100" data-bs-ride="carousel">
+                    <div id="carouselExampleCaptions" class="carousel carousel-dark slide h-100 w-100 carousel-homepage" data-bs-ride="carousel">
                         <div class="carousel-indicators">
                             {% for activity in activities %}
                                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>

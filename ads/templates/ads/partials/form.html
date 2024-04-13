@@ -1,0 +1,22 @@
+{% load crispy_forms_tags %}
+<form id="ad-form-{{ location }}"
+      class="d-flex flex-column mb-5 border round bg-white p-4"
+      hx-post="{% url 'ads-save' location %}"
+      hx-trigger="submit"
+      hx-target="#ad-form-{{location}}"
+      hx-swap="outerHTML">
+    <h3 class="text-center orange user-select-none">{{ title }}</h3>
+    <div class="d-flex justify-content-center gap-4">
+        <h6 class="text-center blue user-select-none">Width: {{ width }}px</h6>
+        <h6 class="text-center blue user-select-none">Height: {{ height }}px</h6>
+    </div>
+    <div class="row mt-3">
+        {% for form in forms %}
+            <div class="col align-self-center fs-3 orange user-select-none">{{ forloop.counter }}</div>
+            <div class="col-11 mb-3 ad-form-fields">
+                {{ form|crispy }}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn orange-hover align-self-end">Submit</button>
+</form>

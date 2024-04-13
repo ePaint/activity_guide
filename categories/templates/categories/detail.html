@@ -7,9 +7,7 @@
             {% include 'layout/search_box.html' with items=providers model='provider' title=category.name|add:" Providers" next_page=next_page %}
         </div>
         <div class="col-lg-2 mb-4 pb-lg-0 no-padding">
-            <div class="category-detail-ad h-100 border round bg-white text-muted small text-center d-flex justify-content-center align-items-center crossed">
-                
-            </div>
+            {% include 'layout/partials/ads_carousel.html' with ads=ads class='category-detail-ad' %}
         </div>
     </div>
 </div>

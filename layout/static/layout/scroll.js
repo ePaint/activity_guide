@@ -10,6 +10,24 @@ const scrollToElementId = (element_id) => {
 }
 
 document.addEventListener('htmx:afterRequest', function(evt) {
+    const ad_interval = 1000;
+    document.querySelectorAll('.carousel-ads').forEach(element => {
+        const carousel = bootstrap.Carousel.getOrCreateInstance(element, {
+            interval: ad_interval
+        });
+        carousel._config.interval = ad_interval;
+        carousel.cycle();
+    });
+
+    const homepage_interval = 5000;
+    document.querySelectorAll('.carousel-homepage').forEach(element => {
+        const carousel = bootstrap.Carousel.getOrCreateInstance(element, {
+            interval: homepage_interval,
+        });
+        carousel._config.interval = homepage_interval;
+        carousel.cycle();
+    });
+
     if (evt.detail.successful != true) return;
     
     switch (evt.detail.target.id) {

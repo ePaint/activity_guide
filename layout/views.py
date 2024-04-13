@@ -3,17 +3,14 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.template import loader, Context
 from django.db.models import Q
-
 from activities.forms import ActivitySearchForm
 from activity_guide.settings import PAGE_SIZE
+from ads.models import Ad, get_ads_by_location
 from categories.models import Category
 from activities.models import Activity
 from django.core.mail import EmailMultiAlternatives
-
 from layout.forms import ContactForm
-
 from django.shortcuts import render
-
 from providers.models import Provider
 
 
@@ -45,7 +42,8 @@ def home(request):
         'categories': categories,
         'activities': activities,
         'contact_form': contact_form,
-        'search_form': search_form
+        'search_form': search_form,
+        'ads': get_ads_by_location('H'),
     }
     return render(request, 'layout/home.html', context)
 
@@ -139,6 +137,9 @@ def search_results(request):
         'search_form': form,
         'next_page': next_page,
         'show_provider_name': 1,
+        'top_ads': get_ads_by_location('S'),
+        'sidebar_1_ads': get_ads_by_location('S1'),
+        'sidebar_2_ads': get_ads_by_location('S2'),
     }
     return render(request, 'layout/search_results.html', context)
 

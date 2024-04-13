@@ -593,10 +593,6 @@ footer {
     /* width: 70%; */
 }
 
-.category-detail-ad {
-    min-height: 20rem;
-}
-
 .fill {
     background-size: cover;
     background-position: center;
@@ -1103,8 +1099,12 @@ label {
     align-items: center;
     border-radius: 2.5rem !important;
     max-width: 880px !important;
-    overflow: hidden;
+    overflow: hidden !important;
     cursor: pointer;
+}
+
+.home-banner-ad-wide-width {
+    max-width: min(880px, 100%) !important;
 }
 
 .categories-ad {
@@ -1118,6 +1118,10 @@ label {
     cursor: pointer;
 }
 
+.categories-ad-width {
+    max-width: min(306px, 100%) !important;
+}
+
 .categories-central-ad {
     height: 7rem;
     display: flex;
@@ -1127,6 +1131,10 @@ label {
     max-width: 636px !important;
     overflow: hidden;
     cursor: pointer;
+}
+
+.categories-central-ad-width {
+    max-width: min(636px, 100%) !important;
 }
 
 .search-banner-ad-wide {
@@ -1140,6 +1148,10 @@ label {
     cursor: pointer;
 }
 
+.search-banner-ad-wide-width {
+    max-width: min(1067px, 100%) !important;
+}
+
 .search-banner-side-ad {
     height: 400px;
     display: flex;
@@ -1149,4 +1161,60 @@ label {
     max-width: 196px !important;
     overflow: hidden;
     cursor: pointer;
+}
+
+.search-banner-side-ad-width {
+    max-width: min(196px, 100%) !important;
+}
+
+.category-detail-ad {
+    height: 1172px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2.5rem !important;
+    max-width: 220px !important;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.category-detail-ad-width {
+    max-width: min(220px, 100%) !important;
+}
+
+.ad-form-fields {
+    display: grid !important;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 0.5rem;
+}
+
+.ad-form-fields > *:nth-child(1) {
+    grid-column: span 9 !important;
+}
+
+.ad-form-fields > *:nth-child(2) {
+    grid-column: span 2 !important;
+}
+
+.ad-form-fields > *:nth-child(3) {
+    grid-column: span 7 !important;
+}
+
+@media screen and (max-width: 576px) {
+    .ad-form-fields {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .ad-form-fields > *:nth-child(1) {
+        grid-column: span 1 !important;
+    }
+
+    .ad-form-fields > *:nth-child(2) {
+        grid-column: span 1 !important;
+    }
+
+    .ad-form-fields > *:nth-child(3) {
+        grid-column: span 1 !important;
+    }
+    
 }
