@@ -158,7 +158,7 @@ class ActivityImageForm(forms.ModelForm):
 class ActivitySearchForm(forms.ModelForm):
     keyword = forms.CharField(max_length=100, required=False, label='Keyword', widget=forms.TextInput())
     age = forms.IntegerField(required=False, label='Age', widget=forms.NumberInput(), min_value=3, max_value=100)
-    weekdays = forms.MultipleChoiceField(choices=WEEKDAYS, required=False, label='Weekday', widget=forms.SelectMultiple())
+    # weekdays = forms.MultipleChoiceField(choices=WEEKDAYS, required=False, label='Weekday', widget=forms.SelectMultiple())
     provider_name = forms.CharField(max_length=100, required=False, label='Provider', widget=forms.TextInput())
     
     class Meta:
@@ -168,7 +168,7 @@ class ActivitySearchForm(forms.ModelForm):
             "category",
             "activity_type",
             "provider_name",
-            "weekdays",
+            "weekday",
             "age",
             "from_date",
             "to_date",
@@ -186,7 +186,7 @@ class ActivitySearchForm(forms.ModelForm):
             "category": forms.Select(),
             "activity_type": forms.Select(attrs={'class': 'form-control'}),
             "provider_name": forms.TextInput(),
-            "weekdays": forms.Select(attrs={'class': 'form-control', 'multiple': 'multiple'}),
+            "weekday": forms.Select(attrs={'class': 'form-control'}),
             "age": forms.NumberInput(),
             "from_date": DateInput(),
             "to_date": DateInput(),

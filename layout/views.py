@@ -70,7 +70,7 @@ def _build_search_query(form: ActivitySearchForm):
     category = form.data.get('category')
     activity_type = data.get('activity_type')
     provider_name = data.get('provider_name')
-    weekdays = data.get('weekdays')
+    weekday = data.get('weekday')
     age = data.get('age')
     from_date = data.get('from_date')
     to_date = data.get('to_date')
@@ -99,8 +99,8 @@ def _build_search_query(form: ActivitySearchForm):
         query = query & Q(activity_type__icontains=activity_type)
     if provider_name:
         query = query & Q(provider__name__icontains=provider_name)
-    if weekdays:
-        query = query & Q(weekday__in=weekdays)
+    if weekday:
+        query = query & Q(weekday=weekday)
     if age:
         query = query & Q(age_start__lte=age) & Q(age_end__gte=age)
     if from_date:
