@@ -15,7 +15,7 @@ load_dotenv(override=True)
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100, required=True, label='Your name', widget=forms.TextInput(attrs={'placeholder': 'John Doe'}))
     email = forms.EmailField(required=True, label='Your email', widget=forms.TextInput(attrs={'placeholder': 'john.doe@gmail.com'}))
-    phone = PhoneNumberField(required=False, label='Your phone', region='CA')
+    phone = PhoneNumberField(required=False, label='Your phone', region='CA', widget=RegionalPhoneNumberWidget(region='CA', attrs={'placeholder': '(506) 234-5678'}))
     message = forms.CharField(widget=forms.Textarea, required=True, label='Your message')
 
     def clean_name(self):
