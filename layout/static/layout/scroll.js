@@ -28,6 +28,8 @@ document.addEventListener('htmx:afterRequest', function(evt) {
         carousel.cycle();
     });
 
+    try {initializePhoneNumberElement('id_phone')} catch (e) {console.log(e)};
+
     if (evt.detail.successful != true) return;
     
     switch (evt.detail.target.id) {
