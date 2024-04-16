@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.exceptions import ValidationError
 from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import RegionalPhoneNumberWidget
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
@@ -14,7 +15,7 @@ load_dotenv(override=True)
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100, required=True, label='Your name', widget=forms.TextInput(attrs={'placeholder': 'John Doe'}))
     email = forms.EmailField(required=True, label='Your email', widget=forms.TextInput(attrs={'placeholder': 'john.doe@gmail.com'}))
-    phone = PhoneNumberField(required=False, label='Your phone')
+    phone = PhoneNumberField(required=False, label='Your phone', region='CA')
     message = forms.CharField(widget=forms.Textarea, required=True, label='Your message')
 
     def clean_name(self):

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField()),
-                ('image', models.ImageField(blank=True, null=True, upload_to='categories')),
+                # ('image', models.ImageField(blank=True, null=True, upload_to='categories')),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_featured', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),

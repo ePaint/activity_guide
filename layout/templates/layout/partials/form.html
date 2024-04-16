@@ -52,11 +52,20 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit"
-                        class="btn bg-{{submit_color|default:'green'}}"
-                        {% if close_on_submit %}data-bs-dismiss="modal"{% endif %}>
-                    {{submit_label}}
-                </button>
+                <div class="d-flex align-items-end gap-3">
+                    {% for extra_button in extra_buttons %}
+                        <button type="button"
+                                class="btn {{extra_button.color|default:'orange'}}-hover"
+                                onclick="{{extra_button.onclick}}">
+                            {{extra_button.label}}
+                        </button>
+                    {% endfor %}
+                    <button type="submit"
+                            class="btn bg-{{submit_color|default:'green'}}"
+                            {% if close_on_submit %}data-bs-dismiss="modal"{% endif %}>
+                        {{submit_label}}
+                    </button>
+                </div>
             </div>
         </form>
     </div>

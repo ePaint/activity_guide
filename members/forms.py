@@ -32,7 +32,7 @@ class FamilyMemberSelectorForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         label=_("Family Members"),
         required=False,
-        help_text=_("Select family members to participate in this activity."),
+        help_text=_("Select Family member to save activity."),
     )
 
     class Meta:

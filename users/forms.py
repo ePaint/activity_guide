@@ -41,7 +41,8 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ['phone_number', 'address', 'city', 'state', 'zip_code', 'bio']
         labels = {
-            'zip_code': _('Postal Code')
+            'state': _('Province'),
+            'zip_code': _('Postal Code'),
         }
         
     

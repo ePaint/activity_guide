@@ -69,14 +69,18 @@ def activity_book_buttons(request, slug):
 
 def activity_book(request, slug):
     activity = Activity.objects.get(slug=slug)
-    messages = [
+    # messages = [
+    #     {
+    #         'text': f'Alternatively, you can <a target="_blank" href="{activity.provider.url}">book with the provider</a>.',
+    #         'type': 'info',
+    #     }
+    # ]
+    messages = []
+    extra_buttons = [
         {
-            'text': f'You can also visit this activity\'s page to book it: </br><a href="{activity.url}">{activity.name}</a>',
-            'type': 'info',
-        },
-        {
-            'text': f'Alternatively, you can visit the provider\'s page: </br><a href="{activity.provider.url}">{activity.provider.name}</a>',
-            'type': 'info',
+            'label': 'Book with Provider',
+            'color': 'orange',
+            'onclick': f'window.open("{activity.provider.url}")',
         }
     ]
     
@@ -117,7 +121,7 @@ def activity_book(request, slug):
     else:
         if not request.user.member.family_members.exists():
             messages.insert(0, {
-                'text': 'You need to add a family member before you can book an activity within this platform.',
+                'text': 'Create family members to save activity.',
                 'type': 'warning',
             })
         form = FamilyMemberSelectorForm(instance=request.user.member, activity=activity)
@@ -130,7 +134,8 @@ def activity_book(request, slug):
         'form': form,
         'messages': messages,
         'extra_htmls': extra_htmls,
-        'title': 'Select Family Members to Book Activity',
+        'extra_buttons': extra_buttons,
+        'title': 'Family Activity Organizer',
         'submit_label': 'Save Changes',
         'endpoint': request.path,
         'close_on_submit': False,

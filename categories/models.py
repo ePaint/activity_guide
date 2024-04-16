@@ -5,7 +5,7 @@ from django.urls import reverse
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='categories', blank=True, null=True)
+    # image = models.ImageField(upload_to='categories', blank=True, null=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
@@ -34,7 +34,7 @@ class Category(models.Model):
         return self.parent.name if self.parent else None
 
     def get_children(self):
-        return Category.objects.filter(parent=self)
+        return Category.objects.filter(parent=self).order_by('name')
     
     def get_activities(self):
         return self.activities.all()
