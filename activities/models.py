@@ -58,19 +58,19 @@ class Activity(models.Model):
     image = models.ImageField(upload_to='activities', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='activities')
     provider = models.ForeignKey('providers.Provider', on_delete=models.CASCADE, blank=True, null=True, related_name='activities')
-    from_date = models.DateField(blank=True, null=True)
-    to_date = models.DateField(blank=True, null=True)
-    start_time = models.TimeField(blank=True, null=True)
-    end_time = models.TimeField(blank=True, null=True)
+    from_date = models.DateField()
+    to_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     weekday = models.CharField(max_length=20, choices=WEEKDAYS, blank=True, null=True)
-    age_start = models.IntegerField(blank=True, null=True)
+    age_start = models.IntegerField()
     age_end = models.IntegerField(blank=True, null=True)
     position = models.CharField(max_length=20, blank=True, null=True)
     location = models.CharField(max_length=20, choices=LOCATIONS, blank=True, null=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    price_period = models.CharField(max_length=20, choices=PRICE_PERIODS, blank=True, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price_period = models.CharField(max_length=20, choices=PRICE_PERIODS)
     capacity = models.IntegerField(blank=True, null=True)
-    activity_type = models.CharField(max_length=20, choices=ACTIVITY_TYPES, blank=True, null=True)
+    activity_type = models.CharField(max_length=20, choices=ACTIVITY_TYPES)
     is_visually_adaptive = models.BooleanField(default=False)
     is_hearing_adaptive = models.BooleanField(default=False)
     is_mobility_adaptive = models.BooleanField(default=False)
@@ -80,7 +80,7 @@ class Activity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
-    url = models.URLField(blank=True, null=True)
+    url = models.URLField()
 
     def __str__(self):
         return self.name
@@ -263,7 +263,7 @@ class ActivityBaseForm(forms.ModelForm):
         super(ActivityBaseForm, self).__init__(*args, **kwargs)
         self.fields[field].widget.attrs.update({
             'id': f'{self.instance.pk}-{field}',
-            'hx-post': f'/activities/{self.instance.pk}/{field}/edit',
+            'hx-post': f'/activities/{self.instance.pk}/{field}/edit/',
             'hx-target': f'#activity_{self.instance.pk}-{field}',
             'hx-trigger': 'keyup delay:500ms, change delay:500ms',
             'onkeydown': 'showLoadingSpinner(this)',

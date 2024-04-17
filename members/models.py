@@ -113,7 +113,7 @@ class FamilyMemberBaseForm(forms.ModelForm):
         super(FamilyMemberBaseForm, self).__init__(*args, **kwargs)
         self.fields[field].widget.attrs.update({
             'id': f'{self.instance.pk}-{field}',
-            'hx-post': f'/members/{self.instance.pk}/{field}/edit',
+            'hx-post': f'/members/{self.instance.pk}/{field}/edit/',
             'hx-target': f'#family_member_{self.instance.id}-{field}',
             'hx-trigger': 'keyup delay:500ms, change delay:500ms',
             'onkeydown': 'showLoadingSpinner(this)',

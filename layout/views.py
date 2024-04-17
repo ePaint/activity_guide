@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.mail import send_mail
@@ -8,7 +10,6 @@ from activity_guide.settings import PAGE_SIZE
 from ads.models import Ad, get_ads_by_location
 from categories.models import Category
 from activities.models import Activity
-from django.core.mail import EmailMultiAlternatives
 from layout.forms import ContactForm
 from django.shortcuts import render
 from providers.models import Provider
@@ -228,3 +229,4 @@ def field_edit(request, model, model_name, pk, field, form_class):
             'form': form,
         }
         return render(request, 'layout/partials/field_edit.html', context)
+        

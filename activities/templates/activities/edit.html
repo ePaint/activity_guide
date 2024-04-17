@@ -32,9 +32,8 @@
                         </div>
                         <hr class="hr mt-0 mb-1" />
                         <div class="d-flex flex-column justify-content-between h-100">
-                            <div class="two-columns">
-                                {{ activity.description }}
-                                {% lorem 2 b random %}
+                            <div id="provider-description-form-container">
+                                {% include 'layout/partials/field_edit.html' with model='activity' item=activity form=activity.get_description_form %}
                             </div>
                         </div>
                     </div>

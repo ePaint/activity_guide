@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <h1>Activity Guide New Provider Registered</h1>
+    <p>Name: {{ provider.name }}</p>
+    <p>Description: {{ provider.description }}</p>
+    <p>Created At: {{ provider.created_at }}</p>
+    <p>Slug: {{ provider.slug }}</p>
+    <p>URL: {{ provider.url }}</p>
+    </br>
+    <p>To activate the provider, please go to <a href="{{ admin_url }}" target="_blank">the admin dashboard</a>, check the <span class="blue">Is active</span> checkbox and click <span class="blue">SAVE</span>.</p>
+</body>
+</html>

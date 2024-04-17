@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import resolve
@@ -5,6 +7,8 @@ from layout.decorators import login_required, provider_required
 from layout.views import _paginate, field_edit
 from providers.forms import ProviderForm, ProviderImageForm, ProviderNameForm, ProviderDescriptionForm
 from providers.models import FORM_MAPPER, Provider
+from django.core.mail import EmailMultiAlternatives
+from django.template import loader, Context
 
 
 def provider_profile(request, slug):
@@ -60,9 +64,12 @@ def provider_request_form(request):
         form = ProviderForm(request.POST, request.FILES, instance=provider)
         if form.is_valid():
             provider = form.save(commit=False)
+            provider.is_active = False
             provider.save()
             request.user.is_provider = True
             request.user.save()
+            base_url = request.build_absolute_uri('/')[:-1]
+            send_provider_email(provider, base_url)
             response = render(request, 'providers/provider_dashboard.html', {'provider': provider})
             response.headers['HX-Replace-Url'] = '/providers/dashboard'
             response.headers['HX-Retarget'] = '#main-content'
@@ -91,3 +98,24 @@ def provider_image_update(request):
 
 def provider_field_edit(request, pk, field):
     return field_edit(request, Provider, 'provider', pk, field, FORM_MAPPER[field])
+
+    
+def send_provider_email(provider: Provider, base_url: str):
+    if not settings.CONTACT_ENABLED:
+        print('Contact form is disabled.')
+        return
+
+    template = loader.get_template('providers/provider_request_email.html')
+    html = template.render(context={
+        'provider': provider,
+        'admin_url': f'{base_url}/admin/providers/provider/{provider.id}/change/'
+    })
+    
+    print(html)
+
+    email = EmailMultiAlternatives(subject='New Provider Registered',
+                                    to=[os.getenv('CONTACT_TO_EMAIL')],
+                                    from_email=os.getenv('CONTACT_FROM_EMAIL'))
+    email.attach_alternative(html, 'text/html')
+    email.send()
+    print('Email successfully sent to admin.')

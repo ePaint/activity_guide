@@ -41,14 +41,22 @@
         {% include "layout/search_box.html" with items=provider.get_activities edit=1 stage='provider_dashboard' model='activity' title='Provider Activities' %}
     </div>
     <div class="d-flex flex-column align-items-center justify-content-center p-2">
-        <button class="btn green-hover"
-                data-bs-toggle="modal" 
-                data-bs-target="#modal_global"
-                hx-get="{% url 'activity-create' %}"
-                hx-trigger="click"
-                hx-target="#modal_global">
-            Create Activity
-        </button>
+        {% if provider.is_active %}
+            <button class="btn green-hover"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modal_global"
+                    hx-get="{% url 'activity-create' %}"
+                    hx-trigger="click"
+                    hx-target="#modal_global">
+                Create Activity
+            </button>
+        {% else %}
+            <div>
+                <div class="alert alert-warning rounded" role="alert">
+                    Your provider account is not active. Please <a class="rounded orange-hover text-decoration-none p-1" role="button" hx-target=".main-content" hx-trigger="click[window.location.pathname != '/']" hx-on::after-request="scrollToElementId('contact')" hx-push-url="true" hx-get="/#contact" href="/#contact" onclick="scrollToElementId('contact')">Contact Us</a> to activate your account and start creating activities.
+                </div>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -58,7 +58,7 @@ class ProviderBaseForm(forms.ModelForm):
         super(ProviderBaseForm, self).__init__(*args, **kwargs)
         self.fields[field].widget.attrs.update({
             'id': f'{self.instance.pk}-{field}',
-            'hx-post': f'/providers/{self.instance.pk}/{field}/edit',
+            'hx-post': f'/providers/{self.instance.pk}/{field}/edit/',
             'hx-target': f'#provider_{self.instance.id}-{field}',
             'hx-trigger': 'keyup delay:500ms, change delay:500ms',
             'onkeydown': 'showLoadingSpinner(this)',
