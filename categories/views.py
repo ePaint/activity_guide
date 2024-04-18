@@ -25,7 +25,7 @@ def detail(request, slug):
     else:
         ads = get_ads_by_location('STEM')
     
-    activities = category.get_activities().order_by('-updated_at')
+    activities = category.get_active_activities().order_by('-updated_at')
     providers = set()
     for activity in activities:
         providers.add(activity.provider)

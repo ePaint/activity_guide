@@ -21,11 +21,15 @@
                 hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-edit' activity.slug %}"
                 onclick="scrollToTop()">{{ activity.name }}</span>
-            <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button"
+            <img id="activity_icon_edit_{{activity.pk}}"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-content="Click here to enter edit your activity details, including the name, description, and image."
+                class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button"
                 src="{{ activity.image_url }}" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-edit' activity.slug %}"
-                onclick="scrollToTop()" />
+                onclick="scrollToTop(); deletePopover(this)" />
         {% else %}
             <span class="fw-bold ms-0 ms-md-1 text-center" role="button" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
@@ -36,21 +40,41 @@
                 hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}"
                 onclick="scrollToTop()" />
-            {% endif %}
-            <span class="badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content"
-                hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
+        {% endif %}
+        <span class="badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content"
+            hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
+            hx-on::after-request="scrollToTop()" hx-push-url="true"
+            hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">
+            {{activity.category.name}}
+        </span>
+        {% if edit %}
+            <button class="btn btn-outline-primary" 
+                    id="copy_button_{{activity.pk}}" 
+                    data-bs-placement="left"
+                    data-bs-content="Create activity using this one as a template"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modal_global"
+                    hx-get="{% url 'activity-create' %}?copy={{activity.pk}}"
+                    hx-trigger="click"
+                    hx-target="#modal_global">
+                Copy
+            </button>
+        {% endif %}
+        {% if show_provider_name == 1 %}
+            <span class="text-center text-muted text-small text-muted fst-italic m-1" role="button" hx-target=".main-content"
+                hx-trigger="click[window.location.pathname != '{% url 'provider-profile' activity.provider.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true"
-                hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">
-                {{activity.category.name}}
+                hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop()">
+                By <span class="{{ activity.category.get_color }}">{{activity.provider.name}}</span>
             </span>
-            {% if show_provider_name == 1 %}
-                <span class="text-center text-muted text-small text-muted fst-italic m-1" role="button" hx-target=".main-content"
-                    hx-trigger="click[window.location.pathname != '{% url 'provider-profile' activity.provider.slug %}']"
-                    hx-on::after-request="scrollToTop()" hx-push-url="true"
-                    hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop()">
-                    By <span class="{{ activity.category.get_color }}">{{activity.provider.name}}</span>
-                </span>
-            {% endif %}
+        {% endif %}
     </div>
     {% include 'activities/partials/line_item_fields.html' with activity=activity edit=edit family_member=family_member %}
 </div>
+
+{% if edit %}
+<script>
+    initializePopover("activity_icon_edit_{{activity.pk}}");
+    initializePopover("copy_button_{{activity.pk}}");
+</script>
+{% endif %}

@@ -81,7 +81,31 @@
                                 &nbsp;{% if request.user.is_staff %}Admin{% else %}Account{% endif %}
                               </div>
                             <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
-                                {% if not request.user.is_staff %}
+                                {% if request.user.is_staff %}
+                                    <li>
+                                        <a class="dropdown-item user-dropdown green-hover d-flex align-items-center text-start" 
+                                            href="/admin" 
+                                            role="button"
+                                            onclick="scrollToTop()">
+                                            <img src="{% static 'layout/pencil.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="green-filter">
+                                            &nbsp;Admin Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item user-dropdown green-hover d-flex align-items-center text-start" 
+                                            href="#" 
+                                            role="button"
+                                            hx-target=".main-content"
+                                            hx-trigger="click"
+                                            hx-push-url="true"
+                                            hx-get="{% url 'ads-home' %}"
+                                            onclick="scrollToTop()">
+                                            <img src="{% static 'layout/card-list.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="green-filter">
+                                            &nbsp;Ad Settings
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                {% else %}
                                     <li>
                                         <a class="dropdown-item user-dropdown orange-hover d-flex align-items-center text-start" 
                                             href="#" 

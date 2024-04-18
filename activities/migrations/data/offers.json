@@ -2,7 +2,7 @@
     {
         "name": "Soccer",
         "description": "Team-based sport involving kicking a ball into the opponent's goal. Develops teamwork, coordination, and agility.",
-        "category": "soccer-quest",
+        "category": "soccer",
         "slugName": "soccer",
         "providerSlug": "playful-learning",
         "fromDate": "2024-01-01",

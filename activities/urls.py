@@ -14,6 +14,7 @@ from activities.views import (
 )
 
 urlpatterns = [
+    path("edit/activity/list/", activity_provider_edit_list, name="activity-provider-edit-list"),
     path("<slug:slug>/image/", activity_image_update, name="activity-image-update"),
     path("create/", activity_create, name="activity-create"),
     path("<slug:slug>/", activity_detail, name="activity-detail"),
@@ -24,6 +25,4 @@ urlpatterns = [
     path("<slug:slug>/book/", activity_book, name="activity-book"),
     path("<slug:slug>/book/buttons/", activity_book_buttons, name="activity-book-buttons"),
     path("<slug:slug>/book/direct/", activity_book_direct, name="activity-book-direct"),
-    path("edit/activity/list/", activity_provider_edit_list, name="activity-provider-edit-list"),
-    
 ]

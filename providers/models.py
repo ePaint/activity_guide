@@ -29,7 +29,7 @@ class Provider(models.Model):
         return reverse('provider-profile', kwargs={'slug': self.slug})
     
     def get_activities(self):
-        return self.activities.all().order_by('-created_at')
+        return self.activities.all().order_by('-is_active', '-created_at')
     
     def get_active_activities(self):
         return self.activities.filter(is_active=True).order_by('-created_at')

@@ -198,7 +198,15 @@ def activity_create(request):
             response.headers['HX-Trigger'] = 'reload-activity-list, close-modal'
             return response
     else:
-        form = ActivityForm()
+        copy = request.GET.get('copy')
+        if copy:
+            activity = Activity.objects.get(pk=copy)
+            activity.slug = None
+            activity.created_at = None
+            activity.updated_at = None
+            form = ActivityForm(instance=activity)
+        else:
+            form = ActivityForm()
     
     context = {
         'form': form,
@@ -212,8 +220,13 @@ def activity_create(request):
 
 @provider_required
 def activity_provider_edit_list(request):
-    activities = request.user.provider.activities.all()
-    context = {"activities": activities, "edit": 1}
+    context = {
+        "items": request.user.provider.get_activities(),
+        "edit": 1,
+        "stage": "provider_dashboard",
+        "model": "activity",
+        "title": "Provider Activities",
+    }
     return render(request, "layout/search_box.html", context)
 
 

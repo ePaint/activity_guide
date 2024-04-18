@@ -35,37 +35,6 @@ class Migration(migrations.Migration):
                 "parent": "sports"
             },
             {
-                "name": "KYSA",
-                "description": "Kamloops Youth Soccer Association. KYSA is a non-profit organization that provides organized soccer for youth in Kamloops.",
-                "slug": "kysa",
-                "parent": "soccer"
-            },
-            {
-                "name": "Soccer Quest",
-                "description": "Soccer Quest is a soccer facility in Kamloops that provides indoor soccer for youth and adults. They also offer soccer camps.",
-                "slug": "soccer-quest",
-                "parent": "soccer"
-            },
-            {
-                "name": "Whitecaps",
-                "description": "The Vancouver Whitecaps are a professional soccer team based in Vancouver, BC. They play in the MLS.",
-                "slug": "whitecaps",
-                "parent": "soccer"
-            },
-            {
-                "name": "Rivers",
-                "description": "Rivers is a soccer club in Kamloops that provides organized soccer for youth. They also offer soccer camps.",
-                "slug": "rivers",
-                "parent": "soccer"
-            },
-            {
-                "name": "TRU",
-                "description": "Thompson Rivers University. TRU is a university in Kamloops that offers a variety of programs. They also have a soccer team.",
-                "slug": "tru",
-                "parent": "soccer"
-            },
-
-            {
                 "name": "Hockey",
                 "description": "Hockey is a popular team sport that is played and loved by millions around the world. It involves two teams trying to score goals by getting a puck into the opposing team's net.",
                 "slug": "hockey",
