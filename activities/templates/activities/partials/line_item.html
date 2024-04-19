@@ -47,7 +47,7 @@
             hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">
             {{activity.category.name}}
         </span>
-        {% if edit %}
+        {% if edit and activity.provider.is_active %}
             <button class="btn btn-outline-primary" 
                     id="copy_button_{{activity.pk}}" 
                     data-bs-placement="left"

@@ -10,7 +10,7 @@
         </div>
         <div class="d-flex flex-column bg-white round border w-100">
             <div class="fs-3 orange align-self-center align-self-md-start d-flex flex-column flex-sm-row align-items-center justify-content-between w-100">
-                <div class="order-1">
+                <div class="order-1 d-flex align-items-center gap-2">
                     {% if provider.url %}
                         <a href="{{ provider.url }}" target="_blank" class="text-decoration-none orange"> 
                             {{ provider.name }}
@@ -18,16 +18,28 @@
                     {% else %}
                         {{ provider.name }}
                     {% endif %}
-                    {% if request.user == provider.user %}
-                        {% if not request.user.is_provider %}
-                            <span>
-                                <img src="{% static 'layout/x-circle-fill.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="gray-filter">
-                            </span>
-                        {% else %}
-                            <span >
-                                <img src="{% static 'layout/check-circle-fill.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="green-filter"> 
-                            </span>
-                        {% endif %}
+                    {% if not provider.is_active %}
+                        <span id="checkmark_inactive" 
+                                data-bs-toggle="popover"
+                                data-bs-placement="right"
+                                data-bs-content="This provider is not currently eligible for display on the website. Please contact the website owner for more information."
+                                title="Unverified Provider" >
+                            <img src="{% static 'layout/x-circle-fill.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="gray-filter">
+                        </span>
+                        <script>
+                            initializePopover("checkmark_inactive");
+                        </script>
+                    {% else %}
+                        <span id="checkmark_active" 
+                                data-bs-toggle="popover"
+                                data-bs-placement="right"
+                                data-bs-content="This provider has been verified by the website owner" 
+                                title="Verified Provider">
+                            <img src="{% static 'layout/check-circle-fill.svg' %}" width="16" height="16" viewBox="0 0 16 16" class="green-filter">
+                        </span>
+                        <script>
+                            initializePopover("checkmark_active");
+                        </script>
                     {% endif %}
                 </div>
                 {% if request.user == provider.user %}
@@ -65,3 +77,4 @@
     {% include "layout/search_box.html" with items=activities model='activity' provider=provider next_page=next_page %}
 </div>
 {% endblock %}
+

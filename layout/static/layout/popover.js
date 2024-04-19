@@ -10,3 +10,9 @@ function deletePopover(element) {
     var popover = bootstrap.Popover.getInstance(element);
     if (popover) popover.dispose();
 }
+
+function closeAllPopovers() {
+    bootstrap.Popover.getInstances().forEach(function (popover) {
+        popover.hide();
+    });
+}
