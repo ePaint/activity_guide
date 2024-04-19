@@ -30,6 +30,8 @@ document.addEventListener('htmx:afterRequest', function(evt) {
 
     try {initializePhoneNumberElement('id_phone')} catch (e) {console.log(e)};
 
+    closeAllPopovers();
+
     if (evt.detail.successful != true) return;
     
     switch (evt.detail.target.id) {
