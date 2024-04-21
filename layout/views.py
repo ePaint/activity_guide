@@ -131,7 +131,9 @@ def _build_search_query(form: ActivitySearchForm):
 def search_results(request):
     form = ActivitySearchForm(request.POST)
     query = _build_search_query(form)
-    activities = Activity.objects.filter(query).order_by('-is_featured', '-provider__is_featured', '-updated_at')
+    activities = list(set(Activity.objects.filter(query)))
+    activities = sorted(activities, key=lambda x: (x.is_featured, x.provider.is_featured, x.updated_at), reverse=True)
+        
     activities, next_page = _paginate(activities, request.GET.get('page'))
     
     context = {
@@ -149,7 +151,8 @@ def search_results(request):
 def search_results_partial(request):
     form = ActivitySearchForm(request.POST)
     query = _build_search_query(form)
-    activities = Activity.objects.filter(query)
+    activities = list(set(Activity.objects.filter(query)))
+    activities = sorted(activities, key=lambda x: (x.is_featured, x.provider.is_featured, x.updated_at), reverse=True)
     activities, next_page = _paginate(activities, request.GET.get('page'))
     
     context = {
