@@ -25,10 +25,12 @@ def detail(request, slug):
     else:
         ads = get_ads_by_location('STEM')
     
-    activities = category.get_active_activities().order_by('-updated_at')
+    activities = category.get_active_activities()
     providers = set()
     for activity in activities:
         providers.add(activity.provider)
+        
+    providers = sorted(providers, key=lambda x: (not x.is_featured, x.name))
     
     providers, next_page = _paginate(list(providers), request.GET.get('page'))
     

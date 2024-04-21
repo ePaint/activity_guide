@@ -123,6 +123,11 @@ class Activity(models.Model):
             return self.image.url
         return STATIC_URL + 'layout/image-alt.svg' 
     
+    def get_color(self):
+        if self.is_featured or self.provider.is_featured:
+            return 'yellow'
+        return self.category.get_color()
+    
     
     def get_adaptive_fields(self):
         fields = [

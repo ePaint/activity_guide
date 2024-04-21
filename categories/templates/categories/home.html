@@ -58,7 +58,8 @@
                                                  hx-push-url="true"
                                                  hx-get="{% url 'provider-profile' provider.slug %}"
                                                  onclick="scrollToTop()">
-                                                {{ provider.name }}
+                                                {% include 'categories/partials/featured.html' with provider=provider seed=provider.get_seed size=20 %}
+                                                <span>{{ provider.name }}</span>
                                             </div>
                                         {% endfor %}
                                         {% if providers.show_more %}

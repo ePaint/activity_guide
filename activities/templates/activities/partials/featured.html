@@ -1,0 +1,14 @@
+{% load static %}
+{% if activity.is_featured or activity.provider.is_featured %}
+    <img id="{{activity.slug}}_{{seed}}"
+        class="yellow-filter"
+        src="{% static 'layout/stars.svg' %}"
+        height="{{size}}px"
+        width="{{size}}px"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        data-bs-content="Featured Activity">
+{% endif %}
+<script>
+    initializePopover("{{activity.slug}}_{{seed}}");
+</script>

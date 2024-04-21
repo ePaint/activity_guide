@@ -9,11 +9,13 @@
                     hx-get="{% url 'activity-book-direct' activity.slug %}?family_member_pk={{family_member.pk}}&action=remove"
                     hx-trigger="click"
                     hx-target="#modal_global"
+                    hx-swap="innerHTML"
                     data-bs-toggle="popover"
                     data-bs-placement="top"
                     data-bs-content="Make {{family_member.name}} opt-out from activity">
                 Opt-out
             </button>
+            {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}
         {% else %}
             <button id="activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}"
                     class="w-75 btn btn-outline-primary orange-hover"
@@ -23,11 +25,13 @@
                     hx-get="{% url 'activity-book-direct' activity.slug %}?family_member_pk={{family_member.pk}}&action=add"
                     hx-trigger="click"
                     hx-target="#modal_global"
+                    hx-swap="innerHTML"
                     data-bs-toggle="popover"
                     data-bs-placement="top"
                     data-bs-content="Book activity for {{family_member.name}}">
                 Book
             </button>
+            {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}
         {% endif %}
     {% else %}
         <button id="activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}"
@@ -38,13 +42,14 @@
                 hx-get="{% url 'activity-book' activity.slug %}"
                 hx-trigger="click"
                 hx-target="#modal_global"
+                hx-swap="innerHTML"
                 data-bs-toggle="popover"
                 data-bs-placement="top"
                 data-bs-content="Book activity">
             Book
         </button>
+        {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}
     {% endif %}
-    {% include 'activities/partials/like.html' with activity=activity %}
     <script>
         initializePopover("activity_interaction_book_family_member_{{activity.slug}}_{{family_member.pk}}");
     </script>
@@ -54,18 +59,18 @@
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#modal_global"
-            hx-get="{% url 'users-login' %}"
+            hx-get="{% url 'users-login' %}?target_activity={{activity.slug}}"
             hx-trigger="click"
             hx-target="#modal_global"
+            hx-swap="innerHTML"
             onclick="deletePopover(this)"
             data-bs-toggle="popover"
             data-bs-placement="top"
             data-bs-content="Book activity">
         Book
     </button>
-    {% include 'activities/partials/like.html' with activity=activity %}
+    {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}
     <script>
         initializePopover("activity_interaction_book_{{activity.slug}}");
     </script>
 {% endif %}
-

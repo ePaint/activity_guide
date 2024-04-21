@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.template import loader, Context
 from django.db.models import Q
 from activities.forms import ActivitySearchForm
-from activity_guide.settings import PAGE_SIZE
+from activity_guide.settings import MAX_ITEMS_IN_HOMEPAGE_CAROUSEL, PAGE_SIZE
 from ads.models import Ad, get_ads_by_location
 from categories.models import Category
 from activities.models import Activity
@@ -35,8 +35,9 @@ def base(request):
 
 
 def home(request):
-    categories = Category.objects.all().order_by('created_at')[:3]
-    activities = Activity.objects.all().order_by('?')[:5]
+    categories = Category.objects.filter(slug__in=['sports', 'art', 'stem'])
+    activities = Activity.objects.filter(Q(is_featured=True) | Q(provider__is_featured=True)).order_by('?')[:MAX_ITEMS_IN_HOMEPAGE_CAROUSEL]
+    
     contact_form = ContactForm()
     search_form = ActivitySearchForm()
     context = {
@@ -130,7 +131,7 @@ def _build_search_query(form: ActivitySearchForm):
 def search_results(request):
     form = ActivitySearchForm(request.POST)
     query = _build_search_query(form)
-    activities = Activity.objects.filter(query)
+    activities = Activity.objects.filter(query).order_by('-is_featured', '-provider__is_featured', '-updated_at')
     activities, next_page = _paginate(activities, request.GET.get('page'))
     
     context = {

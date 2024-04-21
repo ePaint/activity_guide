@@ -26,16 +26,18 @@
             <div class="row home-categories">
                 <div class="col-md-9 home-carousel pb-4 pb-md-0">
                     <div id="carouselExampleCaptions" class="carousel carousel-dark slide h-100 w-100 carousel-homepage" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            {% for activity in activities %}
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
-                            {% endfor %}
-                        </div>
+                        {% if activities.count <= 10 %}
+                            <div class="carousel-indicators">
+                                {% for activity in activities %}
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                         <div class="carousel-inner h-100">
                             {% for activity in activities %}
                                 <div class="carousel-item round border-thick-{{ activity.category.get_color }} fill {% if forloop.first %}active{% endif %}"
                                         style="background-image: url('{{ activity.image_url }}');">
-                                    <div class="carousel-caption bg-white round border"
+                                    <div class="carousel-caption bg-white round border {% if activity.is_featured or activity.provider.is_featured %}box-shadow-yellow{% endif %}"
                                             role="button"
                                             hx-target=".main-content"
                                             hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
@@ -43,7 +45,8 @@
                                             hx-push-url="true"
                                             hx-get="{% url 'activity-detail' activity.slug %}"
                                             onclick="scrollToTop()">
-                                        <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center">
+                                        <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center align-items-center">
+                                            {% include 'activities/partials/featured.html' with activity=activity size=24 %}
                                             <span class="badge bg-{{ activity.category.get_color }} m-1 align-self-center align-self-sm-start">
                                                 {{ activity.category.name }}
                                             </span>

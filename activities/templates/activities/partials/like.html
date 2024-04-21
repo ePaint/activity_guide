@@ -34,7 +34,7 @@
         class="w-25 btn btn-outline-primary orange-hover"
         data-bs-toggle="modal"
         data-bs-target="#modal_global"
-        hx-get="{% url 'users-login' %}"
+        hx-get="{% url 'users-login' %}?target_activity={{activity.slug}}"
         hx-trigger="click"
         hx-target="#modal_global"
         onclick="deletePopover(this)">

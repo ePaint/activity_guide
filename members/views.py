@@ -96,13 +96,16 @@ def remove_family_member(request, pk):
 
 
 def family_member_field_edit(request, pk, field):
+    print('Family member field edit:', pk, field)
     return field_edit(request, FamilyMember, 'family_member', pk, field, FORM_MAPPER[field])
 
 def family_member_search_box(request, pk):
     family_member = FamilyMember.objects.get(pk=pk)
     activities = family_member.activities.all()
     context = {
+        'items': activities,
+        'model': 'activity',
         'family_member': family_member,
-        'activities': activities
     }
+    print('Members search box context:', context)
     return render(request, 'layout/search_box.html', context)

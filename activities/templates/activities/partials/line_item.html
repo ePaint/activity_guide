@@ -1,26 +1,29 @@
 {% if page %}
     {% if hide_search %}
-        <div class="row mb-2 py-2 bg-white round border"
+        <div class="row mb-2 py-2 bg-white round border box-shadow-{{ activity.get_color }}-light"
             hx-post="{% url 'layout-search-results-partial' %}?page={{page}}"
             hx-trigger="revealed"
             hx-swap="afterend"
             hx-include="#main_search_form">
     {% else %}
-        <div class="row mb-2 py-2 bg-white round border"
+        <div class="row mb-2 py-2 bg-white round border box-shadow-{{ activity.get_color }}-light"
             hx-post="{% url 'layout-search-box-results' %}?page={{page}}"
             hx-trigger="revealed"
             hx-swap="afterend"
             hx-include="#search-form_{{ request.user.member.id }}_{{ family_member.id }}">
     {% endif %}
 {% else %}
-    <div class="row mb-2 py-2 bg-white round border">
+    <div class="row mb-2 py-2 bg-white round border box-shadow-{{ activity.get_color }}-light">
 {% endif %}
     <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center">
         {% if edit %}
-            <span class="fw-bold ms-0 ms-md-1 text-center" role="button" hx-target=".main-content"
+            <span class="fw-bold ms-0 ms-md-1 text-center d-flex justify-content-center align-items-center" role="button" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-edit' activity.slug %}"
-                onclick="scrollToTop()">{{ activity.name }}</span>
+                onclick="scrollToTop()">
+                {% include 'activities/partials/featured.html' with activity=activity seed=activity.provider.get_seed size=16 %}
+                <span>{{ activity.name }}</span>
+            </span>
             <img id="activity_icon_edit_{{activity.pk}}"
                 data-bs-toggle="popover"
                 data-bs-placement="top"
@@ -31,10 +34,13 @@
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-edit' activity.slug %}"
                 onclick="scrollToTop(); deletePopover(this)" />
         {% else %}
-            <span class="fw-bold ms-0 ms-md-1 text-center" role="button" hx-target=".main-content"
+            <span class="fw-bold ms-0 ms-md-1 text-center d-flex justify-content-center align-items-center" role="button" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}"
-                onclick="scrollToTop()">{{ activity.name }}</span>
+                onclick="scrollToTop()">
+                {% include 'activities/partials/featured.html' with activity=activity seed=activity.provider.get_seed size=16 %}
+                <span>{{ activity.name }}</span>
+            </span>
             <img class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button"
                 src="{{ activity.image_url }}" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"

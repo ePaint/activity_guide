@@ -113,7 +113,8 @@ def activity_book(request, slug):
                 else:
                     if activity in family_member.activities.all():
                         family_member.activities.remove(activity)
-                        hx_triggers.append(f"interactionButtonsUpdate-{activity.slug}-{family_member.pk}")
+                        # hx_triggers.append(f"interactionButtonsUpdate-{activity.slug}-{family_member.pk}")
+                        hx_triggers.append(f"searchBoxUpdate-{family_member.pk}")
             
             response = HttpResponse(status=204)
             response.headers['HX-Trigger'] = ", ".join(hx_triggers)

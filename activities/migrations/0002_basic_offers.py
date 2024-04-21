@@ -90,6 +90,7 @@ class Migration(migrations.Migration):
                 is_mobility_adaptive=bool(random.getrandbits(1)),
                 is_cognitive_adaptive=bool(random.getrandbits(1)),
                 url=random.choice(random_urls),
+                is_featured=random.choice([True, False, False, False, False]),
             )
 
     dependencies = [

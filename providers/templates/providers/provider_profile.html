@@ -11,6 +11,18 @@
         <div class="d-flex flex-column bg-white round border w-100">
             <div class="fs-3 orange align-self-center align-self-md-start d-flex flex-column flex-sm-row align-items-center justify-content-between w-100">
                 <div class="order-1 d-flex align-items-center gap-2">
+                    {% if provider.is_featured %}
+                        <span id="provider_is_featured"
+                                class="yellow-filter"
+                                data-bs-toggle="popover"
+                                data-bs-placement="top"
+                                data-bs-content="Featured Provider">
+                            <img src="{% static 'layout/stars.svg' %}" width="24" height="24" viewBox="0 0 16 16" class="gray-filter">
+                        </span>
+                        <script>
+                            initializePopover("provider_is_featured");
+                        </script>
+                    {% endif %}
                     {% if provider.url %}
                         <a href="{{ provider.url }}" target="_blank" class="text-decoration-none orange"> 
                             {{ provider.name }}

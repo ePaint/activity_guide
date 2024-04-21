@@ -40,13 +40,13 @@ class Category(models.Model):
         return Category.objects.filter(parent=self, is_active=True).order_by('name')
     
     def get_activities(self):
-        return self.activities.all().order_by('-updated_at')
+        return self.activities.all().order_by('-is_featured', '-provider__is_featured', '-updated_at')
     
     def get_active_activities(self):
-        return self.activities.filter(is_active=True, provider__is_active=True).order_by('-updated_at')
+        return self.activities.filter(is_active=True, provider__is_active=True).order_by('-is_featured', '-provider__is_featured', '-updated_at')
     
     def get_unique_providers(self):
-        max_providers = 2
+        max_providers = 10
         providers = set([activity.provider for activity in self.get_activities()])
         sorted_providers = sorted(providers, key=lambda provider: provider.name)[:max_providers]
         return {
@@ -55,9 +55,9 @@ class Category(models.Model):
         }
     
     def get_active_unique_providers(self):
-        max_providers = 2
+        max_providers = 10
         providers = set([activity.provider for activity in self.get_active_activities()])
-        sorted_providers = sorted(providers, key=lambda provider: provider.name)[:max_providers]
+        sorted_providers = list(providers)[:max_providers]
         return {
             'items': sorted_providers,
             'show_more': len(providers) > max_providers

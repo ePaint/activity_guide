@@ -1,19 +1,19 @@
 {% if page %}
     {% if hide_search %}
-        <div class="row mt-3 round bg-white border"
+        <div class="row mt-3 round bg-white border {% if provider.is_featured %}box-shadow-yellow-light{% endif %}"
             hx-post="{% url 'layout-search-results-partial' %}?page={{page}}"
             hx-trigger="revealed"
             hx-swap="afterend"
             hx-include="#main_search_form">
     {% else %}
-        <div class="row mt-3 round bg-white border"
+        <div class="row mt-3 round bg-white border {% if provider.is_featured %}box-shadow-yellow-light{% endif %}"
             hx-post="{% url 'layout-search-box-results' %}?page={{page}}"
             hx-trigger="revealed"
             hx-swap="afterend"
             hx-include="#search-form_{{ request.user.member.id }}_{{ family_member.id }}">
     {% endif %}
 {% else %}
-    <div class="row mt-3 round bg-white border">
+    <div class="row mt-3 round bg-white border {% if provider.is_featured %}box-shadow-yellow-light{% endif %}">
 {% endif %}
     <div class="col-md-2 d-flex align-items-center justify-content-center"
          role="button"
@@ -38,12 +38,12 @@
          onclick="scrollToTop()">
         {{ provider.name }}
     </div>
-    <div class="col-md-6 text-muted small pt-2 pt-md-0 two-columns">
+    <div class="col-md-5 text-muted small pt-2 pt-md-0 two-columns">
         {{ provider.description }}
     </div>
 
-    <div class="col-md-2 row gap-0 small pt-2 pt-md-0">
-        <div class="col-3 w-25 d-flex flex-column flex-wrap justify-content-center align-items-center">
+    <div class="col-md-3 row gap-0 small pt-2 pt-md-0 d-flex justify-content-center align-items-center">
+        <div class="col-3 w-25 d-flex flex-row flex-md-column justify-content-center align-items-start">
             {% for provider_category in provider.get_categories %}
                 <span class="badge bg-{{ provider_category.get_color }} m-1"
                         role="button"

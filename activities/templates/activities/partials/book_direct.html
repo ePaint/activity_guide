@@ -14,7 +14,8 @@
             data-bs-target="#modal_global"
             hx-get="{% url 'activity-book-direct' activity.slug %}?family_member_pk={{family_member.pk}}&action=add"
             hx-trigger="click"
-            hx-target="#modal_global">
+            hx-target="#modal_global"
+            hx-swap="innerHTML">
         Book
     </button>
 {% endif %}

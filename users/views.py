@@ -48,6 +48,7 @@ def register(request):
 
 
 def login(request):
+    extra_buttons = []
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -63,6 +64,13 @@ def login(request):
                 return response
     else:
         form = UserLoginForm()
+        if 'target_activity' in request.GET:
+            activity = Activity.objects.get(slug=request.GET['target_activity'])
+            extra_buttons.append({
+                'label': 'Book with Provider',
+                'color': 'orange',
+                'onclick': f'window.open("{activity.provider.url}")',
+            })
     
     extra_htmls = [
         f'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
@@ -70,6 +78,7 @@ def login(request):
     context = {
         'form': form,
         'extra_htmls': extra_htmls,
+        'extra_buttons': extra_buttons,
         'title': 'Login to your account',
         'submit_label': 'Sign In',
         'endpoint': request.path,
