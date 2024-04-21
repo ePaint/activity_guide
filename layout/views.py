@@ -193,7 +193,12 @@ def search_box_results(request):
             query = query & (Q(activities__category__slug=category) | Q(activities__category__parent__slug=category))
         items = Provider.objects.filter(query).distinct()
     
-    items = items.order_by('-updated_at')
+    if model == 'activity':
+        items = items.order_by('-is_featured', '-provider__is_featured', '-updated_at')
+    elif model == 'provider':
+        items = items.order_by('-is_featured', '-updated_at')
+    else:
+        items = items.order_by('-updated_at')
     items, next_page = _paginate(items, request.GET.get('page'))
     
     context = {
