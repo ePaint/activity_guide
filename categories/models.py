@@ -48,7 +48,7 @@ class Category(models.Model):
     def get_unique_providers(self):
         max_providers = 10
         providers = set([activity.provider for activity in self.get_activities()])
-        sorted_providers = sorted(providers, key=lambda provider: provider.name)[:max_providers]
+        sorted_providers = sorted(providers, key=lambda x: (-x.is_featured, x.name))[:max_providers]
         return {
             'items': sorted_providers,
             'show_more': len(providers) > max_providers
@@ -57,7 +57,7 @@ class Category(models.Model):
     def get_active_unique_providers(self):
         max_providers = 10
         providers = set([activity.provider for activity in self.get_active_activities()])
-        sorted_providers = list(providers)[:max_providers]
+        sorted_providers = sorted(providers, key=lambda x: (-x.is_featured, x.name))[:max_providers]
         return {
             'items': sorted_providers,
             'show_more': len(providers) > max_providers

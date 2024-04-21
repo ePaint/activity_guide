@@ -143,6 +143,7 @@ class Migration(migrations.Migration):
                 description=provider['description'],
                 image=f'providers/{provider['slug']}.jpg',
                 url=random.choice(random_urls),
+                is_featured=random.choice([True, False, False, False, False]),
             )
         
 
