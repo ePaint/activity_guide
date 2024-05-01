@@ -22,10 +22,13 @@
                     Go!
                 </button>
             </form>
-            
+            <div class="col-xxl-2 d-flex flex-column flex-sm-row flex-xxl-column gap-4 align-items-center justify-content-around justify-content-xxl-start mb-4 d-block d-xxl-none">
+                {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-ad' %}
+                {% include 'layout/partials/ads_carousel.html' with ads=sidebar_2_ads class='search-banner-side-ad' %}
+            </div>
             {% include "layout/search_box.html" with items=activities model='activity' hide_search=1 show_provider_name=1 %}
         </div>
-        <div class="col-xxl-2 d-flex flex-column flex-sm-row flex-xxl-column gap-4 align-items-center justify-content-around justify-content-xxl-start">
+        <div class="col-xxl-2 d-flex flex-column flex-sm-row flex-xxl-column gap-4 align-items-center justify-content-around justify-content-xxl-start d-none d-xxl-block">
             {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-ad' %}
             {% include 'layout/partials/ads_carousel.html' with ads=sidebar_2_ads class='search-banner-side-ad' %}
         </div>
