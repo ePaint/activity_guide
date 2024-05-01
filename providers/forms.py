@@ -45,7 +45,8 @@ class ProviderDescriptionForm(forms.ModelForm):
 
 
 class ProviderForm(forms.ModelForm):
-    slug = forms.SlugField(max_length=100, required=True, label='Custom URL', help_text=_('- A unique identifier for the provider. This will be used in the URL for the provider\'s profile page.</br>- Allowed characters: a-z, 0-9, and -</br>- Example: my-provider-1'))
+    slug = forms.SlugField(max_length=100, required=True, label='Custom URL', help_text=_('- A unique identifier for the provider. This will be used in the URL for the provider\'s profile page</br>- Allowed characters: a-z, 0-9, and -</br>- Example: my-provider-1'))
+    url = forms.URLField(required=True, label='URL')
 
     class Meta:
         model = Provider
