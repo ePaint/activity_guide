@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
                 ('position', models.CharField(blank=True, max_length=20, null=True)),
                 ('location', models.CharField(blank=True, choices=LOCATIONS, max_length=20, null=True)),
                 ('price', models.DecimalField(max_digits=10, decimal_places=2)),
-                ('price_period', models.CharField(choices=[('day', 'day'), ('week', 'week'), ('month', 'month'), ('year', 'year')], max_length=20)),
+                ('price_period', models.CharField(choices=[('Day', 'day'), ('Week', 'week'), ('Month', 'month'), ('Year', 'year'), ('Camp', 'camp'), ('Session', 'session')], max_length=20)),
                 ('capacity', models.IntegerField(blank=True, null=True)),
                 ('activity_type', models.CharField(choices=ACTIVITY_TYPES, max_length=20)),
                 ('is_visually_adaptive', models.BooleanField(default=False)),

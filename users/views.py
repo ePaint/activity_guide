@@ -67,7 +67,7 @@ def login(request):
         if 'target_activity' in request.GET:
             activity = Activity.objects.get(slug=request.GET['target_activity'])
             extra_buttons.append({
-                'label': 'Book with Provider',
+                'label': 'Continue as Guest',
                 'color': 'orange',
                 'onclick': f'window.open("{activity.provider.url}")',
             })

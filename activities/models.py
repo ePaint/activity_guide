@@ -17,10 +17,12 @@ WEEKDAYS = [
 ]
 
 PRICE_PERIODS = [
-    ('day', 'day'),
-    ('week', 'week'),
-    ('month', 'month'),
-    ('year', 'year')
+    ('Day', 'day'),
+    ('Week', 'week'),
+    ('Month', 'month'),
+    ('Year', 'year'),
+    ('Camp', 'camp'),
+    ('Session', 'session'),
 ]
 
 LOCATIONS = [

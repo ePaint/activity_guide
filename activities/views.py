@@ -78,7 +78,7 @@ def activity_book(request, slug):
     messages = []
     extra_buttons = [
         {
-            'label': 'Book with Provider',
+            'label': 'Continue as Guest',
             'color': 'orange',
             'onclick': f'window.open("{activity.provider.url}")',
         }
