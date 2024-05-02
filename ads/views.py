@@ -15,8 +15,8 @@ def home(request):
             'title': location_label,
             'location': location_code,
             'forms': ad_form_set(),
-            'width': ad_dimensions['width'],
-            'height': ad_dimensions['height'],
+            'width': ad_dimensions['desktop']['width'],
+            'height': ad_dimensions['desktop']['height'],
         })
     
     context = {

@@ -29,70 +29,78 @@ class Migration(migrations.Migration):
         
         ads_to_create = [
             {
-                "image_url": "ads/home_page.jpg",
+                "image_desktop": "ads/home_page.jpg",
+                "image_mobile": "ads/home_page_mobile.jpg",
                 "location": "H",
                 "click_action": "Open URL",
                 "click_action_target": "https://www.bcwildlife.com",
             },
             
             {
-                "image_url": "ads/search_results_1.png",
+                "image_desktop": "ads/search_results_1.png",
+                "image_mobile": "ads/search_results_1_mobile.png",
                 "location": "S",
                 "click_action": "Open URL",
                 "click_action_target": "https://raregroupkamloops.ca/",
             },
             
             {
-                "image_url": "ads/search_results_2.png",
+                "image_desktop": "ads/search_results_2.png",
+                "image_mobile": "ads/search_results_2_mobile.jpg",
                 "location": "S1",
                 "click_action": "Send Email",
                 "click_action_target": "marketing@activityguide.ca",
             },
             
             {
-                "image_url": "ads/search_results_3.png",
+                "image_desktop": "ads/search_results_3.png",
+                "image_mobile": "ads/search_results_3_mobile.jpg",
                 "location": "S2",
                 "click_action": "Open URL",
                 "click_action_target": "https://khykhythelabel.com/",
             },       
             
             {
-                "image_url": "ads/categories_1.png",
+                "image_desktop": "ads/categories_1.png",
                 "location": "C1",
                 "click_action": "Send Email",
                 "click_action_target": "marketing@activityguide.ca",
             },
             
             {
-                "image_url": "ads/categories_2.png",
+                "image_desktop": "ads/categories_2.png",
+                "image_mobile": "ads/categories_2_mobile.jpg",
                 "location": "C2",
                 "click_action": "Open URL",
                 "click_action_target": "https://route1distillery.ca/",
             },
             
             {
-                "image_url": "ads/categories_3.png",
+                "image_desktop": "ads/categories_3.png",
                 "location": "C3",
                 "click_action": "Open URL",
                 "click_action_target": "https://www.facebook.com/ConsignorSports",
             },
             
             {
-                "image_url": "ads/arts.png",
+                "image_desktop": "ads/arts.png",
+                "image_mobile": "ads/arts_mobile.jpg",
                 "location": "ARTS",
                 "click_action": "Open URL",
                 "click_action_target": "https://wctlive.ca/thehub/default.htm",
             },
             
             {
-                "image_url": "ads/sports.png",
+                "image_desktop": "ads/sports.png",
+                "image_mobile": "ads/sports_mobile.png",
                 "location": "SPORTS",
                 "click_action": "Open URL",
                 "click_action_target": "https://kamloopsminorhockey.com/registration/",
             },
             
             {
-                "image_url": "ads/stem.png",
+                "image_desktop": "ads/stem.png",
+                "image_mobile": "ads/stem_mobile.png",
                 "location": "STEM",
                 "click_action": "Send Email",
                 "click_action_target": "marketing@activityguide.ca",
@@ -114,7 +122,8 @@ class Migration(migrations.Migration):
         Ad = apps.get_model('ads', 'Ad')
         for ad in ads_to_create:
             Ad.objects.create(
-                image=ad['image_url'],
+                image_desktop=ad['image_desktop'],
+                image_mobile=ad.get('image_mobile'),
                 location=AdLocation.objects.get(location=ad['location']),
                 click_action=AdClickAction.objects.get(action=ad.get('click_action')) if ad.get('click_action') else None,
                 click_action_target=ad['click_action_target'],
@@ -128,7 +137,8 @@ class Migration(migrations.Migration):
             
             Ad.objects.bulk_create([
                 Ad(
-                    image=None,
+                    image_desktop=None,
+                    image_mobile=None,
                     location=AdLocation.objects.get(location=location),
                     click_action=None,
                     click_action_target=None,

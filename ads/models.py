@@ -17,44 +17,104 @@ AD_LOCATIONS = {
 
 AD_SIZES = {
     'H': {
-        'width': 880,
-        'height': 160,
+        'desktop': {
+            'width': 880,
+            'height': 160,
+        },
+        'mobile': {
+            'width': 768,
+            'height': 236,
+        },
     },
     'S': {
-        'width': 1067.2,
-        'height': 112,
+        'desktop': {
+            'width': 1067.2,
+            'height': 112,
+        },
+        'mobile': {
+            'width': 768,
+            'height': 236,
+        },
     },
     'S1': {
-        'width': 196,
-        'height': 400,
+        'desktop': {
+            'width': 196,
+            'height': 400,
+        },
+        'mobile': {
+            'width': 306,
+            'height': 112,
+        },
     },
     'S2': {
-        'width': 196,
-        'height': 400,
+        'desktop': {
+            'width': 196,
+            'height': 400,
+        },
+        'mobile': {
+            'width': 306,
+            'height': 112,
+        },
     },
     'C1': {
-        'width': 306,
-        'height': 112,
+        'desktop': {
+            'width': 306,
+            'height': 112,
+        },
+        'mobile': {
+            'width': 306,
+            'height': 112,
+        },
     },
     'C2': {
-        'width': 636,
-        'height': 112,
+        'desktop': {
+            'width': 636,
+            'height': 112,
+        },
+        'mobile': {
+            'width': 768,
+            'height': 236,
+        },
     },
     'C3': {
-        'width': 306,
-        'height': 112,
+        'desktop': {
+            'width': 306,
+            'height': 112,
+        },
+        'mobile': {
+            'width': 306,
+            'height': 112,
+        },
     },
     'ARTS': {
-        'width': 220,
-        'height': 1171.3,
+        'desktop': {
+            'width': 220,
+            'height': 1171.3,
+        },
+        'mobile': {
+            'width': 306,
+            'height': 112,
+        },
     },
     'SPORTS': {
-        'width': 220,
-        'height': 1171.3,
+        'desktop': {
+            'width': 220,
+            'height': 1171.3,
+        },
+        'mobile': {
+            'width': 765,
+            'height': 280,
+        },
     },
     'STEM': {
-        'width': 220,
-        'height': 1171.3,
+        'desktop': {
+            'width': 220,
+            'height': 1171.3,
+        },
+        'mobile': {
+            'width': 689,
+            'height': 252,
+        },
     },
 }
 
@@ -78,24 +138,32 @@ class AdClickAction(models.Model):
 
 
 class Ad(models.Model):
-    image = models.ImageField(upload_to='ads/', null=True, blank=True)
+    image_desktop = models.ImageField(upload_to='ads/', null=True, blank=True)
+    image_mobile = models.ImageField(upload_to='ads/', null=True, blank=True)
     location = models.ForeignKey(AdLocation, on_delete=models.CASCADE, related_name='ads')
     click_action = models.ForeignKey(AdClickAction, on_delete=models.CASCADE, related_name='ads', null=True, blank=True)
     click_action_target = models.CharField(max_length=255, null=True, blank=True)
 
-    def image_url(self):
-        if self.image:
-            return self.image.url
+    def image_desktop_url(self):
+        if self.image_desktop:
+            return self.image_desktop.url
+        return STATIC_URL + 'layout/image-alt.svg'
+    
+    def image_mobile_url(self):
+        if self.image_mobile:
+            return self.image_mobile.url
+        if self.image_desktop:
+            return self.image_desktop.url
         return STATIC_URL + 'layout/image-alt.svg'
     
     def __str__(self):
-        return self.image_url()
+        return self.image_desktop_url()
     
 
 def get_ads_by_location(location):
     return Ad.objects.filter(
         location__location=location,
-        image__isnull=False,
+        image_desktop__isnull=False,
         click_action__isnull=False,
         click_action_target__isnull=False
     )

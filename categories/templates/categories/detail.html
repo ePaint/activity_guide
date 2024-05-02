@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="d-flex gap-4 flex-md-row flex-column">
-        <div class="col-lg-9 mb-0 mb-lg-4 order-2">
+    <div class="d-flex gap-0 gap-xxl-4 flex-xxl-row flex-column">
+        <div class="col-xxl-9 order-2">
             {% include 'layout/search_box.html' with items=providers model='provider' title=category.name|add:" Providers" next_page=next_page %}
         </div>
-        <div class="col-lg mb-4 pb-lg-0 no-padding order-1 order-md-3">
+        <div class="col-xxl order-1 order-xxl-3">
             {% include 'layout/partials/ads_carousel.html' with ads=ads class='category-detail-ad' %}
         </div>
     </div>

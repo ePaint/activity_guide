@@ -1157,6 +1157,22 @@ label {
     max-width: min(880px, 100%) !important;
 }
 
+.ad-mobile {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: center;
+    border-radius: 2.5rem !important;
+    overflow: hidden !important;
+    cursor: pointer;
+}
+
+.ad-width-mobile {
+    max-width: 100% !important;
+    height: auto !important;
+    width: auto !important;
+}
+
 .categories-ad {
     height: 7rem;
     display: flex;
@@ -1243,10 +1259,14 @@ label {
 }
 
 .ad-form-fields>*:nth-child(2) {
-    grid-column: span 2 !important;
+    grid-column: span 9 !important;
 }
 
 .ad-form-fields>*:nth-child(3) {
+    grid-column: span 2 !important;
+}
+
+.ad-form-fields>*:nth-child(4) {
     grid-column: span 7 !important;
 }
 

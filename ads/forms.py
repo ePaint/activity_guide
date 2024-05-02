@@ -6,27 +6,34 @@ from .models import Ad
 class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
-        fields = ['image', 'click_action', 'click_action_target']
+        fields = ['image_desktop', 'image_mobile', 
+                  'click_action', 'click_action_target']
         widgets = {
-            'image': forms.ClearableFileInput(attrs={'accept': 'image/*'}),
+            'image_desktop': forms.ClearableFileInput(attrs={'accept': 'image/*'}),
+            'image_mobile': forms.ClearableFileInput(attrs={'accept': 'image/*'}),
             'click_action': forms.Select(),
             'click_action_target': forms.TextInput(),
         }
 
     def __init__(self, *args: Any, section: str = None, position: int = 0, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.fields['image'].required = False
+        self.fields['image_desktop'].required = False
+        self.fields['image_mobile'].required = False
         self.fields['click_action'].required = False
         self.fields['click_action_target'].required = False
         
     def save(self, commit=True):
         form_object = super().save(commit=False)
-        image = self.cleaned_data.get('image')
-            
-        if image:
-            self.instance.image = image
         
-        print(f'Image: {image}. Instance: {self.instance}. Commit: {commit}')
+        image_desktop = self.cleaned_data.get('image_desktop')
+        if image_desktop:
+            self.instance.image_desktop = image_desktop
+        print(f'Image desktop: {image_desktop}. Instance: {self.instance}. Commit: {commit}')
+        
+        image_mobile = self.cleaned_data.get('image_mobile')
+        if image_mobile:
+            self.instance.image_mobile = image_mobile
+        print(f'Image mobile: {image_mobile}. Instance: {self.instance}. Commit: {commit}')
         
         if commit:
             form_object.save()
