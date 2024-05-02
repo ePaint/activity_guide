@@ -1,39 +1,40 @@
-<div class="w-100 d-flex flex-column justify-content-center align-items-center d-none d-xxl-block mb-4">
-    <div class="carousel slide {{ class }}-width carousel-ads" data-bs-ride="carousel">
-        <div class="carousel-inner {{ class }}-width">
-            {% for ad in ads %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %} {{ class }}-width">
-                    {% if ad.click_action.action == "Open URL" %}
-                        <a class="{{ class }} {{ class }}-width" target="_blank" href="{{ ad.click_action_target }}">
-                            <img class="" src="{{ ad.image_desktop_url }}">
-                        </a>
-                    {% elif ad.click_action.action == "Send Email" %}
-                        <a class="{{ class }} {{ class }}-width" href="mailto:{{ ad.click_action_target }}">
-                            <img class="" src="{{ ad.image_desktop_url }}">
-                        </a>
-                    {% endif %}
-                </div>
-            {% endfor %}
+<div>
+    <div class="w-100 d-flex flex-column justify-content-center align-items-center d-none d-xl-block">
+        <div class="carousel slide {{ class }}-width" data-bs-ride="carousel">
+            <div class="carousel-inner {{ class }}-width">
+                {% for ad in ads %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %} {{ class }}-width">
+                        {% if ad.click_action.action == "Open URL" %}
+                            <a class="{{ class }} {{ class }}-width" target="_blank" href="{{ ad.click_action_target }}">
+                                <img class="" src="{{ ad.image_desktop_url }}">
+                            </a>
+                        {% elif ad.click_action.action == "Send Email" %}
+                            <a class="{{ class }} {{ class }}-width" href="mailto:{{ ad.click_action_target }}">
+                                <img class="" src="{{ ad.image_desktop_url }}">
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
-
-<div class="w-100 d-flex flex-column justify-content-center align-items-center d-block d-xxl-none mb-4">
-    <div class="carousel slide carousel-ads" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for ad in ads %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    {% if ad.click_action.action == "Open URL" %}
-                        <a class="ad-width-mobile" target="_blank" href="{{ ad.click_action_target }}">
-                            <img class="ad-width-mobile ad-mobile" src="{{ ad.image_mobile_url }}">
-                        </a>
-                    {% elif ad.click_action.action == "Send Email" %}
-                        <a class="ad-width-mobile" href="mailto:{{ ad.click_action_target }}">
-                            <img class="ad-width-mobile ad-mobile" src="{{ ad.image_mobile_url }}">
-                        </a>
-                    {% endif %}
-                </div>
-            {% endfor %}
+    <div class="w-100 d-flex flex-column justify-content-center align-items-center d-block d-xl-none">
+        <div class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for ad in ads %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        {% if ad.click_action.action == "Open URL" %}
+                            <a class="width-mobile" target="_blank" href="{{ ad.click_action_target }}">
+                                <img class="width-mobile mobile" src="{{ ad.image_mobile_url }}">
+                            </a>
+                        {% elif ad.click_action.action == "Send Email" %}
+                            <a class="width-mobile" href="mailto:{{ ad.click_action_target }}">
+                                <img class="width-mobile mobile" src="{{ ad.image_mobile_url }}">
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

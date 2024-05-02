@@ -716,7 +716,7 @@ footer {
     word-wrap: break-word;
 }
 
-.categories-detail-ad {
+.categories-detail-banner {
     height: 40rem;
 }
 
@@ -1141,7 +1141,7 @@ label {
     overflow-y: scroll !important;
 }
 
-.home-banner-ad-wide {
+.home-banner-wide {
     height: calc(10rem + 78px);
     display: flex;
     flex-flow: row wrap;
@@ -1153,11 +1153,11 @@ label {
     cursor: pointer;
 }
 
-.home-banner-ad-wide-width {
+.home-banner-wide-width {
     max-width: min(880px, 100%) !important;
 }
 
-.ad-mobile {
+.mobile {
     display: flex;
     flex-flow: row wrap;
     justify-content: end;
@@ -1167,13 +1167,13 @@ label {
     cursor: pointer;
 }
 
-.ad-width-mobile {
+.width-mobile {
     max-width: 100% !important;
     height: auto !important;
     width: auto !important;
 }
 
-.categories-ad {
+.categories-banner {
     height: 7rem;
     display: flex;
     justify-content: end;
@@ -1184,11 +1184,11 @@ label {
     cursor: pointer;
 }
 
-.categories-ad-width {
+.categories-banner-width {
     max-width: min(306px, 100%) !important;
 }
 
-.categories-central-ad {
+.categories-central-banner {
     height: 7rem;
     display: flex;
     justify-content: start;
@@ -1199,11 +1199,11 @@ label {
     cursor: pointer;
 }
 
-.categories-central-ad-width {
+.categories-central-banner-width {
     max-width: min(636px, 100%) !important;
 }
 
-.search-banner-ad-wide {
+.search-banner-banner-wide {
     height: 7rem;
     display: flex;
     justify-content: end;
@@ -1214,11 +1214,11 @@ label {
     cursor: pointer;
 }
 
-.search-banner-ad-wide-width {
+.search-banner-banner-wide-width {
     max-width: min(1067px, 100%) !important;
 }
 
-.search-banner-side-ad {
+.search-banner-side-banner {
     height: 400px;
     display: flex;
     justify-content: center;
@@ -1229,11 +1229,11 @@ label {
     cursor: pointer;
 }
 
-.search-banner-side-ad-width {
+.search-banner-side-banner-width {
     max-width: min(196px, 100%) !important;
 }
 
-.category-detail-ad {
+.category-detail-banner {
     height: 1172px;
     display: flex;
     justify-content: center;
@@ -1244,7 +1244,7 @@ label {
     cursor: pointer;
 }
 
-.category-detail-ad-width {
+.category-detail-banner-width {
     max-width: min(220px, 100%) !important;
 }
 

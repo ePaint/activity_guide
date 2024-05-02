@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg">
-            {% include 'layout/partials/ads_carousel.html' with ads=top_ads class='search-banner-ad-wide' %}
+            {% include 'layout/partials/ads_carousel.html' with ads=top_ads class='search-banner-banner-wide' %}
             <form class="col-md-3 border p-3 my-4 w-100 bg-white round d-flex flex-column justify-content-center"
                   id="main_search_form"
                   hx-trigger="submit"
@@ -22,15 +22,15 @@
                     Go!
                 </button>
             </form>
-            <div class="col-xxl-2 d-flex flex-column flex-sm-row flex-xxl-column gap-4 align-items-center justify-content-around justify-content-xxl-start d-block d-xxl-none">
-                {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-ad' %}
-                {% include 'layout/partials/ads_carousel.html' with ads=sidebar_2_ads class='search-banner-side-ad' %}
+            <div class="col-xxl-2 w-100 d-flex flex-column flex-md-row gap-4 align-items-center justify-content-around d-inline-flex d-xxl-none mb-4">
+                {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-banner' %}
+                {% include 'layout/partials/ads_carousel.html' with ads=sidebar_2_ads class='search-banner-side-banner' %}
             </div>
             {% include "layout/search_box.html" with items=activities model='activity' hide_search=1 show_provider_name=1 %}
         </div>
-        <div class="col-xxl-2 d-flex flex-column flex-sm-row flex-xxl-column gap-4 align-items-center justify-content-around justify-content-xxl-start d-none d-xxl-block">
-            {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-ad' %}
-            {% include 'layout/partials/ads_carousel.html' with ads=sidebar_2_ads class='search-banner-side-ad' %}
+        <div class="col-xxl-2 d-flex flex-column flex-sm-row flex-xxl-column gap-4 align-items-center justify-content-around justify-content-xxl-start d-none d-xxl-inline-flex">
+            {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-banner' %}
+            {% include 'layout/partials/ads_carousel.html' with ads=sidebar_2_ads class='search-banner-side-banner' %}
         </div>
     </div>
 </div>
