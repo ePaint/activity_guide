@@ -630,17 +630,8 @@ footer {
     color: #6d6d6d;
 }
 
-.home-main {
-    /* width: calc(100% - 300px); */
-}
-
-.home-categories {
-    /* width: 100%; */
-}
-
 .home-carousel {
     height: 538px;
-    /* width: 70%; */
 }
 
 .fill {

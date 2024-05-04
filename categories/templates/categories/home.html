@@ -27,7 +27,6 @@
                         <h3>{{ category.name }}</h3>
                     </div>
                     <div class="categories-item-text pt-3 mb-2 align-self-start h-100 w-100">
-                        <p class="paragraph fl-{{ category.get_color }}">{{ category.description }}</p>
                         {% for subcategory in category.get_active_children %}
                             <div class="btn-group w-100" role="group">
                                 <div class="btn subcategory-item text-start round-noborder-right ms-2 mt-2 border-{{ subcategory.get_color }} {{ subcategory.get_color }}-hover"

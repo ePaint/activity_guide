@@ -3,7 +3,7 @@
         <div class="carousel slide {{ class }}-width" data-bs-ride="carousel">
             <div class="carousel-inner {{ class }}-width">
                 {% for ad in ads %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %} {{ class }}-width">
+                    <div class="carousel-item {% if forloop.first %}active{% endif %} {{ class }}-width" data-bs-interval="10000">
                         {% if ad.click_action.action == "Open URL" %}
                             <a class="{{ class }} {{ class }}-width" target="_blank" href="{{ ad.click_action_target }}">
                                 <img class="" src="{{ ad.image_desktop_url }}">
@@ -22,7 +22,7 @@
         <div class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 {% for ad in ads %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
                         {% if ad.click_action.action == "Open URL" %}
                             <a class="width-mobile" target="_blank" href="{{ ad.click_action_target }}">
                                 <img class="width-mobile mobile" src="{{ ad.image_mobile_url }}">
