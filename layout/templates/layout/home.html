@@ -41,15 +41,15 @@
                         <div class="carousel-inner h-100">
                             {% for activity in activities %}
                                 <div class="carousel-item round border-thick-{{ activity.category.get_color }} fill {% if forloop.first %}active{% endif %}"
-                                        style="background-image: url('{{ activity.image_url }}');">
-                                    <div class="carousel-caption bg-white round border {% if activity.is_featured or activity.provider.is_featured %}box-shadow-yellow{% endif %}"
-                                            role="button"
-                                            hx-target=".main-content"
-                                            hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
-                                            hx-on::after-request="scrollToTop()"
-                                            hx-push-url="true"
-                                            hx-get="{% url 'activity-detail' activity.slug %}"
-                                            onclick="scrollToTop()">
+                                     style="background-image: url('{{ activity.image_url }}');"
+                                     role="button"
+                                     hx-target=".main-content"
+                                     hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
+                                     hx-on::after-request="scrollToTop()"
+                                     hx-push-url="true"
+                                     hx-get="{% url 'activity-detail' activity.slug %}"
+                                     onclick="scrollToTop()">
+                                    <div class="carousel-caption bg-white round border {% if activity.is_featured or activity.provider.is_featured %}box-shadow-yellow{% endif %}">
                                         <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center align-items-center">
                                             {% include 'activities/partials/featured.html' with activity=activity size=24 %}
                                             <span class="badge bg-{{ activity.category.get_color }} m-1 align-self-center align-self-sm-start">
@@ -137,6 +137,6 @@
         <div id="contact-form" class="row pb-4 gap-0 justify-content-center align-items-center px-2">
             {% include 'layout/contact_form.html' with form=contact_form %}
         </div>
-    </div>
+    </div
 </div>
 {% endblock %}

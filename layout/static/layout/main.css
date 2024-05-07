@@ -342,10 +342,13 @@ body {
 .carousel-caption {
     opacity: 0.9;
     transition: all 0.2s ease-in-out;
+    user-select: none;
 }
 
 .carousel-caption:hover {
     opacity: 1;
+    scale: 1.12;
+    transition: all 0.25s ease-in-out;
 }
 
 .result-text-2 {
