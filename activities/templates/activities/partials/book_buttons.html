@@ -12,8 +12,8 @@
                     hx-swap="innerHTML"
                     data-bs-toggle="popover"
                     data-bs-placement="top"
-                    data-bs-content="Make {{family_member.name}} opt-out from activity">
-                Opt-out
+                    data-bs-content="Remove from {{family_member.name}}'s list">
+                Remove
             </button>
             {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}
         {% else %}
@@ -39,7 +39,7 @@
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#modal_global"
-                hx-get="{% url 'activity-book' activity.slug %}"
+                hx-get="{% url 'activity-book' activity.slug %}#"
                 hx-trigger="click"
                 hx-target="#modal_global"
                 hx-swap="innerHTML"

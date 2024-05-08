@@ -9,7 +9,7 @@
             <form class="col-md-3 border p-3 my-4 w-100 bg-white round d-flex flex-column justify-content-center"
                   id="main_search_form"
                   hx-trigger="submit"
-                  hx-post="{% url 'layout-search-results-partial' %}?page=1"
+                  hx-post="{% url 'layout-search-results-partial' %}?page=1#"
                   hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}">
                 <h1 class="text-start orange pb-3">Search Form</h1>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 w-100">

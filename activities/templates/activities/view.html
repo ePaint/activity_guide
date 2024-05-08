@@ -3,10 +3,12 @@
 {% block content %}
 <div class="container">
     <div class="d-flex flex-lg-row flex-column">
-        <div class="me-5 w-100 d-flex justify-content-lg-start justify-content-center pb-2">
+        <a  href="{{ activity.url }}"
+            target="_blank"
+            class="me-5 w-100 d-flex justify-content-lg-start justify-content-center pb-2">
             <img class="profile-image-big {{ activity.category.get_color }} user-select-none"
                 src="{{ activity.image_url }}" />
-        </div>
+        </a>
         <div class="">
             <div class="row mb-2 pb-2">
                 <div class="d-md-flex gap-4 bg-white round border profile-description">
@@ -20,9 +22,11 @@
                                 hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">
                                 {{activity.category.name }}
                             </div>
-                            <div class="flex-grow-1 d-flex justify-content-start {{ activity.category.get_color }}">
+                            <a  href="{{ activity.url }}"
+                                target="_blank"
+                                class="flex-grow-1 d-flex justify-content-start text-decoration-none user-select-none {{ activity.category.get_color }}">
                                 {{activity.name }}
-                            </div>
+                            </a>
                             {% if request.user.provider == activity.provider %}
                                 <div class="fs-6 d-flex flex-row justify-content-end" role="button" hx-target=".main-content"
                                     hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"

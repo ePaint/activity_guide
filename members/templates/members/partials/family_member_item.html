@@ -10,7 +10,8 @@
                 hx-target="#modal_global">
                 <img class="red-filter"  src="{% static 'layout/trash.svg' %}" />
             </div>
-            <div class="btn btn-outline-primary orange-hover border-0"
+            <div id="family_member_{{family_member.pk}}_button"
+                class="btn btn-outline-primary orange-hover border-2"
                 data-bs-toggle="collapse" 
                 data-bs-target="#family_member_{{family_member.pk}}_container"
                 aria-expanded="false" 
@@ -34,3 +35,15 @@
         </div>
     </div>
 </div>
+<script>
+    // Event Listener for searchBoxUpdate-{{family_member.pk}}
+    document.addEventListener('searchBoxUpdate-{{family_member.pk}}', function (e) {
+        // Element ID family_member_{{family_member.pk}}_container expand bootstrap collapsible
+        var element = document.getElementById('family_member_{{family_member.pk}}_container');
+        if (!element.classList.contains('show')) {
+            document.getElementById('family_member_{{family_member.pk}}_button').click();
+        }
+        // Scroll to element ID family_member_{{family_member.pk}}_button
+        // scrollToElementId('family_member_row_{{family_member.pk}}');
+    });
+</script>

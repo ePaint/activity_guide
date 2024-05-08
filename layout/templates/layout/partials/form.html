@@ -60,9 +60,12 @@
                             {{extra_button.label}}
                         </button>
                     {% endfor %}
-                    <button type="submit"
-                            class="btn bg-{{submit_color|default:'green'}}"
-                            {% if close_on_submit %}data-bs-dismiss="modal"{% endif %}>
+
+                    <button onclick="openInNewTab(this)"
+                        href="{{submit_url}}"
+                        type="submit"
+                        class="btn bg-{{submit_color|default:'green'}}"
+                        {% if close_on_submit %}data-bs-dismiss="modal"{% endif %}>
                         {{submit_label}}
                     </button>
                 </div>
@@ -80,5 +83,14 @@
                 element.type = 'password';
             }
         });
+    }
+</script>
+<script>
+    // Function that opens a link in a new tab
+    function openInNewTab(element) {
+        var url = element.getAttribute('href');
+        if (!url) return;
+        var win = window.open(url, '_blank');
+        win.focus();
     }
 </script>

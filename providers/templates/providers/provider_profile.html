@@ -3,11 +3,12 @@
 {% block content %}
 <div class="container">
     <div class="d-md-flex gap-4">
-        <div class="d-flex justify-content-md-start justify-content-center pb-2 pb-md-0">
+        <a  class="d-flex justify-content-md-start justify-content-center pb-2 pb-md-0"
+            href="{{ provider.url }}" target="_blank">
             <img class="profile-image orange user-select-none"
                 role="button"
                 src="{{ provider.image_url }}"/>
-        </div>
+        </a>
         <div class="d-flex flex-column bg-white round border w-100">
             <div class="fs-3 orange align-self-center align-self-md-start d-flex flex-column flex-sm-row align-items-center justify-content-between w-100">
                 <div class="order-1 d-flex align-items-center gap-2">
@@ -24,7 +25,7 @@
                         </script>
                     {% endif %}
                     {% if provider.url %}
-                        <a href="{{ provider.url }}" target="_blank" class="text-decoration-none orange"> 
+                        <a href="{{ provider.url }}" target="_blank" class="text-decoration-none orange user-select-none"> 
                             {{ provider.name }}
                         </a>
                     {% else %}

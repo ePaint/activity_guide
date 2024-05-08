@@ -140,6 +140,7 @@ def activity_book(request, slug):
         'submit_label': 'Save Changes',
         'endpoint': request.path,
         'close_on_submit': False,
+        'submit_url': activity.url
     }
     return render(request, "layout/partials/form.html", context)
 
@@ -151,15 +152,15 @@ def activity_book_direct(request, slug):
     family_member = FamilyMember.objects.get(pk=family_member_pk)
     
     if action == "remove":
-        submit_label = 'Yes, opt-out'
+        submit_label = 'Yes, remove'
         submit_color = 'red'
-        confirm_label = f'Are you sure you want to opt-out?'
-        confirm_message=f'You are about to make <b>{family_member.name}</b> <b class="red">opt-out</b> of <b>{activity.name}</b> by <b>{activity.provider.name}</b>. If you want to book this activity again, you will need to do so manually.'
+        confirm_label = f'Are you sure you want to remove "{family_member.name}" from "{activity.name}" by "{activity.provider.name}" from your booked activities list?'
+        confirm_message=f'To cancel the activity please contact <b>{activity.provider.name}</b> directly for cancellation options.'
     
     else:
         submit_label = 'Yes, book'
         submit_color = 'green'
-        confirm_label = f'Are you sure you want to opt-in?'
+        confirm_label = f'Are you sure you want to join the activity?'
         confirm_message=f'You are about to make <b>{family_member.name}</b> <b class="green">book</b> <b>{activity.name}</b> by <b>{activity.provider.name}</b>. If you want to opt-out of this activity again, you will need to do so manually.'
     
     
