@@ -8,8 +8,12 @@
       hx-swap="outerHTML">
     <h3 class="text-center orange user-select-none">{{ title }}</h3>
     <div class="d-flex justify-content-center gap-4">
-        <h6 class="text-center blue user-select-none">Desktop Width: {{ width }}px</h6>
-        <h6 class="text-center blue user-select-none">Desktop Height: {{ height }}px</h6>
+        <h6 class="text-center blue user-select-none">Desktop Width: {{ desktop_width }}px</h6>
+        <h6 class="text-center blue user-select-none">Desktop Height: {{ desktop_height }}px</h6>
+    </div>
+    <div class="d-flex justify-content-center gap-4">
+        <h6 class="text-center blue user-select-none">Mobile Width: {{ mobile_width }}px</h6>
+        <h6 class="text-center blue user-select-none">Mobile Height: {{ mobile_height }}px</h6>
     </div>
     <div class="row mt-3">
         {% for form in forms %}

@@ -3,7 +3,6 @@
 <div class="container p-4" style="max-width: 800px">
     {% csrf_token %}
     {% for section in sections %}
-        {% include 'ads/partials/form.html' with title=section.title location=section.location forms=section.forms width=section.width height=section.height %}
-    {% endfor %}    
+        {% include 'ads/partials/form.html' with title=section.title location=section.location forms=section.forms desktop_width=section.desktop_width desktop_height=section.desktop_height mobile_width=section.mobile_width mobile_height=section.mobile_height %}    {% endfor %}    
 </div>
 {% endblock %}
