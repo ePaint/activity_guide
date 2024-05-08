@@ -40,6 +40,9 @@ class Migration(migrations.Migration):
         """
         to_create = json.loads(open(os.path.join(settings.BASE_DIR, 'activities', 'migrations', 'data', 'offers.json')).read())
 
+        PricePeriod = self.get_model('activities', 'PricePeriod')
+        ActivityType = self.get_model('activities', 'ActivityType')
+        Location = self.get_model('activities', 'Location')
         Activity = self.get_model('activities', 'Activity')
         Category = self.get_model('categories', 'Category')
         Provider = self.get_model('providers', 'Provider')
@@ -63,6 +66,50 @@ class Migration(migrations.Migration):
             'https://www.whatsapp.com',
         ]
         
+        price_periods_to_create = [
+            'Day',
+            'Week',
+            'Month',
+            'Year',
+            'Camp',
+            'Session',
+        ]
+        for price_period in price_periods_to_create:
+            PricePeriod.objects.get_or_create(name=price_period)
+
+        activity_types_to_create = [
+            'Session',
+            'Camp',
+            'Drop-in',
+            'Party',
+        ]
+        for activity_type in activity_types_to_create:
+            ActivityType.objects.get_or_create(name=activity_type)
+
+        locations_to_create = [
+            'Aberdeen',
+            'Barnhartvale',
+            'Batchlor Heights',
+            'Brocklehurst',
+            'Campble Creek',
+            'Dallas',
+            'Downtown',
+            'Harper Mountain',
+            'Juniper Ridge',
+            'Kamloops',
+            'McArthur Island',
+            'North Kamloops',
+            'Rayleigh / Heffley',
+            'Sahali Lower',
+            'Sahali Upper',
+            'Sun Peaks',
+            'TRU',
+            'Valleyview',
+            'Westsyde'
+        ]
+        for location in locations_to_create:
+            Location.objects.get_or_create(name=location)
+        
         for item in to_create:
             age_start, age_end = item['ageGroup'].split('-')
             Activity.objects.get_or_create(
@@ -80,11 +127,11 @@ class Migration(migrations.Migration):
                 age_start=age_start,
                 age_end=age_end,
                 position=item['position'],
-                location=item['location'],
+                location=Location.objects.get(name=item['location']),
                 price=item['price'],
-                price_period=item['pricePeriod'],
+                price_period=PricePeriod.objects.get(name=item['pricePeriod'].title()),
                 capacity=item['capacity'],
-                activity_type=item['activityType'],
+                activity_type=ActivityType.objects.get(name=item['activityType']),
                 is_visually_adaptive=bool(random.getrandbits(1)),
                 is_hearing_adaptive=bool(random.getrandbits(1)),
                 is_mobility_adaptive=bool(random.getrandbits(1)),

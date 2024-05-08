@@ -139,6 +139,8 @@ class Migration(migrations.Migration):
         for provider in to_create:
             Provider.objects.create(
                 name=provider['name'],
+                email='example@example.com',
+                phone='4165557890',
                 slug=provider['slug'],
                 description=provider['description'],
                 image=f'providers/{provider['slug']}.jpg',

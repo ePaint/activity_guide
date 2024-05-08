@@ -12,7 +12,8 @@
                     hx-swap="innerHTML"
                     data-bs-toggle="popover"
                     data-bs-placement="top"
-                    data-bs-content="Remove from {{family_member.name}}'s list">
+                    data-bs-content="Remove from {{family_member.name}}'s list"
+                    onclick="deletePopover(this)">
                 Remove
             </button>
             {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}
@@ -28,7 +29,8 @@
                     hx-swap="innerHTML"
                     data-bs-toggle="popover"
                     data-bs-placement="top"
-                    data-bs-content="Book activity for {{family_member.name}}">
+                    data-bs-content="Book activity for {{family_member.name}}"
+                    onclick="deletePopover(this)">
                 Book
             </button>
             {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}
@@ -45,7 +47,8 @@
                 hx-swap="innerHTML"
                 data-bs-toggle="popover"
                 data-bs-placement="top"
-                data-bs-content="Book activity">
+                data-bs-content="Book activity"
+                onclick="deletePopover(this)">
             Book
         </button>
         {% include 'activities/partials/like.html' with activity=activity family_member=family_member %}

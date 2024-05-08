@@ -1,7 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.core.exceptions import ValidationError
-from activities.models import LOCATIONS, WEEKDAYS, Activity
+from activities.models import WEEKDAYS, Activity
 from providers.models import Provider
 from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget

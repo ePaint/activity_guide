@@ -6,20 +6,17 @@ import datetime
 from categories.models import Category
 
 
-RELATIONSHIPS = {
-    "Me": "Me",
-    "Spouse": "Spouse",
-    "Parent": "Parent",
-    "Child": "Child",
-    "Sibling": "Sibling",
-    "Other": "Other"
-}
+class Relationship(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class FamilyMember(models.Model):    
     name = models.CharField(max_length=50)
     date_of_birth = models.DateField()
-    relationship = models.CharField(max_length=50, choices=RELATIONSHIPS.items())
+    relationship = models.ForeignKey(Relationship, on_delete=models.CASCADE, blank=True, null=True, related_name='family_members')
     category_interest_1 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_1', blank=True, null=True)
     category_interest_2 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_2', blank=True, null=True)
     category_interest_3 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_3', blank=True, null=True)

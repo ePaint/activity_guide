@@ -114,7 +114,7 @@ def _build_search_query(form: ActivitySearchForm):
     if end_time:
         query = query & Q(end_time__gte=end_time) & Q(start_time__lte=end_time)
     if location:
-        query = query & Q(location__icontains=location)
+        query = query & Q(location__name__icontains=location)
     if position:
         query = query & Q(position__icontains=position)
     if is_visually_adaptive:

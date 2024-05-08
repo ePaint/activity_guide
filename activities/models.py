@@ -16,43 +16,26 @@ WEEKDAYS = [
     ('Sunday', 'Sunday')
 ]
 
-PRICE_PERIODS = [
-    ('Day', 'day'),
-    ('Week', 'week'),
-    ('Month', 'month'),
-    ('Year', 'year'),
-    ('Camp', 'camp'),
-    ('Session', 'session'),
-]
 
-LOCATIONS = [
-    ('Aberdeen', 'Aberdeen'),
-    ('Barnhartvale', 'Barnhartvale'),
-    ('Batchlor Heights', 'Batchlor Heights'),
-    ('Brocklehurst', 'Brocklehurst'),
-    ('Campble Creek', 'Campble Creek'),
-    ('Dallas', 'Dallas'),
-    ('Downtown', 'Downtown'),
-    ('Harper Mountain', 'Harper Mountain'),
-    ('Juniper Ridge', 'Juniper Ridge'),
-    ('Kamloops', 'Kamloops'),
-    ('McArthur Island', 'McArthur Island'),
-    ('North Kamloops', 'North Kamloops'),
-    ('Rayleigh / Heffley', 'Rayleigh / Heffley'),
-    ('Sahali Lower', 'Sahali Lower'),
-    ('Sahali Upper', 'Sahali Upper'),
-    ('Sun Peaks', 'Sun Peaks'),
-    ('TRU', 'TRU'),
-    ('Valleyview', 'Valleyview'),
-    ('Westsyde', 'Westsyde')
-]
+class PricePeriod(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
 
-ACTIVITY_TYPES = [
-    ('Session', 'Session'),
-    ('Camp', 'Camp'),
-    ('Drop-in', 'Drop-in'),
-    ('Party', 'Party'),
-]
+
+class ActivityType(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
+
+class Location(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
+    
 
 class Activity(models.Model):
     name = models.CharField(max_length=100)
@@ -68,11 +51,11 @@ class Activity(models.Model):
     age_start = models.IntegerField()
     age_end = models.IntegerField(blank=True, null=True)
     position = models.CharField(max_length=20, blank=True, null=True)
-    location = models.CharField(max_length=20, choices=LOCATIONS, blank=True, null=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, null=True, related_name='activities')
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    price_period = models.CharField(max_length=20, choices=PRICE_PERIODS)
+    price_period = models.ForeignKey(PricePeriod, on_delete=models.CASCADE, blank=True, null=True, related_name='activities')
     capacity = models.IntegerField(blank=True, null=True)
-    activity_type = models.CharField(max_length=20, choices=ACTIVITY_TYPES)
+    activity_type = models.ForeignKey(ActivityType, on_delete=models.CASCADE, blank=True, null=True, related_name='activities')
     is_visually_adaptive = models.BooleanField(default=False)
     is_hearing_adaptive = models.BooleanField(default=False)
     is_mobility_adaptive = models.BooleanField(default=False)

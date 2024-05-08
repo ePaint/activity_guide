@@ -9,6 +9,8 @@ from activity_guide.settings import STATIC_URL
 class Provider(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    email = models.EmailField()
+    phone = models.CharField(max_length=30)
     image = models.ImageField(upload_to='providers', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
@@ -25,6 +27,9 @@ class Provider(models.Model):
         verbose_name = 'Provider'
         verbose_name_plural = 'Providers'
         ordering = ['created_at']
+        
+    def get_phone(self):
+        return f'({self.phone[:3]}) {self.phone[3:6]}-{self.phone[6:]}' if self.phone else ''
     
     def get_absolute_url(self):
         return reverse('provider-profile', kwargs={'slug': self.slug})

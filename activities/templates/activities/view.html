@@ -3,12 +3,12 @@
 {% block content %}
 <div class="container">
     <div class="d-flex flex-lg-row flex-column">
-        <a  href="{{ activity.url }}"
-            target="_blank"
-            class="me-5 w-100 d-flex justify-content-lg-start justify-content-center pb-2">
-            <img class="profile-image-big {{ activity.category.get_color }} user-select-none"
-                src="{{ activity.image_url }}" />
-        </a>
+        <div class="me-5 w-100 d-flex justify-content-lg-start justify-content-center pb-2">
+            <a href="{{ activity.url }}" target="_blank" class="h-1">
+                <img class="profile-image-big {{ activity.category.get_color }} user-select-none"
+                    src="{{ activity.image_url }}" />
+            </a>
+        </div>
         <div class="">
             <div class="row mb-2 pb-2">
                 <div class="d-md-flex gap-4 bg-white round border profile-description">
@@ -36,12 +36,21 @@
                                     <span class="fw-bold orange">&nbsp;Enter edit mode</span>
                                 </div>
                             {% else %}
-                                <div class="fs-6 d-flex justify-content-end" role="button" hx-target=".main-content"
+                                <div id="provider-contact-info" 
+                                    class="fs-6 d-flex justify-content-end" role="button" hx-target=".main-content"
                                     hx-trigger="click[window.location.pathname != '{% url 'provider-profile' activity.provider.slug %}']"
                                     hx-on::after-request="scrollToTop()" hx-push-url="true"
-                                    hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop()">
+                                    hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop();deletePopover(this)"
+                                    data-bs-toggle="popover"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    data-bs-content="Phone: {{ activity.provider.get_phone }}<br/>Email: {{ activity.provider.email }}"
+                                    title="Provider contact information">
                                     By&nbsp;<span class="fw-bold orange">{{ activity.provider.name }}</span>
                                 </div>
+                                <script>
+                                    initializePopover("provider-contact-info");
+                                </script>
                             {% endif %}
                         </div>
                         <hr class="hr mt-0 mb-1" />

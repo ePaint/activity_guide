@@ -3,12 +3,14 @@
 {% block content %}
 <div class="container">
     <div class="d-md-flex gap-4">
-        <a  class="d-flex justify-content-md-start justify-content-center pb-2 pb-md-0"
-            href="{{ provider.url }}" target="_blank">
-            <img class="profile-image orange user-select-none"
-                role="button"
-                src="{{ provider.image_url }}"/>
-        </a>
+        <div class="d-flex justify-content-md-start justify-content-center pb-2 pb-md-0">
+            <a
+                href="{{ provider.url }}" target="_blank">
+                <img class="profile-image orange user-select-none"
+                    role="button"
+                    src="{{ provider.image_url }}"/>
+            </a>
+        </div>
         <div class="d-flex flex-column bg-white round border w-100">
             <div class="fs-3 orange align-self-center align-self-md-start d-flex flex-column flex-sm-row align-items-center justify-content-between w-100">
                 <div class="order-1 d-flex align-items-center gap-2">
@@ -17,7 +19,8 @@
                                 class="yellow-filter"
                                 data-bs-toggle="popover"
                                 data-bs-placement="top"
-                                data-bs-content="Featured Provider">
+                                data-bs-content="Featured Provider"
+                                >
                             <img src="{% static 'layout/stars.svg' %}" width="24" height="24" viewBox="0 0 16 16" class="gray-filter">
                         </span>
                         <script>
@@ -67,7 +70,11 @@
             </div>
             <div class="d-flex flex-column justify-content-between h-100">
                 <div id="provider-description-form-container">
-                    {{ provider.description|safe }}
+                    <p>{{ provider.description|safe }}</p>
+                </div>
+                <div class="d-flex text-muted text-small fs-6 fw-lighter flex-column align-items-end justify-content-end w-100">
+                    <small class="text-small">Phone: {{ provider.get_phone }}</small>
+                    <small class="text-small">Email: {{ provider.email }}</small>
                 </div>
                 <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start d-flex">
                     {% for provider_category in provider.get_categories %}

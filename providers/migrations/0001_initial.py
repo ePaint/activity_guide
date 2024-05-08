@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
+                ('email', models.EmailField()),
+                ('phone', models.CharField(max_length=30)),
                 ('description', models.TextField(blank=True)),
                 ('image', models.ImageField(blank=True, null=True, upload_to='providers')),
                 ('is_active', models.BooleanField(default=True)),

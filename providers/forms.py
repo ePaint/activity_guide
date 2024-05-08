@@ -5,6 +5,8 @@ from providers.models import Provider
 from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget
 from django.core.files.base import ContentFile
+from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import RegionalPhoneNumberWidget
 import base64
 
 
@@ -47,10 +49,11 @@ class ProviderDescriptionForm(forms.ModelForm):
 class ProviderForm(forms.ModelForm):
     slug = forms.SlugField(max_length=100, required=True, label='Custom URL', help_text=_('- A unique identifier for the provider. This will be used in the URL for the provider\'s profile page</br>- Allowed characters: a-z, 0-9, and -</br>- Example: my-provider-1'))
     url = forms.URLField(required=True, label='URL')
+    phone = PhoneNumberField(required=False, region='CA', widget=RegionalPhoneNumberWidget(region='CA', attrs={'placeholder': '(506) 234-5678'}))
 
     class Meta:
         model = Provider
-        fields = ['name', 'slug', 'description', 'url']
+        fields = ['name', 'slug', 'description', 'email', 'phone', 'url']
 
     def clean_slug(self):
         slug = self.cleaned_data['slug']

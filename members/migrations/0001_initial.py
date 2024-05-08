@@ -18,9 +18,16 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Relationship',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Member',
             fields=[
-                ('id', models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)),
+                ('id', models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True, serialize=False)),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='member', to=settings.AUTH_USER_MODEL)),
                 ('liked_activities', models.ManyToManyField(related_name='liked_by', to='activities.activity', blank=True, null=True)),
             ],
@@ -36,7 +43,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
                 ('date_of_birth', models.DateField()),
-                ('relationship', models.CharField(choices=[('Me', 'Me'), ('Spouse', 'Spouse'), ('Parent', 'Parent'), ('Child', 'Child'), ('Sibling', 'Sibling'), ('Other', 'Other')], max_length=50)),
+                ('relationship', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='family_members', to='members.relationship')),
                 ('activities', models.ManyToManyField(to='activities.activity', related_name='family_members', blank=True, null=True)),
                 ('category_interest_1', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='category_interest_1', to='categories.Category')),
                 ('category_interest_2', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='category_interest_2', to='categories.Category')),

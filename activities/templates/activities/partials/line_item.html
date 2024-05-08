@@ -67,12 +67,21 @@
             </button>
         {% endif %}
         {% if show_provider_name == 1 %}
-            <span class="text-center text-muted text-small text-muted fst-italic m-1" role="button" hx-target=".main-content"
+            <span id="provider-contact-info-{{activity.pk}}"
+                class="text-center text-muted text-small text-muted fst-italic m-1" role="button" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'provider-profile' activity.provider.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true"
-                hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop()">
+                hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop();deletePopover(this)"
+                data-bs-toggle="popover"
+                data-bs-placement="top"
+                data-bs-html="true"
+                data-bs-content="Phone: {{ activity.provider.get_phone }}<br/>Email: {{ activity.provider.email }}"
+                title="Provider contact information">
                 By <span class="{{ activity.category.get_color }}">{{activity.provider.name}}</span>
             </span>
+            <script>
+                initializePopover("provider-contact-info-{{activity.pk}}");
+            </script>
         {% endif %}
     </div>
     {% include 'activities/partials/line_item_fields.html' with activity=activity edit=edit family_member=family_member %}

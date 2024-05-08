@@ -4,35 +4,6 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
-LOCATIONS = [
-    ('Kamloops', 'Kamloops'),
-    ('Aberdeen', 'Aberdeen'),
-    ('Batchlor Heights', 'Batchlor Heights'),
-    ('Barnhartvale', 'Barnhartvale'),
-    ('Brocklehurst', 'Brocklehurst'),
-    ('Campble Creek', 'Campble Creek'),
-    ('Dallas', 'Dallas'),
-    ('Downtown', 'Downtown'),
-    ('Harper Mountain', 'Harper Mountain'),
-    ('Juniper Ridge', 'Juniper Ridge'),
-    ('McArthur Island', 'McArthur Island'),
-    ('North Kamloops', 'North Kamloops'),
-    ('Rayleigh / Heffley', 'Rayleigh / Heffley'),
-    ('Sahali Upper', 'Sahali Upper'),
-    ('Sahali Lower', 'Sahali Lower'),
-    ('Sun Peaks', 'Sun Peaks'),
-    ('TRU', 'TRU'),
-    ('Valleyview', 'Valleyview'),
-    ('Westsyde', 'Westsyde'),
-]
-
-ACTIVITY_TYPES = [
-    ('Indoor', 'Indoor'),
-    ('Outdoor', 'Outdoor'),
-    ('Mixed', 'Mixed'),
-]
-
-
 class Migration(migrations.Migration):
 
     initial = True
@@ -43,6 +14,27 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='PricePeriod',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ActivityType',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Location',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+            ],
+        ),
         migrations.CreateModel(
             name='Activity',
             fields=[
@@ -60,11 +52,11 @@ class Migration(migrations.Migration):
                 ('age_start', models.IntegerField()),
                 ('age_end', models.IntegerField(blank=True, null=True)),
                 ('position', models.CharField(blank=True, max_length=20, null=True)),
-                ('location', models.CharField(blank=True, choices=LOCATIONS, max_length=20, null=True)),
+                ('location', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='activities.location', related_name='activities')),
                 ('price', models.DecimalField(max_digits=10, decimal_places=2)),
-                ('price_period', models.CharField(choices=[('Day', 'day'), ('Week', 'week'), ('Month', 'month'), ('Year', 'year'), ('Camp', 'camp'), ('Session', 'session')], max_length=20)),
+                ('price_period', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='activities.priceperiod', related_name='activities')),
                 ('capacity', models.IntegerField(blank=True, null=True)),
-                ('activity_type', models.CharField(choices=ACTIVITY_TYPES, max_length=20)),
+                ('activity_type', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='activities.activitytype', related_name='activities')),
                 ('is_visually_adaptive', models.BooleanField(default=False)),
                 ('is_hearing_adaptive', models.BooleanField(default=False)),
                 ('is_mobility_adaptive', models.BooleanField(default=False)),
