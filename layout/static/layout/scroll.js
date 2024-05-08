@@ -18,7 +18,7 @@ document.addEventListener('htmx:afterRequest', function(evt) {
     
     switch (evt.detail.target.id) {
         case 'main-content':
-            // scrollToElementId(evt.detail.requestConfig.parameters.scrollTo);
+            scrollToElementId(evt.detail.requestConfig.parameters.scrollTo);
             break;
         default:
             break;
