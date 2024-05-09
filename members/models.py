@@ -16,10 +16,10 @@ class Relationship(models.Model):
 class FamilyMember(models.Model):    
     name = models.CharField(max_length=50)
     date_of_birth = models.DateField()
-    relationship = models.ForeignKey(Relationship, on_delete=models.CASCADE, blank=True, null=True, related_name='family_members')
-    category_interest_1 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_1', blank=True, null=True)
-    category_interest_2 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_2', blank=True, null=True)
-    category_interest_3 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_interest_3', blank=True, null=True)
+    relationship = models.ForeignKey(Relationship, on_delete=models.SET_NULL, blank=True, null=True, related_name='family_members')
+    category_interest_1 = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='category_interest_1', blank=True, null=True)
+    category_interest_2 = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='category_interest_2', blank=True, null=True)
+    category_interest_3 = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='category_interest_3', blank=True, null=True)
     activities = models.ManyToManyField(Activity, related_name='family_members', blank=True, null=True)
     member = models.ForeignKey('Member', on_delete=models.CASCADE, related_name='family_members')
 
