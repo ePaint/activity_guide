@@ -96,7 +96,7 @@ class ActivityForm(forms.ModelForm):
             "price": forms.NumberInput(attrs={"placeholder": "Price here", "required": "required"}),
             "price_period": forms.Select(attrs={'class': 'form-control'}),
             "capacity": forms.NumberInput(attrs={"placeholder": "How many spots are available "}),
-            "activity_type": forms.Select(attrs={'class': 'form-control', "required": "required"}),
+            "activity_type": forms.Select(attrs={'class': 'form-control'}),
             "is_visually_adaptive": forms.CheckboxInput(),
             "is_hearing_adaptive": forms.CheckboxInput(),
             "is_mobility_adaptive": forms.CheckboxInput(),
