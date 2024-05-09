@@ -53,7 +53,7 @@ class Activity(models.Model):
     position = models.CharField(max_length=20, blank=True, null=True)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, blank=True, null=True, related_name='activities')
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    price_period = models.ForeignKey(PricePeriod, on_delete=models.SET_NULL, blank=True, null=True, related_name='activities')
+    price_period = models.ForeignKey(PricePeriod, on_delete=models.SET_NULL, related_name='activities')
     capacity = models.IntegerField(blank=True, null=True)
     activity_type = models.ForeignKey(ActivityType, on_delete=models.SET_NULL, blank=True, null=True, related_name='activities')
     is_visually_adaptive = models.BooleanField(default=False)
