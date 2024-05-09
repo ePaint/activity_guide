@@ -54,17 +54,33 @@
             {{activity.category.name}}
         </span>
         {% if edit and activity.provider.is_active %}
-            <button class="btn btn-outline-primary" 
-                    id="copy_button_{{activity.pk}}" 
-                    data-bs-placement="left"
-                    data-bs-content="Create activity using this one as a template"
-                    data-bs-toggle="modal" 
-                    data-bs-target="#modal_global"
-                    hx-get="{% url 'activity-create' %}?copy={{activity.pk}}"
-                    hx-trigger="click"
-                    hx-target="#modal_global">
-                Copy
-            </button>
+            <div class="pb-2 d-flex justify-content-center align-items-center gap-3">
+                <button class="btn btn-outline-primary" 
+                        id="copy_button_{{activity.pk}}" 
+                        data-bs-placement="left"
+                        title="Copy activity"
+                        data-bs-content="Create activity using this one as a template"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#modal_global"
+                        hx-get="{% url 'activity-create' %}?copy={{activity.pk}}"
+                        hx-trigger="click"
+                        hx-target="#modal_global">
+                    Copy
+                </button>
+                <button class="btn btn-outline-danger" 
+                        id="delete_button_{{activity.pk}}" 
+                        data-bs-placement="left"
+                        data-bs-html="true"
+                        title="Delete activity"
+                        data-bs-content='<b class="red">This action cannot be undone</b>'
+                        data-bs-toggle="modal" 
+                        data-bs-target="#modal_global"
+                        hx-get="{% url 'activity-delete' activity.slug %}"
+                        hx-trigger="click"
+                        hx-target="#modal_global">
+                    Delete
+                </button>
+            </div>
         {% endif %}
         {% if show_provider_name == 1 %}
             <span id="provider-contact-info-{{activity.pk}}"
@@ -91,5 +107,6 @@
 <script>
     initializePopover("activity_icon_edit_{{activity.pk}}");
     initializePopover("copy_button_{{activity.pk}}");
+    initializePopover("delete_button_{{activity.pk}}");
 </script>
 {% endif %}

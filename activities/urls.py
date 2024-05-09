@@ -9,6 +9,7 @@ from activities.views import (
     activity_book_buttons,
     activity_book_direct,
     activity_create,
+    activity_delete,
     activity_provider_edit_list,
     activity_image_update,
 )
@@ -18,6 +19,7 @@ urlpatterns = [
     path("<slug:slug>/image/", activity_image_update, name="activity-image-update"),
     path("create/", activity_create, name="activity-create"),
     path("<slug:slug>/", activity_detail, name="activity-detail"),
+    path("<slug:slug>/delete/", activity_delete, name="activity-delete"),
     path("<slug:slug>/edit/", activity_edit, name="activity-edit"),
     path("<int:pk>/<str:field>/edit/", activity_field_edit, name="activity-field-edit"),
     path("<slug:slug>/like/", activity_like, name="activity-like"),

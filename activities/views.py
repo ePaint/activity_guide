@@ -219,6 +219,36 @@ def activity_create(request):
     }
     return render(request, 'layout/partials/form.html', context)
 
+@provider_required
+def activity_delete(request, slug):
+    activity = Activity.objects.get(slug=slug)
+
+    submit_label = 'Yes, delete'
+    submit_color = 'red'
+    confirm_label = f'Are you sure you want to delete {activity.name}?'
+    confirm_message=f'You are about to delete an activity. All information related to it will be lost.</br></br><b class="red">This action cannot be undone.</b>'
+    
+    
+    if request.method == "POST":
+        form = ConfirmForm(request.POST, confirm_label=confirm_label, confirm_message=confirm_message)
+        if form.is_valid():
+            activity.delete()
+            response = HttpResponse(status=204)
+            response.headers['HX-Trigger'] = 'reload-activity-list'
+            return response
+    else:
+        form = ConfirmForm(confirm_label=confirm_label, confirm_message=confirm_message)
+    
+    context = {
+        'form': form,
+        'title': 'Confirm Action',
+        'submit_label': submit_label,
+        'submit_color': submit_color,
+        'endpoint': request.path,
+        'close_on_submit': True,
+    }
+    return render(request, "layout/partials/form.html", context)
+
 
 @provider_required
 def activity_provider_edit_list(request):

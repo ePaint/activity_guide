@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField()),
                 ('image', models.ImageField(blank=True, null=True, upload_to='activities')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, to='categories.category', related_name='activities', null=True, blank=True)),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='categories.category', related_name='activities')),
                 ('provider', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='providers.provider', related_name='activities')),
                 ('from_date', models.DateField()),
                 ('to_date', models.DateField()),
