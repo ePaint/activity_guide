@@ -73,7 +73,9 @@
                     <p>{{ provider.description|safe }}</p>
                 </div>
                 <div class="d-flex text-muted text-small fs-6 fw-lighter flex-column align-items-end justify-content-end w-100">
-                    <small class="text-small">Phone: {{ provider.get_phone }}</small>
+                    {% if provider.phone % }
+                        <small class="text-small">Phone: {{ provider.get_phone }}</small>
+                    {% endif %}
                     <small class="text-small">Email: {{ provider.email }}</small>
                 </div>
                 <div class="mt-md-auto mt-3 mb-1 align-self-center align-self-md-start d-flex">
