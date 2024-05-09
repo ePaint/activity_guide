@@ -140,7 +140,7 @@ class AdClickAction(models.Model):
 class Ad(models.Model):
     image_desktop = models.ImageField(upload_to='ads/', null=True, blank=True)
     image_mobile = models.ImageField(upload_to='ads/', null=True, blank=True)
-    location = models.ForeignKey(AdLocation, on_delete=models.SET_NULL, related_name='ads')
+    location = models.ForeignKey(AdLocation, on_delete=models.SET_NULL, related_name='ads', null=True, blank=True)
     click_action = models.ForeignKey(AdClickAction, on_delete=models.SET_NULL, related_name='ads', null=True, blank=True)
     click_action_target = models.CharField(max_length=255, null=True, blank=True)
 

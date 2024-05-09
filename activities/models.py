@@ -41,7 +41,7 @@ class Activity(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='activities', blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='activities')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='activities', null=True, blank=True)
     provider = models.ForeignKey('providers.Provider', on_delete=models.CASCADE, blank=True, null=True, related_name='activities')
     from_date = models.DateField()
     to_date = models.DateField()
