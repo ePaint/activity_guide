@@ -161,9 +161,12 @@ class Ad(models.Model):
     
 
 def get_ads_by_location(location):
-    return Ad.objects.filter(
-        location__location=location,
-        image_desktop__isnull=False,
-        click_action__isnull=False,
-        click_action_target__isnull=False
-    )
+    return {
+        'items': Ad.objects.filter(
+            location__location=location,
+            image_desktop__isnull=False,
+            click_action__isnull=False,
+            click_action_target__isnull=False
+        ),
+        'dimensions': AD_SIZES[location],
+    }

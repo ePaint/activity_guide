@@ -7,20 +7,33 @@
         <div class="col-lg">
             {% include 'layout/partials/ads_carousel.html' with ads=top_ads class='search-banner-banner-wide' %}
             <form class="col-md-3 border p-3 my-4 w-100 bg-white round d-flex flex-column justify-content-center"
-                  id="main_search_form"
-                  hx-trigger="submit"
-                  hx-post="{% url 'layout-search-results-partial' %}?page=1#"
-                  hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}">
-                <h1 class="text-start orange pb-3">Search Form</h1>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 w-100">
+                id="main_search_form"
+                hx-trigger="submit"
+                hx-post="{% url 'layout-search-results-partial' %}?page=1#"
+                hx-target="#search-results_{{ request.user.member.id }}_{{ family_member.id }}">
+                <h1 class="text-start orange d-flex gap-2">
+                    <div id="family_member_{{family_member.pk}}_button"
+                        class="btn btn-outline-primary orange-hover border-1"
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#search-form-fields-container"
+                        aria-expanded="false" 
+                        onclick="rotateFirstImg(this)">
+                        <img class="orange-filter rotate-animated"
+                            src="{% static 'layout/caret-down-fill.svg' %}" />
+                    </div>
+                    <span>Search Form</span>
+                </h1>
+                <hr>
+                <div id="search-form-fields-container"
+                    class="row row-cols-2 row-cols-md-3 row-cols-xl-6 w-100 p-0 m-0 collapse multi-collapse">
                     {% for field in search_form %}
                         {{ field|as_crispy_field }}
                     {% endfor %}
+                    <button type="submit"
+                            class="btn orange-hover w-100 align-self-center my-3">
+                        Go!
+                    </button>
                 </div>
-                <button type="submit"
-                        class="btn orange-hover w-100 align-self-center my-3">
-                    Go!
-                </button>
             </form>
             <div class="col-xxl-2 w-100 d-flex flex-column flex-md-row gap-4 align-items-center justify-content-around d-inline-flex d-xxl-none mb-4">
                 {% include 'layout/partials/ads_carousel.html' with ads=sidebar_1_ads class='search-banner-side-banner' %}

@@ -136,6 +136,7 @@ def search_results(request):
         
     activities, next_page = _paginate(activities, request.GET.get('page'))
     
+    
     context = {
         'activities': activities,
         'search_form': form,
