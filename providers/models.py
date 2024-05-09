@@ -8,9 +8,9 @@ from activity_guide.settings import STATIC_URL
 
 class Provider(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, null=True)
     email = models.EmailField()
-    phone = models.CharField(max_length=30)
+    phone = models.CharField(max_length=30, blank=True, null=True)
     image = models.ImageField(upload_to='providers', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
