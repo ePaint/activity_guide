@@ -1,5 +1,5 @@
 {% if model == 'activity' %}
-    {% if items|length == 0 %}
+    {% if items|length == 0 and next_page == 2 %}
         <div class="text-center p-4 text-muted fst-italic">
             <h4>No activities found</h4>
         </div>
@@ -13,7 +13,7 @@
         {% endfor %}
     {% endif %}
 {% elif model == 'provider' %}
-    {% if items|length == 0 %}
+    {% if items|length == 0 and next_page == 2 %}
         <div class="text-center p-4 text-muted fst-italic">
             <h4>No providers found</h4>
         </div>
