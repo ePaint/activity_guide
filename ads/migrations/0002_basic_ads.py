@@ -109,12 +109,14 @@ class Migration(migrations.Migration):
         
         AdLocation = apps.get_model('ads', 'AdLocation')
         for location in AD_LOCATIONS.keys():
+            print(location)
             AdLocation.objects.create(
                 location=location,
             )
             
         AdClickAction = apps.get_model('ads', 'AdClickAction')
         for action in AD_CLICK_ACTIONS.keys():
+            print(action)
             AdClickAction.objects.create(
                 action=action,
             )
