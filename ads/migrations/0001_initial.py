@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
             name='AdClickAction',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('action', models.CharField(choices=AD_CLICK_ACTIONS.items(), max_length=2)),
+                ('action', models.CharField(choices=AD_CLICK_ACTIONS.items(), max_length=10)),
             ],
         ),
         migrations.CreateModel(

@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'ckeditor',
     'ckeditor_uploader',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'storages',
 ]
