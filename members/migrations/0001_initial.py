@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('activities', '0002_basic_offers'),
+        ('activities', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('categories', '0001_initial'),
     ]

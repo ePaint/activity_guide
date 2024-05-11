@@ -6,16 +6,20 @@ from activities.forms import ActivityForm, ActivityImageForm
 from activities.models import FORM_MAPPER, Activity
 from layout.decorators import login_required, provider_required
 from layout.forms import ConfirmForm
-from layout.views import field_edit
+from layout.views import field_edit, not_found
 from members.forms import FamilyMemberSelectorForm
 from members.models import FamilyMember
 from users.forms import UserLoginForm
 
 
 def activity_detail(request, slug):
-    activity = Activity.objects.get(slug=slug)
-    context = {"activity": activity}
-    print(activity.image.__dict__)
+    try:
+        activity = Activity.objects.get(slug=slug)
+    except Activity.DoesNotExist as e:
+        return not_found(request, e)
+    context = {
+        "activity": activity
+    }
     return render(request, "activities/view.html", context)
 
 @login_required

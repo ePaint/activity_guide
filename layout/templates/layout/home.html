@@ -39,6 +39,23 @@
                             </div>
                         {% endif %}
                         <div class="carousel-inner h-100">
+                            {% if activities|length == 0 %}
+                                <div class="carousel-item round border-thick-orange fill active"
+                                     style="background-image: url('{% static 'layout/image-alt.svg' %}');"
+                                     role="button"
+                                     data-bs-toggle="modal"
+                                     data-bs-target="#modal_global"
+                                     hx-get="{% url 'users-login' %}"
+                                     hx-trigger="click"
+                                     hx-target="#modal_global">
+                                <div class="carousel-caption bg-white round border box-shadow-yellow">
+                                    <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center align-items-center">
+                                        <h5 class="orange pt-1">Your activity here!</h5>
+                                    </div>
+                                    <p>Register as a provider and start posting your own activities!</p>
+                                </div>
+                            </div>
+                            {% endif %}
                             {% for activity in activities %}
                                 <div class="carousel-item round border-thick-{{ activity.category.get_color }} fill {% if forloop.first %}active{% endif %}"
                                      style="background-image: url('{{ activity.image_url }}');"

@@ -4,7 +4,7 @@
 #
 
 app = "activity-guide"
-primary_region = "mad"
+primary_region = "sea"
 console_command = "/code/manage.py shell"
 
 [build]
