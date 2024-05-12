@@ -122,4 +122,6 @@ FORM_MAPPER = {
     'name': ProviderNameForm,
     'description': ProviderDescriptionForm,
     'url': ProviderUrlForm,
+    'phone': ProviderPhoneForm,
+    'email': ProviderEmailForm,
 }
