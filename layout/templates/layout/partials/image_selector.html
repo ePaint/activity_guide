@@ -56,12 +56,12 @@
     };
 
     $('#id_image').on('change', function (event) {
-        $('#modal_form_submit').text('Crop and Save');
-        $('#modal_form_submit').attr('data-bs-dismiss', 'modal');
-        $('#modal_form_submit').attr('type', 'button');
-        $('#modal_form_submit').on('click', handleImageUpdateSubmit);
-        console.log('modal shown');
-        console.log('event:', event);
+        $('#submit_modal_global').text('Crop and Save');
+        $('#submit_modal_global').attr('data-bs-dismiss', 'modal');
+        $('#submit_modal_global').attr('type', 'button');
+        $('#submit_modal_global').on('click', handleImageUpdateSubmit);
+        // console.log('modal shown');
+        // console.log('event:', event);
         const element = $('#modal_global_form').CropSelectJs({
             imageSrc: URL.createObjectURL(this.files[0]),
             aspectRatio: 1,
@@ -75,17 +75,15 @@
                 image_metadata.y = payload.yScaledToImage;
             },
         });
-        $('#submit_modal_global').text('Save');
-        $('#submit_modal_global').attr('data-bs-dismiss', 'modal');
         modal.show();
         setTimeout(() => {
             $(element).CropSelectJs('selectCentredSquare');
-            console.log('CropSelectJs instance created', element);
+            // console.log('CropSelectJs instance created', element);
         }, 250);
     });
 
     function handleImageUpdateSubmit() {
-        console.log('Image update submit');
+        // console.log('Image update submit');
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
         const canvas_image = document.getElementById('canvas_image');
@@ -106,14 +104,15 @@
     }
 
     $('#modal_global').on('hidden.bs.modal', function (event) {
-        console.log('modal hidden');
-        document.getElementById('modal_global_form').innerHTML = '';
+        // console.log('modal hidden');
+        // document.getElementById('modal_global_form').innerHTML = '';
         $('#id_image').val('');
     });
 
     function uploadToServer() {
         const form_data = new FormData();
         form_data.append('image_data_url', canvas.toDataURL());
+        // console.log('Uploading image', form_data.get('image_data_url'));
         $.ajax({
             type: 'POST',
             url: '{{ endpoint }}',
@@ -124,11 +123,11 @@
                 'X-CSRFToken': "{{ csrf_token }}"
             },
             success: function (response) {
-                console.log('Image uploaded successfully', response);
+                // console.log('Image uploaded successfully', response);
                 location.reload();
             },
             error: function (error) {
-                console.error('Error uploading image', error);
+                // console.error('Error uploading image', error);
             }
         });
     }

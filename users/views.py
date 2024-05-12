@@ -122,6 +122,7 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 def profile_image_update(request):
+    print(request.POST)
     if request.method == 'POST':
         form = UserProfileImageForm(request.POST, instance=request.user.profile)
         print(form.is_valid())
