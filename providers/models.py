@@ -2,7 +2,8 @@ import uuid
 from django import forms
 from django.db import models
 from django.urls import reverse
-
+from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import RegionalPhoneNumberWidget
 from activity_guide.settings import STATIC_URL
 
 
@@ -59,6 +60,12 @@ class Provider(models.Model):
     
     def get_url_form(self):
         return ProviderUrlForm(instance=self, field='url')
+    
+    def get_phone_form(self):
+        return ProviderPhoneForm(instance=self, field='phone')
+    
+    def get_email_form(self):
+        return ProviderEmailForm(instance=self, field='email')
 
 class ProviderBaseForm(forms.ModelForm):
     prev_value = forms.CharField(widget=forms.HiddenInput())
@@ -96,6 +103,20 @@ class ProviderUrlForm(ProviderBaseForm):
         model = Provider
         fields = ['url']
         widgets = {'url': forms.URLInput(attrs={'class': 'form-control'})}
+        
+class ProviderPhoneForm(ProviderBaseForm):
+    phone = PhoneNumberField(required=False, region='CA')
+    
+    class Meta:
+        model = Provider
+        fields = ['phone']
+        widgets = {'phone': RegionalPhoneNumberWidget(region='CA', attrs={'placeholder': '(506) 234-5678'})}
+
+class ProviderEmailForm(ProviderBaseForm):
+    class Meta:
+        model = Provider
+        fields = ['email']
+        widgets = {'email': forms.EmailInput(attrs={'class': 'form-control'})}
         
 
 FORM_MAPPER = {
