@@ -61,7 +61,8 @@
                         </button>
                     {% endfor %}
 
-                    <button onclick="openInNewTab(this)"
+                    <button id="submit_modal_global"
+                        onclick="openInNewTab(this)"
                         href="{{submit_url}}"
                         type="submit"
                         class="btn bg-{{submit_color|default:'green'}}"
