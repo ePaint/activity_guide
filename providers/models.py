@@ -2,8 +2,6 @@ import uuid
 from django import forms
 from django.db import models
 from django.urls import reverse
-from phonenumber_field.formfields import PhoneNumberField
-from phonenumber_field.widgets import RegionalPhoneNumberWidget
 from activity_guide.settings import STATIC_URL
 
 
@@ -105,11 +103,10 @@ class ProviderUrlForm(ProviderBaseForm):
         widgets = {'url': forms.URLInput(attrs={'class': 'form-control'})}
         
 class ProviderPhoneForm(ProviderBaseForm):
-    phone = PhoneNumberField(required=False, label='Your phone', region='CA', widget=RegionalPhoneNumberWidget(region='CA', attrs={'placeholder': '(506) 234-5678', 'class': 'form-control'}))
-    
     class Meta:
         model = Provider
         fields = ['phone']
+        widgets = {'phone': forms.TextInput(attrs={'class': 'form-control'})}
 
 class ProviderEmailForm(ProviderBaseForm):
     class Meta:
