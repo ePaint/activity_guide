@@ -105,12 +105,11 @@ class ProviderUrlForm(ProviderBaseForm):
         widgets = {'url': forms.URLInput(attrs={'class': 'form-control'})}
         
 class ProviderPhoneForm(ProviderBaseForm):
-    phone = PhoneNumberField(required=False, region='CA')
+    phone = PhoneNumberField(required=False, label='Your phone', region='CA', widget=RegionalPhoneNumberWidget(region='CA', attrs={'placeholder': '(506) 234-5678'}))
     
     class Meta:
         model = Provider
         fields = ['phone']
-        widgets = {'phone': RegionalPhoneNumberWidget(region='CA', attrs={'placeholder': '(506) 234-5678'})}
 
 class ProviderEmailForm(ProviderBaseForm):
     class Meta:

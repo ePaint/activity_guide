@@ -14,11 +14,15 @@ RUN set -ex && \
     pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt && \
     rm -rf /root/.cache/
+
+RUN apt-get update && apt-get install -y libpq-dev gcc \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY . /code
 
 RUN python manage.py migrate
 
-RUN python manage.py createsuperuser --noinput
+RUN python manage.py createsuperuser --noinput; exit 0
 
 EXPOSE 8000
 
