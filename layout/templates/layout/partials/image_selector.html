@@ -76,6 +76,7 @@
             },
         });
         $('#submit_modal_global').text('Save');
+        $('#submit_modal_global').attr('data-bs-dismiss', 'modal');
         modal.show();
         setTimeout(() => {
             $(element).CropSelectJs('selectCentredSquare');
@@ -102,7 +103,6 @@
             canvas.height
         );
         uploadToServer();
-        modal.hide();
     }
 
     $('#modal_global').on('hidden.bs.modal', function (event) {
