@@ -53,6 +53,7 @@
         y: 0,
         width: 0,
         height: 0,
+        offset_left: 0,
     };
 
     $('#id_image').on('change', function (event) {
@@ -79,6 +80,7 @@
         setTimeout(() => {
             $(element).CropSelectJs('selectCentredSquare');
             // console.log('CropSelectJs instance created', element);
+            image_metadata.offset_left = $('.crop-image')[0].offsetLeft;
         }, 250);
     });
 
@@ -89,9 +91,13 @@
         const canvas_image = document.getElementById('canvas_image');
         const modal_form = $('#modal_global_form');
         canvas_image.src = modal_form.CropSelectJs('getImageSrc');
+        // console.log(
+        //     'Image metadata:', image_metadata,
+        //     '\nCanvas:', canvas.width, canvas.height,
+        // )
         context.drawImage(
             canvas_image,
-            image_metadata.x,
+            image_metadata.x - image_metadata.offset_left,
             image_metadata.y,
             image_metadata.width,
             image_metadata.height,
@@ -105,7 +111,7 @@
 
     $('#modal_global').on('hidden.bs.modal', function (event) {
         // console.log('modal hidden');
-        // document.getElementById('modal_global_form').innerHTML = '';
+        document.getElementById('modal_global_form').innerHTML = '';
         $('#id_image').val('');
     });
 
