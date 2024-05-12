@@ -28,11 +28,13 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'activity-guide.fly.dev',
     'activityguide.ca',
+    'www.activityguide.ca',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://activity-guide.fly.dev',
     'https://activityguide.ca',
+    'https://wwww.activityguide.ca',
     'https://cke4.ckeditor.com',
 ]
 
