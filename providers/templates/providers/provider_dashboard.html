@@ -17,7 +17,7 @@
                         {% include 'layout/partials/field_edit.html' with model='provider' item=provider form=provider.get_phone_form %}
                         {% include 'layout/partials/field_edit.html' with model='provider' item=provider form=provider.get_email_form %}
                     </div>
-                    <div class="fs-6 d-flex flex-row justify-content-end align-items-center order-0 order-xl-2 user-select-none" role="button" hx-target=".main-content"
+                    <div class="fs-6 d-flex flex-row justify-content-end align-items-center order-0 order-xxl-2 user-select-none" role="button" hx-target=".main-content"
                         hx-trigger="click[window.location.pathname != '{% url 'provider-profile' provider.slug %}']"
                         hx-on::after-request="scrollToTop()" hx-push-url="true"
                         hx-get="{% url 'provider-profile' provider.slug %}" onclick="scrollToTop()">
