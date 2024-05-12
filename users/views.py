@@ -124,6 +124,9 @@ def profile(request):
 def profile_image_update(request):
     if request.method == 'POST':
         form = UserProfileImageForm(request.POST, instance=request.user.profile)
+        print(form.is_valid())
+        print(form.errors)
+        print(form)
         if form.is_valid():
             form.save()
             return HttpResponse(status=200)
