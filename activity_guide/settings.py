@@ -77,7 +77,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_htmx.middleware.HtmxMiddleware',
     'layout.middleware.HTMXMiddleware',
-    'layout.middleware.IsReadyMiddleware',
+    # 'layout.middleware.IsReadyMiddleware',
     'livereload.middleware.LiveReloadScript',
 ]
 
