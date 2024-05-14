@@ -74,7 +74,7 @@ def provider_request_form(request):
             base_url = request.build_absolute_uri('/')[:-1]
             send_provider_email(provider, base_url)
             response = render(request, 'providers/provider_dashboard.html', {'provider': provider})
-            response.headers['HX-Replace-Url'] = '/providers/dashboard'
+            response.headers['HX-Replace-Url'] = '/providers/dashboard/'
             response.headers['HX-Retarget'] = '#main-content'
             response.headers['HX-Trigger'] = 'close-modal, reload-navbar'
             return response
