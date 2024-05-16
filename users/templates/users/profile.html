@@ -12,7 +12,7 @@
         <fieldset class="form-group">
             <div class="d-flex flex-row justify-content-center">
                 {% url 'users-profile-image' as endpoint %}
-                {% include 'layout/partials/image_selector.html' with endpoint=endpoint source_image=user.profile.image_url %}
+                {% include 'layout/partials/image_selector.html' with endpoint=endpoint source_image=user.profile.image_url image_size=200 %}
             </div>
             {{ user_form | crispy }}
             {{ profile_form | crispy }}

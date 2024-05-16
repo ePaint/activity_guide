@@ -74,7 +74,7 @@ class ProviderBaseForm(forms.ModelForm):
             'id': f'{self.instance.pk}-{field}',
             'hx-post': f'/providers/{self.instance.pk}/{field}/edit/',
             'hx-target': f'#provider_{self.instance.id}-{field}',
-            'hx-trigger': 'keyup delay:500ms, change delay:500ms',
+            'hx-trigger': 'keyup delay:2000ms, change delay:2000ms',
             'onkeydown': 'showLoadingSpinner(this)',
             'onchange': 'showLoadingSpinner(this)',
             'hx-on::after-request': 'hideLoadingSpinner(this)',

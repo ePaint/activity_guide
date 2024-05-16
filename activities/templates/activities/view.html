@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="d-flex flex-lg-row flex-column">
-        <div class="me-5 d-flex justify-content-lg-start justify-content-center pb-2">
+    <div class="d-flex flex-lg-row flex-column gap-2 gap-md-5">
+        <div class="d-flex justify-content-lg-start justify-content-center pb-2">
             <a href="{{ activity.url }}" target="_blank" class="profile-image-big p-0 m-0 border-0">
                 <img class="profile-image-big {{ activity.category.get_color }} user-select-none"
                     src="{{ activity.image_url }}" />
@@ -55,8 +55,8 @@
                         </div>
                         <hr class="hr mt-0 mb-1" />
                         <div class="d-flex flex-column justify-content-between h-100">
-                            <div class="two-columns">
-                                {{ activity.description }}
+                            <div class="">
+                                {{ activity.description|linebreaksbr }}
                             </div>
                         </div>
                     </div>

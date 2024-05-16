@@ -20,6 +20,7 @@ def activity_detail(request, slug):
     context = {
         "activity": activity
     }
+    print(activity.description)
     return render(request, "activities/view.html", context)
 
 @login_required
@@ -84,7 +85,7 @@ def activity_book(request, slug):
         {
             'label': 'Continue as Guest',
             'color': 'orange',
-            'onclick': f'window.open("{activity.provider.url}")',
+            'onclick': f'window.open("{activity.url}")',
         }
     ]
     

@@ -4,7 +4,7 @@
         <img class="profile-image{{class}} orange user-select-none" width="200" height="200" role="img" id="preview_image"
             data-bs-toggle="popover"
             data-bs-placement="bottom"
-            data-bs-content="Recommended size 200x200px"
+            data-bs-content="Recommended size {{image_size}}x{{image_size}}px"
             title="Edit Image"
             src="{{ source_image }}"
             />
@@ -14,7 +14,7 @@
 </div>
 
 <div id="crop-select"></div>
-<canvas id="canvas" width="200" height="200" class="border" style="display:none;"></canvas>
+<canvas id="canvas" width="{{image_size}}" height="{{image_size}}" class="border" style="display:none;"></canvas>
 <img id="canvas_image" src="" style="display:none;">
 
 <style>

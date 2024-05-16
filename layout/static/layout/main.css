@@ -816,6 +816,10 @@ footer {
     min-height: 20rem;
 }
 
+.mh-225 {
+    min-height: 225px !important;
+}
+
 .h-1 {
     height: 1rem;
 }

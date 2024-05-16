@@ -2,10 +2,10 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="d-flex flex-lg-row flex-column">
-        <div class="me-5 d-flex justify-content-lg-start justify-content-center pb-2">
+    <div class="d-flex flex-lg-row flex-column gap-2 gap-md-5">
+        <div class="d-flex justify-content-lg-start justify-content-center pb-2">
             {% url 'activity-image-update' activity.slug as endpoint %}
-            {% include 'layout/partials/image_selector.html' with endpoint=endpoint slug=activity.slug source_image=activity.image_url class="-big" size="rem20" %}
+            {% include 'layout/partials/image_selector.html' with endpoint=endpoint slug=activity.slug source_image=activity.image_url class="-big" size="rem20" image_size=625 %}
         </div>
         <div class="">
             <div class="row mb-2 pb-2">
