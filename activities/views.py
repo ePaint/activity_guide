@@ -20,7 +20,6 @@ def activity_detail(request, slug):
     context = {
         "activity": activity
     }
-    print(activity.description)
     return render(request, "activities/view.html", context)
 
 @login_required
