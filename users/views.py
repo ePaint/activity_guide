@@ -23,8 +23,6 @@ def register(request):
             user.save()
             member = Member(user=user)
             member.save()
-            member.liked_activities.set(Activity.objects.all().order_by('?')[:5])
-            member.save()
             auth_login(request, user)
             response = HttpResponse()
             response.headers['HX-Trigger'] = 'reload-page'
@@ -122,12 +120,8 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 def profile_image_update(request):
-    print(request.POST)
     if request.method == 'POST':
         form = UserProfileImageForm(request.POST, instance=request.user.profile)
-        print(form.is_valid())
-        print(form.errors)
-        print(form)
         if form.is_valid():
             form.save()
             return HttpResponse(status=200)
