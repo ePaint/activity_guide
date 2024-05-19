@@ -67,7 +67,7 @@ def login(request):
             extra_buttons.append({
                 'label': 'Continue as Guest',
                 'color': 'orange',
-                'onclick': f'window.open("{activity.provider.url}")',
+                'onclick': f'window.open("{activity.url}")',
             })
     
     extra_htmls = [
