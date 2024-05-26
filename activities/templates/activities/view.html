@@ -13,8 +13,7 @@
             <div class="row mb-2 pb-2">
                 <div class="d-md-flex gap-4 bg-white round border profile-description">
                     <div class="d-flex w-100 flex-column">
-                        <div
-                            class="w-100 fs-3 align-self-center align-self-md-start d-md-flex flex-row justify-content-center align-items-center text-center">
+                        <div class="w-100 fs-3 align-self-center align-self-md-start d-md-flex flex-row justify-content-center align-items-center text-center gap-2">
                             <div class="badge bg-{{ activity.category.get_color }} m-1" role="button"
                                 hx-target=".main-content"
                                 hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
@@ -24,7 +23,7 @@
                             </div>
                             <a  href="{{ activity.url }}"
                                 target="_blank"
-                                class="flex-grow-1 d-flex justify-content-start text-decoration-none user-select-none {{ activity.category.get_color }}">
+                                class="flex-grow-1 d-flex justify-content-start text-decoration-none user-select-none {{ activity.category.get_color }} text-start fs-5">
                                 {{activity.name }}
                             </a>
                             {% if request.user.provider == activity.provider %}

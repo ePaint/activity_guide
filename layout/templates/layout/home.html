@@ -57,26 +57,28 @@
                             </div>
                             {% endif %}
                             {% for activity in activities %}
-                                <div class="carousel-item round border-thick-{{ activity.category.get_color }} fill {% if forloop.first %}active{% endif %}"
-                                     style="background-image: url('{{ activity.image_url }}');"
-                                     role="button"
-                                     hx-target=".main-content"
-                                     hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
-                                     hx-on::after-request="scrollToTop()"
-                                     hx-push-url="true"
-                                     hx-get="{% url 'activity-detail' activity.slug %}"
-                                     onclick="scrollToTop()">
+                                <a class="carousel-item round border-thick-{{ activity.category.get_color }} fill {% if forloop.first %}active{% endif %}"
+                                   style="background-image: url('{{ activity.image_url }}');"
+                                   role="button"
+                                   href="{% url 'activity-detail' activity.slug %}"
+                                   hx-target=".main-content"
+                                   hx-trigger="click[window.location.pathname != '{% url "activity-detail" activity.slug %}']"
+                                   hx-on::after-request="scrollToTop()"
+                                   hx-push-url="true"
+                                   hx-get="{% url 'activity-detail' activity.slug %}"
+                                   onclick="scrollToTop()">
                                     <div class="carousel-caption bg-white round border {% if activity.is_featured or activity.provider.is_featured %}box-shadow-yellow{% endif %}">
-                                        <div class="d-flex flex-sm-row flex-column flex-nowrap justify-content-center align-items-center">
-                                            {% include 'activities/partials/featured.html' with activity=activity size=24 %}
-                                            <span class="badge bg-{{ activity.category.get_color }} m-1 align-self-center align-self-sm-start">
-                                                {{ activity.category.name }}
-                                            </span>
-                                            <h5 class="{{ activity.category.get_color }} pt-1">{{ activity.name }}</h5>
+                                        <div class="d-flex flex-column flex-nowrap justify-content-center align-items-center">
+                                            <h5 class="{{ activity.category.get_color }} w-100 truncate-2">{{ activity.name }}</h5>
                                         </div>
-                                        <p>{{ activity.description }}</p>
+                                        <hr class="hr mt-0 mb-1" />
+                                        <p class="truncate-4 text-start">{{ activity.description|linebreaksbr }}</p>
+                                        <div class="w-100 d-flex justify-content-end">
+                                            {% include 'activities/partials/featured.html' with activity=activity size=24 %}
+                                            <span class="badge bg-{{ activity.category.get_color }} m-1 align-self-center">{{ activity.category.name }}</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             {% endfor %}
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

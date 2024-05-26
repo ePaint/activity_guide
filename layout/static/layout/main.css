@@ -343,6 +343,8 @@ body {
     opacity: 0.9;
     transition: all 0.2s ease-in-out;
     user-select: none;
+    left: 8% !important;
+    right: 8% !important;
 }
 
 .carousel-caption:hover {
@@ -1284,5 +1286,36 @@ label {
     .ad-form-fields>*:nth-child(3) {
         grid-column: span 1 !important;
     }
+}
 
+.truncate-1 {
+    display: -webkit-box !important;
+    max-width: 100% !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+.truncate-2 {
+    display: -webkit-box !important;
+    max-width: 100% !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+.truncate-4 {
+    display: -webkit-box !important;
+    max-width: 100% !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+.featured-activities {
+    border-width: 10px !important;
+    border-style: solid !important;
+    border-image-source: linear-gradient(90deg, #FFD300 0%, #F26522 100%);
+    border-image-slice: 1 !important;
+    border-radius: 2.5rem !important;
 }
