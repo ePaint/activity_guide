@@ -42,8 +42,10 @@ def save(request, location):
         'title': AD_LOCATIONS[location],
         'location': location,
         'forms': MODEL_FORM_SETS[location](),
-        'width': ad_dimensions['width'],
-        'height': ad_dimensions['height'],
+        'desktop_width': ad_dimensions['desktop']['width'],
+        'desktop_height': ad_dimensions['desktop']['height'],
+        'mobile_width': ad_dimensions['mobile']['width'],
+        'mobile_height': ad_dimensions['mobile']['height'],
     }
     
     return render(request, 'ads/partials/form.html', context)
