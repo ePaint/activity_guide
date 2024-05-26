@@ -73,3 +73,34 @@ class UserProfileImageForm(forms.ModelForm):
         if commit:
             form_object.save()
         return form_object
+
+class UserPasswordResetForm(forms.Form):
+    email = forms.EmailField(required=True)
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not User.objects.filter(email=email).exists():
+            raise ValidationError(_('Email does not exist.'))
+        return email
+    
+    def send_email(self):
+        print('Contact form is enabled. Sending email...')
+        print(self.cleaned_data)
+        name = self.cleaned_data['name']
+        email = self.cleaned_data['email']
+        message = self.cleaned_data['message']
+
+        template = loader.get_template('layout/contact_email.html')
+        html = template.render(context={
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'message': message,
+        })
+
+        email = EmailMultiAlternatives(subject='Customer Inquiry',
+                                       to=[os.getenv('CONTACT_TO_EMAIL')],
+                                       from_email=os.getenv('CONTACT_FROM_EMAIL'),
+                                       reply_to=[email])
+        email.attach_alternative(html, 'text/html')
+        email.send()

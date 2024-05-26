@@ -32,9 +32,9 @@
                 {% endfor %}
 
                 {% if extra_htmls %}
-                    <div class="pt-3 d-flex flex-column">
+                    <div class="pt-3 d-flex flex-column gap-3">
                         {% for extra_html in extra_htmls %}
-                            <span class="small text-muted">{{ extra_html|safe }}</span>
+                            <span class="small text-muted w-100">{{ extra_html|safe }}</span>
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -67,7 +67,7 @@
                         type="submit"
                         class="btn bg-{{submit_color|default:'green'}}"
                         {% if close_on_submit %}data-bs-dismiss="modal"{% endif %}>
-                        {{submit_label}}
+                        {{submit_label | default:"Submit"}}
                     </button>
                 </div>
             </div>
