@@ -1,13 +1,13 @@
 {% load static %}
 <div class="p-0 m-0 {{size}}">
-    <label for="id_image" class="center image-upload">
-        <img class="profile-image{{class}} orange user-select-none" width="200" height="200" role="img" id="preview_image"
-            data-bs-toggle="popover"
-            data-bs-placement="bottom"
-            data-bs-content="Recommended size {{image_size}}x{{image_size}}px"
-            title="Edit Image"
-            src="{{ source_image }}"
-            />
+    <label id="preview_image_label"
+           for="id_image"
+           class="center image-upload" 
+           data-bs-toggle="popover"
+           data-bs-placement="bottom"
+           data-bs-content="Recommended size {{image_size}}x{{image_size}}px"
+           title="Edit Image">
+        <img class="profile-image{{class}} orange user-select-none" width="200" height="200" role="img" id="preview_image" src="{{ source_image }}"/>
         <img src="{% static 'layout/pencil.svg' %}" alt="Add Image" width="50" height="50" class="edit-overlay orange-filter" />
     </label>
     <input type="file" id="id_image" accept="image/png, image/jpeg" />
@@ -140,5 +140,5 @@
 </script>
 
 <script>
-    initializePopover("preview_image");
+    initializePopover("preview_image_label");
 </script>
