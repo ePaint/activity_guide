@@ -9,6 +9,10 @@ const scrollToElementId = (element_id) => {
     window.scroll({top: y, behavior: 'smooth'});
 }
 
+document.addEventListener('htmx:configRequest', function(evt) {
+    evt.detail.headers = [];
+});
+
 document.addEventListener('htmx:afterRequest', function(evt) {
     try {initializePhoneNumberElement('id_phone')} catch (e) {console.log(e)};
 
