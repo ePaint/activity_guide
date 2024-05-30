@@ -108,13 +108,13 @@ def _build_search_query(form: ActivitySearchForm):
     if age:
         query = query & Q(age_start__lte=age) & Q(age_end__gte=age)
     if from_date:
-        query = query & Q(from_date__gte=from_date) & Q(to_date__gte=from_date)
+        query = query & Q(to_date__gte=from_date)
     if to_date:
-        query = query & Q(to_date__lte=to_date) & Q(from_date__lte=to_date)
+        query = query & Q(from_date__lte=to_date)
     if start_time:
-        query = query & Q(start_time__lte=start_time) & Q(end_time__gte=start_time)
+        query = query & Q(end_time__gte=start_time)
     if end_time:
-        query = query & Q(end_time__gte=end_time) & Q(start_time__lte=end_time)
+        query = query & Q(start_time__lte=end_time)
     if location:
         query = query & Q(location__name__icontains=location)
     if position:
