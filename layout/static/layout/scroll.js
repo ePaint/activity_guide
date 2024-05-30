@@ -7,11 +7,7 @@ const scrollToElementId = (element_id) => {
     const header_height = document.getElementById('site-header').offsetHeight;
     const y = element.getBoundingClientRect().top + window.scrollY - header_height;
     window.scroll({top: y, behavior: 'smooth'});
-}
-
-document.addEventListener('htmx:configRequest', function(evt) {
-    evt.detail.headers = [];
-});
+};
 
 document.addEventListener('htmx:afterRequest', function(evt) {
     try {initializePhoneNumberElement('id_phone')} catch (e) {console.log(e)};
