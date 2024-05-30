@@ -11,7 +11,7 @@ django-htmx==1.17.2
 django-js-asset==2.2.0
 django-livereload-server==0.5
 django-phonenumber-field==7.2.0
-django-ses==3.5.2
+django-ses==4.1.0
 django-storages==1.14.2
 gunicorn==21.2.0
 jmespath==1.0.1
