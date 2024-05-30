@@ -7,13 +7,13 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form id="form_global"
-              hx-post="{{endpoint}}"
+              hx-{{ method|default:'post' }}="{{endpoint}}"
               hx-target="#modal_global"
               hx-trigger="submit">
             {% csrf_token %}
             <div class="modal-body" id="modal_global_form">
                 {% for field in form %}
-                    {% if field.label == 'Password' %}
+                    {% if field.label == 'Password' or field.label == 'New password' %}
                         <div class="d-flex w-100 w-100-child">
                             {{ field | as_crispy_field }}
                             <button class="btn btn-outline-secondary btn-eye" type="button" onclick="passwordRevealToggle()">
@@ -38,7 +38,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                
+
                 {% if messages %}
                     <div class="pt-3">
                         {% for message in messages %}

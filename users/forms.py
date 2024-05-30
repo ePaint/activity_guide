@@ -1,10 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import authenticate
 from django import forms
-from django.core.exceptions import ValidationError
 from .models import User, UserProfile
-from django.core.files.images import get_image_dimensions
 from django.core.files.base import ContentFile
 import base64
 
@@ -16,9 +13,10 @@ user_type_choices = (
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name','email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -58,11 +56,11 @@ class UserProfileImageForm(forms.ModelForm):
         image_data_url = self.cleaned_data.get('image_data_url')
         image = self.cleaned_data.get('image')
         if image_data_url:
-            format, imgstr = image_data_url.split(';base64,')
-            ext = format.split('/')[-1]
+            image_format, image_string = image_data_url.split(';base64,')
+            ext = image_format.split('/')[-1]
             form_object.image.save(
                 f"profile_image.{ext}",
-                ContentFile(base64.b64decode(imgstr)),
+                ContentFile(base64.b64decode(image_string)),
                 save=False
             )
             
@@ -73,34 +71,3 @@ class UserProfileImageForm(forms.ModelForm):
         if commit:
             form_object.save()
         return form_object
-
-class UserPasswordResetForm(forms.Form):
-    email = forms.EmailField(required=True)
-    
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if not User.objects.filter(email=email).exists():
-            raise ValidationError(_('Email does not exist.'))
-        return email
-    
-    def send_email(self):
-        print('Contact form is enabled. Sending email...')
-        print(self.cleaned_data)
-        name = self.cleaned_data['name']
-        email = self.cleaned_data['email']
-        message = self.cleaned_data['message']
-
-        template = loader.get_template('layout/contact_email.html')
-        html = template.render(context={
-            'name': name,
-            'email': email,
-            'phone': phone,
-            'message': message,
-        })
-
-        email = EmailMultiAlternatives(subject='Customer Inquiry',
-                                       to=[os.getenv('CONTACT_TO_EMAIL')],
-                                       from_email=os.getenv('CONTACT_FROM_EMAIL'),
-                                       reply_to=[email])
-        email.attach_alternative(html, 'text/html')
-        email.send()

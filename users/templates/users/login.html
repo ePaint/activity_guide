@@ -20,13 +20,4 @@
                             hx-get="{% url 'users-register' %}">Sign Up</a>
     </small>
 </div>
-<script>
-    function reveal(element_id) {
-        if (document.getElementById(element_id).type==='password') {
-            document.getElementById(element_id).type='text';
-        } else {
-            document.getElementById(element_id).type='password';
-        }
-    }
-</script>
 {% endblock %}

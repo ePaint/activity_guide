@@ -57,12 +57,14 @@ def privacy_policy(request):
 def navbar(request):
     return render(request, 'layout/navbar.html')
 
+
 def _paginate(items, page):
     page = int(page) if page else 1
     start = (page - 1) * PAGE_SIZE
     end = start + PAGE_SIZE if len(items) > start + PAGE_SIZE else len(items)
     items = items[start:end] if items else []
     return items, page + 1
+
 
 def _build_search_query(form: ActivitySearchForm):
     form.is_valid()
@@ -106,7 +108,7 @@ def _build_search_query(form: ActivitySearchForm):
     if age:
         query = query & Q(age_start__lte=age) & Q(age_end__gte=age)
     if from_date:
-        query = query & Q(from_date__lte=from_date) & Q(to_date__gte=from_date)
+        query = query & Q(from_date__gte=from_date) & Q(to_date__gte=from_date)
     if to_date:
         query = query & Q(to_date__lte=to_date) & Q(from_date__lte=to_date)
     if start_time:
@@ -128,6 +130,7 @@ def _build_search_query(form: ActivitySearchForm):
         
     return query
 
+
 def search_results(request):
     form = ActivitySearchForm(request.POST)
     query = _build_search_query(form)
@@ -135,8 +138,7 @@ def search_results(request):
     activities = sorted(activities, key=lambda x: (x.is_featured, x.provider.is_featured, x.updated_at), reverse=True)
         
     activities, next_page = _paginate(activities, request.GET.get('page'))
-    
-    
+
     context = {
         'activities': activities,
         'search_form': form,

@@ -1,29 +1,18 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
-from django.contrib.auth.forms import PasswordResetForm
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.urls import resolve
+from django.shortcuts import render
 from activities.models import Activity
-from layout.decorators import login_required
-
 from members.models import Member
-from providers.models import Provider
 from .forms import UserRegisterForm, UserLoginForm, UserProfileForm, UserUpdateForm, UserProfileImageForm
-from .models import User, UserProfile
-
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.views import PasswordContextMixin, PasswordResetView
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
 from django.contrib.auth.tokens import default_token_generator
-from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic.edit import FormView
 
 
 def register(request):
@@ -44,7 +33,7 @@ def register(request):
         form = UserRegisterForm()
     
     extra_htmls = [
-        f'You already have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/login/" hx-trigger="click" hx-target="#modal_global">Login</a>',
+        'You already have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/login/" hx-trigger="click" hx-target="#modal_global">Login</a>',
     ]
     
     context = {
@@ -84,8 +73,8 @@ def login(request):
             })
     
     extra_htmls = [
-        f'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
-        f'Forgot your password? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/password-reset/" hx-trigger="click" hx-target="#modal_global">Reset password</a>'
+        'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
+        'Forgot your password? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/password-reset/" hx-trigger="click" hx-target="#modal_global">Reset password</a>'
     ]
     context = {
         'form': form,
@@ -133,6 +122,7 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
+
 def profile_image_update(request):
     if request.method == 'POST':
         form = UserProfileImageForm(request.POST, instance=request.user.profile)
@@ -152,7 +142,7 @@ def password_reset(request):
         form = PasswordResetForm()
     
     extra_htmls = [
-        f'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
+        'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
     ]
     context = {
         'form': form,
@@ -176,23 +166,12 @@ class UserPasswordResetView(PasswordResetView):
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
-        opts = {
-            "use_https": self.request.is_secure(),
-            "token_generator": self.token_generator,
-            "from_email": self.from_email,
-            "email_template_name": self.email_template_name,
-            "subject_template_name": self.subject_template_name,
-            "request": self.request,
-            "html_email_template_name": self.html_email_template_name,
-            "extra_email_context": self.extra_email_context,
-        }
-        form.save(**opts)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         extra_htmls = [
-            f'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
+            'You don\'t have an account? <a class="btn d-inline rounded orange-hover" role="button" data-bs-target="#modal_global" hx-get="/users/register/" hx-trigger="click" hx-target="#modal_global">Register</a>',
         ]
         extra_buttons = []
 
@@ -211,21 +190,49 @@ class UserPasswordResetView(PasswordResetView):
 def password_reset_done(request):
     messages = [
         {
-            'text': f'We\'ve sent you an email with instructions on how to reset your password. Please check your inbox.',
+            'text': 'We\'ve sent you an email with instructions on how to reset your password. Please check your inbox.',
             'type': 'success',
         }
     ]
     context = {
         'title': 'Reset your password',
-        'submit_label': 'Close',
+        'submit_label': 'Accept',
         'messages': messages,
         'close_on_submit': True,
     }
     return render(request, 'layout/partials/form.html', context)
 
-def password_reset_confirm(request):
-    ...
+
+class UserPasswordResetConfirm(PasswordResetConfirmView):
+    template_name = "users/password_reset_confirm.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context.update({
+            'submit_label': 'Reset password',
+            'endpoint': self.request.path,
+            'close_on_submit': False,
+        })
+
+        return context
 
 
+def password_reset_complete(request):
+    messages = [
+        {
+            'text': 'Your password has been successfully reset. You can now log in with your new password.',
+            'type': 'success',
+        }
+    ]
+    context = {
+        'messages': messages,
+        'title': 'Password reset complete',
+        'submit_label': 'Go to login',
+        'endpoint': '/users/login/',
+        'method': 'get',
+        'close_on_submit': False,
+    }
+    return render(request, 'layout/partials/form.html', context)
 
 
