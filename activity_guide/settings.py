@@ -208,8 +208,8 @@ AWS_SES_REGION_ENDPOINT = os.getenv('AWS_SES_REGION_ENDPOINT')
 
 CONTACT_ENABLED = os.getenv('CONTACT_ENABLED') == 'True'
 
-LOGIN_URL='/users/login'
-LOGIN_REDIRECT_URL='/members/dashboard'
+LOGIN_URL = '/users/login'
+LOGIN_REDIRECT_URL = '/members/dashboard'
 
 PAGE_SIZE = 10
 
