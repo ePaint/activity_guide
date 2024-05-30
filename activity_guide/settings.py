@@ -199,9 +199,7 @@ else:
     STATIC_URL = f'https://{os.getenv('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
-DEFAULT_FROM_EMAIL=os.getenv('CONTACT_FROM_EMAIL')
-# SERVER_EMAIL='root@localhost' 
-# EMAIL_HOST = 'localhost' 
+DEFAULT_FROM_EMAIL = os.getenv('CONTACT_FROM_EMAIL')
 EMAIL_BACKEND = 'django_ses.SESBackend'
 
 AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
