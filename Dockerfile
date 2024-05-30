@@ -18,7 +18,6 @@ RUN set -ex && \
 RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
 
 COPY . /code
-COPY .env /code/.env
 
 RUN python manage.py migrate
 
