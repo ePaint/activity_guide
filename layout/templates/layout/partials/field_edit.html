@@ -1,4 +1,4 @@
-<form class="px-0 pb-2 small flex-grow-1"
+<form class="px-0 pb-2 small {{ extra_classes }}"
       onsubmit="event.preventDefault();"
       id="{{model}}_{{item.pk}}-{{form.visible_fields.0.name}}">
     {% csrf_token %}

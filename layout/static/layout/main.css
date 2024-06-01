@@ -522,7 +522,7 @@ body {
 
 .header-item {
     word-wrap: break-word;
-    min-width: 5rem;
+    min-width: fit-content !important;
 }
 
 footer {
@@ -932,7 +932,7 @@ footer {
     height: 10rem;
 }
 
-@media(max-width: 576px) {
+@media(max-width: 575px) {
     .main-content {
         margin-top: 1rem;
     }
@@ -1270,7 +1270,7 @@ label {
     grid-column: span 7 !important;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 575px) {
     .ad-form-fields {
         grid-template-columns: repeat(1, 1fr);
     }

@@ -30,6 +30,7 @@ class ActivityType(models.Model):
     def __str__(self):
         return self.name
 
+
 class Location(models.Model):
     name = models.CharField(max_length=100)
     
@@ -114,7 +115,6 @@ class Activity(models.Model):
         if not self.category:
             return 'orange'
         return self.category.get_color()
-    
     
     def get_adaptive_fields(self):
         fields = [
@@ -235,18 +235,22 @@ class Activity(models.Model):
             self.get_capacity_form(),
             self.get_activity_type_form(),
             self.get_url_form(),
+            self.get_category_form(),
             self.get_is_visually_adaptive_form(),
             self.get_is_hearing_adaptive_form(),
             self.get_is_mobility_adaptive_form(),
             self.get_is_cognitive_adaptive_form(),
             self.get_is_active_form(),
         ]
-    
+
+
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+
 class TimeInput(forms.TimeInput):
     input_type = 'time'
+
 
 class ActivityBaseForm(forms.ModelForm):
     prev_value = forms.CharField(widget=forms.HiddenInput(), required=False)
@@ -267,11 +271,13 @@ class ActivityBaseForm(forms.ModelForm):
             'value': getattr(self.instance, field),
         })
 
+
 class ActivityNameForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['name']
         widgets = {'name': forms.TextInput(attrs={'class': 'form-control'})}
+
 
 class ActivityDescriptionForm(ActivityBaseForm):
     class Meta:
@@ -279,17 +285,20 @@ class ActivityDescriptionForm(ActivityBaseForm):
         fields = ['description']
         widgets = {'description': forms.Textarea(attrs={'class': 'form-control mh-225'})}
 
-class ActivityCategoryForm(ActivityBaseForm):
-    class Meta:
-        model = Activity
-        fields = ['category']
-        widgets = {'category': forms.Select(attrs={'class': 'form-control'})}
 
 class ActivityCategoryForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['category']
         widgets = {'category': forms.Select(attrs={'class': 'form-control'})}
+
+
+class ActivityCategoryForm(ActivityBaseForm):
+    class Meta:
+        model = Activity
+        fields = ['category']
+        widgets = {'category': forms.Select(attrs={'class': 'form-control'})}
+
 
 class ActivityProviderForm(ActivityBaseForm):
     class Meta:
@@ -297,23 +306,27 @@ class ActivityProviderForm(ActivityBaseForm):
         fields = ['provider']
         widgets = {'provider': forms.Select(attrs={'class': 'form-control'})}
 
+
 class ActivityFromDateForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['from_date']
         widgets = {'from_date': DateInput(attrs={'class': 'form-control'})}
 
+
 class ActivityToDateForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['to_date']
         widgets = {'to_date': DateInput(attrs={'class': 'form-control'})}
-    
+
+
 class ActivityStartTimeForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['start_time']
         widgets = {'start_time': TimeInput(attrs={'class': 'form-control'})}
+
 
 class ActivityEndTimeForm(ActivityBaseForm):
     class Meta:
@@ -327,11 +340,13 @@ class ActivityWeekdayForm(ActivityBaseForm):
         fields = ['weekday']
         widgets = {'weekday': forms.Select(attrs={'class': 'form-control'})}
 
+
 class ActivityAgeStartForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['age_start']
         widgets = {'age_start': forms.NumberInput(attrs={'class': 'form-control'})}
+
 
 class ActivityAgeEndForm(ActivityBaseForm):
     class Meta:
@@ -339,11 +354,13 @@ class ActivityAgeEndForm(ActivityBaseForm):
         fields = ['age_end']
         widgets = {'age_end': forms.NumberInput(attrs={'class': 'form-control'})}
 
+
 class ActivityPositionForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['position']
         widgets = {'position': forms.TextInput(attrs={'class': 'form-control'})}
+
 
 class ActivityLocationForm(ActivityBaseForm):
     class Meta:
@@ -351,11 +368,13 @@ class ActivityLocationForm(ActivityBaseForm):
         fields = ['location']
         widgets = {'location': forms.Select(attrs={'class': 'form-control'})}
 
+
 class ActivityPriceForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['price']
         widgets = {'price': forms.NumberInput(attrs={'class': 'form-control', 'step': 0.25})}
+
 
 class ActivityPricePeriodForm(ActivityBaseForm):
     class Meta:
@@ -363,29 +382,34 @@ class ActivityPricePeriodForm(ActivityBaseForm):
         fields = ['price_period']
         widgets = {'price_period': forms.Select(attrs={'class': 'form-control'})}
 
+
 class ActivityCapacityForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['capacity']
         widgets = {'capacity': forms.NumberInput(attrs={'class': 'form-control'})}
 
+
 class ActivityActivityTypeForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['activity_type']
         widgets = {'activity_type': forms.Select(attrs={'class': 'form-control'})}
-        
+
+
 class ActivityUrlForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['url']
         widgets = {'url': forms.URLInput(attrs={'class': 'form-control'})}
-        
+
+
 class ActivityIsVisuallyAdaptiveForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['is_visually_adaptive']
         widgets = {'is_visually_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
+
 
 class ActivityIsHearingAdaptiveForm(ActivityBaseForm):
     class Meta:
@@ -393,17 +417,20 @@ class ActivityIsHearingAdaptiveForm(ActivityBaseForm):
         fields = ['is_hearing_adaptive']
         widgets = {'is_hearing_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
 
+
 class ActivityIsMobilityAdaptiveForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['is_mobility_adaptive']
         widgets = {'is_mobility_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
-        
+
+
 class ActivityIsCognitiveAdaptiveForm(ActivityBaseForm):
     class Meta:
         model = Activity
         fields = ['is_cognitive_adaptive']
         widgets = {'is_cognitive_adaptive': forms.CheckboxInput(attrs={'class': 'form-check-input form-control w-25 ms-auto'})}
+
 
 class ActivityIsActiveForm(ActivityBaseForm):
     class Meta:

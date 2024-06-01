@@ -14,6 +14,7 @@ def home(request):
     }
     return render(request, 'categories/home.html', context)
 
+
 def detail(request, slug):
     category = Category.objects.get(slug=slug)
     root_category = category.get_root_category()
@@ -40,5 +41,4 @@ def detail(request, slug):
         'next_page': next_page,
         'ads': ads,
     }
-    print('context:', context)
     return render(request, 'categories/detail.html', context)

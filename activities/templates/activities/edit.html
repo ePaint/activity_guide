@@ -12,14 +12,8 @@
                 <div class="d-md-flex gap-4 bg-white round border profile-description">
                     <div class="d-flex w-100 flex-column">
                         <div class="w-100 align-self-center align-self-md-start d-md-flex flex-row justify-content-center align-items-center text-center">
-                            <div class="badge fs-3 bg-{{ activity.category.get_color }} mb-2" role="button"
-                                hx-target=".main-content"
-                                hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
-                                hx-on::after-request="scrollToTop()" hx-push-url="true"
-                                hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">
-                                {{ activity.category.name }}</div>
                             <div class="flex-grow-1 d-flex justify-content-start">
-                                {% include 'layout/partials/field_edit.html' with model='activity' item=activity form=activity.get_name_form %}
+                                {% include 'layout/partials/field_edit.html' with model='activity' item=activity form=activity.get_name_form extra_classes="flex-grow-1" %}
                             </div>
                             <div class="d-flex flex-row justify-content-end pb-2" role="button" hx-target=".main-content"
                                 hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"

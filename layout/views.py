@@ -100,7 +100,7 @@ def _build_search_query(form: ActivitySearchForm):
                          Q(category__parent__id=category) | 
                          Q(category__parent__parent__id=category))
     if activity_type:
-        query = query & Q(activity_type__icontains=activity_type)
+        query = query & Q(activity_type__name__icontains=activity_type)
     if provider_name:
         query = query & Q(provider__name__icontains=provider_name)
     if weekday:

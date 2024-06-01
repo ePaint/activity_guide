@@ -30,6 +30,7 @@
                 data-bs-content="Click here to enter edit your activity details, including the name, description, and image."
                 class="item-row-icon-offer border-{{ activity.category.get_color }} p-01 user-select-none" role="button"
                 src="{{ activity.image_url }}" hx-target=".main-content"
+                hx-swap="innerHTML"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-edit' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-edit' activity.slug %}"
                 onclick="scrollToTop(); deletePopover(this)" />
@@ -37,7 +38,7 @@
             <span class="fw-bold ms-0 ms-md-1 text-center d-flex justify-content-center align-items-center" role="button" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}"
-                onclick="scrollToTop()">
+                onclick="scrollToTop()" hx-swap="innerHTML">
                 {% include 'activities/partials/featured.html' with activity=activity seed=activity.provider.get_seed size=16 %}
                 <span>{{ activity.name }}</span>
             </span>
@@ -45,11 +46,11 @@
                 src="{{ activity.image_url }}" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'activity-detail' activity.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true" hx-get="{% url 'activity-detail' activity.slug %}"
-                onclick="scrollToTop()" />
+                onclick="scrollToTop()" hx-swap="innerHTML" />
         {% endif %}
         <span class="badge bg-{{ activity.category.get_color }} m-1" role="button" hx-target=".main-content"
             hx-trigger="click[window.location.pathname != '{% url 'category-detail' activity.category.slug %}']"
-            hx-on::after-request="scrollToTop()" hx-push-url="true"
+            hx-on::after-request="scrollToTop()" hx-push-url="true" hx-swap="innerHTML"
             hx-get="{% url 'category-detail' activity.category.slug %}" onclick="scrollToTop()">
             {{activity.category.name}}
         </span>
@@ -63,6 +64,7 @@
                         data-bs-toggle="modal" 
                         data-bs-target="#modal_global"
                         hx-get="{% url 'activity-create' %}?copy={{activity.pk}}"
+                        hx-swap="innerHTML"
                         hx-trigger="click"
                         hx-target="#modal_global">
                     Copy
@@ -76,6 +78,7 @@
                         data-bs-toggle="modal" 
                         data-bs-target="#modal_global"
                         hx-get="{% url 'activity-delete' activity.slug %}"
+                        hx-swap="innerHTML"
                         hx-trigger="click"
                         hx-target="#modal_global">
                     Delete
@@ -87,7 +90,9 @@
                 class="text-center text-muted text-small text-muted fst-italic m-1" role="button" hx-target=".main-content"
                 hx-trigger="click[window.location.pathname != '{% url 'provider-profile' activity.provider.slug %}']"
                 hx-on::after-request="scrollToTop()" hx-push-url="true"
-                hx-get="{% url 'provider-profile' activity.provider.slug %}" onclick="scrollToTop();deletePopover(this)"
+                hx-get="{% url 'provider-profile' activity.provider.slug %}"
+                hx-swap="innerHTML"
+                onclick="scrollToTop();deletePopover(this)"
                 data-bs-toggle="popover"
                 data-bs-placement="top"
                 data-bs-html="true"

@@ -43,7 +43,9 @@ class Category(models.Model):
         return self.activities.all().order_by('-is_featured', '-provider__is_featured', '-updated_at')
     
     def get_active_activities(self):
-        return self.activities.filter(is_active=True, provider__is_active=True).order_by('-is_featured', '-provider__is_featured', '-updated_at')
+        return self.activities.model.objects.filter(category__in=self.get_descendants(include_self=True),
+                                                    is_active=True,
+                                                    provider__is_active=True).order_by('-is_featured', '-provider__is_featured', '-updated_at')
     
     def get_unique_providers(self):
         max_providers = 10
