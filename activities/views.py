@@ -141,7 +141,7 @@ def activity_book(request, slug):
         'extra_htmls': extra_htmls,
         'extra_buttons': extra_buttons,
         'title': 'Family Activity Organizer',
-        'submit_label': 'Save Changes',
+        'submit_label': 'Save & Book',
         'endpoint': request.path,
         'close_on_submit': False,
         'submit_url': activity.url
