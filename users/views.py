@@ -190,7 +190,7 @@ class UserPasswordResetView(PasswordResetView):
 def password_reset_done(request):
     messages = [
         {
-            'text': 'We\'ve sent you an email with instructions on how to reset your password. Please check your inbox.',
+            'text': 'We\'ve sent you an email with instructions on how to reset your password. Please check your inbox and spam folder.',
             'type': 'success',
         }
     ]

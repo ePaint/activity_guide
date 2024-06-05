@@ -12,21 +12,22 @@ from categories.models import Category
 from activities.models import Activity
 from layout.forms import ContactForm
 from django.shortcuts import render
+from layout.models import AboutUs
 from providers.models import Provider
 
 
 def not_found(request, exception):
-    print(f'404 error')
+    print('404 error')
     return render(request, 'layout/404.html')
 
 
 def server_error(request):
-    print(f'500 error')
+    print('500 error')
     return render(request, 'layout/500.html')
 
 
 def not_ready(request):
-    print(f'Not ready')
+    print('Not ready')
     return render(request, 'layout/not_ready.html')
 
 
@@ -37,6 +38,7 @@ def base(request):
 def home(request):
     categories = Category.objects.filter(slug__in=['sports', 'art', 'stem'])
     activities = Activity.objects.filter(Q(is_featured=True) | Q(provider__is_featured=True)).order_by('?')[:MAX_ITEMS_IN_HOMEPAGE_CAROUSEL]
+    about_us = AboutUs.objects.filter(show_on_home=True).first()
     
     contact_form = ContactForm()
     search_form = ActivitySearchForm()
@@ -46,6 +48,7 @@ def home(request):
         'contact_form': contact_form,
         'search_form': search_form,
         'ads': get_ads_by_location('H'),
+        'about_us': about_us,
     }
     return render(request, 'layout/home.html', context)
 
