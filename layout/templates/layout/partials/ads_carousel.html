@@ -1,6 +1,6 @@
-<div>
-    <div class="w-100 d-flex flex-column justify-content-center align-items-center d-none d-xl-block">
-        <div class="carousel slide {{ class }}-width" data-bs-ride="carousel">
+<div class="w-100 d-flex justify-content-center align-items-center">
+    <div class="w-100 d-flex justify-content-center align-items-center d-none d-xl-block">
+        <div class="w-100 mx-auto carousel slide {{ class }}-width" data-bs-ride="carousel">
             <div class="carousel-inner {{ class }}-width">
                 {% for ad in ads.items %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %} {{ class }}-width" data-bs-interval="10000">
@@ -19,19 +19,19 @@
         </div>
     </div>
     <div class="w-100 d-flex flex-column justify-content-center align-items-center d-block d-xl-none">
-        <div class="carousel slide" data-bs-ride="carousel">
+        <div class="w-100 mx-auto carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 {% for ad in ads.items %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="10000">
                         {% if ad.click_action.action == "Open URL" %}
                             <a class="width-mobile" target="_blank" href="{{ ad.click_action_target }}">
                                 <img class="width-mobile mobile" src="{{ ad.image_mobile_url }}"
-                                    style="min-height: 112px !important;">
+                                    style="min-height: 112px !important;width: 100% !important;">
                             </a>
                         {% elif ad.click_action.action == "Send Email" %}
                             <a class="width-mobile" href="mailto:{{ ad.click_action_target }}">
                                 <img class="width-mobile mobile" src="{{ ad.image_mobile_url }}"
-                                    style="min-height: 112px !important;">
+                                    style="min-height: 112px !important;width: 100% !important;">
                             </a>
                         {% endif %}
                     </div>

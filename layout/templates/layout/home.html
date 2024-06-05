@@ -5,7 +5,7 @@
 <div class="container-xxl">
     <div class="row gap-4 justify-content-center">
         <div class="d-inline-block d-xl-none">
-            {% include 'layout/partials/ads_carousel.html' with ads=ads class='home-banner-wide' %}
+            {% include 'layout/partials/ads_carousel.html' with ads=ads class='home-banner-wide' location="H" %}
         </div>
         <form class="col-md-3 search-form border px-3 py-3 bg-white round d-flex flex-column justify-content-center"
               hx-target=".main-content"
@@ -26,7 +26,7 @@
         </form>
         <div class="col-md-8 home-main d-flex flex-column gap-4 no-padding">
             <div class="d-none d-xl-inline-block">
-                {% include 'layout/partials/ads_carousel.html' with ads=ads class='home-banner-wide' %}
+                {% include 'layout/partials/ads_carousel.html' with ads=ads class='home-banner-wide' location="H_ALT" %}
             </div>
             <div class="row order-1">
                 <div class="col-md-9 home-carousel pb-4 pb-md-0">

@@ -7,7 +7,7 @@
             {% include 'layout/search_box.html' with items=providers model='provider' title=category.name|add:" Providers" next_page=next_page %}
         </div>
         <div class="col-xl order-1 order-xl-3 mb-4">
-            {% include 'layout/partials/ads_carousel.html' with ads=ads class='category-detail-banner' %}
+            {% include 'layout/partials/ads_carousel.html' with ads=ads class='category-detail-banner' location="category_detail" %}
         </div>
     </div>
 </div>
